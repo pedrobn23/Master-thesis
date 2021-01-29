@@ -1,0 +1,260 @@
+\part{Category Theory}
+\label{Part1}
+
+
+
+\chapter{First Notions of Category Theory}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\epigraph{“The human mind has never invented a labor-saving machine equal to algebra.” }{\textit{Stephan Banach (1925)}}
+
+For us, Categories are an area of interest on its own rights, rather than merely an elegant tool. In this sense we will introduce this theory with a personal point of view, trying to emphasize the intuitive ideas behind each notion.\\
+
+Thus, in addition to the formal content, we will also provide enough information so that an avid reader gain quick intuitive understanding of the subject. With this objective in mind, we will get into the habit of introducing the first examples even before introducing the formal definitions. Thus, when the formal definition is introduced, it becomes more meaningful and helps the intuition to understand the concept.\\
+
+The fundamental idea of Category Theory is that a many properties can be unified if expressed with diagram and arrows. Intuitively, a diagram is a directed graph, such that each way of going from a node to another are equals. For example, in the diagram:
+
+\[
+  \begin{tikzcd}
+    & b \arrow[rd, "g"]& \\
+    a\arrow[ru, "f"] \arrow[rr, "h"] && c\\
+  \end{tikzcd}
+\]
+Means that $f\circ g = h$. This approach to mathematics emphasises  at the relationships between elements, rather than at the elements themselves (and from them derive their relationships).\\
+
+In this first chapter we will introduce the notion of category and their first properties. The principal references for this chapter are \cite{mac2013categories} and \cite{riehl2017category}. 
+
+\section{Metacategories}
+We will start by defining a concept independent of the set theory axioms: the concept of \emph{metacategory}. Once this is done we will follow reinterpreting this definitions in the context of set theory. We define categories following  \cite{mac2013categories}.\\
+
+
+Traditionally, mathematics is based on the set theory. When we start set theory it is not necessary (it is not possible) to define what a set is. It is similar with the concepts of element and belonging, which are basic to set theory. Category theory can also be used to found mathematics. In this sense we will give definitions based on other concepts such as object, arrow, composition. \\
+
+\begin{definition}
+  A \emph{metagraph} consist of \emph{objects}: $a,b,c..$ and \emph{arrows} $f,g,h...$. There are also two pairings: $\dom$ and $\codom$. This pairings assigns each arrow with an object. An arrow $f$ with $\dom(f)=a$ and $\codom(f)=b$ is usually denoted as $f:a\to b$.\\
+\end{definition}
+
+\begin{definition}
+  A metacategory  is a metagraph with two additional operations:
+  \begin{itemize}
+  \item \emph{Identity}: assigns to each object $a$ an arrow $1_a:a\to a$. 
+  \item \emph{Composition}: assigns to each pair of arrows $f,g$ with $\codom(f)=\dom(g)$ and arrow $g\circ f$ such that the diagram:
+
+    \[
+      \begin{tikzcd}
+        & b \arrow[rd, "g"]& \\
+        a\arrow[ru, "f"] \arrow[rr, "g\circ f",swap] && c\\
+      \end{tikzcd}
+    \]
+
+    commutes. The arrow $g\circ f$ is called the \emph{composite} of $f$  and $g$.
+  \end{itemize}
+
+  There are additional two properties:
+  \begin{itemize}
+  \item \emph{Associative}: given arrows $f,g,h$, we have that,
+    $$(g\circ f) \circ h = g \circ (f \circ h).$$
+  \item \emph{Unit}: given an object $a$, and arrows $f,g$ such that $\dom (f)= a$ and $\docom (g) = a$, we have that,
+    $$1_a \circ g = g, \qquad f \circ 1_a = f.$$
+  \end{itemize}
+  In the context of a metacategory, arrows are often called \emph{morphisms}.
+\end{definition}
+
+We have just define what a  metacategory is without any need of set and elements. In most cases we will rely in a set theory interpretation of this definitions, as most examples will rely on this theory. Nonetheless, whenever possible, we will define the concepts working only in terms of objects and arrows, having therefore the theory as independent as possible to this theory.
+
+% Diagramas de existencia condicionada.!!
+% We will also need diagrams that represents the existence of arrows due to the existence other arrows. , given objects $a,b,c$ and arrows $d$
+
+
+
+\section{ZFC Axioms}
+{\color{red}(Maybe) TODO}: Introduce fundamental terminology and problems related to classical set theory.\\
+
+Once we have talk so much about this we may also formally introduce the stuff. Is not so long (?)  - ok, maybe it is. I am letting this as a TODO and continue with other stuff until this is more done.\\
+
+Further on i left a detailed todo of things from this section that are referenced in the text.\\
+
+Detailed TODO:
+\begin{itemize}
+\item small sets and large sets.
+\end{itemize}
+
+
+\section{Set theory categories}
+Further on we will work based on set theory.
+
+\begin{definition}
+  A category (resp. graph) is an interpretation of a metacategory (resp. metagraph) within set theory.
+\end{definition}
+
+
+That is, a graph/category is a pair $(O,A)$ where a set $O$ consisting of all objects as well as a set $A$ consisting of all arrows. Their elements holds the same properties that objects and arrows satisfy on metacategories / metagraph.\\
+
+
+We will focus on the category. We can also define the function homeset of a category $C=(O,A)$, wrote as $\hom_{C}$, as the function:
+\begin{align*}
+  && \hom_{C}: O \times O &\mapsto \mathcal{P}(A)&\\
+  \displaystyle &\ &(a,b)&\mapsto \{f\in A | f:a\to b\}&
+\end{align*}
+
+With this definitions done, we will carry on working on examples and properties of the categories.
+
+\begin{definition}
+  We say that a category is \emph{small} if the collection of objects is given by a set (instead of a proper class). We say that a category is \emph{locally small} if every homesets is a set.
+\end{definition}
+
+\subsection{Examples\footnote{Debería cambiar esto por un entorno de ejemplo grande?}}
+We proceed to introduce a comprehensive list of examples, so that it is already introduced in subsequent chapters.
+
+\begin{itemize}
+\item The ``example'' category:
+  \begin{itemize}
+  \item The category $0 = ( \emptyset, \emptyset)$ where every property is trivially satisfy.
+  \item The category $1 = (\{e\},\{1_e\})$.
+  \item The category $2 = (\{a,b\},\{1_a,1_b,f:a\to b\})$
+  \end{itemize}
+
+\item Discrete categories: are categories where every arrow is an identity arrow. This are sets regarded as categories, in the following sense: every discrete category $C=(A, \{1_a : a \in A\})$ is fully identified by its set of object.  
+\item Monoids and Groups: A monoid is a category with one object (regarding the monoid of the arrows). In the same way, if we requires the arrows to satisfy the inverse property, we can see a group as a single-object category. 
+\item Preorder: From a preorder $(A, \le)$ we can define a category $C = (A, B)$ where $B$ has an arrow $e: a \to b$ for every $a,b\in A$ such that $a \le B$. The identity arrow is the arrow that arise from the reflexive property of the preorders. 
+
+\item Large categories: these categories has a large set of objects. For example:
+  \begin{itemize}
+\item The category $Top$ that has as objects all small topological spaces and as arrow continuous mappings.
+\item The category $Set$ that has as objects all small sets and as arrows all functions between them.
+\item The category $Vect$ That has as object all small vector spaces and as arrows all linear functions.
+\end{itemize}
+
+\item Include more examples as categories are used in the text.
+\end{itemize}
+
+Note that, for example,  as natural numbers can be seen as either a set or a preorder, they also can be seen as a discrete category or a preorder category.
+
+
+
+
+\subsection{Some properties on arrows}
+\subsubsection{Equality}
+We can see that is common in mathematics to have an object of study (propositional logic clauses, groups, Banach spaces or types in Haskell). Once the purpose of the study of these particular set of objects is fixed, it is also common to proceed to consider the transformations between these objects (partial truth assignments, homomorphisms, linear bounded functionals or  functions in Haskell).\\
+
+In categories, we have a kind of different approach to the subject. Instead of focusing in the objects themselves, we focus on how they relate to each other. That is, we focus on the study of the arrows and how they composes. Therefore we can consider equal two objects that has the same relations with other objects. This inspire the next definition:
+
+\begin{definition}[definition 1.1.9 \cite{riehl2017category}]
+  Given a category $C=(O,A)$, a morphism $f: a \to b \in A$ has a \emph{left inverse} (resp. \emph{right inverse}) if there exists a $g: b \to a \in A$ such that $g \circ f = 1_b$ (resp. $f \circ g = 1_a$). A morpishm is an isomorphism if it has both left and right inverse, called the \emph{inverse}. 
+\end{definition}
+
+%Given a category $C=(O,A)$, an \emph{isomorphism} is a morphism $f: a \to b \in A$ for which there exists $g: b\to a\in A$ such that $f\circ g = 1_a$ and $g \circ f = 1_b$.  \\
+
+
+Is easy to follow that this functions define bijections between $\hom(a,c)$ and $hom(b,c)$ para todo $c\in O$. Also one can see that if a morphism has a left and a right inverse, they must be the same, thus implying the uniqueness of the inverse.
+
+\subsubsection{Special arrows}
+\begin{itemize}
+\item monics, epics and zeros.
+\end{itemize}
+
+\subsubsection{Duality}
+
+Let $C = (O,A)$ be a category. Then, we can define another category $C' = (O,A')$ where we change the domain with the codomain and viceversa. 
+
+\subsection{Transformation in categories}
+
+
+
+
+\subsubsection{Functors}
+This is one of the main ways of defining a category: consider a collection of objects and the standard way of transforms one into each other. Then, we may also follow our study defining the structure preserving transformation of categories.
+
+\begin{definition}
+  Given two categories $C=(C_O, C_A), B=(B_O, B_A)$, a \emph{functor} $F: B \to C$ is a pair of functions $F=(F',F'')$ (the \emph{object function} and the \emph{arrow functor} respectively)  such that if $g:a\to b \in B_A$ then $F''g$ is an arrow in $C_A$ from $F'a$ to $F'b$.
+
+\end{definition}
+
+That is a functor is a morphism of categories. When there is no ambiguity we will represent both $F'$ and $F''$ with a single symbol $F$ acting on both objects and arrows. Also, as you can see in the definition, whenever possible the parentheses of the functor will be dropped.\\
+
+We can now construct the category of all small categories $Cat$. This category has as object all small categories and as arrows all functor between them. Note that $Cat$ does not contain itself.\\
+
+
+is left to include:
+\begin{itemize}
+\item full, lluf, faithfull functor.
+\item 
+\end{itemize}
+\subsubsection{Contravariance}
+
+
+\subsubsection{Natural Transformations}
+
+
+\subsection{Some constructions}
+\begin{itemize}
+\item
+\end{itemize}
+
+
+\chapter{Functors and Natural Transformation}
+\section{Definition}
+$$
+\begin{tikzcd}[row sep = 1.4cm, column sep = 1.4cm]
+  F(c)
+  \arrow[lddr, to path= { --
+    ([xshift=-1ex]\tikztostart.west)
+    -| ([xshift=-2ex]\tikztotarget.west)
+    |- (\tikztotarget)}]
+  \arrow[d, swap, "\sigma(c)"]
+  \arrow[r, "F(f)"] 
+  & F(c')
+  \arrow[d, "\sigma(c')"]
+  \arrow[rddl, to path= { --
+    ([xshift=1ex]\tikztostart.east) 
+    -| ([xshift=2ex]\tikztotarget.east)
+    -- (\tikztotarget)}, "\sigma \circ \tau(c')"]
+  \\
+  G(c)
+  \arrow[d, swap, "\tau(c)"] 
+  \arrow[r, "G(f)"] & G(c')
+  \arrow[d, "\tau(c')"] \\
+  H(c) 
+  \arrow[r, "H(f)"] & H(c')
+\end{tikzcd}
+$$
+\subsection{Bifunctors}
+\subsubsection{The $Hom(\cdot,\cdot)$ bifunctor}
+\section{Universality}
+In this section we present the concept of universality. This concept is behind lots of mathematical properties. Intuitively, universality is an efficient way of expressing an one-to-one correspondence between arrows of different categories. This one-to-one relationship is usually expressed via ''given an arrow  $y$ it exists one and only one  arrow $x$ such that <insert your favorite universality property''.\\
+
+Prior to the formal definition, we shall introduce an example. Probably the first contact that any mathematician has with universality is when we first try to define a function  $f:\mathbb R \to \mathbb R^2$. We quickly understand that defining such a function is equivalent to define two $g,h: \mathbb R \to \mathbb R$( we further explain the product in \ref{prod-univ} ). Another example is given when you consider the space quotient of a set A for a $~$ relationship over it. In this case, giving a function from $A/~$ is the same as giving a function from $A$ that maintains the equivalence relationship $a~b \implies f(a)=f(b)$. A similar concept lays for almost every quotient structure. Here is the general concept.
+
+\begin{definition}
+  If $S: D \to C$ is a functor and $c$ an object of $C$, a universal arrow such that from $c$ to $S$ is a pair $<r,u>$ with $r\in D, u \in Ar(C)$, such that the diagram:
+  \[
+    \begin{tikzcd}
+      & b \arrow[rd, "g"]& \\
+      a\arrow[ru, "f"] \arrow[rr, "h"] && c\\
+    \end{tikzcd}
+  \]
+
+  commutes. 
+\end{definition}
+
+\subsection{Yoneda's lemma}
+Yoneda's lemma is one of the main results of category theory. This results is due to japanese professor Nobuo Yoneda. We know about Yoneda's life thanks to the elegy that was written by Yoshiki Kinoshita\cite{yonedaLife}. Yoneda was born in Japan in 1930, and received his doctorate in mathematics from Tokyo University in 1952. He was a reviewer for international mathematical journals. In addition to his contributions to the field of mathematics, he also devoted his research to computer science.\\
+
+Mac Lane\cite{mac2013categories} assures the lemma first appeared in his private communication with Yoneda in 1954. With time, this result has became one of the most relevant. The idea behind the Yoneda's lemma is better understood in the context of Moduli problems. 
+
+\subsubsection{Statement and proof}
+
+\subsubsection{The Yoneda's Embedding}
+We can easily see that 
+
+
+\subsection{Some properties expressed in terms of universality}
+We can see that the Yoneda lemma provide an embedding form 
+
+\begin{itemize}
+\item product \label{prod-univ}
+\end{itemize}
+\section{Adjoints}
+
+
+\section{Monad}

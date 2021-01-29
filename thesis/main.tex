@@ -1,0 +1,188 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Masters Thesis 
+%
+% This template is based on templates by:
+% - Mario Román (https://github.com/mroman42)
+% - Steve Gunn (http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/)
+% - Sunil Patel (http://www.sunilpatel.co.uk/thesis-template/)
+%
+% Modifications done by Pedro Bonilla. 
+% Template license:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+12pt,
+% oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
+english, % ngerman for German
+singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
+%draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
+%nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this  to set spacing in lists to single
+%liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
+%toctotoc, % Uncomment to add the main table of contents to the table of contents
+%parskip, % Uncomment to add space between paragraphs
+%nohyperref, % Uncomment to not load the hyperref package
+headsepline, % Uncomment to get a line under the header
+%chapterinoneline, % Uncomment to place the chapter title next to the number on one line
+%consistentlayout, % Uncomment to change the layout of the declaration, abstract and acknowledgements pages to match the default layout
+]{MastersDoctoralThesis} % The class file specifying the document structure
+
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{stmaryrd}
+\usepackage{mathpazo} % Use the Palatino font by default
+\usepackage[font=itshape]{quoting} 
+\usepackage[toc,page]{appendix}
+\usepackage[nogin]{Sweave}
+\usepackage{pdfpages}
+\usepackage[backend=biber,style=numeric]{biblatex} 
+\usepackage[activate={
+  true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage{eso-pic}
+\usepackage[autostyle=true]{csquotes} 
+
+\addbibresource{./example.bib} % The filename of the bibliography
+
+
+
+%----------------------------------------------------------------------------------
+%	MARGIN SETTINGS
+%----------------------------------------------------------------------------------
+
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=2.5cm, % Inner margin
+	outer=3.8cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%----------------------------------------------------------------------------------
+%	THESIS INFORMATION AND METADATA
+%----------------------------------------------------------------------------------
+\usepackage[allcolors=myred]{hyperref}
+
+\author{Pedro Bonilla Nadal}
+\newcommand{\miTitulo}{Categories in Homotopy Type Theory\\\xspace}
+\newcommand{\miNombre}{Pedro Bonilla Nadal\xspace}
+\newcommand{\miGrado}{Máster en Matemáticas y Aplicaciones}
+\newcommand{\miFacultad}{Facultad de Ciencias}
+\newcommand{\miUniversidad}{Universidad Autónoma de Madrid}
+% Añadir tantos tutores como sea necesario separando cada uno de ellos
+% mediante el comando `\\\medskip` y una línea en blanco
+\newcommand{\miTutor}{
+Dr. Ángel González Prieto  \\ \emph{Departamento - Universidad}}
+\newcommand{\miCurso}{2020-2021\xspace}
+\newcommand{\misPalabrasClave}{HOTT, McLane}
+
+
+\hypersetup{pdfinfo={
+            Title={\miTitulo},
+            Author={\miNombre},
+            Director1={Dr. Ángel González Prieto},
+            Director2={Federico Cantero Morán},
+            Ndirectores={2}
+            Tipo={TFM},
+            Curso={\miCurso},
+            MSC={ MSC2020},
+            Palabrasclave={\misPalabrasClave},
+          }
+        }
+
+\AtBeginDocument{
+\hypersetup{pdftitle=\miTitulo} 
+\hypersetup{pdfauthor=\miNombre}
+\hypersetup{pdfkeywords=\misPalabrasClave}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%----------------------------------------------------------------------------------
+%          OTHER IMPORTS
+%----------------------------------------------------------------------------------
+
+
+\usepackage[utf8]{inputenc}
+%\usepackage[british]{babel}
+\usepackage{caption}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{boldline}
+\usepackage{amssymb, amsmath}
+\usepackage{amsthm}
+\usepackage{soul}
+\usepackage{upgreek}
+\usepackage{wrapfig}
+\usepackage{mathtools}
+\usepackage{epigraph}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{soul}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+
+
+\usepackage{tikz-cd}
+\tikzcdset{arrow style=tikz, diagrams={>=stealth}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{thesis}[theorem]{Thesis}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
+\newcommand\myeq{\stackrel{\mathclap{\normalfont\mbox{?}}}{=}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\codom}{\operatorname{codom}}
+\newcommand{\hom}{\operatorname{hom}}
+
+\begin{document}
+\frontmatter
+% TODO: Añadir cuando 
+% \includepdf{img/portada.pdf}
+% \cleardoublepage
+\include{preliminares/titulo}
+% \include{preliminares/declaracion-originalidad}
+% \include{preliminares/dedicatoria}
+\pagestyle{thesis}
+{
+  \hypersetup{hidelinks}
+  \setcounter{tocdepth}{2}
+  \tableofcontents
+}
+% \include{preliminares/introduccion}               
+% \begin{otherlanguage}{spanish}
+%   \input{preliminares/summary}                    
+% \end{otherlanguage}
+
+\mainmatter
+\input{Chapters/Chapter1}
+
+%\section*{Acknowledgements}
+
+
+
+%-----------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%-----------------------------------------------------------------------------
+\medskip
+\addcontentsline{toc}{chapter}{Bibliography}
+\printbibliography
+
+\end{document}  
