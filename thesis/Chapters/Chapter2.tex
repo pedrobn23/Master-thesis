@@ -1,0 +1,70 @@
+
+\chapter{Unnamed chapter}
+\section{Definition}
+% $$
+% \begin{tikzcd}[row sep = 1.4cm, column sep = 1.4cm]
+%   F(c)
+%   \arrow[lddr, to path= { --
+%     ([xshift=-1ex]\tikztostart.west)
+%     -| ([xshift=-2ex]\tikztotarget.west)
+%     |- (\tikztotarget)}]
+%   \arrow[d, swap, "\sigma(c)"]
+%   \arrow[r, "F(f)"] 
+%   & F(c')
+%   \arrow[d, "\sigma(c')"]
+%   \arrow[rddl, to path= { --
+%     ([xshift=1ex]\tikztostart.east) 
+%     -| ([xshift=2ex]\tikztotarget.east)
+%     -- (\tikztotarget)}, "\sigma \circ \tau(c')"]
+%   \\
+%   G(c)
+%   \arrow[d, swap, "\tau(c)"] 
+%   \arrow[r, "G(f)"] & G(c')
+%   \arrow[d, "\tau(c')"] \\
+%   H(c) 
+%   \arrow[r, "H(f)"] & H(c')
+% \end{tikzcd}
+% $$
+\subsection{Bifunctors}
+\subsubsection{The $Hom(\cdot,\cdot)$ bifunctor}
+\section{Universality}
+In this section we present the concept of universality. This concept is behind lots of mathematical properties. Intuitively, universality is an efficient way of expressing an one-to-one correspondence between arrows of different categories. This one-to-one relationship is usually expressed via ''given an arrow  $y$ it exists one and only one  arrow $x$ such that <insert your favorite universality property''.\\
+
+Prior to the formal definition, we shall introduce an example. Probably the first contact that any mathematician has with universality is when we first try to define a function  $f:\mathbb R \to \mathbb R^2$. We quickly understand that defining such a function is equivalent to define two $g,h: \mathbb R \to \mathbb R$( we further explain the product in \ref{prod-univ} ). Another example is given when you consider the space quotient of a set A for a $~$ relationship over it. In this case, giving a function from $A/~$ is the same as giving a function from $A$ that maintains the equivalence relationship $a~b \implies f(a)=f(b)$. A similar concept lays for almost every quotient structure. Here is the general concept.
+
+\begin{definition}
+  If $S: D \to C$ is a functor and $c$ an object of $C$, an \emph{universal arrow} at from $c$ to $S$ is a pair $<r,u>$ with $r\in D, u \in Ar(C)$, such that the diagram:
+  \[
+    \begin{tikzcd}
+      & b \arrow[rd, "g"]& \\
+      a\arrow[ru, "f"] \arrow[rr, "h"] && c\\
+    \end{tikzcd}
+  \]
+
+  commutes. 
+\end{definition}
+
+\subsection{Yoneda's lemma}
+Yoneda's lemma is one of the main results of category theory. This results is due to japanese professor Nobuo Yoneda. We know about Yoneda's life thanks to the elegy that was written by Yoshiki Kinoshita\cite{yonedaLife}. Yoneda was born in Japan in 1930, and received his doctorate in mathematics from Tokyo University in 1952. He was a reviewer for international mathematical journals. In addition to his contributions to the field of mathematics, he also devoted his research to computer science.\\
+
+Mac Lane\cite{mac2013categories} assures the lemma first appeared in his private communication with Yoneda in 1954. With time, this result has became one of the most relevant. The idea behind the Yoneda's lemma is better understood in the context of Moduli problems. 
+
+\subsubsection{Statement and proof}
+
+\subsubsection{The Yoneda's Embedding}
+We can easily see that 
+
+
+\subsection{Some properties expressed in terms of universality}
+We can see that the Yoneda lemma provide an embedding form 
+
+\begin{itemize}
+\item product \label{prod-univ}
+\end{itemize}
+\section{Adjoints}
+\begin{itemize}
+\item Def
+\item Note that every adjuntion raise a universal arrow
+\end{itemize}
+
+\section{Monad}

@@ -1,3 +1,5 @@
+
+
 \part{Category Theory}
 \label{Part1}
 
@@ -103,11 +105,11 @@ With this definitions done, we will carry on working on examples and properties 
   We say that a category is \emph{small} if the collection of objects is given by a set (instead of a proper class). We say that a category is \emph{locally small} if every homesets is a set.
 \end{definition}
 
-\subsection{Examples\footnote{Debería cambiar esto por un entorno de ejemplo grande?}}
-We proceed to introduce a comprehensive list of examples, so that it is already introduced in subsequent chapters.
+We proceed to introduce a comprehensive list of examples, so that it is already introduced in subsequent chapters. {\color{red} TODO: incluir notación $Ar(C)$ y $Ob(C)$}
+\begin{example} \footnote{Debería cambiar este entorno por una pequeña subsección?} 
 
-\begin{itemize}
-\item The ``example'' category:
+  \begin{itemize}  
+\item The elementary category:
   \begin{itemize}
   \item The category $0 = ( \emptyset, \emptyset)$ where every property is trivially satisfy.
   \item The category $1 = (\{e\},\{1_e\})$.
@@ -125,38 +127,77 @@ We proceed to introduce a comprehensive list of examples, so that it is already 
 \item The category $Vect$ That has as object all small vector spaces and as arrows all linear functions.
 \end{itemize}
 
+\item The category $Hask$ of all Haskell types and all possible functions between two types.
 \item Include more examples as categories are used in the text.
 \end{itemize}
-
-Note that, for example,  as natural numbers can be seen as either a set or a preorder, they also can be seen as a discrete category or a preorder category.
-
-
+Note that, for example, as natural numbers can be seen as either a set or a preorder, they also can be seen as a discrete category or a preorder category.
+\end{example}
 
 
-\subsection{Some properties on arrows}
+
+
+
+
+\subsection{Properties}
+We proceed considering some elementary properties on categories.
+
 \subsubsection{Equality}
 We can see that is common in mathematics to have an object of study (propositional logic clauses, groups, Banach spaces or types in Haskell). Once the purpose of the study of these particular set of objects is fixed, it is also common to proceed to consider the transformations between these objects (partial truth assignments, homomorphisms, linear bounded functionals or  functions in Haskell).\\
 
 In categories, we have a kind of different approach to the subject. Instead of focusing in the objects themselves, we focus on how they relate to each other. That is, we focus on the study of the arrows and how they composes. Therefore we can consider equal two objects that has the same relations with other objects. This inspire the next definition:
 
-\begin{definition}[definition 1.1.9 \cite{riehl2017category}]
-  Given a category $C=(O,A)$, a morphism $f: a \to b \in A$ has a \emph{left inverse} (resp. \emph{right inverse}) if there exists a $g: b \to a \in A$ such that $g \circ f = 1_b$ (resp. $f \circ g = 1_a$). A morpishm is an isomorphism if it has both left and right inverse, called the \emph{inverse}. 
+\begin{definition}[Definition 1.1.9 \cite{riehl2017category}]
+  Given a category $C=(O,A)$, a morphism $f: a \to b \in A$ has a \emph{left inverse} (resp. \emph{right inverse}) if there exists a $g: b \to a \in A$ such that $g \circ f = 1_b$ (resp. $f \circ g = 1_a$). A morpishm is an isomorphism if it has both left and right inverse, called the \emph{inverse}. Two object are isomorphic is there exists an isomorphism between them.
 \end{definition}
-
-%Given a category $C=(O,A)$, an \emph{isomorphism} is a morphism $f: a \to b \in A$ for which there exists $g: b\to a\in A$ such that $f\circ g = 1_a$ and $g \circ f = 1_b$.  \\
 
 
 Is easy to follow that this functions define bijections between $\hom(a,c)$ and $hom(b,c)$ para todo $c\in O$. Also one can see that if a morphism has a left and a right inverse, they must be the same, thus implying the uniqueness of the inverse.
 
-\subsubsection{Special arrows}
-\begin{itemize}
-\item monics, epics and zeros.
-\end{itemize}
+\subsubsection{Special elements}
+
+We will now proceed to talk about certain arrows and objects that have properties that distinguish them from others. To accompany and gain an intuition of these properties, I find the most useful example is that of the $FinSet$ category, of all finite sets and functions between them.  \\
+
+Considering special arrows, an arrow $f$ is a \emph{monic} (resp. \emph{epic}) if it is left-cancelable (resp. right-cancelable), i.e.  $f\circ g = f \circ h \implies g = h$. In FinSet this arrows are the injective functions (resp. surjective).\\
+
+
+ 
+Considering special objects, an object $a$ is \emph{terminal} (resp. \emph{initial}) if for every object $b$ there exists an unique arrow $f:b\to a$ (resp. $f:a\to b$). In FinSet this objects is the empty set (resp. the one point set). An object that is both terminal and initial is called \emph{zero}. {\color{red} understand why it is called 0, it does not seems trivial to me}. We can consider this property on terminal objects:
+
+\begin{proposition}\label{terminal-proposition}
+  Every two terminal object are isomorphic.
+\end{proposition}
+\begin{proof}
+ Every terminal object has only one arrow from itself to itself, and necessarily this arrow has to be the identity. Let $a, b$ be terminal object and $f:a\to b$ and $g:b\to a$ be the only arrows with that domain and codomain. Then $f\circ g : a \to a \implies f \circ g = 1_a$.
+\end{proof}
 
 \subsubsection{Duality}
+We will reflect upon the duality property. In sort, this property tell us that for every theorem that we prove for categories, there exist another theorem that is automatically also true. To prove this, we define the concept of \emph{opposite category}.\\
 
-Let $C = (O,A)$ be a category. Then, we can define another category $C' = (O,A')$ where we change the domain with the codomain and viceversa. 
 
+\begin{definition}[Definition 1.2.1 \cite{riehl2017category}]
+  Let $C$ be any category. The opposite category $C^{op}$ has:
+  \begin{itemize}
+  \item the same objects as in $C$,
+  \item an arrow $f^{op}\in C^{op}$ for each arrow $f \in C$, so that the domain of $f^{op}$ is defined as the codomain of $f$ and viceversa.
+  \end{itemize}
+  The remaining structure of the category $C^{op}$ is given as follows:
+  \begin{itemize}
+  \item For each object $a$, the arrow $1_a^{op}$ serves as its identity in $C^{op}$.
+  \item We observe that $f^{op}$ and $g^{op}$ are composable when $f$ and $g$ are, and define $f^{op} \circ g^{op} = (g \circ f)^{op}$
+  \end{itemize}
+\end{definition}
+
+
+The intuition is that we have the same category, only that all arrows are turned around. We can see that  for each theorem $T$ that we prove, we have reinterpretation that theorem to the opposite category. Intuitively this theorem is an equal theorem in which all the arrows have been turned around. \\
+
+Let make an example: the property\label{terminal-proposition} can be reworked as:
+
+\begin{proposition}
+  Every two initial object are isomorphic.
+\end{proposition}
+
+
+That is because being initial is the dual property of being terminal, that is, if $f\in C$ is a terminal object then $f^{op}\in C^{op}$ is an initial object. Being isomorphic is its own dual.
 \subsection{Transformation in categories}
 
 
@@ -166,95 +207,57 @@ Let $C = (O,A)$ be a category. Then, we can define another category $C' = (O,A')
 This is one of the main ways of defining a category: consider a collection of objects and the standard way of transforms one into each other. Then, we may also follow our study defining the structure preserving transformation of categories.
 
 \begin{definition}
-  Given two categories $C=(C_O, C_A), B=(B_O, B_A)$, a \emph{functor} $F: B \to C$ is a pair of functions $F=(F',F'')$ (the \emph{object function} and the \emph{arrow functor} respectively)  such that if $g:a\to b \in B_A$ then $F''g$ is an arrow in $C_A$ from $F'a$ to $F'b$.
+  Given two categories $C=(C_O, C_A), B=(B_O, B_A)$, a \emph{(covariant) functor} $F: B \to C$ is a pair of functions $F=(F',F'')$ (the \emph{object function} and the \emph{arrow functor} respectively)  such that if $g:a\to b \in B_A$ then $F''g$ is an arrow in $C_A$ from $F'a$ to $F'b$.
 
 \end{definition}
 
-That is a functor is a morphism of categories. When there is no ambiguity we will represent both $F'$ and $F''$ with a single symbol $F$ acting on both objects and arrows. Also, as you can see in the definition, whenever possible the parentheses of the functor will be dropped.\\
+
+That is a functor is a morphism of categories. When there is no ambiguity we will represent both $F'$ and $F''$ with a single symbol $F$ acting on both objects and arrows. Also, as you can see in the definition, whenever possible the parentheses of the functor will be dropped. If we talk about functors, we will always refer to covariant functors unless expecifically noted.  Lets provide some examples:\\
+
+\begin{example}
+  \begin{itemize}
+  \item Forgetfull functor:
+  \item Poincaré functor:
+  \item \v{C}ech:
+  \item Group actions:
+  \item Exotic programming example:
+  \end{itemize}
+\end{example}
 
 We can now construct the category of all small categories $Cat$. This category has as object all small categories and as arrows all functor between them. Note that $Cat$ does not contain itself.\\
 
+We can consider some properties in functors. Before defining then, note that we can consider a functor $T:C\to D$ as a function over homeset, that is, a function: 
+$$T:\hom_C(a,b) \to \{Tf: Ta \to Tb | f \in C\} \subset \hom_D(Ta,Tb)$$
 
-is left to include:
-\begin{itemize}
-\item full, lluf, faithfull functor.
-\item 
-\end{itemize}
-\subsubsection{Contravariance}
+\begin{definition}
+  A functor $T:C\to D$ is \emph{full} if it is surjective as a function over homesets, i.e. if the function $T:\hom_C(a,b) \to  \hom_D(Ta,Tb)$  is surjective for every $a,b \in C$. A functor is \emph{faithfull} if it is injective over homesets.
+\end{definition}
+
+As we have defined the concept of opposite category, we can consider functors $T:C^{op} \to D$. This functor, is called a \emph{contravariant} functor from $C$ to $D$, in oposition of a covariant functor from $C$ to $D$.
 
 
 \subsubsection{Natural Transformations}
+\epigraph{Category has been defined in order to define functor and functor has been defined in order to define natural transformation. }{\textit{Saunders Mac Lane,\cite{mac2013categories}}}
 
+
+One can see a functor $T:C\to D$ as representation of a category in another, in the sense that a functor provide a picture of the category $C$ in $D$. Further elaborating into this idea, we can consider how to transform these drawings into each other. 
+
+\begin{definition}
+  Given two functor $T,S:C\to D$, a \emph{natural transformation} $\tau : T \to S$ is a function from $Ob(C)$ to $Ar(D)$ such that every arrow $f:c \to c' \in C$ we have that:
+\[
+  \begin{tikzpicture}
+  \node {\begin{tikzcd}[column sep=20mm]
+      A\ar[r,"a"]\ar[d,"b"] & C\ar[d,"d"]\\
+      B\ar[r,"b"] & D
+  \end{tikzcd}};
+\end{tikzpicture}
+\]
+  \end{definition}
+
+{\color{red} include concept naturally isomorphic.}
 
 \subsection{Some constructions}
 \begin{itemize}
 \item
 \end{itemize}
 
-
-\chapter{Functors and Natural Transformation}
-\section{Definition}
-$$
-\begin{tikzcd}[row sep = 1.4cm, column sep = 1.4cm]
-  F(c)
-  \arrow[lddr, to path= { --
-    ([xshift=-1ex]\tikztostart.west)
-    -| ([xshift=-2ex]\tikztotarget.west)
-    |- (\tikztotarget)}]
-  \arrow[d, swap, "\sigma(c)"]
-  \arrow[r, "F(f)"] 
-  & F(c')
-  \arrow[d, "\sigma(c')"]
-  \arrow[rddl, to path= { --
-    ([xshift=1ex]\tikztostart.east) 
-    -| ([xshift=2ex]\tikztotarget.east)
-    -- (\tikztotarget)}, "\sigma \circ \tau(c')"]
-  \\
-  G(c)
-  \arrow[d, swap, "\tau(c)"] 
-  \arrow[r, "G(f)"] & G(c')
-  \arrow[d, "\tau(c')"] \\
-  H(c) 
-  \arrow[r, "H(f)"] & H(c')
-\end{tikzcd}
-$$
-\subsection{Bifunctors}
-\subsubsection{The $Hom(\cdot,\cdot)$ bifunctor}
-\section{Universality}
-In this section we present the concept of universality. This concept is behind lots of mathematical properties. Intuitively, universality is an efficient way of expressing an one-to-one correspondence between arrows of different categories. This one-to-one relationship is usually expressed via ''given an arrow  $y$ it exists one and only one  arrow $x$ such that <insert your favorite universality property''.\\
-
-Prior to the formal definition, we shall introduce an example. Probably the first contact that any mathematician has with universality is when we first try to define a function  $f:\mathbb R \to \mathbb R^2$. We quickly understand that defining such a function is equivalent to define two $g,h: \mathbb R \to \mathbb R$( we further explain the product in \ref{prod-univ} ). Another example is given when you consider the space quotient of a set A for a $~$ relationship over it. In this case, giving a function from $A/~$ is the same as giving a function from $A$ that maintains the equivalence relationship $a~b \implies f(a)=f(b)$. A similar concept lays for almost every quotient structure. Here is the general concept.
-
-\begin{definition}
-  If $S: D \to C$ is a functor and $c$ an object of $C$, a universal arrow such that from $c$ to $S$ is a pair $<r,u>$ with $r\in D, u \in Ar(C)$, such that the diagram:
-  \[
-    \begin{tikzcd}
-      & b \arrow[rd, "g"]& \\
-      a\arrow[ru, "f"] \arrow[rr, "h"] && c\\
-    \end{tikzcd}
-  \]
-
-  commutes. 
-\end{definition}
-
-\subsection{Yoneda's lemma}
-Yoneda's lemma is one of the main results of category theory. This results is due to japanese professor Nobuo Yoneda. We know about Yoneda's life thanks to the elegy that was written by Yoshiki Kinoshita\cite{yonedaLife}. Yoneda was born in Japan in 1930, and received his doctorate in mathematics from Tokyo University in 1952. He was a reviewer for international mathematical journals. In addition to his contributions to the field of mathematics, he also devoted his research to computer science.\\
-
-Mac Lane\cite{mac2013categories} assures the lemma first appeared in his private communication with Yoneda in 1954. With time, this result has became one of the most relevant. The idea behind the Yoneda's lemma is better understood in the context of Moduli problems. 
-
-\subsubsection{Statement and proof}
-
-\subsubsection{The Yoneda's Embedding}
-We can easily see that 
-
-
-\subsection{Some properties expressed in terms of universality}
-We can see that the Yoneda lemma provide an embedding form 
-
-\begin{itemize}
-\item product \label{prod-univ}
-\end{itemize}
-\section{Adjoints}
-
-
-\section{Monad}
