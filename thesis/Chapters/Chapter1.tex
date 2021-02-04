@@ -27,7 +27,7 @@ Means that $f\circ g = h$. This approach to mathematics emphasises  at the relat
 In this first chapter we will introduce the notion of category and their first properties. The principal references for this chapter are \cite{mac2013categories} and \cite{riehl2017category}. 
 
 \section{Metacategories}
-We will start by defining a concept independent of the set theory axioms: the concept of \emph{metacategory}. Once this is done we will follow reinterpreting this definitions in the context of set theory. We define categories following  \cite{mac2013categories}.\\
+We will start by defining a concept independent of the set theory axioms: the concept of \emph{metacategory}. Once this is done we will follow reinterpreting this definitions in the context of set theory. We follow  \cite{mac2013categories} for these definitions.\\
 
 
 Traditionally, mathematics is based on the set theory. When we start set theory it is not necessary (it is not possible) to define what a set is. It is similar with the concepts of element and belonging, which are basic to set theory. Category theory can also be used to found mathematics. In this sense we will give definitions based on other concepts such as object, arrow, composition. \\
@@ -90,7 +90,7 @@ Further on we will work based on set theory.
 \end{definition}
 
 
-That is, a graph/category is a pair $(O,A)$ where a set $O$ consisting of all objects as well as a set $A$ consisting of all arrows. Their elements holds the same properties that objects and arrows satisfy on metacategories / metagraph.\\
+That is, a graph/category is a pair $(O,A)$ where a collection $O$ consisting of all objects as well as a collection $A$ consisting of all arrows. Their elements holds the same properties that objects and arrows satisfy on metacategories / metagraph.\\
 
 
 We will focus on the category. We can also define the function homeset of a category $C=(O,A)$, wrote as $\hom_{C}$, as the function:
@@ -99,13 +99,13 @@ We will focus on the category. We can also define the function homeset of a cate
   \displaystyle &\ &(a,b)&\mapsto \{f\in A | f:a\to b\}&
 \end{align*}
 
-With this definitions done, we will carry on working on examples and properties of the categories.
+When there is no possibility of confusion we will state $c\in C$ without specifying . We will refer to the collection of objects of a category $C$ as $Ob(C)$ and the collection of arrows as $Ar(C)$. 
 
 \begin{definition}
   We say that a category is \emph{small} if the collection of objects is given by a set (instead of a proper class). We say that a category is \emph{locally small} if every homesets is a set.
 \end{definition}
 
-We proceed to introduce a comprehensive list of examples, so that it is already introduced in subsequent chapters. {\color{red} TODO: incluir notación $Ar(C)$ y $Ob(C)$}
+We proceed to introduce a comprehensive list of examples, so that it is already introduced in subsequent chapters. 
 \begin{example} \footnote{Debería cambiar este entorno por una pequeña subsección?} 
 
   \begin{itemize}  
@@ -123,7 +123,7 @@ We proceed to introduce a comprehensive list of examples, so that it is already 
 \item Large categories: these categories has a large set of objects. For example:
   \begin{itemize}
 \item The category $Top$ that has as objects all small topological spaces and as arrow continuous mappings.
-\item The category $Set$ that has as objects all small sets and as arrows all functions between them.
+\item The category $Set$ that has as objects all small sets and as arrows all functions between them. We can also consider the category $Set_*$ of pointed small sets (sets with a distinguish point), and function between them that maps one distinguish point into another.  
 \item The category $Vect$ That has as object all small vector spaces and as arrows all linear functions.
 \end{itemize}
 
@@ -139,39 +139,46 @@ Note that, for example, as natural numbers can be seen as either a set or a preo
 
 
 \subsection{Properties}
-We proceed considering some elementary properties on categories.
+We proceed considering some elementary properties on categories.\\
 
-\subsubsection{Equality}
+%\subsubsection{Equality}
 We can see that is common in mathematics to have an object of study (propositional logic clauses, groups, Banach spaces or types in Haskell). Once the purpose of the study of these particular set of objects is fixed, it is also common to proceed to consider the transformations between these objects (partial truth assignments, homomorphisms, linear bounded functionals or  functions in Haskell).\\
 
-In categories, we have a kind of different approach to the subject. Instead of focusing in the objects themselves, we focus on how they relate to each other. That is, we focus on the study of the arrows and how they composes. Therefore we can consider equal two objects that has the same relations with other objects. This inspire the next definition:
+In categories, we have a kind of different approach to the subject. Instead of focusing on the objects themselves, we focus on how they relate to each other. That is, we focus on the study of the arrows and how they composes. Therefore we can consider equal two objects that has the same relations with other objects. This inspire the next definition:
 
 \begin{definition}[Definition 1.1.9 \cite{riehl2017category}]
   Given a category $C=(O,A)$, a morphism $f: a \to b \in A$ has a \emph{left inverse} (resp. \emph{right inverse}) if there exists a $g: b \to a \in A$ such that $g \circ f = 1_b$ (resp. $f \circ g = 1_a$). A morpishm is an isomorphism if it has both left and right inverse, called the \emph{inverse}. Two object are isomorphic is there exists an isomorphism between them.
 \end{definition}
 
 
-Is easy to follow that this functions define bijections between $\hom(a,c)$ and $hom(b,c)$ para todo $c\in O$. Also one can see that if a morphism has a left and a right inverse, they must be the same, thus implying the uniqueness of the inverse.
+Is easy to follow that this functions define bijections between $\hom(a,c)$ and $hom(b,c)$ para todo $c\in O$. Also one can see that if a morphism has a left and a right inverse, they must be the same, thus implying the uniqueness of the inverse.\\
 
-\subsubsection{Special elements}
+%\subsubsection{Special elements}
 
-We will now proceed to talk about certain arrows and objects that have properties that distinguish them from others. To accompany and gain an intuition of these properties, I find the most useful example is that of the $FinSet$ category, of all finite sets and functions between them.  \\
+We will now proceed to talk about certain arrows and objects that have properties that distinguish them from others. To accompany and gain an intuition of these properties, I find the most useful example is that of the $FinSet$ category, of all finite sets and functions between them.  Considering special arrows:\\
 
-Considering special arrows, an arrow $f$ is a \emph{monic} (resp. \emph{epic}) if it is left-cancelable (resp. right-cancelable), i.e.  $f\circ g = f \circ h \implies g = h$. In FinSet this arrows are the injective functions (resp. surjective).\\
+\begin{definition} An arrow $f$ is a \emph{monic} (resp. \emph{epic}) if it is left-cancelable (resp. right-cancelable), i.e.  $f\circ g = f \circ h \implies g = h$ (resp. $g\circ f = h \circ f \implies g = h$).
+\end{definition}
 
 
  
-Considering special objects, an object $a$ is \emph{terminal} (resp. \emph{initial}) if for every object $b$ there exists an unique arrow $f:b\to a$ (resp. $f:a\to b$). In FinSet this objects is the empty set (resp. the one point set). An object that is both terminal and initial is called \emph{zero}. {\color{red} understand why it is called 0, it does not seems trivial to me}. We can consider this property on terminal objects:
+In FinSet this arrows are the injective functions (resp. surjective). Considering special objects:
+
+\begin{definition}
+  an object $a$ is \emph{terminal} (resp. \emph{initial}) if for every object $b$ there exists an unique arrow $f:b\to a$ (resp. $f:a\to b$).  An object that is both terminal and initial is called \emph{zero}.
+\end{definition}
+
+  In FinSet this objects is the initial object is the  empty set and the terminal object the one point set. In the Pointed 
 
 \begin{proposition}\label{terminal-proposition}
   Every two terminal object are isomorphic.
 \end{proposition}
 \begin{proof}
- Every terminal object has only one arrow from itself to itself, and necessarily this arrow has to be the identity. Let $a, b$ be terminal object and $f:a\to b$ and $g:b\to a$ be the only arrows with that domain and codomain. Then $f\circ g : a \to a \implies f \circ g = 1_a$.
+ Every terminal object has only one arrow from itself to itself, and necessarily this arrow has to be the identity. Let $a, b$ be terminal object and $f:a\to b$ and $g:b\to a$ be the only arrows with that domain and codomain. Then $f\circ g : a \to a \implies f \circ g = 1_a$. Analogously $g \circ f = 1_b$.\\
 \end{proof}
 
-\subsubsection{Duality}
-We will reflect upon the duality property. In sort, this property tell us that for every theorem that we prove for categories, there exist another theorem that is automatically also true. To prove this, we define the concept of \emph{opposite category}.\\
+%\subsubsection{Duality}
+Another important property in category theory is the \emph{duality property}. In sort, this property tell us that for every theorem that we prove for categories, there exist another theorem that is automatically also true. To prove this, we define the concept of \emph{opposite category}.
 
 
 \begin{definition}[Definition 1.2.1 \cite{riehl2017category}]
@@ -188,9 +195,8 @@ We will reflect upon the duality property. In sort, this property tell us that f
 \end{definition}
 
 
-The intuition is that we have the same category, only that all arrows are turned around. We can see that  for each theorem $T$ that we prove, we have reinterpretation that theorem to the opposite category. Intuitively this theorem is an equal theorem in which all the arrows have been turned around. \\
-
-Let make an example: the property\label{terminal-proposition} can be reworked as:
+The intuition is that we have the same category, only that all arrows are turned around. We can see that  for each theorem $T$ that we prove, we have reinterpretation that theorem to the opposite category. Intuitively this theorem is an equal theorem in which all the arrows have been turned around. For example: the proposition
+\ref{terminal-proposition} can be reworked as:
 
 \begin{proposition}
   Every two initial object are isomorphic.
@@ -203,7 +209,7 @@ That is because being initial is the dual property of being terminal, that is, i
 
 
 
-\subsubsection{Functors}
+%\subsubsection{Functors}
 This is one of the main ways of defining a category: consider a collection of objects and the standard way of transforms one into each other. Then, we may also follow our study defining the structure preserving transformation of categories.
 
 \begin{definition}
@@ -212,7 +218,7 @@ This is one of the main ways of defining a category: consider a collection of ob
 \end{definition}
 
 
-That is a functor is a morphism of categories. When there is no ambiguity we will represent both $F'$ and $F''$ with a single symbol $F$ acting on both objects and arrows. Also, as you can see in the definition, whenever possible the parentheses of the functor will be dropped. If we talk about functors, we will always refer to covariant functors unless expecifically noted.  Lets provide some examples:\\
+That is,  a functor is a morphism of categories. When there is no ambiguity we will represent both $F'$ and $F''$ with a single symbol $F$ acting on both objects and arrows. Also, as you can see in the definition, whenever possible the parentheses of the functor will be dropped. If we talk about functors, we will always refer to covariant functors unless expecifically noted.  Lets provide some examples:\\
 
 \begin{example}
   \begin{itemize}
@@ -236,28 +242,49 @@ $$T:\hom_C(a,b) \to \{Tf: Ta \to Tb | f \in C\} \subset \hom_D(Ta,Tb)$$
 As we have defined the concept of opposite category, we can consider functors $T:C^{op} \to D$. This functor, is called a \emph{contravariant} functor from $C$ to $D$, in oposition of a covariant functor from $C$ to $D$.
 
 
-\subsubsection{Natural Transformations}
-\epigraph{Category has been defined in order to define functor and functor has been defined in order to define natural transformation. }{\textit{Saunders Mac Lane,\cite{mac2013categories}}}
+% \subsubsection{Natural Transformations}
+
+We shall continue defining natural transformation. In the words of Saunders Mac Lane:
+
+\begin{displayquote}
+Category has been defined in order to define functor and functor has been defined in order to define natural transformation.
+\end{displayquote}
+
+
 
 
 One can see a functor $T:C\to D$ as representation of a category in another, in the sense that a functor provide a picture of the category $C$ in $D$. Further elaborating into this idea, we can consider how to transform these drawings into each other. 
 
 \begin{definition}
-  Given two functor $T,S:C\to D$, a \emph{natural transformation} $\tau : T \to S$ is a function from $Ob(C)$ to $Ar(D)$ such that every arrow $f:c \to c' \in C$ we have that:
+  Given two functor $T,S:C\to D$, a \emph{natural transformation} $\tau : T \to S$ is a function from $Ob(C)$ to $Ar(D)$ such that for every arrow $f:c \to c' \in C$ the following diagram:
 \[
   \begin{tikzpicture}
   \node {\begin{tikzcd}[column sep=20mm]
-      A\ar[r,"a"]\ar[d,"b"] & C\ar[d,"d"]\\
-      B\ar[r,"b"] & D
+      Tc\ar[r,"\tau c"]\ar[d,"Tf"] & Sc\ar[d,"Sf"]\\
+      Tc'\ar[r,"\tau c'"] & Sc'
   \end{tikzcd}};
 \end{tikzpicture}
 \]
+
+commutes. A natural transformation where every $\tau c$ is invertible is called a \emph{natural equivalence} and the functors are \emph{naturally isomorphic}.
   \end{definition}
 
-{\color{red} include concept naturally isomorphic.}
 
+  That is a natural transformation is a map between pictures of $C$ into $D$. Note that a natural transformation acts only on the domain of objects. Lets provide some examples
+
+  \begin{example}
+    \begin{itemize}
+    \item The bidual space:
+    \item A polymorphic function in Haskell
+    \end{itemize}
+  \end{example}
+
+  
 \subsection{Some constructions}
-\begin{itemize}
-\item
-\end{itemize}
 
+\subsubsection{Bifunctors}
+\subsubsection{The $Hom(\cdot,\cdot)$ bifunctor}
+
+\subsubsection{Product Category}
+\subsubsection{Comma Category}
+\subsubsection{Free Category}
