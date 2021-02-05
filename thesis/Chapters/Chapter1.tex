@@ -213,12 +213,12 @@ That is because being initial is the dual property of being terminal, that is, i
 This is one of the main ways of defining a category: consider a collection of objects and the standard way of transforms one into each other. Then, we may also follow our study defining the structure preserving transformation of categories.
 
 \begin{definition}
-  Given two categories $C=(C_O, C_A), B=(B_O, B_A)$, a \emph{(covariant) functor} $F: B \to C$ is a pair of functions $F=(F',F'')$ (the \emph{object function} and the \emph{arrow functor} respectively)  such that if $g:a\to b \in B_A$ then $F''g$ is an arrow in $C_A$ from $F'a$ to $F'b$.
+  Given two categories $C=(C_O, C_A), B=(B_O, B_A)$, a \emph{functor} $F: B \to C$ is a pair of functions $F=(F',F'')$ (the \emph{object function} and the \emph{arrow functor} respectively)  such that if $g:a\to b \in B_A$ then $F''g$ is an arrow in $C_A$ from $F'a$ to $F'b$.
 
 \end{definition}
 
 
-That is,  a functor is a morphism of categories. When there is no ambiguity we will represent both $F'$ and $F''$ with a single symbol $F$ acting on both objects and arrows. Also, as you can see in the definition, whenever possible the parentheses of the functor will be dropped. If we talk about functors, we will always refer to covariant functors unless expecifically noted.  Lets provide some examples:\\
+That is,  a functor is a morphism of categories. When there is no ambiguity we will represent both $F'$ and $F''$ with a single symbol $F$ acting on both objects and arrows. Also, as you can see in the definition, whenever possible the parentheses of the functor will be dropped. This loss of parentheses will be replicated thorough the text, whenever possible. Lets provide some examples:\\
 
 \begin{example}
   \begin{itemize}
@@ -226,7 +226,7 @@ That is,  a functor is a morphism of categories. When there is no ambiguity we w
   \item Poincaré functor:
   \item \v{C}ech:
   \item Group actions:
-  \item Exotic programming example:
+  \item Monads in Haskell:
   \end{itemize}
 \end{example}
 
@@ -239,7 +239,7 @@ $$T:\hom_C(a,b) \to \{Tf: Ta \to Tb | f \in C\} \subset \hom_D(Ta,Tb)$$
   A functor $T:C\to D$ is \emph{full} if it is surjective as a function over homesets, i.e. if the function $T:\hom_C(a,b) \to  \hom_D(Ta,Tb)$  is surjective for every $a,b \in C$. A functor is \emph{faithfull} if it is injective over homesets.
 \end{definition}
 
-As we have defined the concept of opposite category, we can consider functors $T:C^{op} \to D$. This functor, is called a \emph{contravariant} functor from $C$ to $D$, in oposition of a covariant functor from $C$ to $D$.
+As we have defined the concept of opposite category, we can consider functors $T:C^{op} \to D$. This functor, is called a \emph{contravariant} functor from $C$ to $D$, in oposition of a covariant functor from $C$ to $D$. A functor $T: C \to D^{op}$ is usually called a \emph{covariant} functor from 
 
 
 % \subsubsection{Natural Transformations}
@@ -281,10 +281,55 @@ commutes. A natural transformation where every $\tau c$ is invertible is called 
 
   
 \subsection{Some constructions}
+In this last subsection we will introduce some standard construction on categories, along with some examples of these constructions.
 
-\subsubsection{Bifunctors}
-\subsubsection{The $Hom(\cdot,\cdot)$ bifunctor}
 
 \subsubsection{Product Category}
+\begin{itemize}
+\item Bifunctors
+\item The $Hom(\cdot,\cdot)$ bifunctor
+\end{itemize}
+
+\subsubsection{Functor Categories}
+
+We continue defining functor categories, that is, categories where we consider the functors as objects and natural transformation as arrows in some sense. This concept will be instrumental in further consideration in the realm of functional programming (in particular, in the definition of monad). Lets define the composition of two natural transformation.
+
+\begin{definition}
+Let $C$ and $B$ be two categories, $R,S,T : C \to B$ be functors, and let $\tau: R \to S$, $\sigma:S\to R$, we define the composition $(\tau \circ \sigma)c = \tau c\circ \sigma c$.
+\end{definition}
+
+To see that $(\tau \circ \sigma)$ is a natural transformation it suffices the following diagram\cite{stack-composition-natural}:
+
+$$
+\begin{tikzcd}[row sep = 1.4cm, column sep = 1.4cm]
+  R c
+  \arrow[lddr, to path= { --
+    ([xshift=-1ex]\tikztostart.west)
+    -| ([xshift=-2ex]\tikztotarget.west)
+    |- (\tikztotarget)}]
+  \arrow[d, swap, "\sigma c"]
+  \arrow[r, "R f"] 
+  & R c'
+  \arrow[d, "\sigma c'"]
+  \arrow[rddl, to path= { --
+    ([xshift=1ex]\tikztostart.east) 
+    -| ([xshift=2ex]\tikztotarget.east)
+    -- (\tikztotarget)}, "\sigma \circ \tau c'"]
+  \\
+  S c
+  \arrow[d, swap, "\tau c "] 
+  \arrow[r, "S f "] & S(c')
+  \arrow[d, "\tau c'"] \\
+  T c 
+  \arrow[r, "T f"] & T c'
+\end{tikzcd}
+$$
+
+This composition of natural transformation is called \emph{vertical composition}, in opposition to the \emph{horizontal composition}\ref{hortizontal-composition}
+t
+\begin{definition}\label{horizontal-composition}
+
+\end{definition}
+
 \subsubsection{Comma Category}
 \subsubsection{Free Category}
