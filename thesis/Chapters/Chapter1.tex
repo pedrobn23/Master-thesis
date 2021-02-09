@@ -321,21 +321,33 @@ for the object. For the arrows:
   \hom_C<f^{op},g> (h)   = g \circ h \circ f  &\qquad \forall  h\in \hom_C(a',b) 
 \end{align*}
 \subsubsection{Functor Categories}
-W
+We continue defining functor categories, that is, categories where we consider the functors as objects and natural transformation as arrows in some sense. This concept will be instrumental in further consideration in the realm of functional programming (in particular, in the definition of monad).\\
 
-We continue defining functor categories, that is, categories where we consider the functors as objects and natural transformation as arrows in some sense. This concept will be instrumental in further consideration in the realm of functional programming (in particular, in the definition of monad).
-
-Let $B,C$ be categories, $F,G:B\to C$ be functors and $\tau:F\to G$ natural transformation $\tau$. It is common to represent this structure with the following diagram:
+Before explaining composition between natural transformation, it is useful to present the following diagram. Let $B,C$ be categories, $F,G:B\to C$ be functors and $\tau:F\to G$ natural transformation $\tau$, it is common to represent this structure with:
 \[
 \begin{tikzcd}[column sep=huge]
 A
-  \arrow[bend left=50]{r}[name=F,label=above:$\scriptstyle F$]{}
-  \arrow[bend right=50]{r}[name=G,label=below:$\scriptstyle G$]{} &
+  \arrow[bend left=40]{r}[name=F,label=above:$\scriptstyle F$]{}
+  \arrow[bend right=40]{r}[name=G,label=below:$\scriptstyle G$]{} &
 B
-  \arrow[shorten <=10pt,shorten >=10pt,Rightarrow,to path={(F) -- node {} (G)}]{}
+  \arrow[shorten <=3pt,shorten >=3pt,Rightarrow,to path={(F) -- node[label=right:$\tau$] {} (G)}]{}
 \end{tikzcd}
 \]
-Lets define the composition of two natural transformation.
+
+Lets define the composition of two natural transformation. We will start defining the composition of two natural tranformations $\sigma, \tau$ as in:
+\[
+\begin{tikzcd}[column sep=huge]
+A
+  \arrow[bend left=60]{r}[name=F,label=above:$\scriptstyle F$]{}
+  \arrow{r}[name=G,label=right above:$\scriptstyle G$]{}
+  \arrow[bend right=60]{r}[name=H,label=below:$\scriptstyle H$]{}  &
+B
+\arrow[shorten <=3pt,shorten >=2pt,Rightarrow,to path={(F) -- node[label=left:$\tau$] {} (G)}]{}
+\arrow[shorten <=3pt,shorten >=2pt,Rightarrow,to path={(G) -- node[label=left:$\sigma$] {} (H)}]{}
+\end{tikzcd}
+\]
+
+Due to this representation, this composition of natural transformations is called \emph{vertical composition}, in opposition to the \emph{horizontal composition} (def. \ref{horizontal-composition}).
 
 \begin{definition}\label{vertical-composition}
 Let $C$ and $B$ be two categories, $R,S,T : C \to B$ be functors, and let $\tau: R \to S$, $\sigma:S\to T$, we define the composition $(\tau \circ \sigma)c = \tau c\circ \sigma c$.
@@ -368,7 +380,7 @@ $$
 \end{tikzcd}
 $$
 
-This composition of natural transformation is called \emph{vertical composition}, in opposition to the \emph{horizontal composition} (def. \ref{horizontal-composition}).
+
 
 \begin{definition}
   Let $B,C$ be categories. We define the category $B^C$ as the functor category from $B$ to $C$, that is, the category with functors from $B$ to $C$ as object, natural transformation as arrows, and composition as defined in \ref{vertical-composition}.
@@ -385,10 +397,25 @@ we now present some examples to provide some intuition about when this type of c
   \end{itemize}
 \end{example}
 
-Note that this is not the only way in which to define the composition of natural tranformation. In fact, we can define another functor category.
+Note that this is not the only way in which to define the composition of natural tranformation. In fact, we can define another functor category. In this case we compose two natural transformation as in:
 
+\[
+\begin{tikzcd}[column sep=huge]
+B
+  \arrow[bend left=40]{r}[name=F,label=above:$\scriptstyle F$]{}
+  \arrow[bend right=40]{r}[name=G,label=below:$\scriptstyle G$]{} &
+C
+  \arrow[bend left=40]{r}[name=F',label=above:$\scriptstyle F'$]{}
+  \arrow[bend right=40]{r}[name=G',label=below:$\scriptstyle G'$]{}&
+D
+    \arrow[shorten <=3pt,shorten >=3pt,Rightarrow,to path={(F) -- node[label=right:$\tau$] {} (G)}]{}
+\arrow[shorten <=3pt,shorten >=3pt,Rightarrow,to path={(F') -- node[label=right:$\sigma$] {} (G')}]{}
+\end{tikzcd}
+\]
+
+Lets formalize this composition:
 \begin{definition}\label{horizontal-composition}
-Let $B,C,D$ be categories, $R,R': B \to C, S,S':C\to D$ be functors, and let $\tau: R \to R'$, $\sigma:S\to S'$, we define the composition $(\tau \circ \sigma): R\circ S \to R'\circ S'$ such that $$(\tau \circ \sigma) c = \simga R c \circ S' \tau c$$  for all $c\in C$.
+Let $B,C,D$ be categories, $F,G: B \to C, F',G':C\to D$ be functors, and let $\tau: F \to G$, $\sigma:F'\to G'$, we define the composition $(\tau \circ \sigma): F\circ F' \to G\circ G'$ such that $$(\sigma \circ \tau) c = \simga F c \circ G' \tau c$$  for all $c\in B$.
 \end{definition}
 
 With this horizontal composition we can properly defined.In this case we can see that the composition of two natural transformation is indeed a natural transformation due to the commutativity of:
@@ -396,20 +423,56 @@ With this horizontal composition we can properly defined.In this case we can see
 \[
   \begin{tikzpicture}
   \node {\begin{tikzcd}[column sep=20mm]
-      SRc\ar[r,"\sigma R c"]\ar[d,"S\tau c"] & S'Rc\ar[d,"S'\tau c"]\\
-      SR'c\ar[r,"\sigma R'c'"] & S'R'c'
+      F'Fc      \ar[r,"\sigma F c"]
+      \ar[d,"F'\tau c"]
+      \ar[dr,"(\sigma\circ \tau)c"]
+      & G'Fc\ar[d,"G'\tau c"]\\
+      F'Gc\ar[r,"\sigma Gc'"] & G'Gc'
   \end{tikzcd}};
 \end{tikzpicture}
 \]
 
 
+With this definition of composition we can consider another different category: the category of all functors of all (small)\footnote{me parece que tengo que incluir esto pero lo hago más por miedo que por conocimiento} categories, that is, the category that has all functors as object, and has the natural transformation with horizontal composition as arrows.\\
 
-When we have to consider both compositions at the same time we denote the vertical composition with $\tau \cdot \sigma$ and horizontal composition with $\tau \circ \sigma$ , as in  \cite{mac2013categories}. Lastly we have to consider how this composition relate to each other. This is seen in the \emph{interchange law}:
+When we have to consider both compositions at the same time we denote the vertical composition with $\tau \cdot \sigma$ and horizontal composition with $\tau \circ \sigma$ , as in  \cite{mac2013categories}. Lastly we have to consider how this composition relate to each other. This is seen in the \emph{interchange law}:\\
 
 \begin{proposition}
-  Let $B,C,D$ be category and $\simga,\tau: B \to C,\sigma',\tau': C \to D$ be natural transformations, then:
-  $$(\sigma' \circ \sigma)\cdot (\tau' \circ \tau) = (\sigma' \cdot \tau')\circ (\sigma\cdot \tau) = $$
+  Let $A,B,C$ be categories, $F,G,H:A\to B$, $F',G',H':B\to C$ be functors and $\tau: F \to G,\sigma:G\to H,\tau': F' \to G', \sigma' : G'\to H'$ be natural transformations, then:
+  $$(\sigma' \circ \sigma)\cdot (\tau' \circ \tau) = (\sigma' \cdot \tau')\circ (\sigma\cdot \tau)  $$
 \end{proposition}
+\begin{proof}
+  We have a structure like   
+\[
+\begin{tikzcd}[column sep=huge]
+A
+  \arrow[bend left=60]{r}[name=F,label=above:$\scriptstyle F$]{}
+  \arrow{r}[name=G,label=right above:$\scriptstyle G$]{}
+  \arrow[bend right=60]{r}[name=H,label=below:$\scriptstyle H$]{}  &
+B
+  \arrow[bend left=60]{r}[name=F',label=above:$\scriptstyle F'$]{}
+  \arrow{r}[name=G',label=right above:$\scriptstyle G'$]{}
+  \arrow[bend right=60]{r}[name=H',label=below:$\scriptstyle H'$]{}  &
+C
+\arrow[shorten <=3pt,shorten >=2pt,Rightarrow,to path={(F) -- node[label=left:$\tau$] {} (G)}]{}
+\arrow[shorten <=3pt,shorten >=2pt,Rightarrow,to path={(G) -- node[label=left:$\sigma$] {} (H)}]{}
+\arrow[shorten <=3pt,shorten >=2pt,Rightarrow,to path={(F') -- node[label=left:$\tau'$] {} (G')}]{}
+\arrow[shorten <=3pt,shorten >=2pt,Rightarrow,to path={(G') -- node[label=left:$\sigma'$] {} (H')}]{}
+\end{tikzcd}
+\]
+From the  naturality of $\tau'$ we have that for all $c\in A$:
+\begin{align*}
+  ((\sigma'\cdot \tau')\circ (\sigma\cdot \tau))(c)
+  & = H' ((\sigma\cdot \tau) c ) \circ (\sigma'\cdot \tau') (F c)  \\
+  & = H' ( \sigma c \circ \tau c) \circ (\sigma' (Fc)\circ \tau' (F c) )  \\
+  & = H' ( \sigma c) \circ H'(\tau c) \circ \sigma' (Fc)\circ \tau' (F c)   \\
+  &  = H' ( \sigma c) \circ
+    \sigma'Gc \circ G' \tau c%H'(\tau c) \circ \sigma' (Fc)
+    \circ \tau' (F c)   \\ 
+  &  = (\sigma' \circ \sigma) (c) \circ  (\tau \circ \tau) (c)   \\
+  &  = ((\sigma' \circ \sigma) \cdot  (\tau' \circ \tau)) (c). 
+\end{align*}
+\end{proof}
 
 
 \subsubsection{Comma Category}
