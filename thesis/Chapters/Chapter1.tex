@@ -19,10 +19,10 @@ The fundamental idea of Category Theory is that a many properties can be unified
 \[
   \begin{tikzcd}
     & b \arrow[rd, "g"]& \\
-    a\arrow[ru, "f"] \arrow[rr, "h"] && c\\
+    a\arrow[ru, "f"] \arrow[rr, "h", dashed] && c\\
   \end{tikzcd}
 \]
-Means that $f\circ g = h$. This approach to mathematics emphasises  at the relationships between elements, rather than at the elements themselves (and from them derive their relationships).\\
+Means that $f\circ g = h$. This approach to mathematics emphasises  at the relationships between elements, rather than at the elements themselves (and from them derive their relationships). In general, dashed lines means that the existence of that particular arrow is uniquely determined by the solid arrow presents in the diagram.\\
 
 In this first chapter we will introduce the notion of category and their first properties. The principal references for this chapter are \cite{mac2013categories} and \cite{riehl2017category}. 
 
@@ -45,7 +45,7 @@ Traditionally, mathematics is based on the set theory. When we start set theory 
     \[
       \begin{tikzcd}
         & b \arrow[rd, "g"]& \\
-        a\arrow[ru, "f"] \arrow[rr, "g\circ f",swap] && c\\
+        a\arrow[ru, "f"] \arrow[rr, "g\circ f",swap, dashed] && c\\
       \end{tikzcd}
     \]
 
@@ -74,7 +74,7 @@ We have just define what a  metacategory is without any need of set and elements
 
 Once we have talk so much about this we may also formally introduce the stuff. Is not so long (?)  - ok, maybe it is. I am letting this as a TODO and continue with other stuff until this is more done.\\
 
-Further on i left a detailed todo of things from this section that are referenced in the text.\\
+Further on i left a detailed TODO of things from this section that are referenced in the text.\\
 
 Detailed TODO:
 \begin{itemize}
@@ -151,7 +151,7 @@ In categories, we have a kind of different approach to the subject. Instead of f
 \end{definition}
 
 
-Is easy to follow that this functions define bijections between $\hom(a,c)$ and $hom(b,c)$ para todo $c\in O$. Also one can see that if a morphism has a left and a right inverse, they must be the same, thus implying the uniqueness of the inverse.\\
+Is easy to follow that this functions define bijections between $\hom(a,c)$ and $hom(b,c)$ for all $c\in O$. Also one can see that if a morphism has a left and a right inverse, they must be the same, thus implying the uniqueness of the inverse.\\
 
 %\subsubsection{Special elements}
 
@@ -213,7 +213,8 @@ That is because being initial is the dual property of being terminal, that is, i
 This is one of the main ways of defining a category: consider a collection of objects and the standard way of transforms one into each other. Then, we may also follow our study defining the structure preserving transformation of categories.
 
 \begin{definition}
-  Given two categories $C=(C_O, C_A), B=(B_O, B_A)$, a \emph{functor} $F: B \to C$ is a pair of functions $F=(F',F'')$ (the \emph{object function} and the \emph{arrow functor} respectively)  such that if $g:a\to b \in B_A$ then $F''g$ is an arrow in $C_A$ from $F'a$ to $F'b$.
+  Given two categories $C, B$, a \emph{functor} $F: B \to C$ is a pair of functions $F=(F':Ob(C)\to Ob(B),F'':Ar(C)\to Ar(B))$ (the \emph{object function} and the \emph{arrow functor} respectively) in such a way that:
+  $$F''(1c) = 1_{F'c}, \ \forall c \in Ob(C); \qquad F''(f\circ g) = F''f \circ F''g, \ \forall f,g  \in Ar(C).$$
 
 \end{definition}
 
@@ -226,9 +227,11 @@ That is,  a functor is a morphism of categories. When there is no ambiguity we w
   \item Poincaré functor:
   \item \v{C}ech:
   \item Group actions:
-  \item Monads in Haskell:
+  \item \texttt{Maybe} Method in Haskell:
   \end{itemize}
 \end{example}
+
+An  important consideration on functors is that a functor $F$ can be defined only pointing out how it map arrows, as how $F$ maps object can be defined with how it map identity arrows.\\
 
 We can now construct the category of all small categories $Cat$. This category has as object all small categories and as arrows all functor between them. Note that $Cat$ does not contain itself.\\
 
@@ -275,7 +278,7 @@ commutes. A natural transformation where every $\tau c$ is invertible is called 
   \begin{example}
     \begin{itemize}
     \item The bidual space:
-    \item A polymorphic function in Haskell
+    \item A polymorphic function in Haskell:
     \end{itemize}
   \end{example}
 
@@ -285,17 +288,57 @@ In this last subsection we will introduce some standard construction on categori
 
 
 \subsubsection{Product Category}
-\begin{itemize}
-\item Bifunctors
-\item The $Hom(\cdot,\cdot)$ bifunctor
-\end{itemize}
-
-\subsubsection{Functor Categories}
-
-We continue defining functor categories, that is, categories where we consider the functors as objects and natural transformation as arrows in some sense. This concept will be instrumental in further consideration in the realm of functional programming (in particular, in the definition of monad). Lets define the composition of two natural transformation.
+We present now one of the most usual construction in mathematics: the product. We will consider the ``universal'' properties of product on the next chapter. By now, we present the product of categories.
 
 \begin{definition}
-Let $C$ and $B$ be two categories, $R,S,T : C \to B$ be functors, and let $\tau: R \to S$, $\sigma:S\to R$, we define the composition $(\tau \circ \sigma)c = \tau c\circ \sigma c$.
+  Let $B,C$ be categories. Then the \emph{product category} $B\times C$ is the category that has as objects the pairs $\{<b,c>: b \in Ob(B), c\in Ob(C)\}$ and as arrows the pairs of arrows $\{<f,g>: f \in Ar(B), g\in Ar(C)\}$. The composition of arrows if defined by the elementwise composition. 
+\end{definition}
+
+It is clear that we can define to functor $P: B\times C \to B$ and $Q: B \times C \to C$ that restricts the category to each of its component parts (functorial axioms follow immediately). Moreover, we can see that any functor $F:D\to B\times C$ will be uniquely identified by its composition by $P$ and $Q$.\\
+
+Complementary, for any two functors $F:D\to B, G:D\to C$ we can define an functor $F \times G : D \to B\times C$ that apply $(F\times G) <f,g> = <Fg, Gg>$. Expressed as a diagram: 
+
+\[
+\begin{tikzcd}
+  {} & D
+  \arrow[swap, "F"]{ddl}
+  \arrow[dashed, "F\times G"]{dd}
+  \arrow["G"]{ddr}\\
+  {} & \\
+  B & B \times C
+  \arrow["P"]{l}
+  \arrow["Q"]{r} & C
+\end{tikzcd}
+\]
+
+A functor $F: B^{op}\times C \to D$ is called \emph{bifunctors}. Arguably the most important bifunctor is the $\hom_C$ function seen as a functor. Given a category $C$ we can see $\hom_C: C^{op}\times C \to Set$ as a bifunctor such that:
+\[
+  \hom_C<a,b> = \hom_C (a,b) \qquad \forall a,b \in Ob(C)
+\]
+for the object. For the arrows:
+\begin{align*}
+  \hom_C<f^{op},g>: \hom_C (a',b)  \to \hom_C(a,b') &\qquad  \forall f:a\to a', g:b\to b' \in C\\
+  \hom_C<f^{op},g> (h)   = g \circ h \circ f  &\qquad \forall  h\in \hom_C(a',b) 
+\end{align*}
+\subsubsection{Functor Categories}
+W
+
+We continue defining functor categories, that is, categories where we consider the functors as objects and natural transformation as arrows in some sense. This concept will be instrumental in further consideration in the realm of functional programming (in particular, in the definition of monad).
+
+Let $B,C$ be categories, $F,G:B\to C$ be functors and $\tau:F\to G$ natural transformation $\tau$. It is common to represent this structure with the following diagram:
+\[
+\begin{tikzcd}[column sep=huge]
+A
+  \arrow[bend left=50]{r}[name=F,label=above:$\scriptstyle F$]{}
+  \arrow[bend right=50]{r}[name=G,label=below:$\scriptstyle G$]{} &
+B
+  \arrow[shorten <=10pt,shorten >=10pt,Rightarrow,to path={(F) -- node {} (G)}]{}
+\end{tikzcd}
+\]
+Lets define the composition of two natural transformation.
+
+\begin{definition}\label{vertical-composition}
+Let $C$ and $B$ be two categories, $R,S,T : C \to B$ be functors, and let $\tau: R \to S$, $\sigma:S\to T$, we define the composition $(\tau \circ \sigma)c = \tau c\circ \sigma c$.
 \end{definition}
 
 To see that $(\tau \circ \sigma)$ is a natural transformation it suffices the following diagram\cite{stack-composition-natural}:
@@ -325,11 +368,52 @@ $$
 \end{tikzcd}
 $$
 
-This composition of natural transformation is called \emph{vertical composition}, in opposition to the \emph{horizontal composition}\ref{hortizontal-composition}
-t
-\begin{definition}\label{horizontal-composition}
+This composition of natural transformation is called \emph{vertical composition}, in opposition to the \emph{horizontal composition} (def. \ref{horizontal-composition}).
 
+\begin{definition}
+  Let $B,C$ be categories. We define the category $B^C$ as the functor category from $B$ to $C$, that is, the category with functors from $B$ to $C$ as object, natural transformation as arrows, and composition as defined in \ref{vertical-composition}.
 \end{definition}
 
+we now present some examples to provide some intuition about when this type of construction are considered.
+
+\begin{example}\ 
+  \begin{itemize}
+  \item The category of group action over a set.
+  \item $C^2$ also called the arrow category.
+  \item Relation with the product category.
+  \item Study composition of polymorphic function, and put that in either this example or in the next one.
+  \end{itemize}
+\end{example}
+
+Note that this is not the only way in which to define the composition of natural tranformation. In fact, we can define another functor category.
+
+\begin{definition}\label{horizontal-composition}
+Let $B,C,D$ be categories, $R,R': B \to C, S,S':C\to D$ be functors, and let $\tau: R \to R'$, $\sigma:S\to S'$, we define the composition $(\tau \circ \sigma): R\circ S \to R'\circ S'$ such that $$(\tau \circ \sigma) c = \simga R c \circ S' \tau c$$  for all $c\in C$.
+\end{definition}
+
+With this horizontal composition we can properly defined.In this case we can see that the composition of two natural transformation is indeed a natural transformation due to the commutativity of:
+
+\[
+  \begin{tikzpicture}
+  \node {\begin{tikzcd}[column sep=20mm]
+      SRc\ar[r,"\sigma R c"]\ar[d,"S\tau c"] & S'Rc\ar[d,"S'\tau c"]\\
+      SR'c\ar[r,"\sigma R'c'"] & S'R'c'
+  \end{tikzcd}};
+\end{tikzpicture}
+\]
+
+
+
+When we have to consider both compositions at the same time we denote the vertical composition with $\tau \cdot \sigma$ and horizontal composition with $\tau \circ \sigma$ , as in  \cite{mac2013categories}. Lastly we have to consider how this composition relate to each other. This is seen in the \emph{interchange law}:
+
+\begin{proposition}
+  Let $B,C,D$ be category and $\simga,\tau: B \to C,\sigma',\tau': C \to D$ be natural transformations, then:
+  $$(\sigma' \circ \sigma)\cdot (\tau' \circ \tau) = (\sigma' \cdot \tau')\circ (\sigma\cdot \tau) = $$
+\end{proposition}
+
+
 \subsubsection{Comma Category}
-\subsubsection{Free Category}
+
+
+%that a natural transformation {\displaystyle \eta :S\to T}\eta :S\to T, with {\displaystyle S,T:{\mathcal {A}}\to {\mathcal {C}}}S,T:{\mathcal  A}\to {\mathcal  C}, corresponds to a functor {\displaystyle {\mathcal {A}}\to (S\downarrow T)}{\mathcal  A}\to (S\downarrow T) which maps each object {\displaystyle A}A to {\displaystyle (A,A,\eta _{A})}{\displaystyle (A,A,\eta _{A})} and maps each morphism {\displaystyle f=g}f=g to {\displaystyle (f,g)}(f,g). This is a bijective correspondence between natural transformations {\displaystyle S\to T}S\to T and functors {\displaystyle {\mathcal {A}}\to (S\downarrow T)}{\mathcal  A}\to (S\downarrow T) which are sections of both forgetful functors from {\displaystyle S\downarrow T}S\downarrow T.
+%\subsubsection{Free Category}

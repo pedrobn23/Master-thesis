@@ -58,6 +58,30 @@ We can see that the Yoneda lemma provide an embedding form
 
 \begin{itemize}
 \item product \label{prod-univ}
+\item pullback
+  $$
+\begin{tikzcd}
+Q
+\arrow[bend left]{drr}{q_2}
+\arrow[bend right,swap]{ddr}{q_1}
+\arrow[dashed]{dr}[description]{u} & & \\
+& P \arrow{r}{p_2} \arrow{d}[swap]{p_1}
+& Y \arrow{d}{g} \\
+& X \arrow[swap]{r}{f}
+& Z
+\end{tikzcd}
+
+\begin{tikzcd}
+{} & Q
+\arrow[bend right,swap]{ddl}{q_1}
+\arrow[bend left]{ddr}{q_2}
+\arrow[dashed]{d}[description]{u} & & \\
+& P \arrow{dr}{p_1} \arrow{dl}[swap]{p_2} \\
+X \arrow[swap]{dr}{f} & & 
+Y \arrow{dl}{g} \\
+& Z
+\end{tikzcd}
+  $$
 \end{itemize}
 \section{Adjoints}
 
