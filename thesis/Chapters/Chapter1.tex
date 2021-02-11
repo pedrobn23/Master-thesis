@@ -1,5 +1,4 @@
 
-
 \part{Category Theory}
 \label{Part1}
 
@@ -10,11 +9,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \epigraph{“The human mind has never invented a labor-saving machine equal to algebra.” }{\textit{Stephan Banach (1925)}}
 
-For us, Categories are an area of interest on its own rights, rather than merely an elegant tool. In this sense we will introduce this theory with a personal point of view, trying to emphasize the intuitive ideas behind each notion.\\
+For us categories are an area of interest on its own rights, rather than merely an elegant tool. In this sense we will introduce this theory with a point of view, trying to emphasize the intuitive ideas behind each notion.\\
 
 Thus, in addition to the formal content, we will also provide enough information so that an avid reader gain quick intuitive understanding of the subject. With this objective in mind, we will get into the habit of introducing the first examples even before introducing the formal definitions. Thus, when the formal definition is introduced, it becomes more meaningful and helps the intuition to understand the concept.\\
 
-The fundamental idea of Category Theory is that a many properties can be unified if expressed with diagram and arrows. Intuitively, a diagram is a directed graph, such that each way of going from a node to another are equals. For example, in the diagram:
+The fundamental idea of Category Theory is that many properties can be unified if expressed with diagram and arrows. Intuitively, a diagram is a directed graph, such that each way of going from a node to another are equals. For example, the diagram:
 
 \[
   \begin{tikzcd}
@@ -24,7 +23,7 @@ The fundamental idea of Category Theory is that a many properties can be unified
 \]
 Means that $f\circ g = h$. This approach to mathematics emphasises  at the relationships between elements, rather than at the elements themselves (and from them derive their relationships). In general, dashed lines means that the existence of that particular arrow is uniquely determined by the solid arrow presents in the diagram.\\
 
-In this first chapter we will introduce the notion of category and their first properties. The principal references for this chapter are \cite{mac2013categories} and \cite{riehl2017category}. 
+In this first chapter we will introduce the notion of category and their first properties. The principal references for this chapter are \cite{mac2013categories} and \cite{riehl2017category}. Haskell references can be checked in \cite{milewski2018category}.
 
 \section{Metacategories}
 We will start by defining a concept independent of the set theory axioms: the concept of \emph{metacategory}. Once this is done we will follow reinterpreting this definitions in the context of set theory. We follow  \cite{mac2013categories} for these definitions.\\
@@ -62,7 +61,9 @@ Traditionally, mathematics is based on the set theory. When we start set theory 
   In the context of a metacategory, arrows are often called \emph{morphisms}.
 \end{definition}
 
-We have just define what a  metacategory is without any need of set and elements. In most cases we will rely in a set theory interpretation of this definitions, as most examples will rely on this theory. Nonetheless, whenever possible, we will define the concepts working only in terms of objects and arrows, having therefore the theory as independent as possible to this theory.
+We have just define what a  metacategory is without any need of set and elements. In most cases we will rely in a set theory interpretation of this definitions, as most examples will rely on this theory. Nonetheless, whenever possible, we will define the concepts working only in terms of objects and arrows, having therefore the theory as independent as possible to this theory.\\
+
+
 
 % Diagramas de existencia condicionada.!!
 % We will also need diagrams that represents the existence of arrows due to the existence other arrows. , given objects $a,b,c$ and arrows $d$
@@ -83,7 +84,7 @@ Detailed TODO:
 
 
 \section{Set theory categories}
-Further on we will work based on set theory.
+Further on we will work based on set theory. Despite that, it is useful to take into account that most of the concept here presented can be defined without making use of this, To act accordingly if needed. However, for our interests we will never need to get rid of set theory.
 
 \begin{definition}
   A category (resp. graph) is an interpretation of a metacategory (resp. metagraph) within set theory.
@@ -106,14 +107,14 @@ When there is no possibility of confusion we will state $c\in C$ without specify
 \end{definition}
 
 We proceed to introduce a comprehensive list of examples, so that it is already introduced in subsequent chapters. 
-\begin{example} \footnote{Debería cambiar este entorno por una pequeña subsección?} 
+\begin{example}
 
-  \begin{itemize}  
-\item The elementary category:
+  \begin{itemize}  \ 
+\item The elementary categories:
   \begin{itemize}
   \item The category $0 = ( \emptyset, \emptyset)$ where every property is trivially satisfy.
   \item The category $1 = (\{e\},\{1_e\})$.
-  \item The category $2 = (\{a,b\},\{1_a,1_b,f:a\to b\})$
+  \item The category $2 = (\{a,b\},\{1_a,1_b,f:a\to b\})$\label{2-category}
   \end{itemize}
 
 \item Discrete categories: are categories where every arrow is an identity arrow. This are sets regarded as categories, in the following sense: every discrete category $C=(A, \{1_a : a \in A\})$ is fully identified by its set of object.  
@@ -122,32 +123,42 @@ We proceed to introduce a comprehensive list of examples, so that it is already 
 
 \item Large categories: these categories has a large set of objects. For example:
   \begin{itemize}
-\item The category $Top$ that has as objects all small topological spaces and as arrow continuous mappings.
+  \item The category $Top$ that has as objects all small topological spaces and as arrow continuous mappings.
 \item The category $Set$ that has as objects all small sets and as arrows all functions between them. We can also consider the category $Set_*$ of pointed small sets (sets with a distinguish point), and function between them that maps one distinguish point into another.  
 \item The category $Vect$ That has as object all small vector spaces and as arrows all linear functions.
+\item The category $Grp$ That has as object all small vector group and as arrows all homomorphism.
+      \item The category $Top_*$ that has as object all small topological spaces with a distinguished point, and as arrow all continuous functions that maps each distinguished points into distinguished points. Similarly we can consider $Set_*$ or $Grp_*$.
 \end{itemize}
 
-\item The category $Hask$ of all Haskell types and all possible functions between two types.
-\item Include more examples as categories are used in the text.
+\item The category $Hask$ of all Haskell types and all possible functions between two types.\\
+  
 \end{itemize}
 Note that, for example, as natural numbers can be seen as either a set or a preorder, they also can be seen as a discrete category or a preorder category.
 \end{example}
 
 
+Simple enough categories can be easily described with diagrams: there are as many objects as nodes in the diagram, and an arrow in the category for each arrow in the diagram, composition of existing arrows, and every identity arrow (that are usually omitted).\\
+
+For example, we can fully represent the $2$ category with the diagram:
+
+    \[
+      \begin{tikzcd}
+        a\arrow[rr, "g"] && c\\
+      \end{tikzcd}
+    \]
 
 
 
 
 \subsection{Properties}
-We proceed considering some elementary properties on categories.\\
 
 %\subsubsection{Equality}
-We can see that is common in mathematics to have an object of study (propositional logic clauses, groups, Banach spaces or types in Haskell). Once the purpose of the study of these particular set of objects is fixed, it is also common to proceed to consider the transformations between these objects (partial truth assignments, homomorphisms, linear bounded functionals or  functions in Haskell).\\
+We can see that is common in mathematics to have an object of study (propositional logic clauses, groups, Banach spaces or types in Haskell). Once the purpose of studying these particular sets of objects is fixed, it is also common to proceed to consider the transformations between these objects (partial truth assignments, homomorphisms, linear bounded functionals or  functions in Haskell).\\
 
 In categories, we have a kind of different approach to the subject. Instead of focusing on the objects themselves, we focus on how they relate to each other. That is, we focus on the study of the arrows and how they composes. Therefore we can consider equal two objects that has the same relations with other objects. This inspire the next definition:
 
-\begin{definition}[Definition 1.1.9 \cite{riehl2017category}]
-  Given a category $C=(O,A)$, a morphism $f: a \to b \in A$ has a \emph{left inverse} (resp. \emph{right inverse}) if there exists a $g: b \to a \in A$ such that $g \circ f = 1_b$ (resp. $f \circ g = 1_a$). A morpishm is an isomorphism if it has both left and right inverse, called the \emph{inverse}. Two object are isomorphic is there exists an isomorphism between them.
+\begin{definition}\cite[Definition 1.1.9]{riehl2017category}
+  Given a category $C=(O,A)$, a morphism $f: a \to b \in A$ has a \emph{left inverse} (resp. \emph{right inverse}) if there exists a $g: b \to a \in A$ such that $g \circ f = 1_b$ (resp. $f \circ g = 1_a$). A morpishm is an \emph{isomorphism} if it has both left and right inverse, called the \emph{inverse}. Two object are isomorphic is there exists an isomorphism between them.
 \end{definition}
 
 
@@ -157,7 +168,7 @@ Is easy to follow that this functions define bijections between $\hom(a,c)$ and 
 
 We will now proceed to talk about certain arrows and objects that have properties that distinguish them from others. To accompany and gain an intuition of these properties, I find the most useful example is that of the $FinSet$ category, of all finite sets and functions between them.  Considering special arrows:\\
 
-\begin{definition} An arrow $f$ is a \emph{monic} (resp. \emph{epic}) if it is left-cancelable (resp. right-cancelable), i.e.  $f\circ g = f \circ h \implies g = h$ (resp. $g\circ f = h \circ f \implies g = h$).
+\begin{definition} An arrow $f$ is  \emph{monic} (resp. \emph{epic}) if it is left-cancelable (resp. right-cancelable), i.e.  $f\circ g = f \circ h \implies g = h$ (resp. $g\circ f = h \circ f \implies g = h$).
 \end{definition}
 
 
@@ -181,7 +192,7 @@ In FinSet this arrows are the injective functions (resp. surjective). Considerin
 Another important property in category theory is the \emph{duality property}. In sort, this property tell us that for every theorem that we prove for categories, there exist another theorem that is automatically also true. To prove this, we define the concept of \emph{opposite category}.
 
 
-\begin{definition}[Definition 1.2.1 \cite{riehl2017category}]
+\begin{definition}\cite[Definition 1.2.1]{riehl2017category}
   Let $C$ be any category. The opposite category $C^{op}$ has:
   \begin{itemize}
   \item the same objects as in $C$,
@@ -204,6 +215,7 @@ The intuition is that we have the same category, only that all arrows are turned
 
 
 That is because being initial is the dual property of being terminal, that is, if $f\in C$ is a terminal object then $f^{op}\in C^{op}$ is an initial object. Being isomorphic is its own dual.
+
 \subsection{Transformation in categories}
 
 
@@ -219,19 +231,76 @@ This is one of the main ways of defining a category: consider a collection of ob
 \end{definition}
 
 
-That is,  a functor is a morphism of categories. When there is no ambiguity we will represent both $F'$ and $F''$ with a single symbol $F$ acting on both objects and arrows. Also, as you can see in the definition, whenever possible the parentheses of the functor will be dropped. This loss of parentheses will be replicated thorough the text, whenever possible. Lets provide some examples:\\
+That is,  a functor is a morphism of categories. When there is no ambiguity we will represent both $F'$ and $F''$ with a single symbol $F$ acting on both objects and arrows. Also, as you can see in the definition, whenever possible the parentheses of the functor will be dropped. This loss of parentheses will be replicated thorough the text, whenever possible.\\
 
-\begin{example}
+
+
+An  important consideration on functors is that a functor $F$ can be defined only pointing out how it maps arrows (assuming that such mapping respects the composition), as how $F$ maps object can be defined with how it map identity arrows.\\
+
+Lets provide some examples of functors:\\
+
+
+
+\begin{example}\ 
   \begin{itemize}
-  \item Forgetfull functor:
-  \item Poincaré functor:
-  \item \v{C}ech:
-  \item Group actions:
-  \item \texttt{Maybe} Method in Haskell:
-  \end{itemize}
+  \item {Forgetfull functor}: We have a variety of categories consisting of structures on sets such as objects and functions that hold structure such as arrows (eg Top, Grp or Vect).\\
+    
+    Let $C$ one of such  categories, then we have a functor $F:C\to Set$ that maps each object to its underlying set and each arrow to the equivalent arrow between sets. That is, this functor forgets about the structure that is present in $C$.\\
+
+    Conversely, we will often have functors defined $F:C\to Set$ for $C$ any category. On some cases of $C$ it also happen that $FC$ has some more structure on it. In that case we will say that $F$ is an enriched functor for that cases.
+
+  \item Fundamental Group: In the context of algebraic topology we have the functor of the fundamental group $\Pi_1: Top_* \to Grp$. The most famous property of this function is that
+
+    
+    \begin{displayquote}
+      Given continuous application $ f,g:X \to Y$ between two topological spaces induces an application of the group of loops of $X$ on the group of loops of $Y$ such that $\Pi_1(f \circ g) = \Pi_1(f) \circ \Pi_1(g)$.
+    \end{displayquote}
+
+    that is, the functoriality of the function (taking also into account the fact that the identity of topological spaces is mapped to the identity of group). 
+
+  \item Stone-\v{C}ech Compactification\footnote{\url{https://en.wikipedia.org/wiki7Stone–Čech_compactification#Universal_property_and_functoriality}}:  In the realm of functional análisis we have the following theorem:
+
+    \begin{theorem}\footnote{I have a little prove of this theorem that uses the Banach-Stone theorem, but was a bit hesitant about whther should I include it.} Let $\Omega$ be a completely regular Hausdorff topological space. Then there exists a compact Hausdorff topological space $\Omega$ and a homeomorphism $\Phi$, from $\Omega$ to a dense subset of $\Beta\Omega$. Moreover, for every continuous and bounded function $f: \Omega \to \K$ there exists a unique $\overline{f} \in C(\beta \Omega)$ such that $\overline{f}\circ \Phi = f$ and the application $f \to \overline{f}$ is an isometric isomorphism. Finally, $\beta \Omega$ is uniquely determined up to isomorphisms by the above properties.
+    \end{theorem}
+
+    \begin{proof}
+  It is enough to take as $\betaOmega$ the closure of $\Delta(\Omega)$ in the induced weak-topology $\omega^*$ (since in the weak topology we have that a bounded closed is compact).  
+                                                                                                                                                                         
+  Given a continuous and bounded function $f:\Omega \to K$ we can define the function $\overline{f}$ by injection of $\Omega$ and then limit to maintain continuity (which will exist by compactness and boundedness of $f$). Thus the maximum of $overline{f}$ can be reached by a sequence of points injected from $Omega$ obtaining that   
+  $${\displaystyle\max\left\{|\ \overline{f}\ (s)\ | : s \in \beta\Omega\right\} = \sup\left\{| f(s) |: s \in \Omega\right\}}.$$
+
+The application $f \to \overline{f}$ is therefore an isometric isomorphism. Thanks to this isometric isomorphism the function spaces and by the Banach-Stone theorem\cite[Theorem 3]{banach1932theorie} we have uniqueness up to isomorphisms.     
+      \end{proof}
+{\color{red} Question}: I want to include this example of functor in order to later reuse it in universality section (opening of chapter 2).\\
+
+I'm having a bit of trouble doing this though, as I do not see how does it maps arrows. I have found this proof of its functoriality:
+
+\begin{displayquote}
+As is usual for universal constructions like this, the extension property makes $\Beta$ a functor from $Top$ (the category of topological spaces) to $CHaus$ (the category of compact Hausdorff spaces).
+\end{displayquote}
+
+However, I was hoping to provide a more elemental proof, so I will continue looking. If nothing is founded, there will be no problem to drop this example, or to explain directly when extension property is explained.
+{\color{red} End Question}
+
+
+\item Group actions:\label{group-action} Every group action can be seen as a functor from a Group to a Set.\\
+
+  Let $G$ be a group seen as a category with only one element and $S$ be a set seen as a discrete category. Then, an action is a representation of the group of the endomorphism of the set, that is, an action $\alpha$ associate each element of the groupwith an function $\alpha(g):X\to X$ such that the product of element of the group is maintain via composition. That is for $g\in Ar(G)$ we have that $\alpha(g) \in Ar(X)$  and for $$\alpha(g\circ^1 f) = \alpha(g) \circ \alpha(f) \qquad \forall g,f\in Ar(G),$$ where in 1. it is to note that is a group seen as a category the product is the composition) thus having the functoriality.\\
+  
+\item \texttt{Maybe} Method in Haskell \cite[Section 7.1]{milewski2018category}): In Haskell the definition of Maybe is a mapping from type $a$ to type $\maybe  a$.
+  
+\begin{lstlisting}[language=Haskell,caption={Declaration of Maybe},captionpos=b]
+         data Maybe a = Nothing | Just a
+       \end{lstlisting}
+
+       Note that \texttt{Maybe a} is not a type but a function of types. In order for it to be an endofunctor of the $Hask$ category we will need for it to also map function. Let $f: a \to b\in Hask$, then we define the function
+       $$\maybe  f: \maybe a \to \maybe b$$
+such that
+$$(\maybe  f) (Nothing) = Nothing, \qquad (\maybe f) (Just\  a) = Just\  f(a).$$
+Note that $(\maybe id_a) (\maybe a) = Nothing\  |\  Just\  id_a(a) =  \maybe a$.
+     \end{itemize}
 \end{example}
 
-An  important consideration on functors is that a functor $F$ can be defined only pointing out how it map arrows, as how $F$ maps object can be defined with how it map identity arrows.\\
 
 We can now construct the category of all small categories $Cat$. This category has as object all small categories and as arrows all functor between them. Note that $Cat$ does not contain itself.\\
 
@@ -242,7 +311,9 @@ $$T:\hom_C(a,b) \to \{Tf: Ta \to Tb | f \in C\} \subset \hom_D(Ta,Tb)$$
   A functor $T:C\to D$ is \emph{full} if it is surjective as a function over homesets, i.e. if the function $T:\hom_C(a,b) \to  \hom_D(Ta,Tb)$  is surjective for every $a,b \in C$. A functor is \emph{faithfull} if it is injective over homesets.
 \end{definition}
 
-As we have defined the concept of opposite category, we can consider functors $T:C^{op} \to D$. This functor, is called a \emph{contravariant} functor from $C$ to $D$, in oposition of a covariant functor from $C$ to $D$. A functor $T: C \to D^{op}$ is usually called a \emph{covariant} functor from 
+As we have defined the concept of opposite category, we can consider functors $T:C^{op} \to D$. This functor, is called a \emph{contravariant} functor from $C$ to $D$, in oposition of a covariant functor from $C$ to $D$. A functor $T: C \to D^{op}$ is usually called a \emph{covariant} functor from $C$ to $D$.\\
+
+
 
 
 % \subsubsection{Natural Transformations}
@@ -259,7 +330,7 @@ Category has been defined in order to define functor and functor has been define
 One can see a functor $T:C\to D$ as representation of a category in another, in the sense that a functor provide a picture of the category $C$ in $D$. Further elaborating into this idea, we can consider how to transform these drawings into each other. 
 
 \begin{definition}
-  Given two functor $T,S:C\to D$, a \emph{natural transformation} $\tau : T \to S$ is a function from $Ob(C)$ to $Ar(D)$ such that for every arrow $f:c \to c' \in C$ the following diagram:
+  Given two functor $T,S:C\to D$, a \emph{natural transformation} $\tau : T \Rightarrow S$ is a function from $Ob(C)$ to $Ar(D)$ such that for every arrow $f:c \to c' \in C$ the following diagram:
 \[
   \begin{tikzpicture}
   \node {\begin{tikzcd}[column sep=20mm]
@@ -273,12 +344,29 @@ commutes. A natural transformation where every $\tau c$ is invertible is called 
   \end{definition}
 
 
-  That is a natural transformation is a map between pictures of $C$ into $D$. Note that a natural transformation acts only on the domain of objects. Lets provide some examples
+  That is a natural transformation is a map between pictures of $C$ into $D$. Note that a natural transformation acts only on the domain of objects. Lets provide some examples.\\
 
-  \begin{example}
+  With the same notation as in the definition, when we have to define natural transformations  it will often be useful to define each arrow individually. In this case we will note $\tau(c) = \tau_c: Tc \to Sc$. 
+
+  \begin{example}\ 
     \begin{itemize}
-    \item The bidual space:
-    \item A polymorphic function in Haskell:
+    \item The opposite group: We can define the opposite functor $(\cdot)^{op}: Grp \to Grp$ that maps $(G, *)$ to $(G; *^{op})$ where $a*^{op}b= b*a$ and map a morphism $f: G \to G'$ we define $f^{op}(a) = f(a)$ and have that
+      $$ f^{op}(a*^{op}b) = f(b*a) = f(b)*f(a) = f^{op}(a) *^{op} f^{op}(b).$$
+
+Denoting the identity function $Id:Grp\to Grp$, we have a natural transformation $\tau:Id \Rightarrow (\cdot)^{op}$ defined by $\tau_G(a)=a^{-1}$ for all $a\in G$.
+\item In Haskell, the $\operatorname{safeHead}$ \cite[Section 10.1]{milewski2018category} function between the $\operatorname{List}$ functor and the $\maybe$ functor. Lets start by defining the functors:
+  \begin{itemize}
+  \item We can define the $\operatorname{list}$ functor that maps the type $a$ to the type $[a]$ and apply each function $f:a\to b$ to $f':[a]\to [b]$ that applies $f$ elements wise (on empty list it does nothing).
+    \begin{lstlisting}[language=Haskell,captionpos=b]
+    data List a = Nil | Cons a ( List a)
+    \end{lstlisting}
+  \item  We can define the natural transformation $\operatorname{SafeHead}: \operatorname{List} \to \operatorname{Maybe}$ defined as follow:
+    \begin{lstlisting}[language=Haskell,captionpos=b]
+      safeHead :: [a] -> Maybe a
+      safeHead [] = Nothing
+      safeHead (x : xs) = Just x
+    \end{lstlisting}
+  \end{itemize}
     \end{itemize}
   \end{example}
 
@@ -313,13 +401,28 @@ Complementary, for any two functors $F:D\to B, G:D\to C$ we can define an functo
 
 A functor $F: B^{op}\times C \to D$ is called \emph{bifunctors}. Arguably the most important bifunctor is the $\hom_C$ function seen as a functor. Given a category $C$ we can see $\hom_C: C^{op}\times C \to Set$ as a bifunctor such that:
 \[
-  \hom_C<a,b> = \hom_C (a,b) \qquad \forall a,b \in Ob(C)
+  \hom_C(\cdot,\cdot)(a,b) = \hom_C (a,b) \qquad \forall a,b \in Ob(C)
 \]
 for the object. For the arrows:
 \begin{align*}
-  \hom_C<f^{op},g>: \hom_C (a',b)  \to \hom_C(a,b') &\qquad  \forall f:a\to a', g:b\to b' \in C\\
-  \hom_C<f^{op},g> (h)   = g \circ h \circ f  &\qquad \forall  h\in \hom_C(a',b) 
+  \hom_C(f^{op},g): \hom_C (a',b)  \to \hom_C(a,b') &\qquad  \forall f:a\to a', g:b\to b' \in C\\
+  \hom_C(f^{op},g) (h)   = g \circ h \circ f  &\qquad \forall  h\in \hom_C(a',b) 
 \end{align*}
+
+From this bifunctor we can define two functors for every $c\in Ob(C)$:
+\begin{itemize}
+\item  The functor $\hom_C(c, \cdot):C\to Set$ such that
+  \[
+  \hom_C(c,\cdot) = \hom_C (c,d) \qquad \forall d \in Ob(C)
+\]
+for the object. For the arrows:
+\begin{align*}
+ \hom_C(c,g): \hom_C (a,d)  \to \hom_C(a,d') &\qquad  \forall g:d\to d' \in C\\
+  \hom_C(c,g) (h)   = g \circ h   &\qquad \forall  h\in \hom_C(c,d) 
+\end{align*}
+
+\item  The covariant functor $\hom_C(\cdot, c):C^{op}\to Set$, defined analogously.
+\end{itemize}
 \subsubsection{Functor Categories}
 We continue defining functor categories, that is, categories where we consider the functors as objects and natural transformation as arrows in some sense. This concept will be instrumental in further consideration in the realm of functional programming (in particular, in the definition of monad).\\
 
@@ -383,17 +486,33 @@ $$
 
 
 \begin{definition}
-  Let $B,C$ be categories. We define the category $B^C$ as the functor category from $B$ to $C$, that is, the category with functors from $B$ to $C$ as object, natural transformation as arrows, and composition as defined in \ref{vertical-composition}.
+  Let $B,C$ be categories. We define the category $B^C$ as the functor category from $C$ to $B$, that is, the category with all functors $F:C \to B$ as object, natural transformation as arrows, and composition as defined in \ref{vertical-composition}.
 \end{definition}
 
 we now present some examples to provide some intuition about when this type of construction are considered.
 
 \begin{example}\ 
   \begin{itemize}
-  \item The category of group action over a set.
-  \item $C^2$ also called the arrow category.
-  \item Relation with the product category.
-  \item Study composition of polymorphic function, and put that in either this example or in the next one.
+  \item The category of group action over a set: As we have seen in \ref{group-action} each group action over a set is a functor. Let $G$ be a group and $S$ be a set, both seen as categories. Then we can consider the category  $S^G$, that has as object every group action of $G$ over $S$ and as arrow the morpishm of actions.\\
+    
+  \item $C^2$: In \ref{2-category} we define the $2$ category and  can consider therefore the category of functor from $2$ to $C$. This category is called the arrow category, as the can see that there are a functor from $2$ to $C$ as functor for each arrow in $C$ and conversely.\\
+
+    This example display a interesting idea: we can consider small collection of object as functions/functors. This idea can as well be seen when we define a pair of real numbers as any function $f:\{0,1\} \to \R$. Should we want, for example, to consider all the squares in a category $C$, we might ass well define the category square $Sqr$ and consider every functor $F:Sqr \to C$.
+    \begin{figure}[!h]
+      \[
+        \begin{tikzpicture}
+          \node {\begin{tikzcd}[column sep=20mm]
+              a\ar[r,"f"]\ar[d,"g"] & a'\ar[d,"h"]\\
+              b\ar[r,"k"] & b'
+            \end{tikzcd}};
+        \end{tikzpicture}
+      \]
+      \caption*{The square category.}
+    \end{figure}
+
+    Note that the elements $F:Sqr \to C$ are the arrows of the arrow category of $C$.
+      
+  \item We can use this construction to study the category $C^C$ of endofunctors of a particular category $C$. This case is particularly interesting while studying the endofunctors present in $Hask^{Hask}$ and later consider the Monad as a programming structure. 
   \end{itemize}
 \end{example}
 
@@ -431,7 +550,7 @@ With this horizontal composition we can properly defined.In this case we can see
   \end{tikzcd}};
 \end{tikzpicture}
 \]
-
+ 
 
 With this definition of composition we can consider another different category: the category of all functors of all (small)\footnote{me parece que tengo que incluir esto pero lo hago más por miedo que por conocimiento} categories, that is, the category that has all functors as object, and has the natural transformation with horizontal composition as arrows.\\
 
@@ -474,9 +593,88 @@ From the  naturality of $\tau'$ we have that for all $c\in A$:
 \end{align*}
 \end{proof}
 
+To finally consider the relation between product, and the functor category we can see that given 3 small categories $A,B,C$ we have a bijection:
 
+$$\hom_{Cat}(A\times B, C) \cong \hom_{Cat}(A, C^B).$$
+
+This fact will be taken into account further in the text, as this will mean that the functor $\cdot \times B: Cat \to Cat$ has a right adjoint.
 \subsubsection{Comma Category}
 
+To define the comma category, we define the Category $(b \downarrow S)$ of object $S$-under $b$, sketch the dual notion, and generalize this two concepts with the comma category.\\
 
-%that a natural transformation {\displaystyle \eta :S\to T}\eta :S\to T, with {\displaystyle S,T:{\mathcal {A}}\to {\mathcal {C}}}S,T:{\mathcal  A}\to {\mathcal  C}, corresponds to a functor {\displaystyle {\mathcal {A}}\to (S\downarrow T)}{\mathcal  A}\to (S\downarrow T) which maps each object {\displaystyle A}A to {\displaystyle (A,A,\eta _{A})}{\displaystyle (A,A,\eta _{A})} and maps each morphism {\displaystyle f=g}f=g to {\displaystyle (f,g)}(f,g). This is a bijective correspondence between natural transformations {\displaystyle S\to T}S\to T and functors {\displaystyle {\mathcal {A}}\to (S\downarrow T)}{\mathcal  A}\to (S\downarrow T) which are sections of both forgetful functors from {\displaystyle S\downarrow T}S\downarrow T.
-%\subsubsection{Free Category}
+Given a functor $F:B\to C$ an object $b\in B$ is $F-$under another object $c\in C$ if there exists an arrow $f:c\to Fb \in C$. This can be represented as
+
+$$
+\begin{tikzcd}
+      c
+      \ar[d,"f"]\\
+      Fb
+    \end{tikzcd}
+$$
+
+and thus the name of $F$-under.
+
+\begin{definition}
+  Let $B,C$ be (small)\footnote{check this} categories and $S:B\to C$ be a functor. For every $c\in Ob(C)$ we can define the category $(c \downarrow S)$ that has as objects all pairs $(b,f) \in Ob(B)\times Ar(C)$ such that $f:c\to Sb$ and as arrows $h:(d,f) \to (d',f')$ every arrow $h:d\to d'\in Ar(B)$ such that $f' = Sh\circ f$.
+\end{definition}
+
+The property that each arrow should satisfy can be represented as:
+\[
+  \begin{tikzpicture}
+  \node {\begin{tikzcd}
+      & c\ar[ddl, "f"]\ar[ddr,"f'",swap] & \\
+      &&\\
+      Sd\ar[rr, "Sh", swap] & & Sd'
+  \end{tikzcd}};
+\end{tikzpicture}
+\]
+
+\begin{example} Let $U:Grp \to Set$ be the forgetful functor, and let $X\in Ob(Set)$. We can consider $(X\downarrow U)$ where every object is a function $f: X\to Ug$ for a group $g$.  
+\end{example}
+
+One can easily now deduce the dual concept of the category $(b\uparrow S)$ represented by: \\
+\begin{center}
+objects: $
+\begin{tikzcd}
+      c
+      \\
+      Fb\ar[u,"f"]
+    \end{tikzcd}
+$;$\qquad$ arrows: $\begin{tikzcd}
+      & c & \\
+      &&\\
+      Sd\ar[rr, "Sh", swap]\ar[uur, "f"] & & Sd'\ar[uul,"f'",swap]
+  \end{tikzcd}$.
+\end{center}
+
+Now suppose that we have three categories $B,C,D$ and to functors $S,T$ such that
+\[
+  \begin{tikzcd}
+    B \ar[r, "S"] & C & D\ar[l, "T", swap]
+  \end{tikzcd}
+    \]
+
+    me might want to consider the relations objects of $B$ and $D$, for that we have the comma category:
+    
+
+\begin{definition}
+  Let $B,C,D$ be categories and to $S:B\to C,T: C\to D$. We define the coma category $(S\downarrow T)$ as the category that has as object the triples $(b,d,f)$ with $b\in Ob(B), d\in Ob(D), f:Sb\to Td\in Ar(C)$ and arrows the pairs $(g,h):(b,d,f)\to (b',d',f')$ with $g:b\to b'\in Ar(B), h:d\to d'\in Ar(D)$ such that $Th \circ f = f' \circ Sg$. 
+\end{definition}
+
+We can represent the previous definition by:
+\begin{center}
+objects: $
+\begin{tikzcd}
+      Sb\ar[d,"f"]
+      \\
+      Td
+    \end{tikzcd}
+$;$\qquad$ arrows: $\begin{tikzcd}
+      Sb\ar[d,"f"]\ar[r,"Sg"] & Sb' \ar[d,"f'"]
+      \\
+      Td\ar[r,"Sh"] & Td'
+  \end{tikzcd}$.
+\end{center}
+
+
+The name comma category comes from is alternative notation $(S\downarrow T) = (S,T)$. We prefer the $(S\downarrow T)$ as it is more clear, nonetheless it is clear that before modern text editor became popular, the original comma notation had a big plus. 
