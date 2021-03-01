@@ -1,9 +1,9 @@
 
 \chapter{Universality, Adjoints and Monads}
+{\color{red} TODO} Small paragraph introducing the  notions, and sketching a brief summary of the chapter.
 
 \section{Universality}
-\subsection{Definition}
-In this section we present the concept of universality. This concept is behind lots of mathematical properties. Intuitively, universality is an efficient way of expressing an one-to-one correspondence between arrows of different categories. This one-to-one relationship is usually expressed via ''given an arrow  $y$ it exists one and only one  arrow $x$ such that <insert your favorite universality property''.\\
+In this section we present the concept of universality. This concept is behind lots of mathematical properties. Intuitively, universality is an efficient way of expressing an one-to-one correspondence between arrows of different categories. This one-to-one relationship is usually expressed via ''given an arrow  $y$ it exists one and only one  arrow $x$ such that <insert your favorite universal property>''.\\
 
 Prior to the formal definition, we shall introduce an example. Probably the first contact that any mathematician has with universality is when we first try to define a function  $f:\mathbb R \to \mathbb R^2$. We quickly understand that defining such a function is equivalent to define two $g,h: \mathbb R \to \mathbb R$( we further explain the product in \ref{prod-univ}). This uniqueness is the flavor that attempts to capture the concept of universality. Other examples of unique existence are those that occur in quotient groups or in bases of vector spaces.  This example will be further formalized after the definition.\\
 
@@ -85,30 +85,43 @@ From this theorem there is a definition that arises:
 
 \begin{definition}
   Let $D$ be a category with small home-sets and let $F:D\to C$ be a functor. A representation of a functor $K:D\to Set$ is a pair $(r,\varphi)$ with $r \in Ob(D)$ and $ \varphi$ a natural isomorphism  such that
-  $$D(r,\cdot) \cong_{\varphi} F.$$
+  $$D(r,\cdot) \equiv_{\varphi} F.$$
   A functor is representable if it has a representation.
 \end{definition}
 
-Note that therefore a universal arrow induces a natural isomorphism $D(r,d)\cong C(c,Sd)$ and this induces a representation of the functor $C(c,S\cdot): D\to Set$. 
+Note that therefore a universal arrow induces a natural isomorphism $D(r,d)\equiv C(c,Sd)$ and this induces a representation of the functor $C(c,S\cdot): D\to Set$. 
 
 \subsection{Yoneda's lemma}
-Yoneda's lemma is one of the main results of category theory. This results is due to japanese professor Nobuo Yoneda. We know about Yoneda's life thanks to the elegy that was written by Yoshiki Kinoshita\cite{yonedaLife}. Yoneda was born in Japan in 1930, and received his doctorate in mathematics from Tokyo University in 1952. He was a reviewer for international mathematical journals. In addition to his contributions to the field of mathematics, he also devoted his research to computer science.\\
-
-{\color{red} TODO: further schematize this subsection when is finished.}
+In this subsection  deals with the Yoneda's Lemma. Mac Lane\cite{mac2013categories} assures the lemma first appeared in his private communication with Yoneda in 1954. With time, this result has became one of the most relevant one in Category Spaces. We will start by providing some intuition to it, followed by it proof and some use cases.\\
 
 
-Mac Lane\cite{mac2013categories} assures the lemma first appeared in his private communication with Yoneda in 1954. With time, this result has became one of the most relevant one in Category Spaces.\\
+ This results is due to japanese professor Nobuo Yoneda. We know about Yoneda's life thanks to the elegy that was written by Yoshiki Kinoshita\cite{yonedaLife}. Yoneda was born in Japan in 1930, and received his doctorate in mathematics from Tokyo University in 1952. He was a reviewer for international mathematical journals. In addition to his contributions to the field of mathematics, he also devoted his research to computer science.\\
 
 
-{\color{red} (Maybe TODO)\footnote{To be honest, explain what a moduli problem is seems harder than explain the Yoneda lemma, therefore I will maybe write this after being more advanced in the text.}}The idea behind the Yoneda's lemma is better understood in the context of Moduli problems. 
+The idea behind the yoneda lemma can be arid at first, if one does not have a prior understanding of what the purpose and usefulness of this lemma is. In order to ilustrate this idea we will introduce a (simplified) definition of Moduli Spaces, so that we have a geometric understanding of Yoneda's Lemma.\\
 
+The idea behind (some) Moduli spaces is to classify algebraic curves up to isomorphisms. In addition, Moduli spaces allow us to control "complicated" mathematical objects (such as a quotient space of unknown objects) by simpler objects or objects with better properties (such as a concrete variety). A canonical example of this type of classification is:  
+\begin{align*}
+  \{\text{Vector spaces of finite dimension}\}/\text{isomorphism } &\cong \N\\
+  [V] &\to dim V.
+\end{align*}
+Where a complex object can be classified by another object of which we know more properties. We can start by defining:  
+$$\mathcal{M} = \{\text{smooth complex non singular curves} \}/\text{isomorphism}$$
 
-Lets proceed to enunciate and proof the result.
+Further on when we talk about curves we will refer to smooth complex non singular curves. Note that if two curves are isomorphic then they have the same genus. Therefore the function 
+\begin{align*}
+      \gamma: \mathcal{M} &\mapsto \N\\
+      \displaystyle  [V]&\mapsto \text{genus of V} 
+\end{align*}
+
+is well defined and we can define $\mathcal{M}_g = \gamma^{-1}(g)$. An interesting classification of $\mathcal{M}_g$ is given when we consider that for every $g$ there exists a closed, connected, non-singular variety $U_g$ and a family $\{C_t : t \in U_g}$ such that a curve of genus $g$ will be a fibration of $C_t$.  Moreover there is a variety $M_g$ and a superjjective morphism $\varphi: U_g \to M_g$ such that $\varphi(t_1)=\varphi(t_2)$ if $C_{t_1} \equiv C_{t_2}$. Therefore we are classifying the equivalence classes of $\mathcal{M}_g$ by points of the variety $M_g$ (thus generating a Moduli problem).\\
+
+Similarly to this two example, with the Yoneda lemma we will have a functor $F:D\to Set$ and one representation of this functor. We will classify the natural transformation of these functors by the set in the image of $F$! Interestingly enough, there will be applications where the complex object is not the space of naturals transformations, but the images of $F$ (see \ref{Cayleys} for an example). Lets proceed to enunciate and proof the result.
 
 \begin{theorem}\cite[Section 3.2]{mac2013categories}
   Let $D$ be a category with small home-sets, $F:D\to Set$ be a functor, and $r\in Ob(D)$. Then there is a bijection
   \begin{align*}
-    \tau:Nat(\hom_D(r,\cdot), F\cdot) &\cong Fr\\
+    \tau:Nat(\hom_D(r,\cdot), F\cdot) &\equiv Fr\\
     \tau(\alpha:\hom_D(r,\cdot)\to F\cdot)& = \alpha(r)(1_r)
   \end{align*}
   Where $\tau$ is natural in $K$(as an object of $Set^{D}$) and in $r$.
@@ -129,7 +142,9 @@ Writing $\alpha(r)(1_r) = u$ we have that:
       \end{tikzcd}
     \]
 
-    Therefore every natural transformation is uniquely identified by the value of $u$, therefore $\tau$ is injective. Moreover, for every $u$ in $Kr$, we can define a natural transformation following the previous diagram, therefore, $\tau$ is bijective.
+    Therefore every natural transformation is uniquely identified by the value of $u$, therefore $\tau$ is injective. Moreover, for every $u$ in $Kr$, we can define a natural transformation following the previous diagram, therefore, $\tau$ is bijective.\\
+
+    {\color{red} Still to prove the naturality.}
 \end{proof}
 
 The first functor that we will want to apply this result is to the $\hom_{\cdot}$ functor. But this functor is a bifunctor, so to get the full result of this lemma applied to the full bifunctor we may restate this lemma to contravariant functors.
@@ -137,7 +152,7 @@ The first functor that we will want to apply this result is to the $\hom_{\cdot}
 \begin{corollary}
   Let $D$ be a category with small home-sets, $F:D\to Set$ be a contravariant functor, and $r\in Ob(D)$. Then there is a bijection
   \begin{align*}
-    \tau:Nat(\hom_D(\cdot,r), F\cdot) &\cong Fr\\
+    \tau:Nat(\hom_D(\cdot,r), F\cdot) &\equiv Fr\\
     \tau(\alpha:\hom_D(\cdot,r)\to F\cdot)& = \alpha(r)(1_r)
   \end{align*}
   
@@ -146,7 +161,7 @@ The first functor that we will want to apply this result is to the $\hom_{\cdot}
 \begin{proof}
 We seek to use the Yoneda lemma in the functor $F':D^{op}\to Set$ induced by $F$. Then we have that: 
   \begin{align*}
-    \tau:Nat(\hom_{D^{op}}(r,\cdot), F'\cdot) &\cong F'r\\
+    \tau:Nat(\hom_{D^{op}}(r,\cdot), F'\cdot) &\equiv F'r\\
     \tau(\alpha:\hom_{D^{op}}(r,\cdot)\to F'\cdot)& = \alpha(r)(1_r)
   \end{align*}
 
@@ -154,16 +169,14 @@ We seek to use the Yoneda lemma in the functor $F':D^{op}\to Set$ induced by $F$
   $\hom_{D^{op}}(r,\cdot) = \hom_D(\cdot,r)$ we have the result.
 \end{proof}
 
-{\color{red} Is a bit messy after here, consider using subsections?}
-
 As we have seen, the Yoneda lemma is a direct generalization of the moduli problem. In the same vein, yoneda's lemma is the generalisation of other problems/theorems in mathematics, most notably Cayley's lemma. It states:
-\begin{displayquote}
-``Any group is isomorphic to a subgroup of a symmetric group.'' 
-\end{displayquote}
+\begin{proposition} \label{Cayleys}
+Any group is isomorphic to a subgroup of a symmetric group.
+\end{proposition}
 
 To understand this, take a groups $G$ seen as a single-object category, and name that object $e$. Then, the functor $\hom_G(e, \cdot): G \to Set$ can be seen as a group action \ref{group-action}. Then the Yoneda lemma states that:
 
-$$Nat(\hom_G(e,\cdot), Hom_G(e,\cdot)) \cong_\varphi Hom_G(e,e).$$
+$$Nat(\hom_G(e,\cdot), Hom_G(e,\cdot)) \equiv_\varphi Hom_G(e,e).$$
 
 Translating this result to group theory:
 \begin{itemize}
@@ -176,12 +189,18 @@ Translating this result to group theory:
 So we have the isomorphism of groups that is stated in Cayley's Theorem.\\
 
 
-Next,  \emph{Yoneda embedding}. To do this, we apply this result to the functor $h_a=\hom(a,\cdot)$ we get a bijection
-$$Nat(h_a,h_b) \cong \hom_C(B,A),$$\\
 
-{\color{red} TODO} Redactar Yoneba embedding.
+We continue our exploration of Yoneda lemma by defining the \emph{Yoneda Embedding}. For that we define the contravariant functor $h_a = \hom_C(\cdot, a)$. Then the contravariant Yoneda lemma tell us that:
+$$Nat(h_a,h_b) \equiv_{\tau_a} \hom(a,b).$$
 
-\subsection{Some properties expressed in terms of universality}
+We then can define a fully faithfull embedding $\upsilon: C \to Set^{C^{op}}$ such that 
+\begin{align*}
+  \upsilon a  &= \hom_C(A, \cdot)\qquad \forall a \in Ob(C), \\
+  \upsilon f &= \tau_a^{-1} (f)\qquad\qquad \forall f:b\to a\in Ar(C).
+\end{align*}
+
+This functor allows us to view the category $C$ as a subcategory of the category of contravariant functors from $C$ to $Set$, which will be useful for determining "heritable" properties in $C$.
+\subsection{Properties expressed in terms of universality}
 
   After the examples given, we will define a few constructions that are present in various parts. We will outline the notions of limit, pullback and product, and the dual notions of colimit, pushout and coproduct.\\
 
