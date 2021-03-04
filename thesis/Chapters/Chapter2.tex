@@ -1,5 +1,5 @@
 
-\chapter{Universality, Adjoints and Monads}
+\chapter{Universality, Adjoints and Closed Cartesian Categories}
 {\color{red} TODO} Small paragraph introducing the  notions, and sketching a brief summary of the chapter.
 
 \section{Universality}
@@ -11,7 +11,7 @@ Prior to the formal definition, we shall introduce an example. Probably the firs
   Let $S: D \to C$ be a functor and $c \in Ob(C)$, an \emph{universal arrow}  from $c$ to $S$ is a pair $(d,u)$ with $d\in Ob(D), u:c \to Sd \in Ar(C)$, such that for every $(e,f)$ with $e\in Ob(D)$  and $f:c\to Sd$ there exists an unique $f':r,d\in Ar(D)$ such that $u\circ Sf' = f$.
 
 \end{definition}
-
+{\colo{red} Todo, universality from a functor.}
 In a diagram:
 
 \[
@@ -144,7 +144,7 @@ Writing $\alpha(r)(1_r) = u$ we have that:
 
     Therefore every natural transformation is uniquely identified by the value of $u$, therefore $\tau$ is injective. Moreover, for every $u$ in $Kr$, we can define a natural transformation following the previous diagram, therefore, $\tau$ is bijective.\\
 
-    {\color{red} Still to prove the naturality.}
+To see that $\tau$ we is natural we have to consider for which functor it is natural. Consider the functor \emph{Evaluation} $E: Set^D\times D$ that maps each $(F,c)\to Fc$, and the functor $N:Set^D\times D\to Nat(\hom_D(r,\cdot),K)$ the set of natural transformations. Finally, $\tau:N\to E$ is a natural transformation.
 \end{proof}
 
 The first functor that we will want to apply this result is to the $\hom_{\cdot}$ functor. But this functor is a bifunctor, so to get the full result of this lemma applied to the full bifunctor we may restate this lemma to contravariant functors.
@@ -365,10 +365,76 @@ In both case, the universal property consists of having an arrow to a generated 
 having a product structure.  One can proceed to consider an analogous consideration with pushout and coproduct.
 \section{Adjoints}
 
+The adjoints is a fundamental property on Category theory. It relates two functors $F:C\to D, G:D\to C$. The importance of adjoints however, comes from it ubiquity among mathematics, often relate with the ubiquity of universality. This notion was first presented by Daniel M. Kan in \cite{kan1958adjoint}. For this section we follow \cite{mac2013categories}.\\
 
-\begin{itemize}
-\item Def
-\item Note that every adjuntion raise a universal arrow
-\end{itemize}
+We  will start by providing some intuitive notions, before a formal definition. Take the Forgetful Functor $U:Grp\to Set$, and the Free Group Functor $\mathcal{F}:Set\to Grp$. We can see that it is not difficult to consider that we can compose $F$ and $G$ to make endofunctors. These endofunctors are far from being identities, nonetheless we have still a great relation between them: for every set $X$ and group $G$, there is a function $X \to UG$ for each morphism $FX\to U$. Conversely, any function from $X$ to $UG$ induces a morphism. \\
 
-\section{Monad}
+Any avid reader will detect by this point the taste of universality. But there is a bit more, we have a bijective relation on every image home-set of both $F$ and $G$. This is the underlying property of adjointness - to relate home-sets. Lets formalize this idea:
+\begin{definition}
+  Let $C,D$ be categories. And adjunction is a triple $(F,G,\varphi):D\to C$ where $F,G$ are functors:
+  \[
+    \begin{tikzcd}
+      D\arrow[r, shift left=.5ex, "G"{name=F}] &
+      C\arrow[l, shift left=1ex, "F"{name=G}] \\
+    \end{tikzcd}
+  \]
+  while $\varphi$ is a transformation that maps each $(c,d) \in Ob(C\times D)$ with a bijection:
+  \[
+    \varphi_{c,d}:\hom_C(Fd, c)\equiv\hom_D(d, Gc).
+  \]
+  which is natural in $c$ and $d$.
+\end{definition}
+
+We have a bit to unpack in this definition. We will start to understand in what sense $\varphi$ is natural. Remembering about $N$ functor in Yoneda's Lemma, we can see that it is natural bijection from $\varphi:Hom_C(F\cdot, \cdot)\to \hom_D(\cdot, G\cdot)$ in each variable. That is,  for every $f:d\to d'\in C,k:c\to c' \in D$ the diagrams
+
+\[
+\begin{tikzcd}
+ \hom_C(Fd,c) \arrow{d}{\hom_C(Fd,\cdot)(g)}\arrow{r}{\varphi_{c,d}}
+ &\hom_D(d,Gc)\arrow{d}{\hom_D(d,G\cdot)(g)}&
+   \hom_C(Fd,c) \arrow{d}{\hom_C(F\cdot,c)(f)}\arrow{r}{\varphi_{c,d}}
+    &\hom_D(d,Gc)\arrow{d}{\hom_D(\cdot,Gc)(f)}\\
+ \hom_C(Fd,c') \arrow{r}{\varphi_{c',d}}  &\hom_D(d,Gc')&
+    \hom_C(Fd,c') \arrow{r}{\varphi_{c,d'}}  &\hom_D(d,Gc')
+  \end{tikzcd}
+\]
+
+comutes. \\
+
+We can follow by considering the important notation decision: how to call the adjoints. This is a quite ambiguous notation, but we will stick with the notation of $F$ being the \emph{left adjoint} and $G$ being the \emph{right adjoint}. When a functor \emph{is} a left (resp. right) adjoint it \emph{has} a right (resp. left) adjoint. This notation comes from where is the functor placed in the home-set, when making the bijection.\\
+
+We have already suggested the relationship between universality and adjointness. We can summary that relation in the following property:
+\begin{proposition}
+  An adjunction $(F,G,\varphi): D\to C $ determines:
+  \begin{itemize}
+  \item a natural transformation $\eta: I_D \to GF$ such that $\eta(x):x\to G$ is universal for every $x\in Ob(D)$. Conversely, we can define:
+    $$\varphi(f:Fd\to c) = Gf\circ \eta(d): d\to G c.$$
+  \item a natural transformation $\epsilon: FG\to I_C$ such that $\epsilon(x):Fx\to a$ is universal for every $x\in Ob(C)$. Conversely, we can define:
+    $$\varphi(g:d\to Gc) = \eta(c)\circ Fg: Fd\to c.$$
+  \end{itemize}
+\end{proposition}
+\begin{proof}
+  {\color{red} TODO}
+\end{proof}
+
+
+From this proposition we can see that we may be able to define an adjoint based only on the universal arrows provided. We can summary a few equivalent definition of adjoint:
+\begin{proposition}
+  Each adjoint is completely determined by the items in any one of the following list:
+  \begin{enumerate}
+    \item {\color{red} TODO}
+    \end{ennumerate}
+  \end{proposition}
+
+  To further ilustrate this concept we present some examples:
+  \begin{example}
+    \begin{itemize}
+      \item {\color{red} TODO}
+    \end{itemize}
+  \end{example}
+\subsection{Monad}
+\subsection{Algebra}
+
+
+\subsection{Closed Cartesian Categories}
+
+No se muy bien donde meterlo aún.
