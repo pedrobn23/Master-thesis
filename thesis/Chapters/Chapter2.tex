@@ -362,7 +362,20 @@ In both case, the universal property consists of having an arrow to a generated 
 \end{tikzcd}
 \]
 
-having a product structure.  One can proceed to consider an analogous consideration with pushout and coproduct.
+having a product structure.  One can proceed to consider an analogous consideration with pushout and coproduct.\\
+
+
+
+% One last property that can be expressed in terms of universality, and in particular in terms of limit/colimit is the \emph{power/copower}. The first example of power that we have considered yet of such construction is, given $C$ a small categories an $J$ a discrete category, the category $C^J$ is the power of $C$ up to $J$. The notation is due to the standard tuple notation:  considering a set of  tuples in $\R^n$, is in fact the same as considering the functions from  $n= {0,...,n-1}$ to $\R$.\\
+
+% There are two intuitive notion behind this definition:
+% \begin{itemize}
+% \item The one more close to the formalism: to consider as a infinite product of the same element.
+% \item To consider this 
+% \end{itemize}
+
+
+
 \section{Adjoints}
 
 The adjoints is a fundamental property on Category theory. It relates two functors $F:C\to D, G:D\to C$. The importance of adjoints however, comes from it ubiquity among mathematics, often relate with the ubiquity of universality. This notion was first presented by Daniel M. Kan in \cite{kan1958adjoint}. For this section we follow \cite{mac2013categories}.\\
@@ -408,7 +421,7 @@ We have already suggested the relationship between universality and adjointness.
   \begin{itemize}
   \item a natural transformation $\eta: I_D \to GF$ such that $\eta(x):x\to G$ is universal for every $x\in Ob(D)$. Conversely, we can define:
     $$\varphi(f:Fd\to c) = Gf\circ \eta(d): d\to G c.$$
-  \item a natural transformation $\epsilon: FG\to I_C$ such that $\epsilon(x):Fx\to a$ is universal for every $x\in Ob(C)$. Conversely, we can define:
+  \item a natural transformation $\epsilon: FG\to I_C$ such that $\varepsilon(x):Fx\to a$ is universal for every $x\in Ob(C)$. Conversely, we can define:
     $$\varphi(g:d\to Gc) = \eta(c)\circ Fg: Fd\to c.$$
   \end{itemize}
 \end{proposition}
@@ -419,22 +432,74 @@ We have already suggested the relationship between universality and adjointness.
 
 From this proposition we can see that we may be able to define an adjoint based only on the universal arrows provided. We can summary a few equivalent definition of adjoint:
 \begin{proposition}
-  Each adjoint is completely determined by the items in any one of the following list:
+  Each adjoint $(F,G,\varphi,\eta,\varepsilon):D\to C$ is completely determined by the items in any one of the following list:
   \begin{enumerate}
-    \item {\color{red} TODO}
-    \end{ennumerate}
-  \end{proposition}
-
-  To further ilustrate this concept we present some examples:
-  \begin{example}
+  \item $F,G$ and a natural transformation $\eta:1_D\to GF$ such that $\eta(d)$ is universal for every $d\in \Ob(D)$.
+  \item $F,G$ and a natural transformation $\varepsilon:FG\to 1_C$ such that $\varepsilon(c)$ is universal for every $c\in \Ob(C)$.
+  \item $G$ and for each $d\in Ob(D)$:
     \begin{itemize}
-      \item {\color{red} TODO}
+    \item an object $F_0(d)\in Ob(C)$.
+    \item an universal arrow $\nu(x):d \to GF_0 d$.
     \end{itemize}
-  \end{example}
-\subsection{Monad}
-\subsection{Algebra}
+    Then $F$ has $F_0$ as object function and $F(h:d\to d') = \eta(x')\circ h$.
+  \item $F$ and for each $c\in Ob(C)$:
+    \begin{itemize}
+    \item an object $G_0(c)\in Ob(D)$.
+    \item an universal arrow $\varepsilon(c):c \to GF_0 c$.
+    \end{itemize}
+  \item  $F,G$ and two natural tranformation $\eta: I_D\to GF$, $\varepsilon: FG\to I_C$ such that both composites are identities.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}
+    
+  \item We need to define the natural bijection $\varphi: C(Fd,c)\to D(d,Gc)$. Defining  $\varphi(g) = Gg\circ \eta(c)$ for each $g:Fd \to c$. Is is well define as $Gg\circ \eta(c): d\to Gc$ and it is a bijection  due to $\eta(x)$ universality.\\
+
+    It is natural in $d$ because $\eta$ is natural and is natural in $c$ beacuse $G$ s a functor.
+  \item Dual of the previous.
+  \item We will proof that there is only one functor with $F_0$ as object function such that $\eta (x): I_D\to GF$ is natural. The naturality and universality told us that each $h:d\to d'\in Ob(D)$ induces two arrows:
+\[
+\begin{tikzcd}
+  F_0 d\arrow[dashed]{d} & d\arrow{d}{h}\arrow{r}{\eta (d)}&GF_0d\arrow[dashed]{d}\\
+  F_0 d'& d'\arrow{r}{\eta (d')} & GF_0d'
+\end{tikzcd}
+\]
+    So the only way to define $Fh= \eta (x) \circ h$.
+  \item Dual of the previous.
+  \end{enumerate}
+\end{proof}
+To further ilustrate this concept we present some examples:
+\begin{example}
+  \begin{itemize}
+  \item Free group and forgetful functor
+  \item 
+  \end{itemize}
+\end{example}
+
+In the next few subsection, we are going to introduce categories, with some additional structures onto them. This type of considerations, are commonplace in category theory, and will provide useful considerations.
+
+  
+  \subsection{Monad}
 
 
-\subsection{Closed Cartesian Categories}
 
-No se muy bien donde meterlo aún.
+  \subsection{Closed Cartesian Categories}
+
+  The notion of product seen in \ref{prod-univ} is a notion that seek to catch the essence of what the Cartesian product is in the category of Set. In this category it happens that for any two objects, one can consider the product without any hesitance about it existence. A \emph{closed cartesian category} will be a category that, in some sense, maintain this property (of being closed under catersian product). Formally: 
+
+  \begin{definition}
+    A category for which every product exist and has at least one terminal object $t$, is called cartesian closed if each of the following functors:
+\begin{center}
+  \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
+    $\qquad F_1:C\to 1$&$ F_2=\Delta: C \to C\times C $&$ F_{3}^b:C \to C$\\
+    $\qquad \qquad c\to e$&$ \qquad \qquad c \to  (c,c)$&$ \qquad c \to c\times b$\\
+  \end{tabular}
+\end{center}
+has a right adjoint in:
+\begin{center}
+  \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
+    $\qquad G_1:1\to C$&$ G_2=\Delta:  C\times C\to C $&$ G_{3}^b:C \to C$\\
+    $\qquad \qquad e\to t$&$ \qquad \qquad (c,b)\to c \times b$&$ \qquad c \to c^b$\\
+  \end{tabular}
+\end{center}
+
