@@ -11,7 +11,6 @@ Prior to the formal definition, we shall introduce an example. Probably the firs
   Let $S: D \to C$ be a functor and $c \in Ob(C)$, an \emph{universal arrow}  from $c$ to $S$ is a pair $(d,u)$ with $d\in Ob(D), u:c \to Sd \in Ar(C)$, such that for every $(e,f)$ with $e\in Ob(D)$  and $f:c\to Sd$ there exists an unique $f':r,d\in Ar(D)$ such that $u\circ Sf' = f$.
 
 \end{definition}
-{\colo{red} Todo, universality from a functor.}
 In a diagram:
 
 \[
@@ -21,7 +20,7 @@ In a diagram:
     \end{tikzcd}
   \]
 
-  Note that an universal arrow $(d,u)$ induces the unique existence of an arrow in $D$, but with interesting properties via it relationship with $S$. Whenever possible to provide an universal arrow we will only define the functor $S:D\to C$ and the arrow $u:c\to Sr$, letting all other information be deduced from the context.\\
+  Note that an universal arrow $(d,u)$ induces the unique existence of an arrow in $D$, but with interesting properties via it relationship with $S$. Whenever possible to provide an universal arrow we will only define the functor $S:D\to C$ and the arrow $u:c\to Sd$, letting all other information be deduced from the context.\\
 
 
   Lets formalize the prior examples and provide some more:
@@ -38,7 +37,7 @@ In a diagram:
   \end{example}
   
   Lastly, we will provide a characterization of universality:
-  \begin{proposition}
+  \begin{proposition}\label{yoneda-proposition}
       Let $S: D \to C$ be a functor and $u:c\to Sr\in Ar(C)$. Then $u$ is an universal arrow if and, only if, the function $\varphi:\hom_D(r,\cdot)\to \hom(c,S\cdot)$ such that $\varphi(d)(f)= Sf\circ u$ for all $f\in \hom_D(r,d)$ is a natural bijection. Conversely, every natural bijection is uniquely determined by an universal arrow $u:c\to Sr$. 
   \end{proposition}
   \begin{proof}
@@ -288,7 +287,7 @@ Analogously, we can define the coproduct, on which instead of defining an arrow 
  In this notation $\sqcup$ denotes an inverted $\Pi$, with the meaning of being the dual notion of the product.
 \begin{example}\ 
   \begin{itemize}
-  \item Free product of groups
+  \item Tensor Product of R-Modules, include cite to Rotman-Theorem 1.5.
   \item Union of enumerate types.
   \end{itemize}
 \end{example}
@@ -426,7 +425,22 @@ We have already suggested the relationship between universality and adjointness.
   \end{itemize}
 \end{proposition}
 \begin{proof}
-  {\color{red} TODO}
+  \begin{itemize}
+  \item Let $a=Fd$, then we have that
+    $$\hom_C(a, c)\equiv\hom_D(d, Gc).$$
+
+    and by proposition \ref{yoneda-proposition} we have an universal arrow $\eta (d):d\to Ga=GFd$ is provided. The function $d\to \eta(d)$ is natural $I_D\to GF$ as:
+    \[
+  \begin{tikzpicture}
+  \node {\begin{tikzcd}[column sep=20mm]
+      d\ar[r,"\eta c"]\ar[d,"h"] & GFd\ar[d,"GFh"]\\
+      d'\ar[r,"\eta c'"] & GFd''
+  \end{tikzcd}};
+\end{tikzpicture}
+\]
+commutes. 
+  \item Analogous.
+  \end{itemize} 
 \end{proof}
 
 
@@ -464,7 +478,7 @@ From this proposition we can see that we may be able to define an adjoint based 
   F_0 d'& d'\arrow{r}{\eta (d')} & GF_0d'
 \end{tikzcd}
 \]
-    So the only way to define $Fh= \eta (x) \circ h$.
+    So the only way to define $Fh= \eta (x) \circ h$. We conclude applying 1.
   \item Dual of the previous.
   \end{enumerate}
 \end{proof}
@@ -472,34 +486,112 @@ To further ilustrate this concept we present some examples:
 \begin{example}
   \begin{itemize}
   \item Free group and forgetful functor
-  \item 
+  \item \v{C}ech compactification.
   \end{itemize}
 \end{example}
 
-In the next few subsection, we are going to introduce categories, with some additional structures onto them. This type of considerations, are commonplace in category theory, and will provide useful considerations.
+{\color{red} TODO? Lastly, we are going to study the  and prove a theorem that allow us to include parameters in adjoints.}
 
-  
+
+
+\subsection{Equivalente of Categories}
+We can define an isomorphism of categories the same way that we define isomorphisms in any other category: an isomorphism is an arrow (Functor) with a two sided inverse. This definition, while standard, is quite restrictive. We are going to need some more lax concept of equivalence of categories, in the sense that while not being exactly the same, they are mostly the same. Formally:
+
+\begin{definition}
+A functor $F:C\to D$ is an equivalence of categories if there exists a functor $G:D\to C$  and two natural isomorphisms $\varphi: I_C \to GF$ and $\zeta: I_D\to FG$
+\end{definition}
+
+
+For the canonical example we may introduce a really organic concept: the \emph{skeleton} of a category. Quite often in mathematics we do not consider all objects of certain type, but rather objects up to isomorphism. The skeleton category of a category $C$ is another category where we consider the objects up to isomorphism. Formally:
+  \begin{definition}
+    Let $C$ be a category. The skeleton of $C$, namely $ske(C)$, is a subcategory  such that every object in $C$ is isomorphic to an object in $ske(C)$.
+  \end{definition}
+
+  The definition of equivalence of categories previously outline will allow us, for example, to consider $C\sim ske(C)$, while not being isomorphic. Continuing our discussion, it is not difficult to draw similarities between equivalences and adjoints. That motivates the further definition:
+  \begin{definition}
+    Let $(F,G,\varphi,\eta,\varepsilon)$ be an adjoint. It is called an \emph{adjoint equivalence} whenever $\eta$ and $\varepsilon$ are natural equivalences.
+  \end{definition}
+  It is clear that every adjoint equivalence induces two equivalences in $F$ and $G$. We state this idea in the following proposition:
+  \begin{proposition}\cite[Theorem 1, 4.4]{mac2013categories}
+    Let $F:C\to D$ be a functor. Then the following properties are equivalent:
+    \begin{itemize}
+    \item[i)] $F$ is an equivalence of categories.
+    \item[ii)] $F$ is part of an adjoint equivalence. 
+    \item[iii)] $F$ is full and faithfull, and each object $c\in C$ is isomorphic to $Sa$ for some object $a\in A$. 
+    \end{itemize}  
+  \end{proposition}
+  \begin{proof}\
+    \
+
+    
+    \begin{itemize}
+    \item[$ii)\implies i)$] Given an equivalent adjoint $(F,G,\varphi,\eta,\varepsilon)$, then $F$ is an equivalence with $G,\eta,\varepsilon$. 
+    \item[$i)\implies iii)$] $\varphi: GF\equiv I_C$ implies that for every $c\in Ob(C)$ we can consider $c\equiv GFc$. Then considering the natural isomorphism $\zeta: FG\equiv I_D$ states for every $f:a\to a'\in D$
+\[
+\begin{tikzcd}
+  FGa \arrow{d}{FG f}& a\arrow{d}{f}\arrow{l}{\zeta^{-1} a}\\
+  FGa' \arrow{r}{\zeta a'}& a'
+\end{tikzcd}
+\]
+
+ there is one $FG f$ for each $f$ and we get that $G$ is faithful. Analagously we can see that $F$ is also faithful. To see that $G$ is full we can 
+    \item[$iii)\implies ii)$] We can see that 
+    \end{itemize}
+  \end{proof}
+
+
+  In the next few subsection, we are going to introduce categories, with some additional structures onto them. This type of considerations, are commonplace in category theory, and will provide useful considerations.
+
   \subsection{Monad}
-
+  
 
 
   \subsection{Closed Cartesian Categories}
 
-  The notion of product seen in \ref{prod-univ} is a notion that seek to catch the essence of what the Cartesian product is in the category of Set. In this category it happens that for any two objects, one can consider the product without any hesitance about it existence. A \emph{closed cartesian category} will be a category that, in some sense, maintain this property (of being closed under catersian product). Formally: 
-
+  The notion of product seen in \ref{prod-univ} is a notion that seek to catch the essence of what the Cartesian product is in the category of Set. In this category it happens that for any two objects, one can consider the product without any hesitance about it existence. A \emph{cartesian category} will be a category that, in some sense, maintain this property (of being closed under catersian product). Formally: 
   \begin{definition}
-    A category for which every product exist and has at least one terminal object $t$, is called cartesian closed if each of the following functors:
+    A cartesian cartesian is a category for which every finite product exists.
+  \end{definition}
+
+Nonetheless, further on the text we will need categories with some even nicer properties. These categories are called \emph{closed catersian categories}. We will define them formally first, and after unpack the information that the definition contains:
+  
+  \begin{definition}
+    A $C$ is closed cartesian if each of the following functors:
 \begin{center}
   \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
     $\qquad F_1:C\to 1$&$ F_2=\Delta: C \to C\times C $&$ F_{3}^b:C \to C$\\
     $\qquad \qquad c\to e$&$ \qquad \qquad c \to  (c,c)$&$ \qquad c \to c\times b$\\
   \end{tabular}
 \end{center}
-has a right adjoint in:
+has a \emph{specified} right adjoint, denoted by:
 \begin{center}
   \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
-    $\qquad G_1:1\to C$&$ G_2=\Delta:  C\times C\to C $&$ G_{3}^b:C \to C$\\
-    $\qquad \qquad e\to t$&$ \qquad \qquad (c,b)\to c \times b$&$ \qquad c \to c^b$\\
+    $\qquad G_1:1\to C$&$ G_2:  C\times C\to C $&$ G_{3}^b:C \to C$\\
+    $\qquad \qquad e\to t$&$ \  \qquad (c,b)\to c \times b$&$ \qquad c \to c^b$\\
   \end{tabular}
 \end{center}
 
+These adjoints provide us with a lot of information:
+\begin{itemize}
+\item From $F_1$ being an adjoint we get that $t$ is terminal as for every $c\in Ob(C)$:
+  $$\{id_e\} \equiv \hom_1(F_1(c), e) \equiv \hom_C(c,Ge=t)   $$
+\item From $F_2$ we get that every pair $c,b$ has a product at is states the universal property of product:
+  $$\hom_{C\times C}(F_2(c), (c',b'))\equiv \hom_{C\times C}((c,c), (c',b')) \equiv \hom_C(c,c'\times b')$$
+  that is, for every object in $c\in C$, to provide a morphism to $c\to c'\times b'$ is the same that providing to morphisms $c\to c',c\to b'$.
+\item First of all, as every product exists, and it specified by $F_2$, we can define $F_3^b$ for every $b$. Then, it adjointness states that:
+  $$\hom_C(c\times b, d) \equiv \hom_C(c,d^b)   $$
+
+  This object $d^b$ is called the exponential object or map object. The intuitive notion is that this object represent in some way the arrows from $b$ to $c$, being a generalization of the function set of two small sets. The best way to understand this adjoint is by the natural transformation $\varepsilon^b(c^b\times b) = c$. In this context, this is called \emph{evaluation arrow}. In the context of $Set$ this amount to the classic evaluation of a function.\\
+
+actually it is a technical condition that this adjoint is natural in $b$ (cita maclane).
+\end{itemize}
+
+Lets provide some examples:
+
+\begin{example}
+  \begin{itemize}
+  \item $Set$
+  \item The category of compactly generated Hausdorff spaces.
+  \item We will prove later that lambda calculus is, in some sense, a closed cartesian category.
+  \end{itemize}
+\end{example}

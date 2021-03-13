@@ -260,13 +260,13 @@ Lets provide some examples of functors:\\
 
   \item Stone-\v{C}ech Compactification\footnote{\url{https://en.wikipedia.org/wiki7Stone–Čech_compactification#Universal_property_and_functoriality}}:  In the realm of functional análisis we have the following theorem:
 
-    \begin{theorem}\footnote{I have a little prove of this theorem that uses the Banach-Stone theorem, but was a bit hesitant about whther should I include it.} Let $\Omega$ be a completely regular Hausdorff topological space. Then there exists a compact Hausdorff topological space $\Omega$ and a homeomorphism $\Phi$, from $\Omega$ to a dense subset of $\Beta\Omega$. Moreover, for every continuous and bounded function $f: \Omega \to \K$ there exists a unique $\overline{f} \in C(\beta \Omega)$ such that $\overline{f}\circ \Phi = f$ and the application $f \to \overline{f}$ is an isometric isomorphism. Finally, $\beta \Omega$ is uniquely determined up to isomorphisms by the above properties.
+    \begin{theorem}\footnote{Todo: añadir definición $\Delta$} Let $\Omega$ be a completely regular Hausdorff topological space. Then there exists a compact Hausdorff topological space $\beta \Omega$ and a homeomorphism $\Phi$, from $\Omega$ to a dense subset of $\beta\Omega$. Moreover, for every continuous and bounded function $f: \Omega \to \K$ there exists a unique $\overline{f} \in C(\beta \Omega)$ such that $\overline{f}\circ \Phi = f$ and the application $f \to \overline{f}$ is an isometric isomorphism. Finally, $\beta \Omega$ is uniquely determined up to isomorphisms by the above properties.
     \end{theorem}
 
     \begin{proof}
-  It is enough to take as $\betaOmega$ the closure of $\Delta(\Omega)$ in the induced weak-topology $\omega^*$ (since in the weak topology we have that a bounded closed is compact).  
+  It is enough to take as $\beta \Omega$ the closure of $\Delta(\Omega)$ in the induced weak-topology $\omega^*$ (since in the weak topology we have that a bounded closed is compact).  
                                                                                                                                                                          
-  Given a continuous and bounded function $f:\Omega \to K$ we can define the function $\overline{f}$ by injection of $\Omega$ and then limit to maintain continuity (which will exist by compactness and boundedness of $f$). Thus the maximum of $overline{f}$ can be reached by a sequence of points injected from $Omega$ obtaining that   
+  Given a continuous and bounded function $f:\Omega \to K$ we can define the function $\overline{f}$ by injection of $\Omega$ and then limit to maintain continuity (which will exist by compactness and boundedness of $f$). Thus the maximum of $\overline{f}$ can be reached by a sequence of points injected from  $\Omega$ obtaining that   
   $${\displaystyle\max\left\{|\ \overline{f}\ (s)\ | : s \in \beta\Omega\right\} = \sup\left\{| f(s) |: s \in \Omega\right\}}.$$
 
 The application $f \to \overline{f}$ is therefore an isometric isomorphism. Thanks to this isometric isomorphism the function spaces and by the Banach-Stone theorem\cite[Theorem 3]{banach1932theorie} we have uniqueness up to isomorphisms.     
