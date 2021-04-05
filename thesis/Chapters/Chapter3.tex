@@ -1,0 +1,183 @@
+
+\part{Lambda Calculus}
+\label{Part2}
+
+\chapter{Simply Typed Lambda Calculus}
+
+In this we will define the lambda calculus as a formal language of computation, and on this define the concept of typing, ubiquitous in programming languages. We will carry out this project raising as many bridges between category theory and the lambda calculus as possible.\\
+
+The main references for this chapter are \cite{selinger2008lecture} for the general approach and concepts relatives to untyped calculus, \cite{lambek1988introduction} for more specifics details and the category theory approach to the calculus. We refer to \cite{cardone2006history} to further understand the historical motivation for the development of the theory.  \\
+
+
+One of the important advances in 19th century mathematics is the development of the concept of function. However, what makes two functions the same? The most widespread view is the \emph{extensional} approach. In this, we consider two functions to be the same if for the same input they have the same output. In this case, the functions exist by themselves, and each $f$ as a pairing of an X domain to an Y codomain. These functions can  be considered as sets $f\subset X \times Y$.\\
+
+Despite that, specially those involved in computing the functions, can consider this notion of equality misleading. For example, consider a prime $p$ big enough, and let $f$ and $g$ be two endomorphisms of  $\mathbb{Z}/p\mathbb{Z}$. One could argue that the endomorphism of  $f(x)\to x^2$ is different to $g(x) \to \log_a a^{x+2}$. Despite having the same output for the same input, one is clearly different in complexity. It even involve the resolution of a discrete logarithm, that is highly non trivial. \\
+
+This view, in which not only is the result of the function important but how is that result obtained, is called the \emph{intensional} approach. This approach, gain traction in early 1930 as Church\cite{church1932set}, Gödel\cite{adams2011early} or Turing\cite{turing1938computable} start formalizing what is to be computable. This approach is now as ubiquitous modern computer program care not only on the correctness of a program, but on its time and space complexity (to the point on which correctness is often partially dropped to easy time complexity, for example \cite{hofmeister2002probabilistic}). \\
+
+In lambda calculus we consider function as formulas, and thus, we consider an intensional approach. This intensional approach was also backed by the constructivist, to whom we will later on relate with the study of the Curry-Howard isomorphism  \cite{howard1980formulae} es de 1969.\\
+
+
+\section{Untyped Lambda Calculus }
+We will start defining the most simple version of lambda calculus: untyped lambda calculus. Let's define some concepts:
+
+
+\begin{enumerate}
+\item An alphabet $A$ is an arbitrary, maybe finite, non-empty set.
+\item A symbol $a$ in an element of the alphabet.
+\item A word/formula is a finite sequence of symbols.
+\item The collection of all possible words over an alphabet $A$ is denoted by $A^*$.
+\item A language $L$ over $A$  is a subset of $A^*.$
+\end{enumerate}
+
+There are a lot of languages. For example, spanish is a language, with a well-known alphabet $L$, with a proper subset of words over $L^*$.In the same fashion, we define lambda calculus as a formal language, defining its syntax, that is, what words are valid. After that, we will provide the semantics of the language, that is, we will provide meaning to the words.\\
+
+
+\subsubsection{Syntax of untyped $\lambda$-calculus}
+We start with the basic building blocks, which collectively form what is
+called the alphabet:
+
+\begin{itemize}
+\item We denoted $x, y, z,...$ for variables. As more variables are necessary sub-indexes will be used, up to countable infinite variables.
+\item We consider a abstractor connector $\lambda$.
+\end{itemize}
+Now, we are ready to formally define the untyped $\lambda$-calculus:
+
+\begin{definition}[Syntax of Untyped $\lambda$-calculus (section 2.1 \cite{selinger2008lecture})]\label{def:untyped-lambda-calc}
+  A $\lambda$-calculus formula is defined inductively:
+  \begin{itemize}
+  \item Every variable $x,y,z...$ is a valid formula.
+  \item If $A,B$ is a formula, then $AB$ is a valid formula.
+  \item If $A$ is a formula and $x$ is a variable, then $\lambda x.M$ is a valid formula.
+  \end{itemize}
+  The set of all variables is denoted by $\mathcal{V}$ and the set of all $\lambda$-formulas is denoted by $\Lambda$.
+\end{definition}
+Dealing with formal languages, more often than not, we make use of similar inductive statements. Because of this, we find it useful to introduce the Backus-Naur Form notation, noted as BNF \cite{knuth1964backus}.  A BNF specification is a set of derivation rules, written as $$\operatorname{symbols} ::= \operatorname{expression1} | \operatorname{expresion2} |...,$$ where $\operatorname{symbol}$ is a valid word, and each  expression consists of a derived valid formulas. Expressions are separated by the vertical bar: $|$. For example, we can revisit definition \ref{def:untyped-lambda-calc} as follow:
+
+\begin{definition}
+  The formulas of  $\lambda$-calculus are built via the BNF:
+  $$A,B ::= x\ |\ (AB)\ |\ (\lambda x.A) .$$
+  where $x$ denote any variable.
+\end{definition}
+
+
+From this point on we know how the $\lambda$-formulas look like. Now it is time to provide meaning. This point is better understood with some examples, using natural numbers.  We recommend to trust us in their existence and read this examples first to gain traction in the system. The notion of natural numbers is formalized definition \ref{def:untyped-natural}.\\
+
+
+\subsubsection{Semantics of untyped $\lambda$-calculus}
+Let us now explain the idea behind the formalism. Consider the expression $\lambda x.(x+1)$. This expression represent the idea of the function $f(x)=x+1$ that take a variable $x$ and return $x+1$. $\lambda x.M$ is called the \emph{abstraction} of $x$.\\
+
+From the notion of abstraction naturally arises the second one: \emph{application}. Consider formulas $M  =\lambda x. x+1$ and $N = 3$. Then $MN = (\lambda x. x+1)(3)$ represent the application of $M$ to $N$. In untyped $\lambda$-calculus, $N$ can be any formula. Thus for example, the formula $\lambda f.\lambda g. fg$ just represent the composition of formulas.   
+
+\begin{example} The formula $$\lambda g.(\lambda f.(\lambda x. (gf)(x) )) (x+1)(x+2),$$
+  can be understood as $(g\circ f) (x)$ where $g(x) = x+1$ and $f(x)=x+2$.
+\end{example}
+
+In a expression $M = (\lambda x. N)$ we say that the variable $x$ is \emph{bound} in $M$.
+
+This notion however has to be formalized. This is done via the notions of $\alpha$-equivalence, $\beta$-equivalence and $\eta$-equivalence.\\
+
+The idea of $\alpha$-equivalence, $=_{\alpha}$, is that expressions such as $\lambda x.x$ and $\lambda y.y$ are essentially the same. That is, we consider formulas up to rename of variables. To formalise this, we have to formalize the concept of free and bound variables, and the concept of renamed.
+
+\begin{definition}
+  We have a function $FV:\Lambda \to \mathcal{P}(\mathcal{V})$ defined recursively, such that:
+  \begin{itemize}
+  \item $FV(x) = \{x\}$ for every $x\in \mathcal{V}$.
+  \item $FV(MN) = FV(M)\cap FV(N)$ for every $M,N\in \Lambda$.
+  \item $FV(\lambda x.M) = FV(M)\backslash \{x\}$ for every $M\in \Lambda, x\in \mathcal{V}$.
+  \end{itemize}
+\end{definition}
+
+We can now define the rename of a variable. We are  going to define the more general process of substitution, and define renaming as a particular case. This process is the one behind the intuitive idea of evaluation. For example when we consider $(\lambda y. y^2+y)(4) = 4^2+4 = 20$ we are replacing the value of $x$ by the formula $4$. 
+\begin{definition}
+  The substitution of $N$ for free occurrences of $x$ in $M$, denoted as $M[N/x]$ is defined recurrently in the structure of $\lambda$-formulas by:
+  \begin{align*}
+    x[N/x]& \equiv N,\\
+    y[N/x]& \equiv y, &  \text{if } x\ne y&,\\
+    (MP)[N/x]& \equiv (M[N/x])(P[N/x]),\\
+    (\lambda x.M)[N/x] & \equiv \lambda x.M,\\
+    (\lambda y.M)[N/x] & \equiv \lambda y.(M[N/x]), & \text{if } x\ne y \text{ and } \not \in FV(N)&,\\
+    (\lambda y.M)[N/x] & \equiv \lambda y'.((M[y'/y])[N/x]), & \text{if } x\ne y \text{ and } y\in FV(N),\\
+          & & \text{ with } y' \not \in FV(N) \cup \{x\}&.\\
+  \end{align*}
+  When $N = y$ a variable we say that $[N/x] = [y/x]$ is a rename. 
+\end{definition}
+
+\begin{definition}
+  We define the $\alpha$-equivalence $=_\alpha$ as the smallest congruence relation on $\Lambda$ such that:
+  $$\lambda x. M =_\alpha \lambda y. M[x/y], \qquad \forall y \in \mathcal{V} \backslash FV(M).$$
+\end{definition}
+In other words is the congruence that consider every rename of a bounded variable as equals. This type of property-oriented definition is commonplace in $\lambda$-calculus, as it allows for some synthetic and goal-oriented definition. Using this same tool we are going to define the $\beta$-reduction. This is not going to be an equivalence implication, but rather a relationship. It abstract the notion of $4$ and $(\lambda x. 2+x)(2)$ being equals. Formally:
+
+\begin{definition}[Section 2.5 \cite{selinger2008lecture}]
+  We define the \emph{single-step} $\beta$\emph{-reduction} as the smallest relationship $\to_\beta$ such that:\footnote{Should i explain the notation ${A \over B}$}
+  \begin{align*}
+    &(\beta) \qquad\ \ \  \ {\ \over(\lambda x.M)N \to_\beta M[N/x]},\\
+    &(\operatorname{cong}_1)\qquad\qquad{ M \to_\beta M' \over MN \to_\beta M'N },\\
+    &(\operatorname{cong}_2)\qquad\qquad{ N \to_\beta N' \over MN \to_\beta MN' },\\
+    &(\zeta) \qquad\qquad \ \  \ {M\to_\beta M' \over(\lambda x.M) \to_\beta \lambda x.M'}.\\
+  \end{align*}
+\end{definition}
+
+In this definition we can see that rule $(\beta)$ is the main objective, while the others are sanitary conditions.
+
+\begin{definition}
+We define the \emph{multiple-step} $\beta$\emph{-reduction} $\twoheadrightarrow_\beta$ as the reflexive, transitive closure of $\to_\beta$.
+\end{definition}
+\begin{definition}
+  We define the $\beta$-equivalence $=_\beta$ as the symmetric closure of $\twoheadrightarrow_\beta$.
+\end{definition}
+
+While most constructions will be understood clearly using only $\beta$-reduction, we have to define the concept of $\eta$-reduction for a full picture of the system.\\
+
+
+Up to this point the focus of the system was to define an intensional language for computation. The $\eta$-equivalence provides us with the tools to consider $\lambda$-calculus in a extensional way. \\
+
+\begin{definition}
+We define the single-step $eta$-reduction as the smallest relationship such that: 
+  \begin{align*}
+    &(\eta) \qquad\qquad \ \ \ \  \ {\ \over(\lambda x.Mx) \to_\eta M} \qquad \forall x \not  \in FV(M),\\
+    &(\operatorname{cong}_1)\qquad\qquad{ M \to_\eta M' \over MN \to_\eta M'N },\\
+    &(\operatorname{cong}_2)\qquad\qquad{ N \to_\eta N' \over MN \to_\eta MN' },\\
+    &(\zeta) \qquad\qquad \ \  \ {M\to_\eta M' \over(\lambda x.M) \to_\eta \lambda x.M'}.\\
+  \end{align*}
+  Similarly, we define the multiple-step $\eta$-reduction $\twoheadedarrow_\eta$ as the transitive reflexive closure of $\to_\eta$, and the $\eta$-equivalence as the symmetric closure of $\twoheadedarrow_\eta$.
+\end{definition}
+
+\begin{proposition}
+  In the presence of all other axioms defined in $\beta$ and $\eta$ reduction, $\eta$ rule is equivalent to:\footnote{TODO: Revisar si es equivalencia o reducción.}
+  $$(ext) \qquad\ \ \  \ {\ (Mx=M'x)\text{ where } x\not\in FV(M,M') \over M \to_\eta M' \land M' \to_\eta M} \qquad \forall x \not  \in FV(M)$$
+\end{proposition}
+
+\subsection{Confluences and Church-Rosser Theorem}
+
+\subsection{Some constructions in untyped lambda-calculus}
+\begin{definition}[Natural numbers in untyped lambda-calculus] \label{def:untyped-natural} We define..
+
+\end{definition}
+
+\subsection{Problems with Regularity Axiom}
+
+\newpage
+\section{Typed Lambda Calculus}
+\subsection{Definition}
+\subsection{Curry-Howard bijection}
+\subsection{Lambeck bijection}
+
+
+\newpage
+\section{Lambda calculus as a computation system}
+Around 1930, people start thinking about what mean for a function to be computable. There were three major answer to this question (section 4, \cite{cardone2006history}):
+\begin{itemize}
+\item In 1930s Alonzo Church introduces the notion of $\lambda$-calculus, in which a function is computable if we can write it as a recursive-lambda term, that is, if we can deduce the result after a (hopefully finite) deduction steps.
+\item Later, Alan Turing, who had previously been a doctoral student of Alonzo Church, developed the concept of the Turing machine, in which a function is computable if a tape machine with a limited set of operations is capable of reproducing it.
+\item Meanwhile, Gödel define the computable function as the minimum set of function such that some properties (such as the existence of a successor function) are includes, and is closed under some operations. 
+\end{itemize}
+
+The goal of this three mathematicians was to solve the Entscheidungsproblem\cite{hilbert1999principles}.
+
+{\color{red} TODO: include the statement of the problem\\}
+
+The interest for this type of problems was clear for the mathematical community as the goal was to propose an algorithm that solve every theorem and can be computed. This dispute over with the Church-Turing thesis. In this, it was proved that these three independently generated notions were in fact equivalent. This thesis also stated that every effective computable function system is equivalent to those three. While it can not be formally proven, it has near-universal acceptance to date.\\
+
+Nonetheless after the formalization of the solution of this problem there were a last step that was not adverted: the finiteness of time. SAT is the problem of having a machine that has as input a first order formula and reply whether it is satisfiable. This problem is NP-complete, quite famously the firs of these problems\cite{cook1971complexity}. If we consider the analogous problem for first order algebra, we have an even more complex P-space-complete problem, being almost intractable in worst cases to this date. As a happy consequence for us, much work is left to be done in this area \cite{cook2006p}. 
