@@ -15,7 +15,7 @@ Despite that, specially those involved in computing the functions, can consider 
 
 This view, in which not only is the result of the function important but how is that result obtained, is called the \emph{intensional} approach. This approach, gain traction in early 1930 as Church\cite{church1932set}, Gödel\cite{adams2011early} or Turing\cite{turing1938computable} start formalizing what is to be computable. This approach is now as ubiquitous modern computer program care not only on the correctness of a program, but on its time and space complexity (to the point on which correctness is often partially dropped to easy time complexity, for example \cite{hofmeister2002probabilistic}). \\
 
-In lambda calculus we consider function as formulas, and thus, we consider an intensional approach. This intensional approach was also backed by the constructivist, to whom we will later on relate with the study of the Curry-Howard isomorphism  \cite{howard1980formulae} es from 1969.\\
+In lambda calculus we consider function as formulas, and thus, we consider an intensional approach. This intensional approach was also backed by the constructivist, to whom we will later on relate with the study of the Curry-Howard isomorphism  \cite{howard1980formulae} is from 1969.\\
 
 
 \section{Untyped Lambda Calculus }
@@ -53,7 +53,6 @@ Now, we are ready to formally define the untyped $\lambda$-calculus:
   The set of all variables is denoted by $\mathcal{V}$ and the set of all $\lambda$-formulas is denoted by $\Lambda$.\\
 \end{definition}
 
-{\color{red} Discuss atomic constants as in Definition 1.1 \cite{hindley2008lambda}.}
 
 Dealing with formal languages, more often than not, we make use of similar inductive statements. Because of this, we find it useful to introduce the Backus-Naur Form notation, noted as BNF \cite{knuth1964backus}.  A BNF specification is a set of derivation rules, written as $$\operatorname{symbols} ::= \operatorname{expression1} | \operatorname{expression2} |...,$$ where $\operatorname{symbol}$ is a valid word, and each  expression consists of a derived valid formulas. Expressions are separated by the vertical bar: $|$. For example, we can revisit definition \ref{def:untyped-lambda-calc} as follow:
 
@@ -110,7 +109,7 @@ We can now define the rename of a variable. We are  going to define the more gen
   We define the $\alpha$-equivalence $=_\alpha$ as the smallest congruence relation on $\Lambda$ such that:
   $$\lambda x. M =_\alpha \lambda y. M[x/y], \qquad \forall y \in \mathcal{V} \backslash FV(M).$$
 \end{definition}
-In other words is the congruence that consider every rename of a bounded variable as equals. This type of property-oriented definition is commonplace in $\lambda$-calculus, as it allows for some synthetic and goal-oriented definition. Using this same tool we are going to define the $\beta$-reduction. This is not going to be an equivalence implication, but rather a relationship. It abstract the notion of $4$ and $(\lambda x. 2+x)(2)$ being equals. Formally:
+In other words is the congruence that consider every rename of a bounded variable as equals. This type of property-oriented definition is commonplace in $\lambda$-calculus, as it allows for some synthetic and goal-oriented definition. Using this same tool we are going to define the $\beta$-reduction. This is not going to be an equivalence implication, but rather a relationship. It abstracts the notion of $4$ and $(\lambda x. 2+x)(2)$ being equals. Formally:
 
 \begin{definition}[Section 2.5 \cite{selinger2008lecture}]
   We define the \emph{single-step} $\beta$\emph{-reduction} as the smallest relationship $\to_\beta$ such that:\footnote{Should i explain the notation ${A \over B}$}
@@ -300,9 +299,9 @@ As a direct consequence of the previous lemmas, we prove the Church-Rosser theor
 \end{theorem}
 
 
-Let's now explain the usefulness of this theorem. This theorem gives coherence to the definitions, as it states that any two deduction are basically the same but for the order of the steps. 
+This theorem gives coherence to the definitions, as it states that any two deduction are basically the same but for the order of the steps. Therefore we can consider $\lambda$-calculus and operate, with $\alpha$-equivalence and $\twoheadedrightarrow_{\beta\eta}$ reduction to derives terms.  
 
-\subsection{Some constructions in untyped lambda-calculus}
+\subsection{Fixed points and Programming in untyped-Lambda Calculus}
 In this subsection we expose the basic rudiments for programming in untyped lambda calculus. In particular, we explain how to define, for example, a booleans, an integer type and a recursion operator, thus showing the computational potential of recursively enumerable languages. We start with the booleans.
 
 \begin{definition}[Boolean in untyped lambda-calculus] \label{def:untyped-natural} 
@@ -311,7 +310,6 @@ In this subsection we expose the basic rudiments for programming in untyped lamb
     T &= \lambda xy.z\\
     F &= \lambda xy.z\\
   \end{align*}
-
   We also define the operations:
   \begin{align*}
     \operatorname{Not} &= \lambda a.aFT\\
@@ -320,7 +318,13 @@ In this subsection we expose the basic rudiments for programming in untyped lamb
   \end{align*}
 \end{definition}
 
-We can check that this construction left us with the basis of a boolean logic, after checking the truth values of the different operations provided. This definition of truth value is really convenient, as it allow us to easily implement control flow of programs. Next, we will define Naturals number. 
+We can check that this construction left us with the basis of a boolean logic, after checking the truth values of the different operations provided. This definition of truth value is really convenient, as it allow us to easily implement control flow of programs.
+
+\begin{definition}
+  We define the $\operatorname{If} = \lambda x.x$.  
+\end{definition}
+
+We can see that in this case, $\operatorname{If} T M N = M$ and $\operatorname{If} F M N = N$. This construction is very natural and widely used in computer programs. Next, we will define Naturals number. 
 
 \begin{definition}[Natural numbers in untyped lambda-calculus] \label{def:untyped-natural} 
 Let $f,x$ be fixed lambda terms, and write $f^nx = f(f(f(...(f(x))...)))$. Then, for each $n \in \mathbb N$, we define the \emph{nth Church numeral} as $\overline n=\lambda fx.f^nx$.
@@ -336,22 +340,59 @@ Finally, we consider the notion of recursive function. This is done with a elega
 \begin{proof}
   Let $A=\lamdba xy.y(xxy)$ and $\Theta =AA$. Then, for every lambda-term $F$ we have that $N=\theta F = FN$, thus being a fixed point. In fact:
   \begin{align*}
-    N = \Theta F = AAF = (\lambda xy.y(xxy))AF \twoheadrightarrow_\beta F(AAF) = F(\Theta F) = FN.\\
+    N = \Theta F = AAF = (\lambda xy.y(xxy))AF \twoheadrightarrow_\beta F(AAF) = F(\Theta F) = FN.
   \end{align*}
 \end{proof}
-
 The proof of this theorem led to a new definition:
 
 \begin{definition}
   The term $\Theta$ used in the previous theorem is called \emph{Turing fixed point combinator}.
 \end{definition}
-\subsection{Rosser-Kleene Paradox}
 
-Church's attempt to formalize logic into a computer system was halted by the earthquake that shook the foundations in the early 20th century: Russel's paradox. This is the original  reason to be of type theory. The replica that shook untyped lambda calculus is know as \emph{Kleene-Rosser paradox}, first exhibited in \cite{kleene1935inconsistency}. \\
+This existence of fixed point theorem is really useful, as we can now define \emph{recursion}. The idea is to define a function as a term with itself as a parameters and proceed to evaluate a fixed point. Let us first present an example.
+
+\begin{definition}
+  We define the terms:
+  \begin{align*}
+    \operatorname{add} &= \lambda nm f x.nf (mf x),\\
+    \operatorname{mult} &= \lambda nm f.n(mf),\\
+    \operatorname{iszero} &= \lambda nxy.n(\lambda z.y)x,\\
+    \operatorname{predecesor} &=\lambda n.\lambda f.\lambda x. n (\lambda g.\lambda h. h (g f)) (\lambda u.x) (\lambda u.u). 
+  \end{end*}
+\align{definition}
+
+Suppose that we want to define the factorial such that
+$$\operatorname{fact} n = \operatorname{If}(\operatorname{iszero} n)(1)(\operatorname{mult}(n)(\operatorname{fact} (\operatorname{pred}(n))),$$
+in orther to do that, we can simply see of all terms, what is a fixed point of:
+$$\lambda f. \lambda n.\operatorname{If}(\operatorname{iszero}n)(1)(\operatorname{mult}(n)(f (\operatorname{pred}(n))),$$
+and thus $\operatorname{fact}=\Theta \lambda f.\lambda n. \operatorname{If}(\operatorname{iszero}n)(1)(\operatorname{mult}(n)(f (\operatorname{pred}(n)))$. In general:
+
+\begin{definition}
+  Given an stop condition $g$, an stop value $s$ and a recursive step $f$, we define the recursive term $F$ that computes $(g,s,f)$ as
+  $$F = \Theta \lambda f. \operatorname{If}(gn)(n)(f (\operatorname{pred}(n))$$
+\end{definition}
+
+Another implementation of the fixed point operator is \emph{Curry's paradoxical fixed point operator}:
+
+\begin{definition}
+  We define Curry's paradoxical fixed point operator $\operatorname{Y}$ as:
+  $$\operatorname{Y}=\lambda f.(\lambda x.f(x x)) (\lambda x.f(x x)).$$
+\end{definition}
+
+This operator is used for the Curry's paradox.\\
+
+\subsection{Rosser-Kleene and Curry's Paradoxes}
+
+In this subsection we explain the deficits in untyped $\lambda$-calculus, that was the original Church construction, that eventually leads into the definition of \emph{typed} $\lambda$-\emph{calculus}.
 
 An aproximation of this argument can be done if we consider domains of functions to be sets. In particular untyped $\lambda$-calculus allow functions to be applied to themselves. This is going to be troublesome, considering domains as sets, as this will be a clear infringement of \emph{ZF Axiom Theory}\cite{kunen2014set}. Namely, the infinite descending sequence
 $$f\ni \{f,f(f)\}\ni f \ni \{f,f(f)\}...$$
-in contradiction with the \emph{regularity axiom}. An approach that seek solving this problems is presented in the next section, starring the introduction of types.
+in contradiction with the \emph{regularity axiom}. An approach that seek solving this problems is presented in the next section, starring the introduction of types.  \\
+
+This last idea, despite being clear and loud to the intuition, is not a proof of inconsistency as there is no need for domains to be sets. Nonetheless, there was another problem that is to be deal that was noticed before. $\lamdba$-calculus was proposed to be a deductive system. The  \emph{Kleene-Rosser paradox}, first exhibited in \cite{kleene1935inconsistency} proved that simply typed lambda calculus is inconsistent. This paradox was perfected in 1958 by Curry \cite{curry1958combinatory} with the so called \emph{Curry's paradox}. \\
+
+ To solve these problems, a very natural idea is included: the use of types in our computation system. This idea is very natural nowadays, as nearly everyone learns to program priors to a deep academic career. However, we must not forget that the origin was not to use types because we liked them initially, but because they really allow us to avoid logical problems. 
+
 
 \newpage
 \section{Typed Lambda Calculus}
@@ -409,15 +450,13 @@ We can consider two standards in typing: \emph{Church Style} and \emph{Curry Sty
 \section{Lambda calculus as a computation system}
 Around 1930, people start thinking about what mean for a function to be computable. There were three major answer to this question (section 4, \cite{cardone2006history}):
 \begin{itemize}
-\item In 1930s Alonzo Church introduces the notion of $\lambda$-calculus, in which a function is computable if we can write it as a recursive-lambda term, that is, if we can deduce the result after a (hopefully finite) deduction steps.
+\item In 1930s Alonzo Church introduces the notion of $\lambda$-calculus, in which a function is computable if we can write it as a recursive-lambda term onto Church's numerals, that is, if we can deduce the result after a (hopefully finite) deduction steps.
 \item Later, Alan Turing, who had previously been a doctoral student of Alonzo Church, developed the concept of the Turing machine, in which a function is computable if a tape machine with a limited set of operations is capable of reproducing it.
 \item Meanwhile, Gödel define the computable function as the minimum set of function such that some properties (such as the existence of a successor function) are includes, and is closed under some operations. 
 \end{itemize}
 
-The goal of this three mathematicians was to solve the Entscheidungsproblem\cite{hilbert1999principles}.
-
-{\color{red} TODO: include the statement of the problem\\}
+The goal of this three mathematicians was to solve the Entscheidungsproblem\cite{hilbert1999principles}.\\
 
 The interest for this type of problems was clear for the mathematical community as the goal was to propose an algorithm that solve every theorem and can be computed. This dispute over with the Church-Turing thesis. In this, it was proved that these three independently generated notions were in fact equivalent. This thesis also stated that every effective computable function system is equivalent to those three. While it can not be formally proven, it has near-universal acceptance to date.\\
 
-Nonetheless after the formalization of the solution of this problem there were a last step that was not adverted: the finiteness of time. SAT is the problem of having a machine that has as input a first order formula and reply whether it is satisfiable. This problem is NP-complete, quite famously the firs of these problems\cite{cook1971complexity}. If we consider the analogous problem for first order algebra, we have an even more complex P-space-complete problem, being almost intractable in worst cases to this date. As a happy consequence for us, much work is left to be done in this area \cite{cook2006p}. 
+Nonetheless, after the formalization of the solution of this problem there were a last problem that was not adverted: the finiteness of time. SAT is the problem that has as input a propositional logic formula and solve whether it is satisfiable. This problem is NP-complete, quite famously the firs of these problems\cite{cook1971complexity}. If we consider the analogous problem for first order algebra, we have an even more complex P-space-complete problem, being almost intractable in worst cases to this date. As a happy consequence for us, much work is left to be done in this area \cite{cook2006p}. 
