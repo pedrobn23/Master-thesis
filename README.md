@@ -22,7 +22,7 @@ Here I will be updating when each section state:
   - Dependent typing.
 
 ## Acknowledges
-Thanks a lot to Ángel Prieto for supervising this work. 
+Thanks a lot to Ángel González-Prieto for supervising this work. 
 
 ## If you want to help
 - Just reading and telling me whether everything is understandable and well written is more than enough. :)
