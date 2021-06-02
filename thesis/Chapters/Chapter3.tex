@@ -2,7 +2,7 @@
 \part{Lambda Calculus}
 \label{Part2}
 
-\chapter{Simply Typed Lambda Calculus}
+\chapter{Lambda Calculus}
 
 In this we will define the lambda calculus as a formal language of computation, and on this define the concept of typing, ubiquitous in programming languages. We will carry out this project raising as many bridges between category theory and the lambda calculus as possible.\\
 
@@ -147,7 +147,7 @@ We define the single-step $\eta$-reduction $\to_\eta$ as the smallest relationsh
     &(\operatorname{cong}_2)\qquad\qquad{ N \to_\eta N' \over MN \to_\eta MN' },\\
     &(\zeta) \qquad\qquad \ \  \ {M\to_\eta M' \over(\lambda x.M) \to_\eta \lambda x.M'}.\\
   \end{align*}
-  Similarly, we define the multiple-step $\eta$-reduction $\twoheadrightarrow_\eta$ as the transitive reflexive closure of $\to_\eta$, and the $\eta$-equivalence as the symmetric closure of $\twoheadedarrow_\eta$.
+  Similarly, we define the multiple-step $\eta$-reduction $\twoheadrightarrow_\eta$ as the transitive reflexive closure of $\to_\eta$, and the $\eta$-equivalence as the symmetric closure of $\twoheadrightarrow_\eta$.
 \end{definition}
 \begin{definition}
   We define the single-step $\beta\eta$-reduction $\to_{\beta\eta}$ as the union of $\to_\beta$ and $\to_\eta$.  We define the multiple-step $\beta\eta$-reduction $\twoheadrightarrow_{\beta\eta}$ as the transitive reflexive closure of $\to_{\beta\eta}$.
@@ -308,7 +308,7 @@ Now let take a moment to comment on the usefulness of each reduction. We can say
   $\twoheadrightarrow_{\beta}$ satisfy the Church-Rosser property.
 \end{theorem}
 
-This theorem gives coherence to the definitions, as it states that any two deduction are basically the same but for the order of the steps. Therefore we can consider $\lambda$-calculus and operate, with $\alpha$-equivalence and $\twoheadedrightarrow_{\beta\eta}$ reduction to derives terms.\\
+This theorem gives coherence to the definitions, as it states that any two deduction are basically the same but for the order of the steps. Therefore we can consider $\lambda$-calculus and operate, with $\alpha$-equivalence and $\twoheadrightarrow_{\beta\eta}$ reduction to derives terms. This can be used to define \emph{normal} forms for untyped lambda-terms. More infomation on normalization can be found on \cite{selinger2008lecture}. \\
 
 
 
@@ -404,7 +404,7 @@ in contradiction with the \emph{regularity axiom}. An approach that seek solving
 
 This last idea, despite being clear and loud to the intuition, is not a proof of inconsistency as there is no need for domains to be sets. Nonetheless, there was another problem that is to be deal that was noticed before. $\lamdba$-calculus was proposed to be a deductive system. The  \emph{Kleene-Rosser paradox}, first exhibited in \cite{kleene1935inconsistency} proved that simply typed lambda calculus is inconsistent. This paradox was perfected in 1958 by Curry \cite{curry1958combinatory} with the so called \emph{Curry's paradox}. \\
 
- To solve these problems, a very natural idea is included: the use of types in our computation system. This idea is very natural nowadays, as nearly everyone learns to program priors to a deep academic career. However, we must not forget that the origin was not to use types because we liked them initially, but because they really allow us to avoid logical problems. 
+ To solve these problems, a very natural idea is included: the use of types in our computation system. This idea is very natural nowadays, as nearly everyone learns to program priors to a deep academic career. However, we must not forget that the origin was not to use types because we liked them initially, but because they really allow us to avoid logical problems.  
 
 \subsection{Lambda calculus as a computation system}
 Around 1930, people start thinking about what mean for a function to be computable. There were three major answer to this question (section 4, \cite{cardone2006history}):
@@ -457,7 +457,6 @@ while some authors prefer to include in the definition a type for every natural 
 
 In this definition we intend to define $\pi_i$ in a way that $\pi_i \langle A_1,A_2\rangle = A_i$, and such that $*$ is the only term of type $1$.\\
 
-
 The main difference with untyped calculus, is that every bound variable has a type. That is, for the expression $(\lambda x^t.M)N$ to be coherent we require $N$ to be of type $t$. This led us to require some sort of condition to $N$ for being of type $t$.\\
 
 Nonetheless raw terms have some other meaningless terms, such as projections of a non-pair $\pi_1(\lambda x^t.x)$. We solve all this problems at once with the \emph {Typing rules}. This rules will restricts the semantics of terms. We start by defining \emph{typing context}.
@@ -491,7 +490,7 @@ Note that not every term can be typed, namely the two previous examples of bad-b
   A \emph{simply typed lambda term} is a raw typed lambda term that, together with a typing context of every variable, is subject to be typed.
 \end{definition}
 
-By assigning type we mean assigning types to the free and bound variables. Further on, when talking about terms we will refer to simply type lambda terms.
+By assigning type we mean assigning types to the free and bound variables. Further on, when talking about terms we will refer to simply type lambda terms. On these terms, we can define substitution just like we defined it on untyped lambda calculus.
 
 \subsection{Unification of typing}
 
@@ -503,7 +502,6 @@ We can consider two standards in typing: \emph{Church Style} and \emph{Curry Sty
 More information about the typing style can be found on Chapter 10 and 11 of \cite{hindley2008lambda}. \\
 
 Despite this apparent differences, both typing styles can be \emph{unified}. An unifier is a pair of substitution that makes two type styles equal as typed templates. Such an unifier is based onta an algorithm based on type inference. This is instrumental to languages  as relevant \texttt{python}, that works with implicit typed variables. How this algorithms for unification is shown in great detail in chapter 9  of \cite{selinger2008lecture}. Due to this unification, we can consider only explicitely typed terms without any remorse.
-\subsection{Substitution}
 
 \subsection{Church-Rosser on simply typed lambda calculus}
 
@@ -513,6 +511,7 @@ To talk Church-Rosser, we have to talk reduction. Reductions are basically the s
   We define the \emph{single-step} $\beta$\emph{-reduction} as the smallest relationship $\to_\beta$ such that:
 \begin{itemize}
 \item[]$(\beta)$ $ (\lambda x^t.M)N \to_\beta M[N/x]$.\\
+\item[]$(\beta_{\times,i})$ $\pi_i\langle M_1,M_2\rangle \to_\beta M_i$.\\
 \item[]$(\operatorname{cong}_1)$ If $ M \to_\beta M'$ then $MN \to_\beta M'N$.\\
 \item[]$(\operatorname{cong}_2)$ If $ N \to_\beta N'$ then $ MN \to_\beta MN'$.\\
 \item[]$(\zeta)$ If $M\to_\beta M'$ then $(\lambda x.M) \to_\beta \lambda x.M'$.\\
@@ -523,17 +522,17 @@ We define the \emph{multiple-step} $\beta$\emph{-reduction} $\twoheadrightarrow_
 \begin{definition}
 We define the single-step $\eta$-reduction $\to_\eta$ as the smallest relationship such that: 
 \begin{itemize}
-\item[]$(\eta)$ $(\lambda x.Mx) \to_\eta M} \qquad \forall x \not  \in FV(M)$.\\
-\item[]$(\operatorname{cong}_1)$ If $ M \to_\eta M'$ then $MN \to_\beta M'N$.\\
-\item[]$(\operatorname{cong}_2)$ If $ N \to_\eta N'$ then $ MN \to_\beta MN'$.\\
+\item[]$(\eta)$ $(\lambda x.Mx) \to_\eta M}$,para todo $ x \not  \in FV(M)$.\\
+\item[]$(\eta_1)$ $\langle\pi_1 M, \pi_2 M\rangle\to_\eta M$.\\
+\item[]$(\eta_\times)$ If $M:1$ then $M \to_\eta *$ . \\
+\item[]$(\operatorname{cong}_1)$ If $ M \to_\eta M'$ then $MN \to_\eta M'N$.\\
+\item[]$(\operatorname{cong}_2)$ If $ N \to_\eta N'$ then $ MN \to_\eta MN'$.\\
 \item[]$(\zeta)$ If $M\to_\eta M'$ then $(\lambda x.M) \to_\eta \lambda x.M'$.\\
 \end{itemize}
 
-  Similarly, we define the multiple-step $\eta$-reduction $\twoheadrightarrow_\eta$ as the transitive reflexive closure of $\to_\eta$, and the $\eta$-equivalence as the symmetric closure of $\twoheadedarrow_\eta$.
+  Similarly, we define the multiple-step $\eta$-reduction $\twoheadrightarrow_\eta$ as the transitive reflexive closure of $\to_\eta$, and the $\eta$-equivalence as the symmetric closure of $\twoheadrightarrow_\eta$.
 \end{definition}
 
-\chapter{Curry-Howard-Lambeck bijection}
-\section{Property oriented Propositional Logic}
-\section{Curry-Howard bijection}
-\section{Lambeck bijection}
+We can now talk about about Church-Rosser.  Lets check that it does not hold. For example, if $x: A\times 1$ then we can consider $M=\langle \pi_1x, \pi_2x\rangle$. Because of the rule $\eta_1$, we have that $M \to_{\eta}\langle \pi_1 x, *\rangle$, but taking $\eta_\times$ into account we can check that $M \to_{\eta} x$. \\
 
+Despite this, $\beta$-reduction does maintain the Church-Rosser property, so from a computational point of view there is no problem at all. 
