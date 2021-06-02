@@ -15,7 +15,7 @@ Despite that, specially those involved in computing the functions, can consider 
 
 This view, in which not only is the result of the function important but how is that result obtained, is called the \emph{intensional} approach. This approach, gain traction in early 1930 as Church\cite{church1932set}, Gödel\cite{adams2011early} or Turing\cite{turing1938computable} start formalizing what is to be computable. This approach is now as ubiquitous modern computer program care not only on the correctness of a program, but on its time and space complexity (to the point on which correctness is often partially dropped to easy time complexity, for example \cite{hofmeister2002probabilistic}). \\
 
-In lambda calculus we consider function as formulas, and thus, we consider an intensional approach. This intensional approach was also backed by the constructivist, to whom we will later on relate with the study of the Curry-Howard isomorphism  \cite{howard1980formulae} is from 1969.\\
+In lambda calculus we consider function as formulas, and thus, we consider an intensional approach. This intensional approach was also backed by the constructivist, to whom we will later on relate with the study of the Curry-Howard isomorphism  \cite{howard1980formulae}.\\
 
 
 \section{Untyped Lambda Calculus }
@@ -109,7 +109,11 @@ We can now define the rename of a variable. We are  going to define the more gen
   We define the $\alpha$-equivalence $=_\alpha$ as the smallest congruence relation on $\Lambda$ such that:
   $$\lambda x. M =_\alpha \lambda y. M[x/y], \qquad \forall y \in \mathcal{V} \backslash FV(M).$$
 \end{definition}
-In other words is the congruence that consider every rename of a bounded variable as equals. This type of property-oriented definition is commonplace in $\lambda$-calculus, as it allows for some synthetic and goal-oriented definition. Using this same tool we are going to define the $\beta$-reduction. This is not going to be an equivalence implication, but rather a relationship. It abstracts the notion of $4$ and $(\lambda x. 2+x)(2)$ being equals. Formally:
+In other words is the congruence that consider every rename of a bounded variable as equals. This type of property-oriented definition is commonplace in $\lambda$-calculus, as it allows for some synthetic and goal-oriented definition. More often than note we will not give explicit use of this equivalence.\\
+
+
+
+Using this same tool we are going to define the $\beta$-reduction. This is not going to be an equivalence implication, but rather a relationship. It abstracts the notion of $4$ and $(\lambda x. 2+x)(2)$ being equals. Formally:
 
 \begin{definition}[Section 2.5 \cite{selinger2008lecture}]
   We define the \emph{single-step} $\beta$\emph{-reduction} as the smallest relationship $\to_\beta$ such that:\footnote{Should i explain the notation ${A \over B}$}
@@ -298,10 +302,19 @@ As a direct consequence of the previous lemmas, we prove the Church-Rosser theor
   $\twoheadrightarrow_{\beta\eta}$ satisfy the Church-Rosser property.
 \end{theorem}
 
+Now let take a moment to comment on the usefulness of each reduction. We can say that $\beta$ reduction is the soul of computation  while $\eta$ is useful to cleanup the results. In fact, Church-Rosser is also stated in an alternative form that only includes $\beta$-reduction, with a rather similar proof that we omit, but can be checked in [Theorem 1.32, \cite{hindley2008lambda}].
 
-This theorem gives coherence to the definitions, as it states that any two deduction are basically the same but for the order of the steps. Therefore we can consider $\lambda$-calculus and operate, with $\alpha$-equivalence and $\twoheadedrightarrow_{\beta\eta}$ reduction to derives terms.  
+\begin{theorem}
+  $\twoheadrightarrow_{\beta}$ satisfy the Church-Rosser property.
+\end{theorem}
 
-\subsection{Fixed points and Programming in untyped-Lambda Calculus}
+This theorem gives coherence to the definitions, as it states that any two deduction are basically the same but for the order of the steps. Therefore we can consider $\lambda$-calculus and operate, with $\alpha$-equivalence and $\twoheadedrightarrow_{\beta\eta}$ reduction to derives terms.\\
+
+
+
+
+
+\subsection{Fixed points and Programming}
 In this subsection we expose the basic rudiments for programming in untyped lambda calculus. In particular, we explain how to define, for example, a booleans, an integer type and a recursion operator, thus showing the computational potential of recursively enumerable languages. We start with the booleans.
 
 \begin{definition}[Boolean in untyped lambda-calculus] \label{def:untyped-natural} 
@@ -393,13 +406,28 @@ This last idea, despite being clear and loud to the intuition, is not a proof of
 
  To solve these problems, a very natural idea is included: the use of types in our computation system. This idea is very natural nowadays, as nearly everyone learns to program priors to a deep academic career. However, we must not forget that the origin was not to use types because we liked them initially, but because they really allow us to avoid logical problems. 
 
+\subsection{Lambda calculus as a computation system}
+Around 1930, people start thinking about what mean for a function to be computable. There were three major answer to this question (section 4, \cite{cardone2006history}):
+\begin{itemize}
+\item In 1930s Alonzo Church introduces the notion of $\lambda$-calculus, in which a function is computable if we can write it as a recursive-lambda term onto Church's numerals, that is, if we can deduce the result after a (hopefully finite) deduction steps.
+\item Later, Alan Turing, who had previously been a doctoral student of Alonzo Church, developed the concept of the Turing machine, in which a function is computable if a tape machine with a limited set of operations is capable of reproducing it.
+\item Meanwhile, Gödel define the computable function as the minimum set of function such that some properties (such as the existence of a successor function) are includes, and is closed under some operations. 
+\end{itemize}
 
-\newpage
+The goal of this three mathematicians was to solve the Entscheidungsproblem\cite{hilbert1999principles}.\\
+
+The interest for this type of problems was clear for the mathematical community as the goal was to propose an algorithm that solve every theorem and can be computed. The Church-Turing thesis fromally proved that these three independently generated notions were in fact equivalent\cite{copeland1997church}.\\
+
+
+This thesis is also formulated in a philosophical background, to state that every effective computable function system is equivalent to those three. While it can not be formally proven, it has near-universal acceptance to date. Any computing system that can replicate, and thus is equivalent, to either Turing Machines Calculus or Lambda Calculus is said to be \emph{Turing Complete}.\\
+
+Nonetheless, after the formalization of the solution of this problem there were a last problem that was not adverted: the finiteness of time. SAT is the problem that has as input a propositional logic formula and solve whether it is satisfiable. This problem is NP-complete, quite famously the firs of these problems\cite{cook1971complexity}. If we consider the analogous problem for first order algebra, we have an even more complex P-space-complete problem, being almost intractable in worst cases to this date. As a happy consequence for us, much work is left to be done in this area \cite{cook2006p}. 
+
 \section{Typed Lambda Calculus}
 \emph{Typed $\lambda$-calculus} is a refinement of untyped $\lambda$-calculus, presented as a for the Rosser-Kleene paradox. In this we will introduce the concept of typing. This idea is intended to restrict the ability of types to combine with each other. We start defining \emph{simply typed }$\lambda$\emph{-calculus}, on which we only consider a handfull of basic types, and product and function types. In opposition we can study \emph{dependent typing}, where types can be construct onto each other.
 
 \subsection{Definition}
- as presented in \cite{lambek1988introduction} or \cite{selinger2008lecture}. We structure this definition in three steps: types, formulas (sometimes called terms) and equations.
+ We synthesize the definitions of typing presented in \cite{lambek1988introduction} or \cite{selinger2008lecture}. We structure this definition in three steps: types, formulas (sometimes called terms) and equations.
 
 
 \begin{definition}
@@ -415,23 +443,55 @@ As it happens in sets, where we have that we can consider the set of functions b
 
 \begin{definition}
   The types of simply typed $\lambda$-calculus are built via the BNF:
-  $$A,B ::= \iota |\ A\to B\ |\ A \times B \ |\ 1 .$$
+  $$A,B ::= \iota\ |\ A\to B\ |\ A \times B \ |\ 1 .$$
   where $\iota$ denote a basic type. 
 \end{definition}
 
 while some authors prefer to include in the definition a type for every natural $\N$, we choose to include only the $\iota$ type 
 
 \begin{definition}
-  The formulas of simply typed $\lambda$-calculus are built via the BNF:
-  $$A,B ::= x |\ AB\ |\ \lambda x^t.A \ |\ \langle A,B \rangle\ |\ \pi_1A\ |\ \pi_2A\ |\ *.$$
+  The \emph{raw typed lambda terms} of simply typed $\lambda$-calculus are built via the BNF:
+  $$A,B ::= x\ |\ AB\ |\ \lambda x^t.A \ |\ \langle A,B \rangle\ |\ \pi_1A\ |\ \pi_2A\ |\ *.$$
   where $x$ denote any variables, and $t$ denote any type. 
 \end{definition}
 
-The main difference with untyped calculus, is that every bound variable has a type. That is, for the expression $(\lambda x^t.M)N$ to be coherent we require $N$ to be of type $t$. This led us to our next definition. This led us to the definition of $N$ being of type $t$. This semantics will be provided by the \emph {Typing rules}. We start by defining \emph{typing context}.
+In this definition we intend to define $\pi_i$ in a way that $\pi_i \langle A_1,A_2\rangle = A_i$, and such that $*$ is the only term of type $1$.\\
+
+
+The main difference with untyped calculus, is that every bound variable has a type. That is, for the expression $(\lambda x^t.M)N$ to be coherent we require $N$ to be of type $t$. This led us to require some sort of condition to $N$ for being of type $t$.\\
+
+Nonetheless raw terms have some other meaningless terms, such as projections of a non-pair $\pi_1(\lambda x^t.x)$. We solve all this problems at once with the \emph {Typing rules}. This rules will restricts the semantics of terms. We start by defining \emph{typing context}.
 
 \begin{definition}
-  When a term $M$ is of type $t$, denoted as $M:t$. A typing context is a set of assumption $\Gamma = (x_1:A_1)$
+  When a term $M$ is of type $t$, denoted as $M:t$. A typing context is a set of assumption $\Gamma = (x_1:A_1)$, on which we assume each variable $x_i$ to be of type $A_i$.
 \end{definition}
+
+From this definition, we can state the typing rules, from which we will be able to provide typing. We use the notation $\Gamma \vdash M:A$ meaning that the typing context $\Gamma$ derives in term $M$ being of type $A$. 
+
+\begin{definition}[Typing Rules]
+  We define the following typing rules, for every typing context $\Gamma$.
+  \begin{itemize}
+    \item Every variable is of the type marked by the context, namely:
+$$  (var)\qquad  {\displaystyle \over \Gamma, x:A \vdash x:A}.$$
+\item From a term of type $A\to B$ we can derive a term of type $B$, from a term of type $A$:
+$$(app)\qquad  {\displaystyle \Gamma \vdash M:A\to B\qquad \Gamma \vdash N:A      \over \Gamma \vdash MN:B}.$$
+\item The projections takes types pairing to each typing:
+  $$(\pi_i) \qquad {\displaystyle \Gamma\vdash M: A_1\times A_2 \over \Gamma \vdash \pi_i M: A_i},\qquad i=1,2.$$
+\item Pairs takes types to types pairings:
+    $$(pair) \qquad {\displaystyle \Gamma\vdash M: A\qquad \Gamma\vdash N: B \over \Gamma \vdash \langle M, N\rangle:  A\times B}.$$
+  \item $*$ is of type 1.
+    $$  (*)\qquad  {\displaystyle \over \Gamma\vdash *:1}.$$
+  \end{itemize}
+\end{definition}
+
+
+Note that not every term can be typed, namely the two previous examples of bad-behaviour: $\pi_1(\lambda x^t. x)$ and $(\lambda x^t.M)N$ where $N$ is not of type $t$. Thus, in simply typed lambda calculus, we only work with typed terms.
+
+\begin{definition}
+  A \emph{simply typed lambda term} is a raw typed lambda term that, together with a typing context of every variable, is subject to be typed.
+\end{definition}
+
+By assigning type we mean assigning types to the free and bound variables. Further on, when talking about terms we will refer to simply type lambda terms.
 
 \subsection{Unification of typing}
 
@@ -440,23 +500,40 @@ We can consider two standards in typing: \emph{Church Style} and \emph{Curry Sty
 \item Church style,  first shown in \cite{church1940formulation}, is an explicit system, as we do only consider expression with well defined types, in the same way that a function is consider with regard to it domain and codomain. In summary, the typing of a function is the first part of the definition of it, so you can define $f:(0,1)\to (0,1)$ and just then define $f(x)=1/x$. This domain is not it only possible domain, but it what we choose it to be. 
 \item Curry style on the other hand, gain some of the notions of untyped $\lambda$-calculus and consider expression as function. To continue the real function analogy, it consider that the function $f(x)=x^2$ just exists, and one can check that it is well defined on $\R$. \\
 \end{itemize}
- More information about the typing style can be found on Chapter 10 and 11 of \cite{hindley2008lambda}. 
-\subsection{Property oriented Propositional Logic}
-\subsection{Curry-Howard bijection}
-\subsection{Lambeck bijection}
+More information about the typing style can be found on Chapter 10 and 11 of \cite{hindley2008lambda}. \\
 
+Despite this apparent differences, both typing styles can be \emph{unified}. An unifier is a pair of substitution that makes two type styles equal as typed templates. Such an unifier is based onta an algorithm based on type inference. This is instrumental to languages  as relevant \texttt{python}, that works with implicit typed variables. How this algorithms for unification is shown in great detail in chapter 9  of \cite{selinger2008lecture}. Due to this unification, we can consider only explicitely typed terms without any remorse.
+\subsection{Substitution}
 
-\newpage
-\section{Lambda calculus as a computation system}
-Around 1930, people start thinking about what mean for a function to be computable. There were three major answer to this question (section 4, \cite{cardone2006history}):
+\subsection{Church-Rosser on simply typed lambda calculus}
+
+To talk Church-Rosser, we have to talk reduction. Reductions are basically the same but for the additional structure added that we need to respect: 
+
+\begin{definition}[Section 2.5 \cite{selinger2008lecture}]
+  We define the \emph{single-step} $\beta$\emph{-reduction} as the smallest relationship $\to_\beta$ such that:
 \begin{itemize}
-\item In 1930s Alonzo Church introduces the notion of $\lambda$-calculus, in which a function is computable if we can write it as a recursive-lambda term onto Church's numerals, that is, if we can deduce the result after a (hopefully finite) deduction steps.
-\item Later, Alan Turing, who had previously been a doctoral student of Alonzo Church, developed the concept of the Turing machine, in which a function is computable if a tape machine with a limited set of operations is capable of reproducing it.
-\item Meanwhile, Gödel define the computable function as the minimum set of function such that some properties (such as the existence of a successor function) are includes, and is closed under some operations. 
+\item[]$(\beta)$ $ (\lambda x^t.M)N \to_\beta M[N/x]$.\\
+\item[]$(\operatorname{cong}_1)$ If $ M \to_\beta M'$ then $MN \to_\beta M'N$.\\
+\item[]$(\operatorname{cong}_2)$ If $ N \to_\beta N'$ then $ MN \to_\beta MN'$.\\
+\item[]$(\zeta)$ If $M\to_\beta M'$ then $(\lambda x.M) \to_\beta \lambda x.M'$.\\
+\end{itemize}
+We define the \emph{multiple-step} $\beta$\emph{-reduction} $\twoheadrightarrow_\beta$ as the reflexive, transitive closure of $\to_\beta$.
+\end{definition}
+
+\begin{definition}
+We define the single-step $\eta$-reduction $\to_\eta$ as the smallest relationship such that: 
+\begin{itemize}
+\item[]$(\eta)$ $(\lambda x.Mx) \to_\eta M} \qquad \forall x \not  \in FV(M)$.\\
+\item[]$(\operatorname{cong}_1)$ If $ M \to_\eta M'$ then $MN \to_\beta M'N$.\\
+\item[]$(\operatorname{cong}_2)$ If $ N \to_\eta N'$ then $ MN \to_\beta MN'$.\\
+\item[]$(\zeta)$ If $M\to_\eta M'$ then $(\lambda x.M) \to_\eta \lambda x.M'$.\\
 \end{itemize}
 
-The goal of this three mathematicians was to solve the Entscheidungsproblem\cite{hilbert1999principles}.\\
+  Similarly, we define the multiple-step $\eta$-reduction $\twoheadrightarrow_\eta$ as the transitive reflexive closure of $\to_\eta$, and the $\eta$-equivalence as the symmetric closure of $\twoheadedarrow_\eta$.
+\end{definition}
 
-The interest for this type of problems was clear for the mathematical community as the goal was to propose an algorithm that solve every theorem and can be computed. This dispute over with the Church-Turing thesis. In this, it was proved that these three independently generated notions were in fact equivalent. This thesis also stated that every effective computable function system is equivalent to those three. While it can not be formally proven, it has near-universal acceptance to date.\\
+\chapter{Curry-Howard-Lambeck bijection}
+\section{Property oriented Propositional Logic}
+\section{Curry-Howard bijection}
+\section{Lambeck bijection}
 
-Nonetheless, after the formalization of the solution of this problem there were a last problem that was not adverted: the finiteness of time. SAT is the problem that has as input a propositional logic formula and solve whether it is satisfiable. This problem is NP-complete, quite famously the firs of these problems\cite{cook1971complexity}. If we consider the analogous problem for first order algebra, we have an even more complex P-space-complete problem, being almost intractable in worst cases to this date. As a happy consequence for us, much work is left to be done in this area \cite{cook2006p}. 
