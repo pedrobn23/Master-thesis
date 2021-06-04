@@ -1,4 +1,3 @@
-
 \part{Lambda Calculus}
 \label{Part2}
 
@@ -510,11 +509,11 @@ To talk Church-Rosser, we have to talk reduction. Reductions are basically the s
 \begin{definition}[Section 2.5 \cite{selinger2008lecture}]
   We define the \emph{single-step} $\beta$\emph{-reduction} as the smallest relationship $\to_\beta$ such that:
 \begin{itemize}
-\item[]$(\beta)$ $ (\lambda x^t.M)N \to_\beta M[N/x]$.\\
-\item[]$(\beta_{\times,i})$ $\pi_i\langle M_1,M_2\rangle \to_\beta M_i$.\\
-\item[]$(\operatorname{cong}_1)$ If $ M \to_\beta M'$ then $MN \to_\beta M'N$.\\
-\item[]$(\operatorname{cong}_2)$ If $ N \to_\beta N'$ then $ MN \to_\beta MN'$.\\
-\item[]$(\zeta)$ If $M\to_\beta M'$ then $(\lambda x.M) \to_\beta \lambda x.M'$.\\
+\item[]$(\beta)$: $ (\lambda x^t.M)N \to_\beta M[N/x]$.\\
+\item[]$(\beta_{\times,i})$: $\pi_i\langle M_1,M_2\rangle \to_\beta M_i$.\\
+\item[]$(\operatorname{cong}_1)$: If $ M \to_\beta M'$ then $MN \to_\beta M'N$.\\
+\item[]$(\operatorname{cong}_2)$: If $ N \to_\beta N'$ then $ MN \to_\beta MN'$.\\
+\item[]$(\zeta)$: If $M\to_\beta M'$ then $(\lambda x.M) \to_\beta \lambda x.M'$.\\
 \end{itemize}
 We define the \emph{multiple-step} $\beta$\emph{-reduction} $\twoheadrightarrow_\beta$ as the reflexive, transitive closure of $\to_\beta$.
 \end{definition}
@@ -522,12 +521,12 @@ We define the \emph{multiple-step} $\beta$\emph{-reduction} $\twoheadrightarrow_
 \begin{definition}
 We define the single-step $\eta$-reduction $\to_\eta$ as the smallest relationship such that: 
 \begin{itemize}
-\item[]$(\eta)$ $(\lambda x.Mx) \to_\eta M}$,para todo $ x \not  \in FV(M)$.\\
-\item[]$(\eta_1)$ $\langle\pi_1 M, \pi_2 M\rangle\to_\eta M$.\\
-\item[]$(\eta_\times)$ If $M:1$ then $M \to_\eta *$ . \\
-\item[]$(\operatorname{cong}_1)$ If $ M \to_\eta M'$ then $MN \to_\eta M'N$.\\
-\item[]$(\operatorname{cong}_2)$ If $ N \to_\eta N'$ then $ MN \to_\eta MN'$.\\
-\item[]$(\zeta)$ If $M\to_\eta M'$ then $(\lambda x.M) \to_\eta \lambda x.M'$.\\
+\item[]$(\eta)$: $(\lambda x.Mx) \to_\eta M}$,para todo $ x \not  \in FV(M)$.\\
+\item[]$(\eta_1)$: $\langle\pi_1 M, \pi_2 M\rangle\to_\eta M$.\\
+\item[]$(\eta_\times)$: If $M:1$ then $M \to_\eta *$ . \\
+\item[]$(\operatorname{cong}_1)$: If $ M \to_\eta M'$ then $MN \to_\eta M'N$.\\
+\item[]$(\operatorname{cong}_2)$: If $ N \to_\eta N'$ then $ MN \to_\eta MN'$.\\
+\item[]$(\zeta)$: If $M\to_\eta M'$ then $(\lambda x.M) \to_\eta \lambda x.M'$.\\
 \end{itemize}
 
   Similarly, we define the multiple-step $\eta$-reduction $\twoheadrightarrow_\eta$ as the transitive reflexive closure of $\to_\eta$, and the $\eta$-equivalence as the symmetric closure of $\twoheadrightarrow_\eta$.
