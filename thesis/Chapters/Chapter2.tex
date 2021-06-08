@@ -1,7 +1,10 @@
 
 \chapter{Universality, Adjoints and Closed Cartesian Categories}
 
-In this chatp
+In this chapter we are going to study universality and adjunctions. Despite a possible apparent difference in definitions, both have the same use: they are tools that, given an arrow selected in a category, allow us to uniquely select an arrow in another category, generally fulfilling some special property (if not, a functor would be enough). \\
+
+We will start this section with the definition of universality, as well as the statement of Yoneda's lemma. Then, we present the concept of Adjunction. We will use these concepts to introduce new structures, in particular that of closed Cartesian category.
+
 
 \section{Universality}
 In this section we present the concept of universality. This concept is behind lots of mathematical properties. Intuitively, universality is an efficient way of expressing an one-to-one correspondence between arrows of different categories. This one-to-one relationship is usually expressed via ''given an arrow  $y$ it exists one and only one  arrow $x$ such that <insert your favorite universal property>''.\\
@@ -9,14 +12,14 @@ In this section we present the concept of universality. This concept is behind l
 Lets do an introductory example. Probably the first contact that any mathematician has with universality is defining a function  $f:\mathbb R \to \mathbb R^2$. It is easy to see that defining such a function is equivalent to define two $g,h: \mathbb R \to \mathbb R$. Furthermore, those $g,h$ are unique for each $f$. This uniqueness is the flavor that attempts to capture the concept of universality. Other examples of unique existence are those that occur in quotient groups or in bases of vector spaces. \\
 
 \begin{definition}\label{def:univ-arrow}
-  Let $S: D \to C$ be a functor and $c \in Ob(C)$, an \emph{universal arrow}  from $c$ to $S$ is a pair $(d,u)$ with $d\in Ob(D), u:c \to Sd \in Ar(C)$, such that for every $(e,f)$ with $e\in Ob(D)$  and $f:c\to Sd$ there exists an unique $f':r,d\in Ar(D)$ such that $u\circ Sf' = f$.
+  Let $S: D \to C$ be a functor and $c \in Ob(C)$, an \emph{universal arrow}  from $c$ to $S$ is a pair $(d,u)$ with $d\in Ob(D), u:c \to Sd \in Ar(C)$, such that for every $(e,f)$ with $e\in Ob(D)$  and $f:c\to Sd$ there exists an unique $f':r,d\in Ar(D)$ such that $Sf'\circ u = f$.
 
 \end{definition}
 In a diagram:
 
 \[
   \begin{tikzcd}
-      c\arrow[r, "u"] \arrow[rd, "f"]      & Sd \arrow[d, "Sf'", dashed]& d\arrow[d,"f'"]\\
+      c\arrow[r, "u"] \arrow[rd, "f", swap]      & Sd \arrow[d, "Sf'", dashed]& d\arrow[d,"f'"]\\
        &Se& e 
     \end{tikzcd}
   \]
@@ -36,7 +39,7 @@ In a diagram:
 %      c\arrow[r, "u"] \arrow[rd, "f"]
     \[
   \begin{tikzcd}
-     *\arrow[r, "u"] \arrow[rd, "f"] & Sr \arrow[d, "Sf", dashed]& r\arrow[d,"f"]\\
+     *\arrow[r, "u"] \arrow[rd, "f", swap] & Sr \arrow[d, "Sf", dashed]& r\arrow[d,"f"]\\
       &Sd& d 
     \end{tikzcd}
   \]
@@ -46,21 +49,49 @@ In a diagram:
   Conversely if $D$ has small homesets, we can consider an universal arrow to be a particular case of an universal element. With the same context as in \ref{def:univ-arrow} $(d,u: c\to Sd)$ is an universal arrow if, and only if, $(d, u\in  \hom_{D}(c, Sd))$ is an universal element.\\
 
   The point of having these such similar definition is to have different interfaces for the concept. While most result can be easily adapted, once we got to the examples is clear when to use each concept. 
-
   
   \begin{example}\ 
     \begin{itemize}
     \item Quotient Group: This property states that, for any two groups $N\lhd G$ with $\pi: G \to N$ the canonical projection, and any group homomorphism $f:G\to K$ such that $N\subset \ker f$ there exists an unique $\overline f: H \to K$ such that $\overline f  \circ \pi = f$.\\
-
+      
       The question now is, how is this a universal property. This is an example of a universal element. Considering the functor $H: Grp\to Set$:
       $$HG' = \{f:G\to G'\in Ar(Grp) : F(N)=\{0\} \},$$
-
+      
       Then, $(G/N, \pi)$ is an universal element for $H$. From this property alone the three isomorphism theorems can be deduced. Therefore, we only have to prove this result to have the full power of these theorems in any context (e.g. Rings, K-Algebra, or Topological spaces).
-
-    \item Add the universal derived from the adjoint in lambeck isomorphism:
     \end{itemize}
   \end{example}
-  
+
+  Dualy, we can consider an \emph{universal arrow from $S$ to $c$} or simply universal arrow from $S$:
+\begin{definition}\label{def:univ-arrow2}
+  Let $S: D \to C$ be a functor and $c \in Ob(C)$, an \emph{universal arrow}  from $c$ to $S$ is a pair $(d,u)$ with $d\in Ob(D), u:c \to Sd \in Ar(C)$, such that for every $(e,f)$ with $e\in Ob(D)$  and $f:c\to Sd$ there exists an unique $f':r,d\in Ar(D)$ such that $u\circ Sf' = f$.
+
+\end{definition}
+In a diagram:
+
+\[
+  \begin{tikzcd}
+      c       & Sd \arrow[swap, l, "f"]\arrow[d, "Sf'", dashed]& d\arrow[d,"f'"]\\
+       &Se\arrow[lu, "u"]& e 
+    \end{tikzcd}
+  \]
+
+
+  \begin{example}\ 
+    \begin{itemize}
+    \item In $Sets$ we have a particular construction: the product of sets for any two sets $a,b$ along with the projections $\pi_1 a \times b \to a$ and $\pi_2 a \times b \to b$. Then, we can define the functor $\Delta: Set \to Set\times Set$ such that $\Delta c = c\times c$ for every $c\in Ob(Set)$ and $\Delta (f:c\to b): c\times c\to b\times b$ is the elements-wise aplication of $f$.\\
+
+Then, given any two sets $a,b\in Ob(Sets)$, $u=(\pi_1,\pi_2)$ is an universal arrow from $\Delta$ to $(a,b)$ as
+
+\[
+  \begin{tikzcd}
+      (a,b)       & \Delta d=(d,d) \arrow[swap, l, "f"]\arrow[d, "\Delta f'", dashed]& d\arrow[d,"f'"]\\
+       &\Delta e=(e,e)\arrow[lu, "u"]& e 
+    \end{tikzcd}
+  \]
+
+\end{example}
+
+    
   Lastly, we will provide a characterization of universality:
   \begin{proposition}\label{Yoneda-proposition}
       Let $S: D \to C$ be a functor and $u:c\to Sr\in Ar(C)$. Then $u$ is an universal arrow if and, only if, the function $\varphi:\hom_D(r,\cdot)\to \hom(c,S\cdot)$ such that $\varphi(d)(f)= Sf\circ u$ for all $f\in \hom_D(r,d)$ is a natural bijection. Conversely, every natural bijection is uniquely determined by an universal arrow $u:c\to Sr$. 
@@ -110,7 +141,7 @@ From this theorem there is a definition that arises:
 \begin{definition}
   Let $D$ be a category with small home-sets and let $F:D\to C$ be a functor. A representation of a functor $K:D\to Set$ is a pair $(r,\varphi)$ with $r \in Ob(D)$ and $ \varphi$ a natural isomorphism  such that
   $$D(r,\cdot) \equiv_{\varphi} F.$$
-  A functor is representable if it has a representation.
+  A functor is said to be \emph{representable} whenever it has a representation.
 \end{definition}
 
 Note that therefore a universal arrow induces a natural isomorphism $D(r,d)\equiv C(c,Sd)$ and this induces a representation of the functor $C(c,S\cdot): D\to Set$, being these three equivalent.
@@ -226,9 +257,9 @@ We then can define a fully faithfull embedding $\upsilon: C \to Set^{C^{op}}$ su
 This functor allows us to view the category $C$ as a subcategory of the category of contravariant functors from $C$ to $Set$, which will be useful for determining "heritable" properties in $C$.
 \subsection{Properties expressed in terms of universality}
 
-  After the examples given, we will define a few constructions that are present in various parts. We will outline the notions of limit, pullback and product, and the dual notions of colimit, pushout and coproduct.\\
+  After the examples given, we define a few constructions that are commonplace in Maths. We will outline the notions of limit, pullback and product, and the dual notions of colimit, pushout and coproduct.\\
 
-  The notions of product and pullback can be seen as particular cases of the notion of limit. We will therefore begin by defining this concept as an introductory step. In turn, to define limit we will introduce the concept of co-cone and the diagonal functor. \\
+  The notions of product and pullback can be seen as particular cases of the notion of limit. To define limit we will introduce the concept of co-cone and the diagonal functor. \\
 
   \begin{definition}
     Let $C,J$ be categories. We can define the functor $\Delta_J: C \to C^J$ that maps $c$ to the functor from $J$ to $C$ that is constantly $c$, and maps every arrow to the identity $1_c$. 
@@ -253,12 +284,12 @@ This functor allows us to view the category $C$ as a subcategory of the category
     \]
 
 
-    We can now define the concept of limit and colimit. We introduce first the concept of colimit. This definition is a basic definition of a universal arrow, only in a category of functors. Following this definition, we will define the limit as a dual concept.
+    We can now define the concepts of limit and colimit. We introduce first the concept of colimit. This definition is that of an universal arrow, only in a category of functors. Following this definition, we will define the limit as its dual concept.
   \begin{definition}
  A colimit is an object $r\in Ob(C)$ together with an universal arrow $u:F\to \Delta r \in Ar(C^J)$. The colimit is denoted by $$\lim_{\leftarrow} F = r = \colim F.$$
   \end{definition}
 
-  The notation $\lim_{\leftarrow}$ is intuitive as we can see that in the colimit we have arrows to $F$. To represent this as a diagram, we have a co-cone $u\to \colim F$ such that for every other co-cone $\tau \to s$, it exist an unique $f$ such that the following commutes for every $x_j,x_k\in Ob(C)$:
+  The notation $\lim_{\leftarrow}$ is intuitive: in the colimit we have arrows to $F$. To represent this as a diagram, we have a co-cone $u\to \colim F$ such that for every other co-cone $\tau \to s$, it exist an unique $f$ such that the following commutes for every $x_j,x_k\in Ob(C)$:
 
 \[
 \begin{tikzcd}
@@ -273,7 +304,7 @@ x_k \arrow[swap]{dr}{u x_k}\arrow[bend right,swap]{uul}{\tau x_k}\\
 Now, thanks to the duality of categories, we can define what a limit is in a very synthetic way:
 
 \begin{definition}
-  A limit is the dual concept of a colimit. It is denote as
+  A limit is the dual concept of a colimit. It is denoted as
   $$\lim_{\rightarrow} F = r = \lim F.$$
 \end{definition}
 
@@ -291,7 +322,7 @@ x_k \\
 
 Analogously as in the colimit notation, in the limit we have arrows from $F$, and thus the notation $\lim_{\rightarrow}$. Let focus for a while now in the notion of limit, in particular of two of its specials cases: the product and the pullback. From these cases we are going to provide most examples. \\
 
-We have already talked about the product of categories, and in example \ref{example product} we denote that in these type of construction there is some sort of universality involved. The product is a limit when $J$ is the 2-element discrete category, that is, when every functor from $J\to C$ is merely choosing to object of $C$. 
+We have already talked about the product of categories, and in example \ref{example product} we denote that in these type of construction there is some sort of universality involved. The product is a limit where $J$ is the 2-element discrete category, that is, where every functor $F:J\to C$ is merely choosing to object of $C$. 
 
 \begin{definition}\label{prod-univ}
   Let $C$ be a category, $J=\{0,1\}$ be the discrete category with two elements. The product $c_1\times c_2$ of two elements $c_0,c_1\in Ob(C)$ is the limit of the functor $F:J\to C$ such that $F0 = c_0, F1= c_1$.
@@ -319,7 +350,7 @@ Analogously, we can define the coproduct, on which instead of defining an arrow 
 
 
 
-From my personal experience I have to say that I have seen more difficulties learning this notion rather than learning the utterly similar notion of product, probably because we are more used to think in terms of arrays rather than in terms of universality for the product. I think that thinking in terms of universality should be the way in to these concept.
+% From my personal experience I have to say that I have seen more difficulties learning this notion rather than learning the utterly similar notion of product, probably because we are more used to think in terms of arrays rather than in terms of universality for the product. I think that thinking in terms of universality should be the way in to these concept.
 
 
 After learning about the product and the coproduct, we will focus now in the notion of pullback and its dual, the pushout. We will first define the category
@@ -336,13 +367,13 @@ Then we can define the pullback:
   Let $C$ be a category and $F:P\to C$ be a functor. Then the pullback of $Fx$ and $F_y$ denoted as $Fx\times_{Fz}Fy$ is the limit of the functor $F$.
 \end{definition}
 
-We can represent this structure in the following diagram. For any other object $q$ and arrows $f':q\to Fx,g':q\to Fy$ we have:
+We can represent this structure in the following diagram. For any object $q$ and arrows $f':q\to Fx,g':q\to Fy$ we have:
 
 \[
 \begin{tikzcd}
 q
-\arrow[bend left]{drr}{q_2}
-\arrow[bend right,swap]{ddr}{q_1}
+\arrow[bend left]{drr}{g'}
+\arrow[bend right,swap]{ddr}{f'}
 \arrow[dashed]{dr}[description]{u} & & \\
 & Fx\times_{Fz}Fy \arrow{r}{p_2} \arrow{d}[swap]{p_1}
 & Fy \arrow{d}{Fg} \\
@@ -372,9 +403,9 @@ and define:
   \end{itemize}
 \end{example}
 
-We can regard that there are an evident similarity on the notation of the pullback/pushout and the one of product/coproduct. To understand these we have to consider the similarities of both construction. We are going to focus on the similarities of product and pullback.\\
+Note the  similarity of the pullback/pushout and the one of product/coproduct notation-wise. To understand these we have to consider the similarities of both construction. We are going to focus on the similarities of product and pullback, letting the coproduct/pushouts as duals.\\
 
-In both case, the universal property consists of having an arrow to a generated object only if we have an arrow to each of its generators. In this line of reasoning, we can consider that the product is a pullback where we forget about the object $z$ and its arrows. One easy way to generate that case is to consider the construction when $Fz$ is a terminal object. In that case we have that the existence of $Ff$ and $Fg$ is a tautology, and we can only consider 
+In both case, the universal property consists of having an arrow to a generated object only if we have an arrow to each of its generators. In this line of reasoning, we can consider that the product is a pullback where we forget about the object $z$ and its arrows. One easy way to generate that case is to consider the construction when $Fz$ is a terminal object. In that case we have that the existence of $Ff$ and $Fg$ is a tautology, and we can consider 
 
 \[
 \begin{tikzcd}
@@ -386,7 +417,7 @@ In both case, the universal property consists of having an arrow to a generated 
 \end{tikzcd}
 \]
 
-having a product structure.  One can proceed to consider an analogous consideration with pushout and coproduct.\\
+% having a product structure.  One can proceed to consider an analogous consideration with pushout and coproduct.\\
 
 
 
