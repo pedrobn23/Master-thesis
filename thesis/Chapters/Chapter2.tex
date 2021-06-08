@@ -1,13 +1,14 @@
 
 \chapter{Universality, Adjoints and Closed Cartesian Categories}
-{\color{red} TODO} Small paragraph introducing the  notions, and sketching a brief summary of the chapter.
+
+In this chatp
 
 \section{Universality}
 In this section we present the concept of universality. This concept is behind lots of mathematical properties. Intuitively, universality is an efficient way of expressing an one-to-one correspondence between arrows of different categories. This one-to-one relationship is usually expressed via ''given an arrow  $y$ it exists one and only one  arrow $x$ such that <insert your favorite universal property>''.\\
 
-Prior to the formal definition, we shall introduce an example. Probably the first contact that any mathematician has with universality is when we first try to define a function  $f:\mathbb R \to \mathbb R^2$. We quickly understand that defining such a function is equivalent to define two $g,h: \mathbb R \to \mathbb R$( we further explain the product in \ref{prod-univ}). This uniqueness is the flavor that attempts to capture the concept of universality. Other examples of unique existence are those that occur in quotient groups or in bases of vector spaces.  This example will be further formalized after the definition.\\
+Lets do an introductory example. Probably the first contact that any mathematician has with universality is defining a function  $f:\mathbb R \to \mathbb R^2$. It is easy to see that defining such a function is equivalent to define two $g,h: \mathbb R \to \mathbb R$. Furthermore, those $g,h$ are unique for each $f$. This uniqueness is the flavor that attempts to capture the concept of universality. Other examples of unique existence are those that occur in quotient groups or in bases of vector spaces. \\
 
-\begin{definition}
+\begin{definition}\label{def:univ-arrow}
   Let $S: D \to C$ be a functor and $c \in Ob(C)$, an \emph{universal arrow}  from $c$ to $S$ is a pair $(d,u)$ with $d\in Ob(D), u:c \to Sd \in Ar(C)$, such that for every $(e,f)$ with $e\in Ob(D)$  and $f:c\to Sd$ there exists an unique $f':r,d\in Ar(D)$ such that $u\circ Sf' = f$.
 
 \end{definition}
@@ -15,33 +16,57 @@ In a diagram:
 
 \[
   \begin{tikzcd}
-      c\arrow[r, "u"] \arrow[rd, "f"]      & Sd \arrow[d, "Sf'", dashed]& d\arrow[d,"f'", dashed]\\
+      c\arrow[r, "u"] \arrow[rd, "f"]      & Sd \arrow[d, "Sf'", dashed]& d\arrow[d,"f'"]\\
        &Se& e 
     \end{tikzcd}
   \]
 
-  Note that an universal arrow $(d,u)$ induces the unique existence of an arrow in $D$, but with interesting properties via it relationship with $S$. Whenever possible to provide an universal arrow we will only define the functor $S:D\to C$ and the arrow $u:c\to Sd$, letting all other information be deduced from the context.\\
+  Note that an universal arrow $(d,u)$ induces the unique existence of an arrow in $D$, but with interesting properties via it relationship with $S$. Usually, to provide an universal arrow we will only define the functor $S:D\to C$ and the arrow $u:c\to Sd$, letting all other information be deduced from the context.\\
 
 
-  Lets formalize the prior examples and provide some more:
 
+  The idea of universality is often regard via the notion of \emph{universal element}, in the special (and commonplace) case where $S:D\to Set$.
+
+  \begin{definition}
+    Let $S: D \to Set$, an \emph{universal element}  for $S$ is a pair $(r,e)$ with $r \in Ob(D), e \in   Sr$, such that for every $(d,x)$ with $d\in Ob(D), x\in Sd$, there is an unique arrow $f:r\to d\in D$ such that $(Sf)e = x$. 
+  \end{definition}
+
+
+    Note that having an universal element is a particular case of having an universal arrow. Considering $*$ the set with one point (as a category) an universal element is an universal arrow $*\to H$. This is clearly seen if we consider the diagram:
+%      c\arrow[r, "u"] \arrow[rd, "f"]
+    \[
+  \begin{tikzcd}
+     *\arrow[r, "u"] \arrow[rd, "f"] & Sr \arrow[d, "Sf", dashed]& r\arrow[d,"f"]\\
+      &Sd& d 
+    \end{tikzcd}
+  \]
+
+  where $*$ is helping us select the elements of $Sd$ and $Se$ to enforce the property.\\
+
+  Conversely if $D$ has small homesets, we can consider an universal arrow to be a particular case of an universal element. With the same context as in \ref{def:univ-arrow} $(d,u: c\to Sd)$ is an universal arrow if, and only if, $(d, u\in  \hom_{D}(c, Sd))$ is an universal element.\\
+
+  The point of having these such similar definition is to have different interfaces for the concept. While most result can be easily adapted, once we got to the examples is clear when to use each concept. 
+
+  
   \begin{example}\ 
     \begin{itemize}
-    \item Quotient Group:
+    \item Quotient Group: This property states that, for any two groups $N\lhd G$ with $\pi: G \to N$ the canonical projection, and any group homomorphism $f:G\to K$ such that $N\subset \ker f$ there exists an unique $\overline f: H \to K$ such that $\overline f  \circ \pi = f$.\\
 
-      From this property alone the three isomorphism theorems can be deduced. Therefore, we only have to prove this result to have the full power of these theorems in any context (e.g. Rings, K-Algebra, or Topological spaces).
-    \item Product in $\R$:\label{example product}
-    \item Vector Space Bases:
-    \item Haskell Type void (or some other cool example):
+      The question now is, how is this a universal property. This is an example of a universal element. Considering the functor $H: Grp\to Set$:
+      $$HG' = \{f:G\to G'\in Ar(Grp) : F(N)=\{0\} \},$$
+
+      Then, $(G/N, \pi)$ is an universal element for $H$. From this property alone the three isomorphism theorems can be deduced. Therefore, we only have to prove this result to have the full power of these theorems in any context (e.g. Rings, K-Algebra, or Topological spaces).
+
+    \item Add the universal derived from the adjoint in lambeck isomorphism:
     \end{itemize}
   \end{example}
   
   Lastly, we will provide a characterization of universality:
-  \begin{proposition}\label{yoneda-proposition}
+  \begin{proposition}\label{Yoneda-proposition}
       Let $S: D \to C$ be a functor and $u:c\to Sr\in Ar(C)$. Then $u$ is an universal arrow if and, only if, the function $\varphi:\hom_D(r,\cdot)\to \hom(c,S\cdot)$ such that $\varphi(d)(f)= Sf\circ u$ for all $f\in \hom_D(r,d)$ is a natural bijection. Conversely, every natural bijection is uniquely determined by an universal arrow $u:c\to Sr$. 
   \end{proposition}
   \begin{proof}
-    Lets start by supposing that $u$ is universal. Then for $\varphi$ to be universal the diagram 
+    Let $u$ be universal. Then for $\varphi$ to be a natural transformation the diagram 
     \[
       \begin{tikzcd}
         \hom_D(r,d)\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(d)} & \hom_C(r,Sd)\arrow{d}{\hom_C(r,Sg)}\\
@@ -57,7 +82,7 @@ In a diagram:
       \end{tikzcd}
     \]
 
-    So the diagram commutes, and $\varphi$ is natural. The bijectivity follows from the definition of $u$ being universal.\\
+    So the diagram commutes, and $\varphi$ is natural. The bijectivity follows from $u$ being universal.\\
 
     Lets consider now that $\varphi$ is a natural bijection. We will define $u := \varphi(r)(1_r)$ and check that $(r,u)$ is an universal arrow. As $\varphi$ is natural we have that:
 
@@ -88,18 +113,18 @@ From this theorem there is a definition that arises:
   A functor is representable if it has a representation.
 \end{definition}
 
-Note that therefore a universal arrow induces a natural isomorphism $D(r,d)\equiv C(c,Sd)$ and this induces a representation of the functor $C(c,S\cdot): D\to Set$. 
+Note that therefore a universal arrow induces a natural isomorphism $D(r,d)\equiv C(c,Sd)$ and this induces a representation of the functor $C(c,S\cdot): D\to Set$, being these three equivalent.
 
 \subsection{Yoneda's lemma}
-In this subsection  deals with the Yoneda's Lemma. Mac Lane\cite{mac2013categories} assures the lemma first appeared in his private communication with Yoneda in 1954. With time, this result has became one of the most relevant one in Category Spaces. We will start by providing some intuition to it, followed by it proof and some use cases.\\
+This subsection  deals with Yoneda's Lemma. Mac Lane\cite{mac2013categories} assures the lemma first appeared in his private communication with Yoneda in 1954. With time, this result has became one of the most relevant one in Category Spaces. We will start by providing some intuition to it, followed by it proof and some use cases.\\
 
 
- This results is due to japanese professor Nobuo Yoneda. We know about Yoneda's life thanks to the elegy that was written by Yoshiki Kinoshita\cite{yonedaLife}. Yoneda was born in Japan in 1930, and received his doctorate in mathematics from Tokyo University in 1952. He was a reviewer for international mathematical journals. In addition to his contributions to the field of mathematics, he also devoted his research to computer science.\\
+ This results is due to japanese professor Nobuo Yoneda. We know about Yoneda's life thanks to the elegy that was written by Yoshiki Kinoshita\cite{YonedaLife}. Yoneda was born in Japan in 1930, and received his doctorate in mathematics from Tokyo University in 1952. He was a reviewer for international mathematical journals. In addition to his contributions to the field of mathematics, he also devoted his research to computer science.\\
 
 
-The idea behind the yoneda lemma can be arid at first, if one does not have a prior understanding of what the purpose and usefulness of this lemma is. In order to ilustrate this idea we will introduce a (simplified) definition of Moduli Spaces, so that we have a geometric understanding of Yoneda's Lemma.\\
+The idea behind the Yoneda lemma can be arid at first, if one does not have a prior understanding of what the purpose and usefulness of this lemma is. In order to ilustrate this idea we will introduce a (simplified) definition of Moduli Spaces, so that we have a geometric understanding of Yoneda's Lemma.\\
 
-The idea behind (some) Moduli spaces is to classify algebraic curves up to isomorphisms. In addition, Moduli spaces allow us to control "complicated" mathematical objects (such as a quotient space of unknown objects) by simpler objects or objects with better properties (such as a concrete variety). A canonical example of this type of classification is:  
+The idea behind (some) Moduli spaces is to classify algebraic curves up to isomorphisms. In addition, Moduli spaces allow us to control complex mathematical objects (such as a quotient space of unknown objects) by simpler objects or objects with better properties (such as a concrete variety). A canonical example of this type of classification is:  
 \begin{align*}
   \{\text{Vector spaces of finite dimension}\}/\text{isomorphism } &\cong \N\\
   [V] &\to dim V.
@@ -168,7 +193,7 @@ We seek to use the Yoneda lemma in the functor $F':D^{op}\to Set$ induced by $F$
   $\hom_{D^{op}}(r,\cdot) = \hom_D(\cdot,r)$ we have the result.
 \end{proof}
 
-As we have seen, the Yoneda lemma is a direct generalization of the moduli problem. In the same vein, yoneda's lemma is the generalisation of other problems/theorems in mathematics, most notably Cayley's lemma. It states:
+As we have seen, the Yoneda lemma is a direct generalization of the moduli problem. In the same vein, Yoneda's lemma is the generalisation of other problems/theorems in mathematics, most notably Cayley's lemma. It states:
 \begin{proposition} \label{Cayleys}
 Any group is isomorphic to a subgroup of a symmetric group.
 \end{proposition}
@@ -429,7 +454,7 @@ We have already suggested the relationship between universality and adjointness.
   \item Let $a=Fd$, then we have that
     $$\hom_C(a, c)\equiv\hom_D(d, Gc).$$
 
-    and by proposition \ref{yoneda-proposition} we have an universal arrow $\eta (d):d\to Ga=GFd$ is provided. The function $d\to \eta(d)$ is natural $I_D\to GF$ as:
+    and by proposition \ref{Yoneda-proposition} we have an universal arrow $\eta (d):d\to Ga=GFd$ is provided. The function $d\to \eta(d)$ is natural $I_D\to GF$ as:
     \[
   \begin{tikzpicture}
   \node {\begin{tikzcd}[column sep=20mm]
