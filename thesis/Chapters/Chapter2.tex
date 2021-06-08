@@ -19,7 +19,7 @@ In a diagram:
 
 \[
   \begin{tikzcd}
-      c\arrow[r, "u"] \arrow[rd, "f", swap]      & Sd \arrow[d, "Sf'", dashed]& d\arrow[d,"f'"]\\
+      c\arrow[r, "u"] \arrow[rd, "f", swap]      & Sd \arrow[d, "Sf'", dashed]& d\arrow[d,"f'",dash]\\
        &Se& e 
     \end{tikzcd}
   \]
@@ -39,7 +39,7 @@ In a diagram:
 %      c\arrow[r, "u"] \arrow[rd, "f"]
     \[
   \begin{tikzcd}
-     *\arrow[r, "u"] \arrow[rd, "f", swap] & Sr \arrow[d, "Sf", dashed]& r\arrow[d,"f"]\\
+     *\arrow[r, "u"] \arrow[rd, "f", swap] & Sr \arrow[d, "Sf", dashed]& r\arrow[d,"f", dash]\\
       &Sd& d 
     \end{tikzcd}
   \]
@@ -58,6 +58,11 @@ In a diagram:
       $$HG' = \{f:G\to G'\in Ar(Grp) : F(N)=\{0\} \},$$
       
       Then, $(G/N, \pi)$ is an universal element for $H$. From this property alone the three isomorphism theorems can be deduced. Therefore, we only have to prove this result to have the full power of these theorems in any context (e.g. Rings, K-Algebra, or Topological spaces).
+
+    \item Tensor Product: Given an right $R$-module $A$ and a left $R$-module $B$ one can consider the tensor product as an abelian group $A\otimes_R B$ and an $R$-biadditive function
+      $$h:A\times B\to A \otimes_R B,$$
+      such that  for every $R$-biadditive $f:A\times B \to G$ it exists an unique $\overline f$ such that $\overline f\circ h=f$. Is easy to follow that tensor product can be reformulated as an universal arrow $\varphi:A\time B \to A\otimes_R B$ from $A\times B$ to the identity functor in the category of $R$-additive groups along with $R$-additive functions.
+
     \end{itemize}
   \end{example}
 
@@ -78,7 +83,7 @@ In a diagram:
 
   \begin{example}\ 
     \begin{itemize}
-    \item In $Sets$ we have a particular construction: the product of sets for any two sets $a,b$ along with the projections $\pi_1 a \times b \to a$ and $\pi_2 a \times b \to b$. Then, we can define the functor $\Delta: Set \to Set\times Set$ such that $\Delta c = c\times c$ for every $c\in Ob(Set)$ and $\Delta (f:c\to b): c\times c\to b\times b$ is the elements-wise aplication of $f$.\\
+    \item In $Set$ we have a particular construction: the product of sets for any two sets $a,b$ along with the projections $\pi_1 a \times b \to a$ and $\pi_2 a \times b \to b$. Then, we can define the functor $\Delta: Set \to Set\times Set$ such that $\Delta c = c\times c$ for every $c\in Ob(Set)$ and $\Delta (f:c\to b): c\times c\to b\times b$ is the elements-wise aplication of $f$.\\
 
 Then, given any two sets $a,b\in Ob(Sets)$, $u=(\pi_1,\pi_2)$ is an universal arrow from $\Delta$ to $(a,b)$ as
 
