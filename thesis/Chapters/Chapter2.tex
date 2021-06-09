@@ -81,9 +81,9 @@ In a diagram:
   \]
 
 
-  \begin{example}\ 
+  \begin{example}\label{example:prod}\ 
     \begin{itemize}
-    \item In $Set$ we have a particular construction: the product of sets for any two sets $a,b$ along with the projections $\pi_1 a \times b \to a$ and $\pi_2 a \times b \to b$. Then, we can define the functor $\Delta: Set \to Set\times Set$ such that $\Delta c = c\times c$ for every $c\in Ob(Set)$ and $\Delta (f:c\to b): c\times c\to b\times b$ is the elements-wise aplication of $f$.\\
+    \item In $Set$  we have a particular construction: the product of sets for any two sets $a,b$ along with the projections $\pi_1 a \times b \to a$ and $\pi_2 a \times b \to b$. Then, we can define the functor $\Delta: Set \to Set\times Set$ such that $\Delta c = c\times c$ for every $c\in Ob(Set)$ and $\Delta (f:c\to b): c\times c\to b\times b$ is the elements-wise application of $f$.\\
 
 Then, given any two sets $a,b\in Ob(Sets)$, $u=(\pi_1,\pi_2)$ is an universal arrow from $\Delta$ to $(a,b)$ as
 
@@ -94,6 +94,7 @@ Then, given any two sets $a,b\in Ob(Sets)$, $u=(\pi_1,\pi_2)$ is an universal ar
     \end{tikzcd}
   \]
 
+  This construction is reproducible in, among many others, $Grp, Top$ or Banach Spaces with bounded linear transformation. 
 \end{example}
 
     
@@ -146,7 +147,7 @@ From this theorem there is a definition that arises:
 \begin{definition}
   Let $D$ be a category with small home-sets and let $F:D\to C$ be a functor. A representation of a functor $K:D\to Set$ is a pair $(r,\varphi)$ with $r \in Ob(D)$ and $ \varphi$ a natural isomorphism  such that
   $$D(r,\cdot) \equiv_{\varphi} F.$$
-  A functor is said to be \emph{representable} whenever it has a representation.
+  A functor is said to be \emph{re-presentable} whenever it has a representation.
 \end{definition}
 
 Note that therefore a universal arrow induces a natural isomorphism $D(r,d)\equiv C(c,Sd)$ and this induces a representation of the functor $C(c,S\cdot): D\to Set$, being these three equivalent.
@@ -155,10 +156,10 @@ Note that therefore a universal arrow induces a natural isomorphism $D(r,d)\equi
 This subsection  deals with Yoneda's Lemma. Mac Lane\cite{mac2013categories} assures the lemma first appeared in his private communication with Yoneda in 1954. With time, this result has became one of the most relevant one in Category Spaces. We will start by providing some intuition to it, followed by it proof and some use cases.\\
 
 
- This results is due to japanese professor Nobuo Yoneda. We know about Yoneda's life thanks to the elegy that was written by Yoshiki Kinoshita\cite{YonedaLife}. Yoneda was born in Japan in 1930, and received his doctorate in mathematics from Tokyo University in 1952. He was a reviewer for international mathematical journals. In addition to his contributions to the field of mathematics, he also devoted his research to computer science.\\
+ This results is due to Japanese professor Nobuo Yoneda. We know about Yoneda's life thanks to the elegy that was written by Yoshiki Kinoshita\cite{YonedaLife}. Yoneda was born in Japan in 1930, and received his doctorate in mathematics from Tokyo University in 1952. He was a reviewer for international mathematical journals. In addition to his contributions to the field of mathematics, he also devoted his research to computer science.\\
 
 
-The idea behind the Yoneda lemma can be arid at first, if one does not have a prior understanding of what the purpose and usefulness of this lemma is. In order to ilustrate this idea we will introduce a (simplified) definition of Moduli Spaces, so that we have a geometric understanding of Yoneda's Lemma.\\
+The idea behind the Yoneda lemma can be arid at first, if one does not have a prior understanding of what the purpose and usefulness of this lemma is. In order to illustrate this idea we will introduce a (simplified) definition of Moduli Spaces, so that we have a geometric understanding of Yoneda's Lemma.\\
 
 The idea behind (some) Moduli spaces is to classify algebraic curves up to isomorphisms. In addition, Moduli spaces allow us to control complex mathematical objects (such as a quotient space of unknown objects) by simpler objects or objects with better properties (such as a concrete variety). A canonical example of this type of classification is:  
 \begin{align*}
@@ -174,7 +175,7 @@ Further on when we talk about curves we will refer to smooth complex non singula
       \displaystyle  [V]&\mapsto \text{genus of V} 
 \end{align*}
 
-is well defined and we can define $\mathcal{M}_g = \gamma^{-1}(g)$. An interesting classification of $\mathcal{M}_g$ is given when we consider that for every $g$ there exists a closed, connected, non-singular variety $U_g$ and a family $\{C_t : t \in U_g}$ such that a curve of genus $g$ will be a fibration of $C_t$.  Moreover there is a variety $M_g$ and a superjjective morphism $\varphi: U_g \to M_g$ such that $\varphi(t_1)=\varphi(t_2)$ if $C_{t_1} \equiv C_{t_2}$. Therefore we are classifying the equivalence classes of $\mathcal{M}_g$ by points of the variety $M_g$ (thus generating a Moduli problem).\\
+is well defined and we can define $\mathcal{M}_g = \gamma^{-1}(g)$. An interesting classification of $\mathcal{M}_g$ is given when we consider that for every $g$ there exists a closed, connected, non-singular variety $U_g$ and a family $\{C_t : t \in U_g}$ such that a curve of genus $g$ will be a fibration of $C_t$.  Moreover there is a variety $M_g$ and a subjective morphism $\varphi: U_g \to M_g$ such that $\varphi(t_1)=\varphi(t_2)$ if $C_{t_1} \equiv C_{t_2}$. Therefore we are classifying the equivalence classes of $\mathcal{M}_g$ by points of the variety $M_g$ (thus generating a Moduli problem).\\
 
 Similarly to this two example, with the Yoneda lemma we will have a functor $F:D\to Set$ and one representation of this functor. We will classify the natural transformation of these functors by the set in the image of $F$! Interestingly enough, there will be applications where the complex object is not the space of naturals transformations, but the images of $F$ (see \ref{Cayleys} for an example). Lets proceed to enunciate and proof the result.
 
@@ -327,17 +328,28 @@ x_k \\
 
 Analogously as in the colimit notation, in the limit we have arrows from $F$, and thus the notation $\lim_{\rightarrow}$. Let focus for a while now in the notion of limit, in particular of two of its specials cases: the product and the pullback. From these cases we are going to provide most examples. \\
 
-We have already talked about the product of categories, and in example \ref{example product} we denote that in these type of construction there is some sort of universality involved. The product is a limit where $J$ is the 2-element discrete category, that is, where every functor $F:J\to C$ is merely choosing to object of $C$. 
+We have already talked about the product of categories. The product is a limit where $J$ is the 2-element discrete category, that is, where every functor $F:J\to C$ is merely choosing to object of $C$. 
 
 \begin{definition}\label{prod-univ}
   Let $C$ be a category, $J=\{0,1\}$ be the discrete category with two elements. The product $c_1\times c_2$ of two elements $c_0,c_1\in Ob(C)$ is the limit of the functor $F:J\to C$ such that $F0 = c_0, F1= c_1$.
 \end{definition}
 
-This construction means that providing an arrow to $c_0,c_1$ determines an unique arrow to $c_0\times c_1$. In this case, the arrows $u0, u1$ are usually called \emph{projections} and denoted by $\pi_0, \pi_1$. The notation is due to the product being a generalization of the cartesian product in the category $Set$. It is also sometimes note with $c_0 \Pi c_1$ with $\Pi$ being stardard for the sequence product. Some examples of product object in categories are:
+This construction means that providing an arrow to $c_0,c_1$ determines an unique arrow to $c_0\times c_1$. In this case, the arrows $u0, u1$ are usually called \emph{projections} and denoted by $\pi_0, \pi_1$. The notation is due to the product being a generalization of the Cartesian product in the category $Set$. It is also sometimes note with $c_0 \Pi c_1$ with $\Pi$ being standard for the sequence product. Some examples of product object in categories are:
 \begin{example}\ 
 \begin{itemize}
-\item Product of Banach spaces:
-\item Product of something in haskell.
+\item Products from Example \ref{example:prod}.
+\item In Haskell, considering two integer types \texttt{A} and \texttt{B}, we can consider the duple type \texttt{(A,B)} that is the product, along with projections \texttt{fst} and \texttt{snd} to be a product. We can fairly easily check that, for any other integer type \texttt{C} and any morphism \texttt{f: C$\to$ (A,B)} it exist a unique \texttt{g} and \texttt{h} such that:
+\[
+\begin{tikzcd}
+{} & C \arrow[bend right,swap,dashed]{dl}{g}
+\arrow[bend left,dashed]{dr}{h} \arrow{d}[description]{f}& & \\
+A  &(A,B) \arrow{l}[swap]{fst} \arrow{r}{snd} & 
+B \\
+\end{tikzcd}
+\]
+Note that we have requested \texttt{A} and \texttt{B} to be integer types. Quite surprisingly, this construction can not be generalized in Haskell to provide a product type for every object\cite{wiki:hask}. This will provide in the future a palpable difference between our theoretical $\lambda$-calculus, and its applicable version,  Haskell.\\
+
+This troubles arise from of implementation details of bottom values. Why have not anyone fix this? Well, when functions have to terminate and only finite values are considered this problems does not Arise. This condition is fairly acceptable in any engineering scenario. 
 \end{itemize}
 \end{example}
 
@@ -348,8 +360,14 @@ Analogously, we can define the coproduct, on which instead of defining an arrow 
  In this notation $\sqcup$ denotes an inverted $\Pi$, with the meaning of being the dual notion of the product.
 \begin{example}\ 
   \begin{itemize}
-  \item Tensor Product of R-Modules, include cite to Rotman-Theorem 1.5.
-  \item Union of enumerate types.
+  \item In the category $Ab$ of Abelian Group and morphism, finite products and coproducts are equivalent. This equivalence also happens in others categories, such as $R$-Modules for a ring $R$ or vector spaces. This has a underlying idea of a type of category that relates this constructions: This are all \emph{Abelian Categories}, as in \cite[Section 5.5]{rotman2008introduction}.\\
+
+    We will not delve further into this concept so as not to deviate from the subject at hand. However, for those readers who are familiar with the notation, we cannot resist including Mitchel's theorem\cite[Chapter IV]{mitchell1965theory} .
+
+    \begin{theorem}[Mitchell's Theorem] If A is a small abelian category, then there is a covariant full faithful exact functor $F : A \to Ab$.
+    \end{theorem}
+
+    As a consequence, any statement ``$p$ implies $q$'' where $p$ and $q$ are categorical statmenet about a diagram in $A$, if is true in  $Ab$, it holds true in $A$.
   \end{itemize}
 \end{example}
 
@@ -402,8 +420,10 @@ and define:
 
 \begin{example}
   \begin{itemize}
-  \item Fiber bundles (pullback)
-  \item Suppose that X, Y, and Z as above are sets, and that f : Z → X and g : Z → Y are set functions. The pushout of f and g is the disjoint union of X and Y, where elements sharing a common preimage (in Z)
+  \item Let $A,B,C\in Ob(Set)$ , and let  $f : C \to A, g : C \to B\in Ar(Set)$. The pushout of $f$ and $g$ is the disjoint union of $X$ and $Y$, where elements sharing a common preimage (in $Z$).
+
+  \item Fiber bundles (pullback)\footnote{No se si estos ejemplo proveen valor o ya hemos llegado al punto en el que solo parecen más cosas aleatorias puestas en el trabajo.}
+
    \item Seifert-Van-Kampen (Si tienes valor).
   \end{itemize}
 \end{example}
@@ -471,7 +491,7 @@ We have a bit to unpack in this definition. We will start to understand in what 
   \end{tikzcd}
 \]
 
-comutes. \\
+commutes. \\
 
 We can follow by considering the important notation decision: how to call the adjoints. This is a quite ambiguous notation, but we will stick with the notation of $F$ being the \emph{left adjoint} and $G$ being the \emph{right adjoint}. When a functor \emph{is} a left (resp. right) adjoint it \emph{has} a right (resp. left) adjoint. This notation comes from where is the functor placed in the home-set, when making the bijection.\\
 
@@ -522,7 +542,7 @@ From this proposition we can see that we may be able to define an adjoint based 
     \item an object $G_0(c)\in Ob(D)$.
     \item an universal arrow $\varepsilon(c):c \to GF_0 c$.
     \end{itemize}
-  \item  $F,G$ and two natural tranformation $\eta: I_D\to GF$, $\varepsilon: FG\to I_C$ such that both composites are identities.
+  \item  $F,G$ and two natural transformation $\eta: I_D\to GF$, $\varepsilon: FG\to I_C$ such that both composites are identities.
   \end{enumerate}
 \end{proposition}
 \begin{proof}
@@ -530,7 +550,7 @@ From this proposition we can see that we may be able to define an adjoint based 
     
   \item We need to define the natural bijection $\varphi: C(Fd,c)\to D(d,Gc)$. Defining  $\varphi(g) = Gg\circ \eta(c)$ for each $g:Fd \to c$. Is is well define as $Gg\circ \eta(c): d\to Gc$ and it is a bijection  due to $\eta(x)$ universality.\\
 
-    It is natural in $d$ because $\eta$ is natural and is natural in $c$ beacuse $G$ s a functor.
+    It is natural in $d$ because $\eta$ is natural and is natural in $c$ because $G$ s a functor.
   \item Dual of the previous.
   \item We will proof that there is only one functor with $F_0$ as object function such that $\eta (x): I_D\to GF$ is natural. The naturality and universality told us that each $h:d\to d'\in Ob(D)$ induces two arrows:
 \[
@@ -543,7 +563,7 @@ From this proposition we can see that we may be able to define an adjoint based 
   \item Dual of the previous.
   \end{enumerate}
 \end{proof}
-To further ilustrate this concept we present some examples:
+To further illustrate this concept we present some examples:
 \begin{example}
   \begin{itemize}
   \item Free group and forgetful functor
@@ -555,7 +575,7 @@ To further ilustrate this concept we present some examples:
 
 
 
-\subsection{Equivalente of Categories}
+\subsection{Equivalence of Categories}
 We can define an isomorphism of categories the same way that we define isomorphisms in any other category: an isomorphism is an arrow (Functor) with a two sided inverse. This definition, while standard, is quite restrictive. We are going to need some more lax concept of equivalence of categories, in the sense that while not being exactly the same, they are mostly the same. Formally:
 
 \begin{definition}
@@ -595,7 +615,7 @@ For the canonical example we may introduce a really organic concept: the \emph{s
 \end{tikzcd}
 \]
 
- there is one $FG f$ for each $f$ and we get that $G$ is faithful. Analagously we can see that $F$ is also faithful. To see that $G$ is full we can 
+ there is one $FG f$ for each $f$ and we get that $G$ is faithful. Analogously we can see that $F$ is also faithful. To see that $G$ is full we can 
     \item[$iii)\implies ii)$] We can see that 
     \end{itemize}
   \end{proof}
@@ -609,9 +629,9 @@ For the canonical example we may introduce a really organic concept: the \emph{s
 
   \subsection{Closed Cartesian Categories}
 
-  The notion of product seen in \ref{prod-univ} is a notion that seek to catch the essence of what the Cartesian product is in the category of Set. In this category it happens that for any two objects, one can consider the product without any hesitance about it existence. A \emph{cartesian category} will be a category that, in some sense, maintain this property (of being closed under catersian product). Formally: 
+  The notion of product seen in \ref{prod-univ} is a notion that seek to catch the essence of what the Cartesian product is in the category of Set. In this category it happens that for any two objects, one can consider the product without any hesitance about it existence. A \emph{Cartesian category} will be a category that, in some sense, maintain this property (of being closed under Cartesian product). Formally: 
   \begin{definition}
-    A cartesian cartesian is a category for which every finite product exists.
+    A Cartesian category is a category for which every finite product exists.
   \end{definition}
 
 Nonetheless, further on the text we will need categories with some even nicer properties. These categories are called \emph{closed catersian categories}. We will define them formally first, and after unpack the information that the definition contains:
