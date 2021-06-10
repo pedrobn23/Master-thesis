@@ -466,21 +466,27 @@ Nonetheless raw terms have some other meaningless terms, such as projections of 
 
 From this definition, we can state the typing rules, from which we will be able to provide typing. We use the notation $\Gamma \vdash M:A$ meaning that the typing context $\Gamma$ derives in term $M$ being of type $A$. 
 
+
+
 \begin{definition}[Typing Rules]
-  We define the following typing rules, for every typing context $\Gamma$.
+  We define the following typing rules, for each typing context $\Gamma$.
   \begin{itemize}
     \item Every variable is of the type marked by the context, namely:
-$$  (var)\qquad  {\displaystyle \over \Gamma, x:A \vdash x:A}.$$
-\item From a term of type $A\to B$ we can derive a term of type $B$, from a term of type $A$:
-$$(app)\qquad  {\displaystyle \Gamma \vdash M:A\to B\qquad \Gamma \vdash N:A      \over \Gamma \vdash MN:B}.$$
-\item The projections takes types pairing to each typing:
-  $$(\pi_i) \qquad {\displaystyle \Gamma\vdash M: A_1\times A_2 \over \Gamma \vdash \pi_i M: A_i},\qquad i=1,2.$$
-\item Pairs takes types to types pairings:
-    $$(pair) \qquad {\displaystyle \Gamma\vdash M: A\qquad \Gamma\vdash N: B \over \Gamma \vdash \langle M, N\rangle:  A\times B}.$$
-  \item $*$ is of type 1.
+$$  (var)\qquad  {\displaystyle \over \Gamma \vdash x_i:A_i},\qquad  i=  1,..,n.$$
+In addition,  $*$ is of type 1.
     $$  (*)\qquad  {\displaystyle \over \Gamma\vdash *:1}.$$
+
+\item From a term of type $A\to B$ we can derive a term of type $B$, from a term of type $A$:
+  $$(app)\qquad  {\displaystyle \Gamma \vdash M:A\to B\qquad \Gamma \vdash N:A      \over \Gamma \vdash MN:B}.$$
+  Conversely, we can deduce th
+  $$(abs)\qquad  {\displaystyle \Gamma, x: A\vdash M: B  \over \Gamma \vdash \lambda x^A.m:A\to B}.$$
+\item The projections takes types pairing to each typing:
+  $$(\pi_i) \qquad {\displaystyle \Gamma\vdash M: A_1\times A_2 \over \Gamma \vdash \pi_i M: A_i},\qquad i=1,2,$$
+and conversely:
+    $$(pair) \qquad {\displaystyle \Gamma\vdash M: A\qquad \Gamma\vdash N: B \over \Gamma \vdash \langle M, N\rangle:  A\times B}.$$
   \end{itemize}
 \end{definition}
+
 
 
 Note that not every term can be typed, namely the two previous examples of bad-behaviour: $\pi_1(\lambda x^t. x)$ and $(\lambda x^t.M)N$ where $N$ is not of type $t$. Thus, in simply typed lambda calculus, we only work with typed terms.

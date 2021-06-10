@@ -1,13 +1,95 @@
 
 \chapter{Curry-Howard-Lambeck bijection}
-In these chapter we raises bridges between Category Theory, Lambda calculus, and Propositional logic. These will provide a good principle, {\color{red} finish this intro after writing the chapter}. 
+In these chapter we raise bridges between Category Theory, Lambda calculus, and Propositional logic. Is good have to have in mind that the use of lambda calculus as a deduction system, in addition of lambda calculus, was not accidental. Therefore the relation raised with propositional logic was anything but a fluke. This is due to the aforementioned problems that were spotted in Maths fundamentals. The main sources for this chapter were  \cite{lambek1988introduction} and \cite[Chapter 6]{selinger2008lecture}.
+
+\section{Natural deduction}
+In this section we succinctly introduce the notation of propositional intuitionistic logic, in order to work with them further in the chapter. Therefore, we spare our readers of yet another comprehensive introduction of the widely known propositional logic. Should it be required, more information of propositional logic can be found in, for example, \cite{marek2009introduction} and \cite{wadler2015propositions}. Natural deduction originally appears in the works of \cite{gentzen1935untersuchungen}. \\
+
+Thorough this section we replicate notations and process done when defining typed lambda calculus. This is done purposely, as our aim is to proof an equivalence between both system. We start by considering the alphabet consisting a set of countable many variables $x,y,z,...$ as done previously in lambda-calculus, $\top$ and $\bot$ 
+
+\begin{definition}
+  The formulas of propositional intuitionistic logic are built via the BNF:
+  $$A,B ::= x |\ A\to B\ |\ A \land B \ |\ \top .$$
+  where $x$ denote any variable.
+\end{definition}
 
 
-\section{Property oriented Propositional Logic}
-In this section we briefly introduce the notation and rudiments of propositional logic, in order to work with it further in the 
+Note that we consider a logic without law of excluded middle. This approach, although somewhat demodé in modern mathematics, was highly popular at the beginning of the twentieth century. It sought to solve the problems of mathematical foundations, in particular the \emph{principle of explosion}. \\
+
+Having the syntax done, is time to provide meaning. We want $\top$ to be the truth value. A formula is true if $A \to \top$. In addition, we want all the formulas from which we can derive certain to be true. For this we will define, analogously to the typing-contex from the previous chapter, what a \emph{truth-assumption} is and  what the rules of deduction are.
+
+\begin{definition}
+ A truth-assumption is a set of variables $\Gamma = \{x_1,...,x_n\}$ that we assume to be true. An \emph{judgement} $\Gamma \vdash B$ states that from truth assumption $\Gamma$, the formula $B$ can be deduced to be true. 
+\end{definition}
+
+Sometimes we can write a truth assumption $\Gamma, A$, that will denote that additionally $A$ is assume to be true. As most times, we will only need a formula $A$ to be true or not without any interest on what exact variable configuration made this possible, so by abuse of notation we can consider $\Gamma = \{x_1,A_1\}$ to have both variables and formulas.  
+\begin{definition}[Deduction Rules]
+  We define the following deduction rules, for each truth assumption Gamma $\Gamma=\{x_1,...,x_n\}$.
+  \begin{itemize}
+    \item Every variable assumed to be true is true:
+      $$  (ax)\qquad  {\displaystyle \over \Gamma \vdash x_i},\qquad \forall i \in 1,..,n.$$
+      In addition, $\top$ is always true:
+      $$  (\top)\qquad  {\displaystyle \over \Gamma \vdash \top}.$$
+\item From a true formula $A\to B$ and a true formula $A$, $B$ can be derived:
+  $$(\to_1)\qquad  {\displaystyle \Gamma \vdash A\to B\qquad \Gamma \vdash A      \over \Gamma \vdash B}.$$
+  Conversely, if assuming $A$ deduces $B$, then $A\to B$ is true.
+$$(\to_2)\qquad  {\displaystyle \Gamma, A \vdash B      \over \Gamma \vdash (A\to B)}.$$
+  
+\item The conjunction being true imply each element to be true:
+  $$(\land_1) \qquad {\displaystyle \Gamma\vdash A_1\land A_2 \over \Gamma \vdash A, \qquad \Gamma \vdash B },$$
+and conversely:
+  $$(\land_2) \qquad {\displaystyle \Gamma\vdash A\qquad \Gamma\vdash B \over \Gamma \vdash  A \land B}.$$
+  \end{itemize}
+\end{definition}
+
+
+
+
+So, what properties make this logic interesting? By not having the law of the excluded third, we have a system in which all proofs must be constructive. Therefore, we can view proofs as programs. We will formalize this idea of viewing proofs as programs in the next section, by relating our computational system and our intuitionistic logic. \\
+
+
+
+
+
+
+
+As a final note, the definitions of intuitionistic logic and lambda calculus introduced in this work, are made to be matching but are not unique. For example, other source consider that the types of simply typed $\lambda$-calculus are built via the BNF:
+  $$A,B ::= \iota\ |\ A\to B\ |\ A \times B \ |\ 1 \ |\ 0 .$$
+This does not add any more capabilites to the deduction system, but allow to make an isomorphism to a intuitionistic propositional logic that also support $\bot$ for false and has a natural $\lor$ defined. We decided not to follow this line, which is equally valid, because we consider that it does not really provide new utilities from a theoretical point of view. However, it is useful to have this consideration resolved from the beginning, especially for engineering applications.
+
 
 \section{Curry-Howard bijection}
+The first approach of lambda calculus to be seen as a deduction system was observed by Curry in 1934\cite{curry1934functionality}, early in the development of this area. {\color{red} Añadir un poquito de introducción histórica que no cuesta na.}\\
 
+
+Having already asked ourselves when does a term have a type, it is natural to arise the new question: When does a type have a term? This is in fact the fundamental idea of the Curry-Howard isomorphism. For example, considering whether it exists a term for the type$(A \times B) \to B$, is analogue to consider the formula $(A\land B)\to B$ to be a tautology. Moreover, the term $\lambda x^{A\times B}. \pi_2 x$ can be seen as a proof of the tautology! we have arrived at the dream of a constructivist mathematician: computational algorithms are demonstrations, and demonstrations are nothing if not algorithms. Lets formalize this intuition.\\
+
+
+We can create a pairing between type and formulas by pairing variables with variables and:
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}{c|c}
+  Types  & Formulas  \\
+  \hline
+  Type 1 & $\top$ \\
+  Function type $\to$   & Implication $\to$  \\
+  Product type $\times$ & Conjuction $\land$ \\  
+\end{tabular}
+\caption*{\label{tab:table-name} Pairing of formulas and terms.}
+\end{center}
+\end{table}
+
+
+With this construction we have develop a pairing in syntax,  now we can make a pairing in semantics.
+\begin{itemize}
+\item We pair the concept of a formula being true with the concept of a type having a term. We formalize this by pairing truth assumption $\Gamma=\{A\}$ is with the typing context $\Gamma\vdash M:A$. 
+\item We can relate $(var)$ with $(ax)$ and $(*)$ with $(\top)$.
+\item We can relate $(app)$ with $(\to_1)$ and $(abs)$ with $(\to_2)$.
+  We can relate $(\pi_i)$ with $(\land_1)$ and $(\land_2)$ with $(pair)$.
+\end{itemize}
+
+
+We can mentioned prior, we can.
 \section{Lambeck bijection}
 
-\section{Lamdba calculus as a deduction system}
+\section{Lambda calculus as a deduction system}
