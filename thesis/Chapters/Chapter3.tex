@@ -426,27 +426,25 @@ Nonetheless, after the formalization of the solution of this problem there were 
 \emph{Typed $\lambda$-calculus} is a refinement of untyped $\lambda$-calculus, presented as a for the Rosser-Kleene paradox. In this we will introduce the concept of typing. This idea is intended to restrict the ability of types to combine with each other. We start defining \emph{simply typed }$\lambda$\emph{-calculus}, on which we only consider a handfull of basic types, and product and function types. In opposition we can study \emph{dependent typing}, where types can be construct onto each other.
 
 \subsection{Definition}
+
  We synthesize the definitions of typing presented in \cite{lambek1988introduction} or \cite{selinger2008lecture}. We structure this definition in three steps: types, formulas (sometimes called terms) and equations.
 
 
 \begin{definition}
   The types of simply typed $\lambda$-calculus are built via the BNF:
-  $$A,B ::= \iota |\ A\to B\ |\ A \times B \ |\ 1 .$$
-  where $\iota$ denote a basic type. \footnote{Understand the relation with the construction of natural types.}
-\end{definition}
-
-Lets start laying some bricks, useful for the intuition. $\iota$ type is foundational type. We consider also the type $1$. Others author, such as \cite{lambek1988introduction} prefer to include a type for every natural. Nonetheless, we consider that we can repeat the construction realized in untyped lambda-calculus to consider this typing. \\
-
-
-As it happens in sets, where we have that we can consider the set of functions between two set, here we can consider the type of function between two types. Surely this can get to mind a categorical construction already presented. We continue defining the formulas. Further on, we will use formulas and terms interchangeably. This types are called \emph{function types}.
-
-\begin{definition}
-  The types of simply typed $\lambda$-calculus are built via the BNF:
-  $$A,B ::= \iota\ |\ A\to B\ |\ A \times B \ |\ 1 .$$
+  $$A,B ::= \iota |\ A\to B\ |\ A \times B  \ |\ 1.$$
   where $\iota$ denote a basic type. 
 \end{definition}
 
-while some authors prefer to include in the definition a type for every natural $\N$, we choose to include only the $\iota$ type 
+
+
+% Lets start laying some bricks useful for the intuition. $\iota$ type is foundational type. We consider also the type $1$. Others author, such as \cite{lambek1988introduction} prefer to include a type for every natural. Nonetheless, we consider that we can repeat the construction realized in untyped lambda-calculus to consider this typing. \\
+
+
+As it happens in sets, where we have that we can consider the set of functions between two set, here we can consider the type of function between two types. Surely this can get to mind a categorical construction already presented. We continue defining the formulas. Further on, we will use formulas and terms interchangeably. This types are called \emph{function types}.\\
+
+
+
 
 \begin{definition}
   The \emph{raw typed lambda terms} of simply typed $\lambda$-calculus are built via the BNF:
@@ -468,7 +466,7 @@ From this definition, we can state the typing rules, from which we will be able 
 
 
 
-\begin{definition}[Typing Rules]
+\begin{definition}[Typing Rules]\label{def:typing-rules}
   We define the following typing rules, for each typing context $\Gamma$.
   \begin{itemize}
     \item Every variable is of the type marked by the context, namely:
@@ -540,4 +538,39 @@ We define the single-step $\eta$-reduction $\to_\eta$ as the smallest relationsh
 
 We can now talk about about Church-Rosser.  Lets check that it does not hold. For example, if $x: A\times 1$ then we can consider $M=\langle \pi_1x, \pi_2x\rangle$. Because of the rule $\eta_1$, we have that $M \to_{\eta}\langle \pi_1 x, *\rangle$, but taking $\eta_\times$ into account we can check that $M \to_{\eta} x$. \\
 
-Despite this, $\beta$-reduction does maintain the Church-Rosser property, so from a computational point of view there is no problem at all. 
+Despite this, $\beta$-reduction does maintain the Church-Rosser property, so from a computational point of view there is no problem at all.
+
+\subsection{Expanded Typing}
+
+We can add to the definition of typing by considering the sum Type. The idea is to have two types $A$ and $B$ and be able to consider a term $\lambda x^{A+B}. x+1$. That is, we can consider two types to be acceptable by a function. This notion, commonplace in engineering, has to be formalized to be acceptable:
+
+\begin{definition}
+  The types of expanded simply typed $\lambda$-calculus are built via the BNF:
+  $$A,B ::= \iota |\ A\to B\ |\ A \times B \ |\ A + B  \ |\ 1\ |\ 0.$$
+  where $\iota$ denote a basic type. 
+\end{definition}
+
+We proceed to define the raw typed lambda terms. We have the same consideration as previously, so that only those being subject to typing will be considered terms. Unification of typing considerations also holds.
+\begin{definition}
+  The \emph{expanded raw typed lambda terms} of simply typed $\lambda$-calculus are built via the BNF:
+  \begin{align*}
+    A,B, C ::= x\ &|\ AB\ |\ \lambda x^t.A \ |\ \langle A,B \rangle\ |\ \pi_1A\ |\ \pi_2A\ |\ * \\
+               &|\ \iin_1 A\ |\ \iin_2 A \ |\ \ccase A ; x^{t_1}.B\oo x^{t_2}.C \ |\ \square^t. 
+  \end{align*}
+  where $x$ denote any variables, and $t$ denote any type. 
+\end{definition}
+
+Probably the only exotic of this term is $\ccase A ; x^{t_1}.B\oo x^{t_2}.C$. This abstracts the idea that a union term behaves differently in each type that is included. In the typing laws we will see that it is necessary that the type returned by the application of a variable in a function of type union must always converge to the same type ($case$ rule).\\
+
+For this typing, three new rules are included for type derivation, in addition to the previously defined in \ref{def:typing-rules}:
+\begin{definition}[Typing Rules]
+  We define the following typing rules, for each typing context $\Gamma$.
+  \begin{itemize}
+  \item Every type is part of a union type including it:
+    $$  (\iin_i)\qquad  {\displaystyle\Gamma \vdash M:A_i \over \Gamma \vdash \iin_i M:A_1+A_2},\qquad  i=  1,2.$$
+  conversely, A term on a union must always have the same type after application.:
+    $$(\ccase) \qquad {\displaystyle \Gamma\vdash M: A+B\qquad \Gamma, x:A\vdash N: C\qquad \Gamma, x:B\vdash P: C \over \Gamma \vdash \ccase A ; x^{A}.M\oo x^{B}.P:C}.$$
+  \item The $\square^\cdot$ extract a term of any type form the void type.
+    $$  (\square)\qquad  {\displaystyle\Gamma \vdash M:0 \over \Gamma \vdash \square^A M:A}.$$
+  \end{itemize}
+\end{definition}

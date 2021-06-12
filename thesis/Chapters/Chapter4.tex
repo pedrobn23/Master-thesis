@@ -9,14 +9,14 @@ Thorough this section we replicate notations and process done when defining type
 
 \begin{definition}
   The formulas of propositional intuitionistic logic are built via the BNF:
-  $$A,B ::= x |\ A\to B\ |\ A \land B \ |\ \top .$$
+  $$A,B ::= x |\ A\to B\ |\ A \land B \ |\ A \lor B \ |\ \top \ |\ \bot .$$
   where $x$ denote any variable.
 \end{definition}
 
 
 Note that we consider a logic without law of excluded middle. This approach, although somewhat demodé in modern mathematics, was highly popular at the beginning of the twentieth century. It sought to solve the problems of mathematical foundations, in particular the \emph{principle of explosion}. \\
 
-Having the syntax done, is time to provide meaning. We want $\top$ to be the truth value. A formula is true if $A \to \top$. In addition, we want all the formulas from which we can derive certain to be true. For this we will define, analogously to the typing-contex from the previous chapter, what a \emph{truth-assumption} is and  what the rules of deduction are.
+Having the syntax done, is time to provide meaning. We want $\top$ to be the truth value. A formula is true if $A \to \top$. Conversely, a formula is \emph{not-true} or \emph{false} (sometimes denoted as $\neg A$) if $ A \to \bot$. In addition, we want all the formulas from which we can derive certain to be true. For this we will define, analogously to the typing-contex from the previous chapter, what a \emph{truth-assumption} is and  what the rules of deduction are.
 
 \begin{definition}
  A truth-assumption is a set of variables $\Gamma = \{x_1,...,x_n\}$ that we assume to be true. An \emph{judgement} $\Gamma \vdash B$ states that from truth assumption $\Gamma$, the formula $B$ can be deduced to be true. 
@@ -39,7 +39,14 @@ $$(\to_2)\qquad  {\displaystyle \Gamma, A \vdash B      \over \Gamma \vdash (A\t
   $$(\land_1) \qquad {\displaystyle \Gamma\vdash A_1\land A_2 \over \Gamma \vdash A, \qquad \Gamma \vdash B },$$
 and conversely:
   $$(\land_2) \qquad {\displaystyle \Gamma\vdash A\qquad \Gamma\vdash B \over \Gamma \vdash  A \land B}.$$
-  \end{itemize}
+\item Every type is part of a union type including it:
+    $$  (\lor_1^i)\qquad  {\displaystyle\Gamma \vdashA_i \over \Gamma \vdash \in_i A_1+A_2},\qquad  i=  1,2.$$
+  conversely, A term on a union must always have the same type after application.:
+    $$(\lor_2) \qquad {\displaystyle \Gamma\vdash A\lor B\qquad \Gamma, A\vdash C\qquad \Gamma, B\vdash C \over \Gamma \vdash C}.$$
+  \item the \emph{ex falsum quodlibet} (i.e. everything is derivable from falsity)  holds:
+    $$  (\bot)\qquad  {\displaystyle\Gamma \vdash \bot \over \Gamma \vdash A}.$$ 
+
+\end{itemize}
 \end{definition}
 
 
@@ -47,19 +54,32 @@ and conversely:
 
 So, what properties make this logic interesting? By not having the law of the excluded third, we have a system in which all proofs must be constructive. Therefore, we can view proofs as programs. We will formalize this idea of viewing proofs as programs in the next section, by relating our computational system and our intuitionistic logic. \\
 
+To work with this logic, we usually work in the usual \emph{truth derivation}. That is, having a formula $F$, we use the previously introduced rules in other to see whether can they be derivated from the truth assumption. More often than not, we consider the empty assumption, therefore we are working with \emph{tautologies}
+
+\begin{example}
+  We can consider the formula $F=((x\to y) \land (y\to z)) \to ((x \to z)$ and $\Gamma$ the empty assumption. Then we can deduce:
+  \begin{align*}
+    \Gamma=\{\}& \vdash    ((x\to y) \land (y\to z)) \to (x\to z),\\
+    \Gamma=\{(x\to y)\land (y\to z)\} & \vdash    (x \to z),\\
+    \Gamma=\{(x\to y), (y\to z)\} & \vdash    (x \to z),\\
+    \Gamma=\{ (y\to z)\} & \vdash    (y \to z),\\
+    \Gamma=\{\} & \vdash \top.
+    \end{align*}
+therefore the formula $F$ is true.
+\end{example}
 
 
 
 
 
+As a final note, the definitions of intuitionistic logic and lambda calculus introduced in this work, are made to be matching but are not unique. For example, other source consider that the types of simply typed $\lambda$-calculus (instead of the extended typing) and consider only (as is done in \cite[Section 6.5]{selinger2008lecture}):
+  $$A,B ::= x |\ A\to B\ |\ A \land B \ |\ \top .$$
 
-As a final note, the definitions of intuitionistic logic and lambda calculus introduced in this work, are made to be matching but are not unique. For example, other source consider that the types of simply typed $\lambda$-calculus are built via the BNF:
-  $$A,B ::= \iota\ |\ A\to B\ |\ A \times B \ |\ 1 \ |\ 0 .$$
-This does not add any more capabilites to the deduction system, but allow to make an isomorphism to a intuitionistic propositional logic that also support $\bot$ for false and has a natural $\lor$ defined. We decided not to follow this line, which is equally valid, because we consider that it does not really provide new utilities from a theoretical point of view. However, it is useful to have this consideration resolved from the beginning, especially for engineering applications.
+We decided not to follow this line, which is equally valid, for consistency with \cite{seely1984locally} However, it is useful to have this consideration resolved from the beginning, especially for engineering applications.
 
 
 \section{Curry-Howard bijection}
-The first approach of lambda calculus to be seen as a deduction system was observed by Curry in 1934\cite{curry1934functionality}, early in the development of this area. {\color{red} Añadir un poquito de introducción histórica que no cuesta na.}\\
+The first approach of lambda calculus to be seen as a deduction system was observed by Curry in 1934\cite{curry1934functionality}, early in the development of this area.\\% {\color{red} Añadir un poquito de introducción histórica que no cuesta na.}\\
 
 
 Having already asked ourselves when does a term have a type, it is natural to arise the new question: When does a type have a term? This is in fact the fundamental idea of the Curry-Howard isomorphism. For example, considering whether it exists a term for the type$(A \times B) \to B$, is analogue to consider the formula $(A\land B)\to B$ to be a tautology. Moreover, the term $\lambda x^{A\times B}. \pi_2 x$ can be seen as a proof of the tautology! we have arrived at the dream of a constructivist mathematician: computational algorithms are demonstrations, and demonstrations are nothing if not algorithms. Lets formalize this intuition.\\
@@ -72,24 +92,31 @@ We can create a pairing between type and formulas by pairing variables with vari
   Types  & Formulas  \\
   \hline
   Type 1 & $\top$ \\
+  Type 0 & $\bot$ \\
   Function type $\to$   & Implication $\to$  \\
-  Product type $\times$ & Conjuction $\land$ \\  
+  Product type $\times$ & Conjuction $\land$ \\
+  Sum type $+$     & Disjuction $\lor$ \\
+
 \end{tabular}
 \caption*{\label{tab:table-name} Pairing of formulas and terms.}
 \end{center}
 \end{table}
 
+And we can see that this pairing holds because we can see that Typing rules 
 
-With this construction we have develop a pairing in syntax,  now we can make a pairing in semantics.
 \begin{itemize}
 \item We pair the concept of a formula being true with the concept of a type having a term. We formalize this by pairing truth assumption $\Gamma=\{A\}$ is with the typing context $\Gamma\vdash M:A$. 
 \item We can relate $(var)$ with $(ax)$ and $(*)$ with $(\top)$.
 \item We can relate $(app)$ with $(\to_1)$ and $(abs)$ with $(\to_2)$.
-  We can relate $(\pi_i)$ with $(\land_1)$ and $(\land_2)$ with $(pair)$.
+\item We can relate $(\pi_i)$ with $(\land_1)$ and $(\land_2)$ with $(pair)$.
+\item We can relate $(\iin_i)$ with $(\lor_1^i)$ and $(\lor_2)$ with $(\ccase)$.
+\item We can relate $0$ with $\bot$.
 \end{itemize}
 
 
-We can mentioned prior, we can.
+With this construction we have develop a pairing in syntax,  now we can make a pairing in semantics. The million dollar question is: Who do we relate the concept of term with? We relate it with the concept of truth derivation. That is, given a term $M$  of type $C$ with associated formula $F$. By replacing each typing rule needed to deduce $M:C$  with an associated derivation rule, we can get a truth derivation, and conversely with a truth derivation of $F\to \top$ from $\Gamma=\{\}$.\\
+
+We can mentioned prior, we can vary lightly the definitions, but an analogue pairing still holds. For example, we can consider an intuitionistic logic where there is no $\lor$ nor $\bot$ in a pairing with (unextended) simply typed. Further on the text we will examine this variation of pairings.
 \section{Lambeck bijection}
 
 \section{Lambda calculus as a deduction system}
