@@ -1,122 +1,132 @@
 
 \chapter{Curry-Howard-Lambeck bijection}
-In these chapter we raise bridges between Category Theory, Lambda calculus, and Propositional logic. Is good have to have in mind that the use of lambda calculus as a deduction system, in addition of lambda calculus, was not accidental. Therefore the relation raised with propositional logic was anything but a fluke. This is due to the aforementioned problems that were spotted in Maths fundamentals. The main sources for this chapter were  \cite{lambek1988introduction} and \cite[Chapter 6]{selinger2008lecture}.
+In these chapter we raise bridges between Category Theory, Lambda calculus, and Propositional logic. The main sources for this chapter were  \cite{lambek1988introduction} and \cite[Chapter 6]{selinger2008lecture}.\\
 
-\section{Natural deduction}
-In this section we succinctly introduce the notation of propositional intuitionistic logic, in order to work with them further in the chapter. Therefore, we spare our readers of yet another comprehensive introduction of the widely known propositional logic. Should it be required, more information of propositional logic can be found in, for example, \cite{marek2009introduction} and \cite{wadler2015propositions}. Natural deduction originally appears in the works of \cite{gentzen1935untersuchungen}. \\
+\section{Deduction systems}
 
-Thorough this section we replicate notations and process done when defining typed lambda calculus. This is done purposely, as our aim is to proof an equivalence between both system. We start by considering the alphabet consisting a set of countable many variables $x,y,z,...$ as done previously in lambda-calculus, $\top$ and $\bot$ 
-
-\begin{definition}
-  The formulas of propositional intuitionistic logic are built via the BNF:
-  $$A,B ::= x |\ A\to B\ |\ A \land B \ |\ A \lor B \ |\ \top \ |\ \bot .$$
-  where $x$ denote any variable.
-\end{definition}
-
-
-Note that we consider a logic without law of excluded middle. This approach, although somewhat demodé in modern mathematics, was highly popular at the beginning of the twentieth century. It sought to solve the problems of mathematical foundations, in particular the \emph{principle of explosion}. \\
-
-Having the syntax done, is time to provide meaning. We want $\top$ to be the truth value. A formula is true if $A \to \top$. Conversely, a formula is \emph{not-true} or \emph{false} (sometimes denoted as $\neg A$) if $ A \to \bot$. In addition, we want all the formulas from which we can derive certain to be true. For this we will define, analogously to the typing-contex from the previous chapter, what a \emph{truth-assumption} is and  what the rules of deduction are.
+\subsection{First Definitions}
+\subsubsection{Deduction systems}
+Having introduced the notion lambda calculus, category theory and propositional intuitionistic calculus, is time to have a step back, in other to get the full picture.
 
 \begin{definition}
- A truth-assumption is a set of variables $\Gamma = \{x_1,...,x_n\}$ that we assume to be true. An \emph{judgement} $\Gamma \vdash B$ states that from truth assumption $\Gamma$, the formula $B$ can be deduced to be true. 
+  A \emph{Deductive system} $D$ is a graph  with identity and composition of arrows.
 \end{definition}
 
-Sometimes we can write a truth assumption $\Gamma, A$, that will denote that additionally $A$ is assume to be true. As most times, we will only need a formula $A$ to be true or not without any interest on what exact variable configuration made this possible, so by abuse of notation we can consider $\Gamma = \{x_1,A_1\}$ to have both variables and formulas.  
-\begin{definition}[Deduction Rules]
-  We define the following deduction rules, for each truth assumption Gamma $\Gamma=\{x_1,...,x_n\}$.
-  \begin{itemize}
-    \item Every variable assumed to be true is true:
-      $$  (ax)\qquad  {\displaystyle \over \Gamma \vdash x_i},\qquad \forall i \in 1,..,n.$$
-      In addition, $\top$ is always true:
-      $$  (\top)\qquad  {\displaystyle \over \Gamma \vdash \top}.$$
-\item From a true formula $A\to B$ and a true formula $A$, $B$ can be derived:
-  $$(\to_1)\qquad  {\displaystyle \Gamma \vdash A\to B\qquad \Gamma \vdash A      \over \Gamma \vdash B}.$$
-  Conversely, if assuming $A$ deduces $B$, then $A\to B$ is true.
-$$(\to_2)\qquad  {\displaystyle \Gamma, A \vdash B      \over \Gamma \vdash (A\to B)}.$$
-  
-\item The conjunction being true imply each element to be true:
-  $$(\land_1) \qquad {\displaystyle \Gamma\vdash A_1\land A_2 \over \Gamma \vdash A, \qquad \Gamma \vdash B },$$
-and conversely:
-  $$(\land_2) \qquad {\displaystyle \Gamma\vdash A\qquad \Gamma\vdash B \over \Gamma \vdash  A \land B}.$$
-\item Every type is part of a union type including it:
-    $$  (\lor_1^i)\qquad  {\displaystyle\Gamma \vdashA_i \over \Gamma \vdash \in_i A_1+A_2},\qquad  i=  1,2.$$
-  conversely, A term on a union must always have the same type after application.:
-    $$(\lor_2) \qquad {\displaystyle \Gamma\vdash A\lor B\qquad \Gamma, A\vdash C\qquad \Gamma, B\vdash C \over \Gamma \vdash C}.$$
-  \item the \emph{ex falsum quodlibet} (i.e. everything is derivable from falsity)  holds:
-    $$  (\bot)\qquad  {\displaystyle\Gamma \vdash \bot \over \Gamma \vdash A}.$$ 
-
-\end{itemize}
-\end{definition}
-
-
-
-
-So, what properties make this logic interesting? By not having the law of the excluded third, we have a system in which all proofs must be constructive. Therefore, we can view proofs as programs. We will formalize this idea of viewing proofs as programs in the next section, by relating our computational system and our intuitionistic logic. \\
-
-To work with this logic, we usually work in the usual \emph{truth derivation}. That is, having a formula $F$, we use the previously introduced rules in other to see whether can they be derivated from the truth assumption. More often than not, we consider the empty assumption, therefore we are working with \emph{tautologies}
-
+We can reformulated the previous logic with this optic. Prior to that we will make an illustrative example on how is this made. All the properties aforementioned (and paired) show that the requirements of typing/intuitionistics calculus can be expressed in just requirements for the arrows. For example, 
 \begin{example}
-  We can consider the formula $F=((x\to y) \land (y\to z)) \to ((x \to z)$ and $\Gamma$ the empty assumption. Then we can deduce:
+\begin{enumerate}
+\item Deduction rule $\to_1$: There is an arrow $$\varepsilon_{A,B}: [B\land (B \to A)] \to A.$$
+\item From deduction rule $\to_2$ it can be deduced:
   \begin{align*}
-    \Gamma=\{\}& \vdash    ((x\to y) \land (y\to z)) \to (x\to z),\\
-    \Gamma=\{(x\to y)\land (y\to z)\} & \vdash    (x \to z),\\
-    \Gamma=\{(x\to y), (y\to z)\} & \vdash    (x \to z),\\
-    \Gamma=\{ (y\to z)\} & \vdash    (y \to z),\\
-    \Gamma=\{\} & \vdash \top.
-    \end{align*}
-therefore the formula $F$ is true.
+    \Gamma,\{\} \vdash & F= (C\land B)\to A;\\
+    \Gamma, \{(C\land B)\} \vdash & A;\\
+    \Gamma, \{C, B\} \vdash & A;\\
+    \Gamma, \{C\} \vdash & B\to A;\\
+    \Gamma, \{\} \vdash & F'=C \to (B \to A).
+  \end{align*}
+  That is provided an arrow $h: C\land B \to A$ there is an induced arrow
+  $$h^*:C \to [A\to B].$$
+\end{enumerate}
 \end{example}
 
+We can unpack a bit from these notions. To begin with, we can check that the second example include an idea, much needed, in the relationship between assumption and deduction systems. We can view each assumption of truth as a new deduction system. This also seems logical, since an assumption $\Gamma = \{A_i : i=1,...,n\}$  with $A_i$ formulas can be seen as an existence of an arrow $g_i: \top \to A_i$.\\
+
+We see that in our derivations we sometimes need to change the truth-assumption $\Gamma$. This is not mandatory, but it is useful to avoid including a large number of rules. However we do that in a way such that we start from a given $\Gamma$ and return to it at the end of the derivation. Thus knowing that if a $\Gamma$ derives the formula $F$, then it also derives the formula $F'$ and therefore there is an arrow in our deductive system. Similar reflections can be made with the rest of the rules discussed in the previous sections, and of course with the simply typed lambda calculus. \\
+
+
+
+\subsubsection{Logical Systems as Deduction systems}
+In  the fashion of previous definitions we can reformulate the logical systems as deduction systems.\\
+\begin{definition}
+  A conjunction calculus is a deductive system $D$ where there is a specified object $\top$ and an operation $\land: Ob(D)\times Ob(D) \to Ob(D)$ such that:
+  \begin{enumerate}
+  \item For each $A\in Ob(D)$ exists $O_A:A\to \top$.
+  \item For each $A_1,A_2\in Ob(D)$ exists arrows $\pi_i^(A_1,A_2): A_1 \land A_2 \to A_i$ for $i=1,2$.
+  \item Let $f:C\to A$ and $g:C\to B$. Then $\langle f,g\rangle C\to A\land B$.
+  \end{enumerate}
+\end{definition}
+
+Note that $\pi_i^(A_1,A_2)$ depend on both $A_1,A_2$. in the absence of ambiguity we will denote this arrow by $\pi_i$.
+
+\begin{definition}
+  A positive intuitionistic calculus is a conjunction calculus $D$ where there is binary an operator $\to: Ob(D)\times Ob(D) \to Ob(D)$ such that:
+  \begin{enumerate}
+  \item For each $A,B \in Ob(D)$, there is an arrow $\varepsilon^{A,B}: [(B \to A) \land B]\to A$.
+  \item For each $g:C\land B \to A$ then there is an arrow $g^*: C\to [B\to A]$.
+  \end{enumerate}
+\end{definition}
+\begin{remark}
+  Note that we use $[]$ to avoid ambiguity between $\to$ as operator or as simply an arrow.
+\end{remark}
+Similarly to $\pi_i$, we will usually denote jsut $\varepsilon$. 
+\begin{definition}
+  A \emph{intuitionistic propositional calculus} is a positive intuitionistic calculus where there is a specified object $\bot$ and an operation $\lor: Ob(D)\times Ob(D) \to Ob(D)$ such that:
+  \begin{enumerate}
+  \item For each $A\in Ob(D)$ there is an arrow $\square_A: \Bot\to A$.
+  \item For each $A_1,A_2\in Ob(D)$ there are arrows $\sqcup_i: A_i\to A_1 \lor A_2 $.
+  \item For each $A,B,C \in Ob(D)$ there is an arrow $$h:[(B\to A)\land (C\to A)] \to [(C\lor B)\to A].$$
+  \end{enumerate}
+\end{definition}
+
+\subsubsection{Categorical systems as Deduction systems}
+
+We have already note how a category is a particular case of a deduction system. We can consider how are the logical systems, but we only select those who are also categories.\\
 
 
 
 
-As a final note, the definitions of intuitionistic logic and lambda calculus introduced in this work, are made to be matching but are not unique. For example, other source consider that the types of simply typed $\lambda$-calculus (instead of the extended typing) and consider only (as is done in \cite[Section 6.5]{selinger2008lecture}):
-  $$A,B ::= x |\ A\to B\ |\ A \land B \ |\ \top .$$
+\begin{proposition}
+  A cartesian category $C$ is a deduction system that is both conjunction system and a category where:
+  \begin{enumerate}
+  \item $f:A\to T\implies f=O_A$.
+  \item Given $\langle f_1,f_2\rangle: C\to A\land B$ then $\pi_i \circ \langle f_1,f_2\rangle = f_i$.
+  \item Given $h:C\to A\land B$ we have that $\langle \pi_1 h, \pi_2 h\rangle = h$.
+  \end{enumerate}
+\end{proposition}
 
-We decided not to follow this line, which is equally valid, for consistency with \cite{seely1984locally} However, it is useful to have this consideration resolved from the beginning, especially for engineering applications.
+\begin{proof}
 
+  Lets begin by proving that a cartesian category satisfy this conditions. It is clearly a category. Using the specified terminal point $T=\Top$.  Considering the product $A\times B = A\land B$ for every $A,B \in C$ along with the projections, the others properties are satisfied.\\
 
-\section{Curry-Howard bijection}
-The first approach of lambda calculus to be seen as a deduction system was observed by Curry in 1934\cite{curry1934functionality}, early in the development of this area.\\% {\color{red} Añadir un poquito de introducción histórica que no cuesta na.}\\
+  Conversely, considering again $T= \top$ we can check that it is a terminal object. Also, for every $h:C\to A\land B$we can see that every $h$ derive the existence of unique $f_1,f_2$ such that:
+  \[
+\begin{tikzcd}
+{} & C \arrow[bend right,swap,dashed]{dl}{g}
+\arrow[bend left,dashed]{dr}{h} \arrow{d}[description]{f}& & \\
+A  &A\land B \arrow{l}[swap]{\pi_1} \arrow{r}{\pi_2} & 
+B \\
+\end{tikzcd}
+\]
+ And thus we have finite product.
+\end{proof}
 
-
-Having already asked ourselves when does a term have a type, it is natural to arise the new question: When does a type have a term? This is in fact the fundamental idea of the Curry-Howard isomorphism. For example, considering whether it exists a term for the type$(A \times B) \to B$, is analogue to consider the formula $(A\land B)\to B$ to be a tautology. Moreover, the term $\lambda x^{A\times B}. \pi_2 x$ can be seen as a proof of the tautology! we have arrived at the dream of a constructivist mathematician: computational algorithms are demonstrations, and demonstrations are nothing if not algorithms. Lets formalize this intuition.\\
-
-
-We can create a pairing between type and formulas by pairing variables with variables and:
-\begin{table}[!h]
-\begin{center}
-\begin{tabular}{c|c}
-  Types  & Formulas  \\
-  \hline
-  Type 1 & $\top$ \\
-  Type 0 & $\bot$ \\
-  Function type $\to$   & Implication $\to$  \\
-  Product type $\times$ & Conjuction $\land$ \\
-  Sum type $+$     & Disjuction $\lor$ \\
-
-\end{tabular}
-\caption*{\label{tab:table-name} Pairing of formulas and terms.}
-\end{center}
-\end{table}
-
-And we can see that this pairing holds because we can see that Typing rules 
-
-\begin{itemize}
-\item We pair the concept of a formula being true with the concept of a type having a term. We formalize this by pairing truth assumption $\Gamma=\{A\}$ is with the typing context $\Gamma\vdash M:A$. 
-\item We can relate $(var)$ with $(ax)$ and $(*)$ with $(\top)$.
-\item We can relate $(app)$ with $(\to_1)$ and $(abs)$ with $(\to_2)$.
-\item We can relate $(\pi_i)$ with $(\land_1)$ and $(\land_2)$ with $(pair)$.
-\item We can relate $(\iin_i)$ with $(\lor_1^i)$ and $(\lor_2)$ with $(\ccase)$.
-\item We can relate $0$ with $\bot$.
-\end{itemize}
+Thus, we can start seeing the kind of bijection already shown in the Curry Howard Isomorphism. Hitherto we can adopt the notation $A\times B$ for the conjunction, in the context of cartesian categories.
+\begin{proposition}
+  A closed cartesian category is a deduction system that is a positive intuitionistic calculus that is also a category such that:
+  \begin{enumerate}
+  \item   For all $h: C\times B \to A$ , we have that $\varepsilon \langle h^* \pi_1, \pi_2\rangle = h$.
+  \item   For all $k: C\to [B \to A]$ , we have that $(\varepsilon \langle k \pi_1, \pi_2\rangle) = k$.
+  \end{enumerate}
+\end{proposition}
 
 
-With this construction we have develop a pairing in syntax,  now we can make a pairing in semantics. The million dollar question is: Who do we relate the concept of term with? We relate it with the concept of truth derivation. That is, given a term $M$  of type $C$ with associated formula $F$. By replacing each typing rule needed to deduce $M:C$  with an associated derivation rule, we can get a truth derivation, and conversely with a truth derivation of $F\to \top$ from $\Gamma=\{\}$.\\
 
-We can mentioned prior, we can vary lightly the definitions, but an analogue pairing still holds. For example, we can consider an intuitionistic logic where there is no $\lor$ nor $\bot$ in a pairing with (unextended) simply typed. Further on the text we will examine this variation of pairings.
-\section{Lambeck bijection}
+\begin{proof}
 
-\section{Lambda calculus as a deduction system}
+\end{proof}
+
+
+\subsubsection{Deduction Theorem}
+We proceed with the tating that an arrow $f:\top \to A$ does exists in our deduction system. It can be deduced in both positive (without $\lor$ and $\bot$) an intuitionistic calculus that is $A \land B\vdash C$ then $A \vdash C\to B$. This theorem is more interesting to state in the new optics of deduction systems:
+\begin{theorem}[Proposition 2.1, \cite{lambek1988introduction}]
+  In a positive  calculus, if assuming the existence of an arrow $f:\top \to A$ implies the existence of an arrow $g: B\to C$, then there exists an arrow $h: A\land B\to C$ that does not depend on $f$.
+\end{theorem}
+
+\begin{sproof}
+In a similar fashion of the Church-Rosser Theorem, it is solved by induction in the last rule used in the deduction.
+\end{sproof}
+
+
+As we have seen, a category is a deductive system with added structure.
+
+

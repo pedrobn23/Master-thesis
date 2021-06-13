@@ -334,7 +334,7 @@ We have already talked about the product of categories. The product is a limit w
   Let $C$ be a category, $J=\{0,1\}$ be the discrete category with two elements. The product $c_1\times c_2$ of two elements $c_0,c_1\in Ob(C)$ is the limit of the functor $F:J\to C$ such that $F0 = c_0, F1= c_1$.
 \end{definition}
 
-This construction means that providing an arrow to $c_0,c_1$ determines an unique arrow to $c_0\times c_1$. In this case, the arrows $u0, u1$ are usually called \emph{projections} and denoted by $\pi_0, \pi_1$. The notation is due to the product being a generalization of the Cartesian product in the category $Set$. It is also sometimes note with $c_0 \Pi c_1$ with $\Pi$ being standard for the sequence product. Some examples of product object in categories are:
+This construction means that providing an arrow to $c_0,c_1$ determines an unique arrow to $c_0\times c_1$ and vice versa by composition with $\pi_i$. In this case, the arrows $u0, u1$ are usually called \emph{projections} and denoted by $\pi_0, \pi_1$. The notation is due to the product being a generalization of the Cartesian product in the category $Set$. It is also sometimes note with $c_0 \Pi c_1$ with $\Pi$ being standard for the sequence product. Some examples of product object in categories are:
 \begin{example}\ 
 \begin{itemize}
 \item Products from Example \ref{example:prod}.
@@ -631,7 +631,7 @@ For the canonical example we may introduce a really organic concept: the \emph{s
 
   The notion of product seen in \ref{prod-univ} is a notion that seek to catch the essence of what the Cartesian product is in the category of Set. In this category it happens that for any two objects, one can consider the product without any hesitance about it existence. A \emph{Cartesian category} will be a category that, in some sense, maintain this property (of being closed under Cartesian product). Formally: 
   \begin{definition}
-    A Cartesian category is a category for which every finite product exists.
+    A Cartesian category is a category with a distinguish terminal object $T$ and for which every finite product exists.
   \end{definition}
 
 Nonetheless, further on the text we will need categories with some even nicer properties. These categories are called \emph{closed catersian categories}. We will define them formally first, and after unpack the information that the definition contains:
