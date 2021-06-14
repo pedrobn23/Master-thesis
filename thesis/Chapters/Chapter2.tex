@@ -457,9 +457,9 @@ In both case, the universal property consists of having an arrow to a generated 
 
 \section{Adjoints}
 
-Adjointness is a fundamental property on Category theory. It relates two functors $F:C\to D, G:D\to C$. The importance of adjoints however, comes from it ubiquity among mathematics, often relate with the ubiquity of universality. This notion was first presented by Daniel M. Kan in \cite{kan1958adjoint}. For this section we follow \cite{mac2013categories}.\\
+Adjointness is a fundamental theory within Category theory. It relates the homesets of two functors $F:C\to D, G:D\to C$. The importance of adjoints however, comes from it ubiquity among mathematics, often relate with the ubiquity of universality. This notion was first presented by Daniel M. Kan in \cite{kan1958adjoint}. For this section we follow the material presented in \cite{mac2013categories}.\\
 
-We  will start by providing some intuitive notions, before a formal definition. Take the Forgetful Functor $U:Grp\to Set$, and the Free Group Functor $\mathcal{F}:Set\to Grp$. We can see that it is not difficult to consider that we can compose $F$ and $G$ to make endofunctors. These endofunctors are far from being identities, nonetheless we have still a great relation between them: for every set $X$ and group $G$, there is a function $X \to UG$ for each morphism $FX\to U$. Conversely, any function from $X$ to $UG$ induces a morphism. \\
+We  will start by providing some intuitive notions, before a formal definition. Take the Forgetful Functor $U:Grp\to Set$, and the Free Group Functor $\mathcal{F}:Set\to Grp$. We can see that it is not difficult to consider that we can compose $F$ and $G$ to make endofunctors. These endofunctors are far from being identities, nonetheless we have still a great relation between them: for every set $X$ and group $G$, there is a function $f: X \to UG$ for each morphism $g:FX\to U$. Conversely, any function from $X$ to $UG$ induces a morphism. \\
 
 Any avid reader will detect by this point the taste of universality. But there is a bit more, we have a bijective relation on every image home-set of both $F$ and $G$. This is the underlying property of adjointness - to relate home-sets. Lets formalize this idea:
 \begin{definition}
@@ -498,9 +498,9 @@ We have already suggested the relationship between universality and adjointness.
 \begin{proposition}\label{prop:univAdjoint}
   An adjunction $(F,G,\varphi): D\to C $ determines:
   \begin{itemize}
-  \item a natural transformation $\eta: I_D \to GF$ such that $\eta(d):d\to G$ is universal from $G$ to $d$ for every $d\in Ob(D)$. Conversely, we can define:
+  \item a natural transformation $\eta: I_D \to GF$ such that $\eta(d):d\to GFd$ is universal to $G$ from $d$ for every $d\in Ob(D)$. Conversely, we can define:
     $$\varphi(f:Fd\to c) = Gf\circ \eta(d): d\to G c.$$
-  \item a natural transformation $\epsilon: FG\to I_C$ such that $\varepsilon(c):Fd\to c$ is universal from $a$ to $F$ and we can define:
+  \item a natural transformation $\epsilon: FG\to I_C$ such that $\varepsilon(c):FGc\to c$ is universal from $c$ to $F$ and we can define:
     $$\varphi(g:d\to Gc) = \varepsilon(c)\circ Fg: Fd\to c.$$
   \end{itemize}
 \end{proposition}
