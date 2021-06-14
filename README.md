@@ -9,20 +9,18 @@ Here I will be updating when each section state:
   - Ready.
   
 - Chapter 2: 
-  - Some examples are left to do.
+  - Section 1: Ready
+  - Section 2: Some examples are left to do.
 
 - Chapter 3:
-  - Untyped lambda calculus is mostly done.
-	- Curry's paradox is left to do.
-  - Typed lambda calculus is to do.
+  - Ready - still to be check over.
   
   
-- Thinks that will be add:
-  - Curry-Howard-Lambeck isomorphism.
-  - Dependent typing.
-
+- Chapter 4:
+  - Work in Progress
+  
 ## Acknowledges
-Thanks a lot to Ángel González-Prieto for supervising this work. 
+Thanks a lot to Ángel González Prieto for supervising this work. 
 
 ## If you want to help
 - Just reading and telling me whether everything is understandable and well written is more than enough. :)
