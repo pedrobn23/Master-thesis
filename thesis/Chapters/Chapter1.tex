@@ -122,8 +122,9 @@ We proceed to introduce a comprehensive list of examples, so that it is already 
   \item The category $Top$ that has as objects all small topological spaces and as arrow continuous mappings.
 \item The category $Set$ that has as objects all small sets and as arrows all functions between them. We can also consider the category $Set_*$ of pointed small sets (sets with a distinguish point), and function between them that maps one distinguish point into another.  
 \item The category $Vect$ That has as object all small vector spaces and as arrows all linear functions.
-\item The category $Grp$ That has as object all small vector group and as arrows all homomorphism.
-      \item The category $Top_*$ that has as object all small topological spaces with a distinguished point, and as arrow all continuous functions that maps each distinguished points into distinguished points. Similarly we can consider $Set_*$ or $Grp_*$.
+\item The category $Grp$ that has as object all small vector group and as arrows all homomorphism.
+\item The category $Top_*$ that has as object all small topological spaces with a distinguished point, and as arrow all continuous functions that maps each distinguished points into distinguished points. Similarly we can consider $Set_*$ or $Grp_*$.
+\item The category $Grph$ that has as objects all small graphs, and as arrows all graphs morphisms.
 \end{itemize}
 
 \item The category $Hask$ of all Haskell types and all possible functions between two types.\\
@@ -248,8 +249,9 @@ Lets provide some examples of functors:\\
     
     Let $C$ one of such  categories, then we have a functor $F:C\to Set$ that maps each object to its underlying set and each arrow to the equivalent arrow between sets. That is, this functor forgets about the structure that is present in $C$.\\
 
-    Additionally, we will often have functors defined $F:C\to Set$. For some cases of $C$ it also happen that $FC$ has some more structure on it. In that case we will say that $F$ is an enriched functor for that cases.
+    Additionally, we will often have functors defined $F:C\to Set$. For some cases of $C$ it also happen that $FC$ has some more structure on it. In that case we will say that $F$ is an enriched functor for that cases.\\
 
+    Another similar case of Forgetful functor is $\mathcal{U}:Cart \to Grph$ that maps each (small) category to their \emph{underlying} graph. 
   \item Fundamental Group: In the context of algebraic topology we have the functor of the fundamental group $\Pi_1: Top_* \to Grp$. The most famous property of this function is that
 
     

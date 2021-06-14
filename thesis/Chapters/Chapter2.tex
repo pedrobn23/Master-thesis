@@ -62,7 +62,6 @@ In a diagram:
     \item Tensor Product: Given an right $R$-module $A$ and a left $R$-module $B$ one can consider the tensor product as an abelian group $A\otimes_R B$ and an $R$-biadditive function
       $$h:A\times B\to A \otimes_R B,$$
       such that  for every $R$-biadditive $f:A\times B \to G$ it exists an unique $\overline f$ such that $\overline f\circ h=f$. Is easy to follow that tensor product can be reformulated as an universal arrow $\varphi:A\time B \to A\otimes_R B$ from $A\times B$ to the identity functor in the category of $R$-additive groups along with $R$-additive functions.
-
     \end{itemize}
   \end{example}
 
@@ -458,7 +457,7 @@ In both case, the universal property consists of having an arrow to a generated 
 
 \section{Adjoints}
 
-The adjoints is a fundamental property on Category theory. It relates two functors $F:C\to D, G:D\to C$. The importance of adjoints however, comes from it ubiquity among mathematics, often relate with the ubiquity of universality. This notion was first presented by Daniel M. Kan in \cite{kan1958adjoint}. For this section we follow \cite{mac2013categories}.\\
+Adjointness is a fundamental property on Category theory. It relates two functors $F:C\to D, G:D\to C$. The importance of adjoints however, comes from it ubiquity among mathematics, often relate with the ubiquity of universality. This notion was first presented by Daniel M. Kan in \cite{kan1958adjoint}. For this section we follow \cite{mac2013categories}.\\
 
 We  will start by providing some intuitive notions, before a formal definition. Take the Forgetful Functor $U:Grp\to Set$, and the Free Group Functor $\mathcal{F}:Set\to Grp$. We can see that it is not difficult to consider that we can compose $F$ and $G$ to make endofunctors. These endofunctors are far from being identities, nonetheless we have still a great relation between them: for every set $X$ and group $G$, there is a function $X \to UG$ for each morphism $FX\to U$. Conversely, any function from $X$ to $UG$ induces a morphism. \\
 
@@ -496,13 +495,13 @@ commutes. \\
 We can follow by considering the important notation decision: how to call the adjoints. This is a quite ambiguous notation, but we will stick with the notation of $F$ being the \emph{left adjoint} and $G$ being the \emph{right adjoint}. When a functor \emph{is} a left (resp. right) adjoint it \emph{has} a right (resp. left) adjoint. This notation comes from where is the functor placed in the home-set, when making the bijection.\\
 
 We have already suggested the relationship between universality and adjointness. We can summary that relation in the following property:
-\begin{proposition}
+\begin{proposition}\label{prop:univAdjoint}
   An adjunction $(F,G,\varphi): D\to C $ determines:
   \begin{itemize}
-  \item a natural transformation $\eta: I_D \to GF$ such that $\eta(x):x\to G$ is universal for every $x\in Ob(D)$. Conversely, we can define:
+  \item a natural transformation $\eta: I_D \to GF$ such that $\eta(d):d\to G$ is universal from $G$ to $d$ for every $d\in Ob(D)$. Conversely, we can define:
     $$\varphi(f:Fd\to c) = Gf\circ \eta(d): d\to G c.$$
-  \item a natural transformation $\epsilon: FG\to I_C$ such that $\varepsilon(x):Fx\to a$ is universal for every $x\in Ob(C)$. Conversely, we can define:
-    $$\varphi(g:d\to Gc) = \eta(c)\circ Fg: Fd\to c.$$
+  \item a natural transformation $\epsilon: FG\to I_C$ such that $\varepsilon(c):Fd\to c$ is universal from $a$ to $F$ and we can define:
+    $$\varphi(g:d\to Gc) = \varepsilon(c)\circ Fg: Fd\to c.$$
   \end{itemize}
 \end{proposition}
 \begin{proof}
@@ -526,7 +525,7 @@ commutes.
 
 
 From this proposition we can see that we may be able to define an adjoint based only on the universal arrows provided. We can summary a few equivalent definition of adjoint:
-\begin{proposition}
+\begin{proposition}\label{prop:equivdefinition}
   Each adjoint $(F,G,\varphi,\eta,\varepsilon):D\to C$ is completely determined by the items in any one of the following list:
   \begin{enumerate}
   \item $F,G$ and a natural transformation $\eta:1_D\to GF$ such that $\eta(d)$ is universal for every $d\in \Ob(D)$.
@@ -566,7 +565,7 @@ From this proposition we can see that we may be able to define an adjoint based 
 To further illustrate this concept we present some examples:
 \begin{example}
   \begin{itemize}
-  \item Free group and forgetful functor
+  \item Free category from a graph and forgetful functor
   \item \v{C}ech compactification.
   \end{itemize}
 \end{example}
@@ -636,7 +635,7 @@ For the canonical example we may introduce a really organic concept: the \emph{s
 
 Nonetheless, further on the text we will need categories with some even nicer properties. These categories are called \emph{closed catersian categories}. We will define them formally first, and after unpack the information that the definition contains:
   
-  \begin{definition}
+  \begin{definition}\label{def:CCC}
     A $C$ is closed cartesian if each of the following functors:
 \begin{center}
   \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
@@ -664,10 +663,14 @@ These adjoints provide us with a lot of information:
 
   This object $d^b$ is called the exponential object or map object. The intuitive notion is that this object represent in some way the arrows from $b$ to $c$, being a generalization of the function set of two small sets. The best way to understand this adjoint is by the natural transformation $\varepsilon^b(c^b\times b) = c$. In this context, this is called \emph{evaluation arrow}. In the context of $Set$ this amount to the classic evaluation of a function.\\
 
-actually it is a technical condition that this adjoint is natural in $b$ (cita maclane).
+actually it is a technical condition that this adjoint is natural in $b$ (cita maclane). 
 \end{itemize}
 
-Lets provide some examples:
+
+Cartesian Closed Categories will be reformulated in Chapter 4, proposition \ref{def2:CCC}. We will use this last ideas in other to equationally present the concept. For now on, lets provide some examples of Cartesian Closed Categories:
+
+
+ 
 
 \begin{example}
   \begin{itemize}
@@ -676,3 +679,6 @@ Lets provide some examples:
   \item We will prove later that lambda calculus is, in some sense, a closed cartesian category.
   \end{itemize}
 \end{example}
+
+
+          Proposition 4.1 Lambeck: {\color{red} TODO }. \label{prop:4.1lambeck}

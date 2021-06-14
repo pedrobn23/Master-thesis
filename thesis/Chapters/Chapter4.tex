@@ -101,8 +101,8 @@ B \\
 \end{proof}
 
 Thus, we can start seeing the kind of bijection already shown in the Curry Howard Isomorphism. Hitherto we can adopt the notation $A\times B$ for the conjunction, in the context of cartesian categories.
-\begin{proposition}
-  A closed cartesian category is a deduction system that is a positive intuitionistic calculus that is also a category such that:
+\begin{proposition}\label{def2:CCC}
+  A closed cartesian category $C$ is a deduction system that is a positive intuitionistic calculus that is also a category such that:
   \begin{enumerate}
   \item   For all $h: C\times B \to A$ , we have that $\varepsilon \langle h^* \pi_1, \pi_2\rangle = h$.
   \item   For all $k: C\to [B \to A]$ , we have that $(\varepsilon \langle k \pi_1, \pi_2\rangle) = k$.
@@ -110,11 +110,25 @@ Thus, we can start seeing the kind of bijection already shown in the Curry Howar
 \end{proposition}
 
 \begin{proof}
-Check that the adjunction holds.
+  Lets begin checking that $C$ is a positive intuitionistic calculus and holds 1. and 2. As it is a cartesian category, by it does satisfy the requirements for being a conjunction calculus. Pairing the exponential object $cA^B$ with the function object $B\to A$. As in definition \ref{def:CCC}, we have two functors $F_3$ and $G_3$, that are both adjoint, i.e.:
+  $$\hom_C(C \times B, A) \equiv \hom(C, A^B)$$
+  Then, by proposition \ref{prop:univAdjoint}, we can deduce the existence of a natural transformation  $\varepsilon^{A,B}: FG \to I_C$ such that every $\varpesilon(x): F x $
+
+
+  
+  To do the converse, is enough to made the same pairings and apply \ref{prop:equivdefinition} to check that such adjoints are define via $\epsilon$.
 \end{proof}
 
 These propositions allow us to easily define graph completions to generate a to generate from these CCCs and positive conjunction calculus.
 
+
+\subsection{Natural Numbers}
+
+\subsection{A language from a Closed Cartesian Category}
+\subsubsection{The internal Language}
+Explain Example 10.6 and proposition 10.7
+\subsubsection{Equivalence}
+After defining $L$ we want to show that it is an equivalence of categories. We shall obtain a functor $C$ in the opposite direction.  
 
 % \subsubsection{Deduction Theorem}
 % We proceed with the tating that an arrow $f:\top \to A$ does exists in our deduction system. It can be deduced in both positive (without $\lor$ and $\bot$) an intuitionistic calculus that is $A \land B\vdash C$ then $A \vdash C\to B$. This theorem is more interesting to state in the new optics of deduction systems:
