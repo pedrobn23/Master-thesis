@@ -5,16 +5,16 @@
 
 In this chapter we define the lambda calculus as a formal language of computation, and on this define the concept of typing, ubiquitous in programming languages. We will carry out this project raising as many bridges between category theory and the lambda calculus as possible.\\
 
-The main references for this chapter are \cite{selinger2008lecture} for the general approach and concepts relatives to untyped calculus, \cite{lambek1988introduction} for more specifics details and the category theory approach to the calculus. We refer to \cite{cardone2006history} to further understand the historical motivation for the development of the theory.  \\
+The main references for this chapter are \cite{selinger2008lecture} and \cite{hindley2008lambda} for the general approach and concepts relatives to untyped calculus, \cite{lambek1988introduction} for more specifics details and the category theory approach to the calculus. We refer to \cite{cardone2006history} to further understand the historical motivation for the development of the theory.  \\
 
 
-One of the important advances in 19th century mathematics is the development of the concept of function. However, what makes two functions the same? The most widespread view is the \emph{extensional} approach. In this, we consider two functions to be the same if for the same input they have the same output. In this case, the functions exist by themselves, and each $f$ as a pairing of an X domain to an Y codomain. These functions can  be considered as sets $f\subset X \times Y$.\\
+One of the important advances in 19th century mathematics is the development of the concept of function. In this time it was question what makes two functions the same? The most widespread view is the \emph{extensional} approach. In this, we consider two functions to be the same if for the same input they have the same output. In this case, the functions exist by themselves, and each $f$ as a pairing of an X domain to an Y codomain. These functions can be considered as sets $f\subset X \times Y$.\\
 
 Despite that, specially those involved in computing the functions, can consider this notion of equality misleading. For example, consider a prime $p$ big enough, and let $f$ and $g$ be two endomorphisms of  $\mathbb{Z}/p\mathbb{Z}$. One could argue that the endomorphism of  $f(x)\to x^2$ is different to $g(x) \to \log_a a^{x+2}$. Despite having the same output for the same input, one is clearly different in complexity. It even involve the resolution of a discrete logarithm, that is highly non trivial. \\
 
-This view, in which not only is the result of the function important but how is that result obtained, is called the \emph{intensional} approach. This approach, gain traction in early 1930 as Church\cite{church1932set}, Gödel\cite{adams2011early} or Turing\cite{turing1938computable} start formalizing what is to be computable. This approach is now as ubiquitous modern computer program care not only on the correctness of a program, but on its time and space complexity (to the point on which correctness is often partially dropped to easy time complexity, for example \cite{hofmeister2002probabilistic}). \\
+This view, in which not only is the result of the function important but how is that result obtained, is called the \emph{intensional} approach. This approach, gain traction in early 1930 as Church\cite{church1932set}, Gödel\cite{adams2011early} or Turing\cite{turing1938computable} start formalizing what is to be computable. Nowdays, after the wake of computation the intensional approach have come to be as relevant as the extenisional approach.%(to the point on which correctness is often partially dropped to easy time complexity, for example \cite{hofmeister2002probabilistic}). \\
 
-In lambda calculus we consider function as formulas, and thus, we consider an intensional approach. This intensional approach was also backed by the constructivist, to whom we will later on relate with the study of the Curry-Howard isomorphism  \cite{howard1980formulae}.\\
+%In lambda calculus we consider function as formulas, and thus, we consider an intensional approach. This intensional approach was also backed by the constructivist, to whom we will later on relate with the study of the Curry-Howard isomorphism  .\\
 
 
 \section{Untyped Lambda Calculus }
@@ -115,7 +115,7 @@ In other words is the congruence that consider every rename of a bounded variabl
 Using this same tool we are going to define the $\beta$-reduction. This is not going to be an equivalence implication, but rather a relationship. It abstracts the notion of $4$ and $(\lambda x. 2+x)(2)$ being equals. Formally:
 
 \begin{definition}[Section 2.5 \cite{selinger2008lecture}]
-  We define the \emph{single-step} $\beta$\emph{-reduction} as the smallest relationship $\to_\beta$ such that:\footnote{Should i explain the notation ${A \over B}$}
+  We define the \emph{single-step} $\beta$\emph{-reduction} as the smallest relationship $\to_\beta$ such that:%\footnote{Should i explain the notation ${A \over B}$}
   \begin{align*}
     &(\beta) \qquad\ \ \  \ {\ \over(\lambda x.M)N \to_\beta M[N/x]},\\
     &(\operatorname{cong}_1)\qquad\qquad{ M \to_\beta M' \over MN \to_\beta M'N },\\
@@ -136,7 +136,10 @@ We define the \emph{multiple-step} $\beta$\emph{-reduction} $\twoheadrightarrow_
 While most constructions will be understood clearly using only $\beta$-reduction, we have to define the concept of $\eta$-reduction for a full picture of the system.\\
 
 
-Up to this point the focus of the system was to define an intensional language for computation. The $\eta$-equivalence provides us with the tools to consider $\lambda$-calculus in a extensional way. \\
+Up to this point the focus of the system was to define an intensional language for computation. That is, we have formulas and we have a way of computing them: the $\beta$-reduction. \\
+
+
+Should we want to consider a way of having an extensional approach, for example, to generate normal forms for the formulas, we would need more machinery. The $\eta$-equivalence provides us with the tools to consider $\lambda$-calculus in a extensional way. \\
 
 \begin{definition}
 We define the single-step $\eta$-reduction $\to_\eta$ as the smallest relationship such that: 
@@ -370,8 +373,9 @@ This existence of fixed point theorem is really useful, as we can now define \em
     \operatorname{mult} &= \lambda nm f.n(mf),\\
     \operatorname{iszero} &= \lambda nxy.n(\lambda z.y)x,\\
     \operatorname{predecesor} &=\lambda n.\lambda f.\lambda x. n (\lambda g.\lambda h. h (g f)) (\lambda u.x) (\lambda u.u). 
-  \end{end*}
-\align{definition}
+  \end{align*}
+                                
+\end{definition}
 
 Suppose that we want to define the factorial such that
 $$\operatorname{fact} n = \operatorname{If}(\operatorname{iszero} n)(1)(\operatorname{mult}(n)(\operatorname{fact} (\operatorname{pred}(n))),$$
@@ -652,7 +656,7 @@ This is called \emph{positive intuitionistic calculus}. We decided not to follow
 
 
 \subsection{Bijection}
-The first approach of lambda calculus to be seen as a deduction system was observed by Curry in 1934\cite{curry1934functionality}, early in the development of this area.\\% {\color{red} Añadir un poquito de introducción histórica que no cuesta na.}\\
+The first approach of lambda calculus to be seen as a deduction system was observed by Curry in 1934\cite{curry1934functionality}, early in the development of this area and was completed by Howard in 1980 \cite{howard1980formulae}. \\% {\color{red} Añadir un poquito de introducción histórica que no cuesta na.}\\
 
 
 Having already asked ourselves when does a term have a type, it is natural to arise the new question: When does a type have a term? This is in fact the fundamental idea of the Curry-Howard isomorphism. For example, considering whether it exists a term for the type$(A \times B) \to B$, is analogue to consider the formula $(A\land B)\to B$ to be a tautology. Moreover, the term $\lambda x^{A\times B}. \pi_2 x$ can be seen as a proof of the tautology! we have arrived at the dream of a constructivist mathematician: computational algorithms are demonstrations, and demonstrations are nothing if not algorithms. Lets formalize this intuition.\\

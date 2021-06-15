@@ -41,12 +41,12 @@ In  the fashion of previous definitions we can reformulate the logical systems a
   A conjunction calculus is a deductive system $D$ where there is a specified object $\top$ and an operation $\land: Ob(D)\times Ob(D) \to Ob(D)$ such that:
   \begin{enumerate}
   \item For each $A\in Ob(D)$ exists $O_A:A\to \top$.
-  \item For each $A_1,A_2\in Ob(D)$ exists arrows $\pi_i^(A_1,A_2): A_1 \land A_2 \to A_i$ for $i=1,2$.
+  \item For each $A_1,A_2\in Ob(D)$ exists arrows $\pi_i^{A_1,A_2}: A_1 \land A_2 \to A_i$ for $i=1,2$.
   \item Let $f:C\to A$ and $g:C\to B$. Then $\langle f,g\rangle C\to A\land B$.
   \end{enumerate}
 \end{definition}
 
-Note that $\pi_i^(A_1,A_2)$ depend on both $A_1,A_2$. in the absence of ambiguity we will denote this arrow by $\pi_i$.
+Note that $\pi_i^{A_1,A_2}$ depend on both $A_1,A_2$. in the absence of ambiguity we will denote this arrow by $\pi_i$.
 
 \begin{definition} \label{def:positivecalculus}
   A positive intuitionistic calculus is a conjunction calculus $D$ where there is binary an operator $\to: Ob(D)\times Ob(D) \to Ob(D)$ such that:
@@ -58,12 +58,12 @@ Note that $\pi_i^(A_1,A_2)$ depend on both $A_1,A_2$. in the absence of ambiguit
 \begin{remark}
   Note that we use $[]$ to avoid ambiguity between $\to$ as operator or as simply an arrow.
 \end{remark}
-Similarly to $\pi_i$, we will usually denote jsut $\varepsilon$. 
+Similarly to $\pi_i$, we will usually denote just $\varepsilon$. 
 \begin{definition}
   A \emph{intuitionistic propositional calculus} is a positive intuitionistic calculus where there is a specified object $\bot$ and an operation $\lor: Ob(D)\times Ob(D) \to Ob(D)$ such that:
   \begin{enumerate}
   \item For each $A\in Ob(D)$ there is an arrow $\square_A: \Bot\to A$.
-  \item For each $A_1,A_2\in Ob(D)$ there are arrows $\sqcup_i: A_i\to A_1 \lor A_2 $.
+  \item For each $A_1,A_2\in Ob(D)$ there are arrows $\iin_i: A_i\to A_1 \lor A_2 $.
   \item For each $A,B,C \in Ob(D)$ there is an arrow $$h:[(B\to A)\land (C\to A)] \to [(C\lor B)\to A].$$
   \end{enumerate}
 \end{definition}
@@ -72,7 +72,9 @@ Similarly to $\pi_i$, we will usually denote jsut $\varepsilon$.
 
 We have already note how a category is a particular case of a deduction system. We can consider how are the logical systems, but we only select those who are also categories.\\
 
-
+\begin{remark} {\color{red} Define $\langle f_1,f_2\rangle$ and $[f_1,f_2]$}
+  
+\end{remark}
 
 
 \begin{proposition}
@@ -124,7 +126,7 @@ Thus, we can start seeing the kind of bijection already shown in the Curry Howar
 \end{tikzcd}
 \]
 
-therefore, putting it all together, and remembering the \emph{evaluacion} fashion of $\varepsilon$ (i.e., we have that the following diagram commutes. The 
+therefore, putting it all together, and remembering the \emph{evaluation} fashion of $\varepsilon$ (i.e., we have that the following diagram commutes. The 
 
 \[
 \begin{tikzcd}
@@ -139,10 +141,42 @@ therefore, putting it all together, and remembering the \emph{evaluacion} fashio
 
 These propositions allow us to easily define graph completions to generate a to generate from these CCCs and positive conjunction calculus.
 
+\begin{proposition} A \emph{closed bicartesian category} is a deduction system that is both a intuitionistic propositional calculus and a category, with the additional equations:
+  \begin{enumerate}
+  \item $f:\bot \to A \implies f=\square_A$.
+  \item Given $[f_1,f_2] : A\lor B \to C$ then $ [f_1,f_2]\circ \iin_i  = f_i$.
+  \item Given $h:A\lor B\to C$ we have that $[ h\iin_1, h\iin_2] = h$.
+  \end{enumerate}
+\end{proposition}
+\begin{remark}
+  Is usual to denote $A\lor B$ as $A+B$ or $A\sqcup B$.
+\end{remark} 
+\begin{proof}
+  We have proved that it is already a closed cartesian category. Extra considerations are dual to does already considered for a cartesian category.
+\end{proof}
+\subsection{Adjoint of hypotheses}
+
+We will now proceed to talk about unfinished products. This is as simple as asking: what would happen if this new truth existed? Or to put it another way in our new language, what if this new arrow were embedded in our graph. We will now study these inclusions and their consequences.\\
+
+To do this, we are going to use the properties of the adjoint that is generated between the forgetful functor $\mathcal U$ and the free category $\mathcal{F}$ functor.{\color {red} add example y chapter 2}.\\
+
+
+\begin{definition}[Category of closed cartesian categories]
+\end{defintion}
+\begin{proposition}
+Given a cartesian closed category A and any graph morpshim $F: G \to \mathcal U(A)$ there is a unique morsphism in $Cart$  
+\end{proposition}
+
 
 \subsection{Natural Numbers}
 
+
+Lambda calculus
+
+
 \subsection{A language from a Closed Cartesian Category}
+
+
 \subsubsection{The internal Language}
 Explain Example 10.6 and proposition 10.7
 \subsubsection{Equivalence}
@@ -162,3 +196,4 @@ After defining $L$ we want to show that it is an equivalence of categories. We s
 % As we have seen, a category is a deductive system with added structure.
 
 
+\subsection{A review of Curry Howard under Deduction systems}
