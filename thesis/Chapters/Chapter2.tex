@@ -357,7 +357,7 @@ Analogously, we can define the coproduct, on which instead of defining an arrow 
   The coproduct is the dual definition of the product. It is denoted by $c_0 \sqcup c_1$.
 \end{definition}
  In this notation $\sqcup$ denotes an inverted $\Pi$, with the meaning of being the dual notion of the product.
-\begin{example}\ 
+\begin{example}\ \label{example:mitchell}
   \begin{itemize}
   \item In the category $Ab$ of Abelian Group and morphism, finite products and coproducts are equivalent. This equivalence also happens in others categories, such as $R$-Modules for a ring $R$ or vector spaces. This has a underlying idea of a type of category that relates this constructions: This are all \emph{Abelian Categories}, as in \cite[Section 5.5]{rotman2008introduction}.\\
 
@@ -597,7 +597,7 @@ For the canonical example we may introduce a really organic concept: the \emph{s
     \begin{itemize}
     \item[i)] $F$ is an equivalence of categories.
     \item[ii)] $F$ is part of an adjoint equivalence. 
-    \item[iii)] $F$ is full and faithfull, and each object $c\in C$ is isomorphic to $Sa$ for some object $a\in A$. 
+    \item[iii)] $F$ is full and faithfull, and each object $d\in D$ is isomorphic to $Fc$ for some object $c\in C$.  
     \end{itemize}  
   \end{proposition}
   \begin{proof}\
@@ -606,7 +606,7 @@ For the canonical example we may introduce a really organic concept: the \emph{s
     
     \begin{itemize}
     \item[$ii)\implies i)$] Given an equivalent adjoint $(F,G,\varphi,\eta,\varepsilon)$, then $F$ is an equivalence with $G,\eta,\varepsilon$. 
-    \item[$i)\implies iii)$] $\varphi: GF\equiv I_C$ implies that for every $c\in Ob(C)$ we can consider $c\equiv GFc$. Then considering the natural isomorphism $\zeta: FG\equiv I_D$ states for every $f:a\to a'\in D$
+    \item[$i)\implies iii)$] $\varphi: GF\equiv I_C$ implies that for every $c\in Ob(C)$ we can consider $c\equiv GFc$. We select $a=Fc$\footnote{Duda, Sección 4.4 Maclane.} Then considering the natural isomorphism $\zeta: FG\equiv I_D$ states for every $f:a\to a'\in D$
 \[
 \begin{tikzcd}
   FGa \arrow{d}{FG f}& a\arrow{d}{f}\arrow{l}{\zeta^{-1} a}\\
@@ -614,15 +614,41 @@ For the canonical example we may introduce a really organic concept: the \emph{s
 \end{tikzcd}
 \]
 
- there is one $FG f$ for each $f$ and we get that $G$ is faithful. Analogously we can see that $F$ is also faithful. To see that $G$ is full we can 
-    \item[$iii)\implies ii)$] We can see that 
-    \end{itemize}
-  \end{proof}
+ there is one $FG f$ for each $f$ and we get that $G$ is faithful. Faithfullnes of $F$ can be prove simetrically. To see that $G$ is full we can consider any $h:Ga\to Ga'$ and defining $f=\zeta a\circ h \circ \zeta a'$ we follow hat $FG f = Gh$. As $T$ is faithfull, $Gf=h$ so that $G$ is full. Procees simetrically with $F$.  
+\item[$iii)\implies ii)$]
+
+
+  We need to construct $G$ so that $F$ is a left adjoint. The idea is to define $\eta$ and apply the previously developed characterizations.\\
+
+
+  Due to the fully faithfulness of $F$ we can choose for every $d\in D$ an object $c\in C$ such that there is an isomorphism $\eta d: d \to Fc$ and for each $c'\in C, f:d\to Fc'\in D$ there is some $g\in Ar(C)$ (that exists because $F$ is full and is unique because of faithful) such that:
+\[
+\begin{tikzcd}
+  d\arrow[leftrightarrow]{r}{\eta d}\arrow[swap]{dr}{f}& Fc\arrow{d}{Fg}\\
+  & Fc'.
+\end{tikzcd} 
+\]  
+
+We define $G_0d = c$. Also note  that $\eta d$ is universal from $d$ to $F$. Therefore, $F$ is part of an adjoint by proposition \ref{prop:equivdefinition} $F$ is part of an adjoint $(F,G,\eta, \varepsilon)$. As with every adjoint, $F (\varepsilon c)\circ \eta (Fc) =1_{Gc}$. Thus $F(\varepsilon c)$ is invertible and by  fully faithfulness of $F$ so is $\epsilon c$, thus having an adjoint equivalence.
+
+
+  %We name $\zeta: Ob(D)  \to Ob(C)$ to the mapping  such that $d\equiv F(\zeta d = c)$. Naming $\eta d: d \to c$ to the denoted isomorphism, we can see that
+% \[
+% \begin{tikzcd}
+%   c=Fd& d\arrow[swap]{l}{\eta d}\arrow{d}{f}\\
+%   & d'
+% \end{tikzcd}
+% \]
+% Now, we can apply $G$ to the diagram, and as it is faithfull, the isomorphism will be maitained it will be maintained (see example \ref{example:mitchell} for more on this idea): 
+
+
+\end{itemize}
+\end{proof}
 
 
   In the next few subsection, we are going to introduce categories, with some additional structures onto them. This type of considerations, are commonplace in category theory, and will provide useful considerations.
 
-  \subsection{Monad}
+  % \subsection{Monad}
   
 
 
@@ -630,8 +656,11 @@ For the canonical example we may introduce a really organic concept: the \emph{s
 
   The notion of product seen in \ref{prod-univ} is a notion that seek to catch the essence of what the Cartesian product is in the category of Set. In this category it happens that for any two objects, one can consider the product without any hesitance about it existence. A \emph{Cartesian category} will be a category that, in some sense, maintain this property (of being closed under Cartesian product). Formally: 
   \begin{definition}
-    A Cartesian category is a category with a distinguish terminal object $T$ and for which every finite product exists.
+    A Cartesian category is a category with a specified terminal object $T$ and for which every finite product exists.
   \end{definition}
+  \begin{remark}
+    Finite product are equivalent to binary product.
+  \end{remark}
 
 Nonetheless, further on the text we will need categories with some even nicer properties. These categories are called \emph{closed catersian categories}. We will define them formally first, and after unpack the information that the definition contains:
   
@@ -663,9 +692,10 @@ These adjoints provide us with a lot of information:
 
   This object $d^b$ is called the exponential object or map object. The intuitive notion is that this object represent in some way the arrows from $b$ to $c$, being a generalization of the function set of two small sets. The best way to understand this adjoint is by the natural transformation $\varepsilon^b(c^b\times b) = c$. In this context, this is called \emph{evaluation arrow}. In the context of $Set$ this amount to the classic evaluation of a function.\\
 
-actually it is a technical condition that this adjoint is natural in $b$ (cita maclane). 
 \end{itemize}
-
+\begin{remark}
+Note that a Closed Cartesian category grow in the notion of a cartesian category. It is in fact a Cartesian category on which we have a function object, with an evaluation arrow that is universal.
+\end{remark}
 
 Cartesian Closed Categories will be reformulated in Chapter 4, proposition \ref{def2:CCC}. We will use this last ideas in other to equationally present the concept. For now on, lets provide some examples of Cartesian Closed Categories:
 
@@ -681,4 +711,25 @@ Cartesian Closed Categories will be reformulated in Chapter 4, proposition \ref{
 \end{example}
 
 
-          Proposition 4.1 Lambeck: {\color{red} TODO }. \label{prop:4.1lambeck}
+We can consider, now that we have a category with evaluation, products and a terminal object, what if we consider also the duals. 
+
+\begin{definition}
+  A \emph{cocartesian} category is a category with a specified initial object $\bot$ and for which every finite coproduct exists. A \emph{bicartesian} category is a category that is both cartesian and cocartesian.
+\end{definition}
+
+  \begin{definition}A \emph{closed bicartesian category} is a bicartesian category such that
+  \begin{center}
+  \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
+$ F_{3}^b:C \to C$\\
+$ \qquad c \to c\times b$\\
+  \end{tabular}
+\end{center}
+has a \emph{specified} right adjoint, denoted by:
+\begin{center}
+  \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
+$ G_{3}^b:C \to C$\\
+$ \qquad c \to c^b$\\
+  \end{tabular}
+\end{center}
+
+\end{definition}

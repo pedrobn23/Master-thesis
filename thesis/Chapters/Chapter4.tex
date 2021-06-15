@@ -48,7 +48,7 @@ In  the fashion of previous definitions we can reformulate the logical systems a
 
 Note that $\pi_i^(A_1,A_2)$ depend on both $A_1,A_2$. in the absence of ambiguity we will denote this arrow by $\pi_i$.
 
-\begin{definition}
+\begin{definition} \label{def:positivecalculus}
   A positive intuitionistic calculus is a conjunction calculus $D$ where there is binary an operator $\to: Ob(D)\times Ob(D) \to Ob(D)$ such that:
   \begin{enumerate}
   \item For each $A,B \in Ob(D)$, there is an arrow $\varepsilon^{A,B}: [(B \to A) \land B]\to A$.
@@ -76,7 +76,7 @@ We have already note how a category is a particular case of a deduction system. 
 
 
 \begin{proposition}
-  A cartesian category $C$ is a deduction system that is both conjunction system and a category where:
+  A cartesian category $\mathcal{C}$ is a deduction system that is both conjunction system and a category where:
   \begin{enumerate}
   \item $f:A\to T\implies f=O_A$.
   \item Given $\langle f_1,f_2\rangle: C\to A\land B$ then $\pi_i \circ \langle f_1,f_2\rangle = f_i$.
@@ -102,21 +102,39 @@ B \\
 
 Thus, we can start seeing the kind of bijection already shown in the Curry Howard Isomorphism. Hitherto we can adopt the notation $A\times B$ for the conjunction, in the context of cartesian categories.
 \begin{proposition}\label{def2:CCC}
-  A closed cartesian category $C$ is a deduction system that is a positive intuitionistic calculus that is also a category such that:
+  A closed cartesian category $\mathcal{C}$ is a deduction system that is a positive intuitionistic calculus that is also a category such that:
   \begin{enumerate}
   \item   For all $h: C\times B \to A$ , we have that $\varepsilon \langle h^* \pi_1, \pi_2\rangle = h$.
-  \item   For all $k: C\to [B \to A]$ , we have that $(\varepsilon \langle k \pi_1, \pi_2\rangle) = k$.
+  \item   For all $k: C\to [B \to A]$ , we have that $(\varepsilon \langle k \pi_1, \pi_2\rangle)^* = k$.
   \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-  Lets begin checking that $C$ is a positive intuitionistic calculus and holds 1. and 2. As it is a cartesian category, by it does satisfy the requirements for being a conjunction calculus. Pairing the exponential object $cA^B$ with the function object $B\to A$. As in definition \ref{def:CCC}, we have two functors $F_3$ and $G_3$, that are both adjoint, i.e.:
+  
+  Lets begin checking that $\mathcal{C}$ is a positive intuitionistic calculus and holds 1. and 2. As it is a cartesian category, by it does satisfy the requirements for being a conjunction calculus. Pairing the exponential object $cA^B$ with the function object $B\to A$. As in definition \ref{def:CCC}, we have  3 adjoints, the first two of them are already considered as we have that $C$ is a cartesian category. We now study the third of them and remember that $F_3^B=F$ and $G_3^B=G$ are both adjoint, i.e.:
   $$\hom_C(C \times B, A) \equiv \hom(C, A^B)$$
-  Then, by proposition \ref{prop:univAdjoint}, we can deduce the existence of a natural transformation  $\varepsilon^{A,B}: FG \to I_C$ such that every $\varpesilon(x): F x $
 
+  Therefore, we can check the second part in definition \ref{def:positivecalculus}. Then, remembering proposition \ref{prop:univAdjoint}, we can deduce the existence of a natural transformation  $\varepsilon: FG \to I_C$ i.e. $\varepsilon: A^B\times A = (B\to A)\land A \to A$, having the first part in definition \ref{def:positivecalculus}.\\
+
+  The proof of 1. and 2. are conditions of universality. Lets unpack 1. as 2. is the same reasoning on the other side of the adjoint. We have (remember that, in the notation of part I: $\langle h^*\pi_1, \pi_2\rangle = \langle h^*,1_B\rangle$, and we used to note $h^*=\varphi(h)$):
+\[
+\begin{tikzcd}
+  C\times B\arrow{d}{h}&C\arrow{d}{h^*} & C\times B\arrow{d}{\langle h^*,1_B\rangle} & A^B\times B\arrow{d}{\varepsilon}\\
+  A & A^B = B\to A & A^B\times B & A 
+\end{tikzcd}
+\]
+
+therefore, putting it all together, and remembering the \emph{evaluacion} fashion of $\varepsilon$ (i.e., we have that the following diagram commutes. The 
+
+\[
+\begin{tikzcd}
+  C\times B\arrow{d}{h} \arrow{r}{\langle h^*,1_B\rangle}& A^B\times B \arrow[swap]{dl}{\varepsilon}\\
+  A&
+\end{tikzcd}
+\]
 
   
-  To do the converse, is enough to made the same pairings and apply \ref{prop:equivdefinition} to check that such adjoints are define via $\epsilon$.
+  To do the converse, is enough to made the same pairings and apply the notions of universality of $\varepsilon$ in  and apply \ref{prop:equivdefinition} to check that such adjoints are define via $\epsilon$.
 \end{proof}
 
 These propositions allow us to easily define graph completions to generate a to generate from these CCCs and positive conjunction calculus.
