@@ -14,19 +14,19 @@ Having introduced the notion lambda calculus, category theory and propositional 
 
 We can reformulated the previous logic with this optic. Prior to that we will make an illustrative example on how is this made. All the properties aforementioned (and paired) show that the requirements of typing/intuitionistics calculus can be expressed in just requirements for the arrows. For example, 
 \begin{example}
-\begin{enumerate}
-\item Deduction rule $\to_1$: There is an arrow $$\varepsilon_{A,B}: [B\land (B \to A)] \to A.$$
-\item From deduction rule $\to_2$ it can be deduced:
-  \begin{align*}
-    \Gamma,\{\} \vdash & F= (C\land B)\to A;\\
-    \Gamma, \{(C\land B)\} \vdash & A;\\
-    \Gamma, \{C, B\} \vdash & A;\\
-    \Gamma, \{C\} \vdash & B\to A;\\
-    \Gamma, \{\} \vdash & F'=C \to (B \to A).
-  \end{align*}
-  That is provided an arrow $h: C\land B \to A$ there is an induced arrow
-  $$h^*:C \to [A\to B].$$
-\end{enumerate}
+  \begin{enumerate}
+  \item Deduction rule $\to_1$: There is an arrow $$\varepsilon_{A,B}: [B\land (B \to A)] \to A.$$
+  \item From deduction rule $\to_2$ it can be deduced:
+    \begin{align*}
+      \Gamma,\{\} \vdash & F= (C\land B)\to A;\\
+      \Gamma, \{(C\land B)\} \vdash & A;\\
+      \Gamma, \{C, B\} \vdash & A;\\
+      \Gamma, \{C\} \vdash & B\to A;\\
+      \Gamma, \{\} \vdash & F'=C \to (B \to A).
+    \end{align*}
+    That is provided an arrow $h: C\land B \to A$ there is an induced arrow
+    $$h^*:C \to [A\to B].$$
+  \end{enumerate}
 \end{example}
 
 We can unpack a bit from these notions. To begin with, we can check that the second example include an idea, much needed, in the relationship between assumption and deduction systems. We can view each assumption of truth as a new deduction system. This also seems logical, since an assumption $\Gamma = \{A_i : i=1,...,n\}$  with $A_i$ formulas can be seen as an existence of an arrow $g_i: \top \to A_i$.\\
@@ -92,14 +92,14 @@ We have already note how a category is a particular case of a deduction system. 
 
   Conversely, considering again $T= \top$ we can check that it is a terminal object. Also, for every $h:C\to A\land B$we can see that every $h$ derive the existence of unique $f_1,f_2$ such that:
   \[
-\begin{tikzcd}
-{} & C \arrow[bend right,swap,dashed]{dl}{g}
-\arrow[bend left,dashed]{dr}{h} \arrow{d}[description]{f}& & \\
-A  &A\land B \arrow{l}[swap]{\pi_1} \arrow{r}{\pi_2} & 
-B \\
-\end{tikzcd}
-\]
- And thus we have finite product.
+    \begin{tikzcd}
+      {} & C \arrow[bend right,swap,dashed]{dl}{g}
+      \arrow[bend left,dashed]{dr}{h} \arrow{d}[description]{f}& & \\
+      A  &A\land B \arrow{l}[swap]{\pi_1} \arrow{r}{\pi_2} & 
+      B \\
+    \end{tikzcd}
+  \]
+  And thus we have finite product.
 \end{proof}
 
 Thus, we can start seeing the kind of bijection already shown in the Curry Howard Isomorphism. Hitherto we can adopt the notation $A\times B$ for the conjunction, in the context of cartesian categories.
@@ -119,24 +119,24 @@ Thus, we can start seeing the kind of bijection already shown in the Curry Howar
   Therefore, we can check the second part in definition \ref{def:positivecalculus}. Then, remembering proposition \ref{prop:univAdjoint}, we can deduce the existence of a natural transformation  $\varepsilon: FG \to I_C$ i.e. $\varepsilon: A^B\times A = (B\to A)\land A \to A$, having the first part in definition \ref{def:positivecalculus}.\\
 
   The proof of 1. and 2. are conditions of universality. Lets unpack 1. as 2. is the same reasoning on the other side of the adjoint. We have (remember that, in the notation of part I: $\langle h^*\pi_1, \pi_2\rangle = \langle h^*,1_B\rangle$, and we used to note $h^*=\varphi(h)$):
-\[
-\begin{tikzcd}
-  C\times B\arrow{d}{h}&C\arrow{d}{h^*} & C\times B\arrow{d}{\langle h^*,1_B\rangle} & A^B\times B\arrow{d}{\varepsilon}\\
-  A & A^B = B\to A & A^B\times B & A 
-\end{tikzcd}
-\]
+  \[
+    \begin{tikzcd}
+      C\times B\arrow{d}{h}&C\arrow{d}{h^*} & C\times B\arrow{d}{\langle h^*,1_B\rangle} & A^B\times B\arrow{d}{\varepsilon}\\
+      A & A^B = B\to A & A^B\times B & A 
+    \end{tikzcd}
+  \]
 
-therefore, putting it all together, and remembering the \emph{evaluation} fashion of $\varepsilon$ (i.e., we have that the following diagram commutes. The 
+  therefore, putting it all together, and remembering the \emph{evaluation} fashion of $\varepsilon$ (i.e., we have that the following diagram commutes. The 
 
-\[
-\begin{tikzcd}
-  C\times B\arrow{d}{h} \arrow{r}{\langle h^*,1_B\rangle}& A^B\times B \arrow[swap]{dl}{\varepsilon}\\
-  A&
-\end{tikzcd}
-\]
+  \[
+    \begin{tikzcd}
+      C\times B\arrow{d}{h} \arrow{r}{\langle h^*,1_B\rangle}& A^B\times B \arrow[swap]{dl}{\varepsilon}\\
+      A&
+    \end{tikzcd}
+  \]
 
   
-  To do the converse, is enough to made the same pairings and apply the notions of universality of $\varepsilon$ in  and apply \ref{prop:equivdefinition} to check that such adjoints are define via $\epsilon$.
+  To do the converse, is enough to made the same pairings and apply the notions of universality of $\varepsilon$ in  and apply \ref{prop:equivdefinition} to check that such adjoints are define via $\arepsilon$.
 \end{proof}
 
 These propositions allow us to easily define graph completions to generate a to generate from these CCCs and positive conjunction calculus.
@@ -149,7 +149,7 @@ These propositions allow us to easily define graph completions to generate a to 
   \end{enumerate}
 \end{proposition}
 \begin{remark}
-  Is usual to denote $A\lor B$ as $A+B$ or $A\sqcup B$.
+  Is usual to denote $A\lor B$ as $A+B$ or $A\sqcup B$, as we are working with the coproduct.
 \end{remark} 
 \begin{proof}
   We have proved that it is already a closed cartesian category. Extra considerations are dual to does already considered for a cartesian category.
@@ -158,21 +158,95 @@ These propositions allow us to easily define graph completions to generate a to 
 
 We will now proceed to talk about unfinished products. This is as simple as asking: what would happen if this new truth existed? Or to put it another way in our new language, what if this new arrow were embedded in our graph. We will now study these inclusions and their consequences.\\
 
-To do this, we are going to use the properties of the adjoint that is generated between the forgetful functor $\mathcal U$ and the free category $\mathcal{F}$ functor.{\color {red} add example y chapter 2}.\\
+To do this, we are going to use the properties of the adjoint that is generated between the forgetful functor $\mathcal U$ and the free category $\mathcal{F}$ functor.{\color {red} add example in chapter 2}.\\
+
 
 
 \begin{definition}[Category of closed cartesian categories]
 \end{defintion}
 \begin{proposition}
-Given a cartesian closed category A and any graph morpshim $F: G \to \mathcal U(A)$ there is a unique morsphism in $Cart$  
+  Given a cartesian closed category A and any graph morpshim $F: G \to \mathcal U(A)$ there is a unique morsphism in $Cart$  
 \end{proposition}
 
 
 \subsection{Natural Numbers}
 
 
-Lambda calculus
+We begin this section by motivating the introduction of natural numbers. The importance of these is that we want a computacoin system. These systems, in a modern practical case, are actually intended to compute a function from the natural numbers to the natural numbers (either on a tape in a turing machine, a recursion as in Gödel's computational system, or an abstract formalization in lambda calculus).
 
+We have already seen how natural numbers can be done in untyped calculus. However in this section we will approach the problem, formalizing the notion for typed calculus and introducing the concept of natural numbers in categories.
+
+\subsubsection{Natural Numbers in Categories}
+
+
+\begin{definition}
+  Given a closed cartesian category $C$,  $(N,S:N\to N)\in Ob(C)\times Ar(C)$ is said to be a \emph{natural number} when, for every $f:A\to A\in C$, there is an unique $h$ such that
+\[
+  \begin{tikzcd}
+    1\arrow{dr}{a}\arrow{r}{0} & N\arrow{r}{S}\arrow[dashed]{d}{h} & N\arrow[dashed]{d}{h}\\
+    & A\arrow{r}{f} & A
+  \end{tikzcd}
+\]
+When $h$ exists but is not necessarily unique $(N,S)$ is said to be a \emph{weak natural number}.
+\end{definition}
+
+We can consider natural numbers as an initial object. Having a closed cartesian category $C$, we can consider it as a marked category $C_*$, such as in $Set_*$, with the specified object being $\top =1$. We can also consider the category $J$ provided by the diagram:
+
+\[
+  \begin{tikzcd}
+    1\arrow{r}{0} & N\arrow{r}{S} & N
+  \end{tikzcd}
+\]
+with the specified point being $1$. Then considering $C_*^J$ we can see that every arrow is such that: 
+\[
+  \begin{tikzcd}
+    1\arrow{r}{0}\arrow{d}{1_1} & N\arrow{r}{S}\arrow{d}{h} & N\arrow{d}{g}\\
+    1\arrow{r}{a} & A\arrow{r}{f} & A
+  \end{tikzcd}
+\]
+and is denoted as $(1,h,g)$. Considering the category $(C_*^J)'$ with objects as in $C_*^J$ and arrows  $\{(1,h,g)\in C_*^J: h=g\}$ we have that a natural number for $C$ is an initial object in $(C_*^J)'$. This observation allow us for a simple proposition as a consequence of proposition \ref{prop:initial}:
+
+\begin{proposition}
+  Any two natural number objects are isomorphic.
+\end{proposition}
+
+Every time natural are talked, induction have to appear in some part. The intuition of the categorical concept is that we have a object $N$ that is the set of every natural, and a successor arrow $S$. 
+
+{\color{red} Maybe add the proposition and corollary 9.1 and 9.2 of Lambeck.}
+
+\subsubsection{Natural Numbers in Typed $\lambda$-calculus}
+
+During the study of the Curry-Howard isomorphism we start having the identification between logic and lamdba-calculus. One important note is the fact that, as we can consider different logic deduction system, we can consider different typings, each one paired with a deduction system. When restricted to the world of categories these gave us also another set of paired categories.\\
+
+In this fashion we can go in the other direction: having laid the intuition of what is a natural number in category theory we can proceed to explain what a natural number is in Typed Lambda calculus. Relating the notions of typed lambda calculus shown in \cite[Section 10]{lambek1985cartesian}, \cite[Section 6]{selinger2008lecture} and \cite[Section 10]{cardone2006history}, we can see that it is opted by Lambek to include to simply include some structure over the basic type $\iota$ to provide with a natural number type:
+
+\begin{definition}
+  \emph{Natural number simply type lambda-calculus} is a simply type lamdba calculus where:
+  \begin{enumerate}
+  \item
+  \item
+  \item 
+  \end{enumerate}
+\end{definition}
+
+
+This option has some positive notes{\color{red}Extend}:
+\begin{enumerate}
+\item We enjoy that the natural numbers are a basic contruction, we were already assuming estructure.
+\item We have, as in categories, an object $N$ that is a natural number.
+\item It is a hugely retalable with our future contection with category theory.
+\end{enumerate}
+
+Nonetheless we have already carried out a construction over natural numbers in untyped lambda calculus. That construction is replicable in the context of typed lambda calculus.
+
+\begin{definition}[Church numerals in typed lamdba-calculi]
+  We define the $n$th Church numeral in typed lambda calculi as:
+  $$\overline n = \lambda f^{\iota \to \iora}. \lambda x^{\iota}. f^{n}(\iota).$$
+\end{definition}
+
+Then we have a formal definition.
+
+The study of this area is strangely obscure. 
 
 \subsection{A language from a Closed Cartesian Category}
 
@@ -189,7 +263,7 @@ After defining $L$ we want to show that it is an equivalence of categories. We s
 % \end{theorem}
 
 % \begin{sproof}
-% In a similar fashion of the Church-Rosser Theorem, it is solved by induction in the last rule used in the deduction.
+%   In a similar fashion of the Church-Rosser Theorem, it is solved by induction in the last rule used in the deduction.
 % \end{sproof}
 
 
