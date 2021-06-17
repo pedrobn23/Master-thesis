@@ -1,11 +1,9 @@
 
 \chapter{Curry-Howard-Lambeck bijection}
-In these chapter we raise bridges between Category Theory, Lambda calculus, and Propositional logic. The main sources for this chapter were  \cite{lambek1988introduction} and \cite[Chapter 6]{selinger2008lecture}.\\
+In these chapter we raise bridges between Category Theory, Lambda calculus, and Propositional logic. The main sources for this chapter were  \cite{lambek1988introduction}, \cite{lambek1985cartesian} and \cite[Chapter 6]{selinger2008lecture}.\\
+
 
 \section{Deduction systems}
-
-\subsection{First Definitions}
-\subsubsection{Deduction systems}
 Having introduced the notion lambda calculus, category theory and propositional intuitionistic calculus, is time to have a step back, in other to get the full picture.
 
 \begin{definition}
@@ -214,45 +212,111 @@ Every time natural are talked, induction have to appear in some part. The intuit
 
 {\color{red} Maybe add the proposition and corollary 9.1 and 9.2 of Lambeck.}
 
+
 \subsubsection{Natural Numbers in Typed $\lambda$-calculus}
 
-During the study of the Curry-Howard isomorphism we start having the identification between logic and lamdba-calculus. One important note is the fact that, as we can consider different logic deduction system, we can consider different typings, each one paired with a deduction system. When restricted to the world of categories these gave us also another set of paired categories.\\
+As a consequence of the Curry-Howard isomorphism we have the identification between logic and lamdba-calculus. Afterwards, as we start consider different deduction system  (conjunction calculus, positive, intuitionistic) in logic, we can consider different typed lambda calculus(basic, standard, expanded), each one paired with a deduction system. Finally, we restricted these deduction systems to the world of categories these gave us also another set of paired categories (cartesian, closed cartesian, closed bicartesian).\\
 
-In this fashion we can go in the other direction: having laid the intuition of what is a natural number in category theory we can proceed to explain what a natural number is in Typed Lambda calculus. Relating the notions of typed lambda calculus shown in \cite[Section 10]{lambek1985cartesian}, \cite[Section 6]{selinger2008lecture} and \cite[Section 10]{cardone2006history}, we can see that it is opted by Lambek to include to simply include some structure over the basic type $\iota$ to provide with a natural number type:
+Having laid the intuition of what is a natural number in category theory we can proceed to explain what a natural number is in Typed Lambda calculus. Relating the notions of typed lambda calculus shown in \cite[Section 10]{lambek1988introduction}, \cite[Section 6]{selinger2008lecture} and \cite[Section 10]{cardone2006history}, we can see that it is opted by Lambek to include to simply include some structure over the basic type $\iota$ to provide with a natural number type:
 
-\begin{definition}
-  \emph{Natural number simply type lambda-calculus} is a simply type lamdba calculus where:
-  \begin{enumerate}
-  \item
-  \item
-  \item 
-  \end{enumerate}
+\begin{remark}
+  Remember that $\iota$ was a basic type with no added structure.
+\end{remark}
+\begin{definition}[Lambek natural numbers]
+  \emph{Natural number simply type lambda-calculus} is a simply typed lamdba calculus with the added structure for raw typed lambda terms:
+  \begin{align*}
+    A,B, C ::= ...\ |\ \mathfrak{o}\ |\ S(A)\ |\ I_t(A,B,C);
+  \end{align*}
+for every type $T$, and the related typing rules:
+  \begin{itemize}
+  \item If $N$ is of type $\iota$ so is $S(N)$:
+    $$  (S)\qquad  {\displaystyle\Gamma \vdash N:\iota \over \Gamma \vdash S(N):\iota}.$$
+    In addition, $\mathfrak{o}$ is of type $\iota$:
+    $$  (\mathfrak{o})\qquad  {\displaystyle\Gamma \vdash \over \Gamma \vdash \mathfrak{o}:\iota}.$$
+  \item If $M: A$, $H: A\to A$ and $N\in \iota$ then we can apply $H$ to $M$, $N$ times and get a result in $A$:
+        $$  (I)\qquad  {\displaystyle\Gamma \vdash N:\iota, \qquad \Gamma \vdash M:A,\qquad \Gamma \vdash H:A\to A \over \Gamma \vdash I_A(M,H,N):\iota}.$$
+  \end{itemize}
 \end{definition}
 
+\begin{remark}
+  Natural numbers can be define over any of the different typed lambda calculus. Thus we made a definition by addition of structure. 
+\end{remark}
 
-This option has some positive notes{\color{red}Extend}:
+This option has some positive notes:
 \begin{enumerate}
-\item We enjoy that the natural numbers are a basic contruction, we were already assuming estructure.
 \item We have, as in categories, an object $N$ that is a natural number.
-\item It is a hugely retalable with our future contection with category theory.
+\item It encapsulate in formalism the properties of Church numerals in untyped lambda calculus.
 \end{enumerate}
 
 Nonetheless we have already carried out a construction over natural numbers in untyped lambda calculus. That construction is replicable in the context of typed lambda calculus.
 
 \begin{definition}[Church numerals in typed lamdba-calculi]
-  We define the $n$th Church numeral in typed lambda calculi as:
-  $$\overline n = \lambda f^{\iota \to \iora}. \lambda x^{\iota}. f^{n}(\iota).$$
+  Let We define the $n$th Church numeral in typed lambda calculi as, for a type $t$:
+  $$\overline n^t = \lambda f^{t \to t}. \lambda x^{t}. f^{n}(x).$$
+  
+\end{definition}
+We can deduce this simple proposition:
+\begin{proposition}
+  $\overline n^t$ is of type $(t\to t)\to(t\to t)$.
+\end{proposition}
+
+As a consequence of this proposition, we can consider a type $N$ such that each natural numbers $\overline n^t:N$. Nonetheless:
+\begin{enumerate}
+
+\item To have a similar behaviour of multiple application of a function, the natural numbers are dependent on the type. So to speak, there is a natural number family for each type $t$.
+\item There is no type exclusively for natural numbers, as not necessarily every element of $(t\to t)\to(t\to t)$ is a natural number.
+\item On the plus side, we have the tools to make both a term $S$ and a term $I_t$ in the same manner as it was done in untyped lambda calculus. \\
+\end{enumerate}
+From this point on, we will use the \emph{Lambek} description of natural numbers, letting Church numerals as a construction for untyped lambda calculus.
+
+\subsection{Category of typed lambda calculus}
+
+The objective of this section is to finish forming an idea that has been present for some time in this work: the existence of several lambda calculations. 
+
+While in chapter 3, in the manner of the classical sources on the subject, we have seen a pure proposition-based calculus, deviated from time to time with the help of truth assumptions. In reality we can consider the already known lambda calculus as a basis for each of its instances. Similarly to the group structure, where then there are formally many group instances:
+
+\begin{definition}[Instances of lambda calculus]
+
 \end{definition}
 
-Then we have a formal definition.
+We have just defined a structure. Let's define its morphisms:
 
-The study of this area is strangely obscure. 
+\begin{definition}[Morphisms of lambda-calculus]
+  Let $\Lambda, \Lambda '$ be lambda calculus. A morphism $F: \Lambda \to \Lambda '$ is a function that
+  \begin{enumerate}
+  \item Maps types in $\Lambda$ to types in $\Lambda '$.
+  \item Maps Terms in $\Lambda$ to terms in $\Lambda '$.
+  \item Preserves structures $\to, \times, \pi, ...$
+  \item Preserves $\beta$-equivalence.
+\end{enumerate}
+\end{definition}
+\begin{remark}
+We let the structure part undefined, as we can consider a morphism of the different lamdba calculus structures previously defined.
+\end{remark}
+so we can end up considering the category of the various lambda calculus. 
 
-\subsection{A language from a Closed Cartesian Category}
+
+\begin{definition}[Category of lambda-calculus]
+  We can define the category of 
+\end{definition}
+
+\subsubsection{A language from a Closed Cartesian Category}
+
+Up to this moment, we have related that a closed cartesian category is a positive intuitionistic calculus, that is equivalent to  typed lambda calculus, with some extra structure. The idea is now clear: we are going to generate a typed lambda calculus from a closed cartesian category. Now, we are going to deduce the existence of the internal language.\\
+
+\begin{definition}
+  Let $C$ be a closed cartesian category. Then its \emph{internal language} $\LL (A)$ is the lambda calculus that:
+\begin{itemize}
+\item Has as types the objects of $C$, with $1,N, A\times B, B^A$ having the same pairing as with deduction systems.
+\item Has as terms of type $A$ the polynomials expressions $\varphi(x_1,..,x_n): \Top \to A$ that are obtained by the indeterminates $1\to x$ and the preexiting arrows $1\to A\in Ar(C)$.
+\item TODO: Include terms operations
+\end{definition}
 
 
-\subsubsection{The internal Language}
-Explain Example 10.6 and proposition 10.7
+
+
+
+
 \subsubsection{Equivalence}
 After defining $L$ we want to show that it is an equivalence of categories. We shall obtain a functor $C$ in the opposite direction.  
 
