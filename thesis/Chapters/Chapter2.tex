@@ -1,18 +1,18 @@
 
 \chapter{Universality, Adjoints and Closed Cartesian Categories}
+\thispagestyle{empty}
+In this chapter we are going to study universality and adjunctions. Despite a possible apparent difference in their definitions, both have the same use: they are tools that, given an arrow selected in a category, allow us to uniquely select an arrow in another category, generally fulfilling some special property. \\
 
-In this chapter we are going to study universality and adjunctions. Despite a possible apparent difference in definitions, both have the same use: they are tools that, given an arrow selected in a category, allow us to uniquely select an arrow in another category, generally fulfilling some special property (if not, a functor would be enough). \\
-
-We will start this section with the definition of universality, as well as the statement of Yoneda's lemma. Then, we present the concept of Adjunction. We will use these concepts to introduce new structures, in particular that of closed Cartesian category.
+We will start this section with the definition of universality, as well as the statement of the celebrated Yoneda's lemma. Then, we present the concept of adjunction. We will use these concepts to introduce new structures, in particular that of closed Cartesian category.
 
 
 \section{Universality}
-In this section we present the concept of universality. This concept is behind lots of mathematical properties. Intuitively, universality is an efficient way of expressing an one-to-one correspondence between arrows of different categories. This one-to-one relationship is usually expressed via ''given an arrow  $y$ it exists one and only one  arrow $x$ such that <insert your favorite universal property>''.\\
+In this section we present the concept of universality. This concept is behind lots of mathematical properties. Intuitively, universality is an efficient way of expressing a one-to-one correspondence between arrows of different categories. This one-to-one relationship is usually expressed via ''given an arrow  $f$ it exists one and only one  arrow $\overline f$ such that <insert your favorite universal property>''.\\
 
-Lets do an introductory example. Probably the first contact that any mathematician has with universality is defining a function  $f:\mathbb R \to \mathbb R^2$. It is easy to see that defining such a function is equivalent to define two $g,h: \mathbb R \to \mathbb R$. Furthermore, those $g,h$ are unique for each $f$. This uniqueness is the flavor that attempts to capture the concept of universality. Other examples of unique existence are those that occur in quotient groups or in bases of vector spaces. \\
+Probably the first contact that any mathematician has with universality is defining a function  $f:\mathbb R \to \mathbb R^2$. It is easy to see that defining such a function is equivalent to define two $g,h: \mathbb R \to \mathbb R$. Furthermore, those $g,h$ are unique for each $f$. This uniqueness is the flavor that attempts to capture the concept of universality. Other examples of unique existence are those that occur in quotient groups or in bases of vector spaces. \\
 
 \begin{definition}\label{def:univ-arrow}
-  Let $S: D \to C$ be a functor and $c \in Ob(C)$, an \emph{universal arrow}  from $c$ to $S$ is a pair $(d,u)$ with $d\in Ob(D), u:c \to Sd \in Ar(C)$, such that for every $(e,f)$ with $e\in Ob(D)$  and $f:c\to Sd$ there exists an unique $f':r,d\in Ar(D)$ such that $Sf'\circ u = f$.
+  Let $S: D \to C$ be a functor and $c \in Ob(C)$. An \emph{universal arrow}  from $c$ to $S$ is a pair $(d,u)$ with $d\in Ob(D), u:c \to Sd \in Ar(C)$, such that for every $(e,f)$ with $e\in Ob(D)$  and $f:c\to Sd$ there exists an unique $f':r,d\in Ar(D)$ such that $Sf'\circ u = f$.
 
 \end{definition}
 In a diagram:

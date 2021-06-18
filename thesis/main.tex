@@ -112,6 +112,9 @@ Dr. Ángel González Prieto  \\ \emph{Departamento de Matemáticas \\ Universida
 %----------------------------------------------------------------------------------
 
 
+\usepackage{titlesec}
+
+
 %\usepackage[british]{babel}
 \usepackage{caption}
 \usepackage{adjustbox}
@@ -181,19 +184,22 @@ Dr. Ángel González Prieto  \\ \emph{Departamento de Matemáticas \\ Universida
 
 \mainmatter
 \part{Category Theory}
+\thispagestyle{empty}
 \label{Part1}
 
 \input{Chapters/Chapter1}
 \input{Chapters/Chapter2}
 
 
-\\part{Lambda Calculus}
+\part{Lambda Calculus}
 \label{Part2}
 
 
 \input{Chapters/Chapter3}
 \input{Chapters/Chapter4}
-%\input{chapters/apendix1}
+
+\appendix
+\input{Chapters/apendix1}
 
 %\section*{Acknowledgements}
 
