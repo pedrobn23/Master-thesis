@@ -261,9 +261,7 @@ Lets provide some examples of functors:\\
 
     \begin{theorem} Let $\mathbb{K}=\mathbb R $ or $\mathbb C$ and let $\Omega$ be a completely regular Hausdorff topological space. Then there exists a compact Hausdorff topological space $\beta \Omega$ and a homeomorphism $\Phi$, from $\Omega$ to a dense subset of $\beta\Omega$. Moreover, for every continuous and bounded function $f: \Omega \to \K$ there exists a unique $\overline{f} \in C(\beta \Omega)$ such that $\overline{f}\circ \Phi = f$ and the application $f \to \overline{f}$ is an isomorphism. Finally, $\beta \Omega$ is uniquely determined up to isomorphism by the above properties.
     \end{theorem}
-    \begin{remark}
 
-    \end{remark}
     \begin{proof}
       We define the functional $\Delta: \Omega \to \Omega^{**}$   such that $\Delta(t)=\delta_t$ where $\delta_t(f) = f(t)$ is Dirac's operator .  It is enough to take as $\beta \Omega$ the closure of $\Delta(\Omega)$ in the induced weak-topology $\omega^*$ of $\Omega$ (since in the weak topology we have that a bounded closed is compact).  
       
@@ -437,7 +435,7 @@ From this bifunctor we can define two functors for every $c\in Ob(C),g:d\to d' \
  and
   \begin{align*}
     \hom_C(c,g): \hom_C (a,d) & \to \hom_C(a,d'),\\
-    \hom_C(c,g) (h)   &= g \circ h .\\
+    \hom_C(c,g) (h)   &= g \circ h .
   \end{align*}
 
 \item  The covariant functor $\hom_C(\cdot, c):C^{op}\to Set$, defined analogously.

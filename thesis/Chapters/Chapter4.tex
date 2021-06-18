@@ -268,16 +268,19 @@ As a consequence of this proposition, we can consider a type $N$ such that each 
 \item There is no type exclusively for natural numbers, as not necessarily every element of $(t\to t)\to(t\to t)$ is a natural number.
 \item On the plus side, we have the tools to make both a term $S$ and a term $I_t$ in the same manner as it was done in untyped lambda calculus. \\
 \end{enumerate}
-From this point on, we will use the \emph{Lambek} description of natural numbers, letting Church numerals as a construction for untyped lambda calculus.
+From this point on, we will use the Lambek description of natural numbers, letting Church numerals as a construction for untyped lambda calculus.\\
+
+Lastly, we can consider the effect of lambeck description in $\beta$-reduction.
 
 \subsection{Category of typed lambda calculus}
 
-The objective of this section is to finish forming an idea that has been present for some time in this work: the existence of several lambda calculations. 
+The objective of this section is to finish forming an idea that has been present for some time in this work: the existence of several lambda calculations. \\
 
-While in chapter 3, in the manner of the classical sources on the subject, we have seen a pure proposition-based calculus, deviated from time to time with the help of truth assumptions. In reality we can consider the already known lambda calculus as a basis for each of its instances. Similarly to the group structure, where then there are formally many group instances:
+While in chapter 3, in the manner of the classical sources on the subject, we have seen a pure proposition-based calculus, deviated from time to time with the help of truth assumptions. In reality we can consider the already known lambda calculus as a basis for each of its instances. Similarly to the group structure, where then there are formally many group instances, we have a lambda calculus in every structure that allow lambda calculus rules and operators.\\
 
+Here, we can use the Curry-Howard isomorphism to ease the definition definition.
 \begin{definition}[Instances of lambda calculus]
-
+  A deductive system $D$ is a typed lambda calculus with natural numbers if it is a positive intuitionistic calculus ...
 \end{definition}
 
 We have just defined a structure. Let's define its morphisms:
@@ -312,8 +315,8 @@ Up to this moment, we have related that a closed cartesian category is a positiv
   Let $C$ be a closed cartesian category. Then its \emph{internal language} $\LL (A)$ is the lambda calculus that:
 \begin{itemize}
 \item Has as types the objects of $C$, with $1,N, A\times B, B^A$ having the same pairing as with deduction systems.
-\item Has as terms of type $A$ the polynomials expressions $\varphi(x_1,..,x_n): \Top \to A$ that are obtained by the indeterminates $1\to x$ and the preexiting arrows $1\to A\in Ar(C)$.
-\item TODO: Include terms operations
+\item Has as terms of type $A$ the polynomials expressions $\varphi(x_1,..,x_n): \Top \to A$ that are obtained by the indeterminates $1\to x$ and the preexiting arrows $1\to A\in Ar(C)$ .
+\item 
 \end{definition}
 
 
