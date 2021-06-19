@@ -1,0 +1,157 @@
+% Tipo de documento (presentación)
+\documentclass[usenames,dvipsnames]{beamer}
+
+% Cargar el tema
+\usetheme{metropolis}
+
+% Configuración de LaTeX
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+
+
+\usepackage{graphicx,wrapfig,lipsum}
+
+% Configuración básica del tema
+\metroset{
+  % tema oscuro ('dark') o claro ('light'). No tiene efecto al usar la
+  % paleta de colores más adelante
+  background=light,
+  % 'none' para eliminar la diapositiva inicial de cada sección
+  sectionpage=progressbar,
+  % 'progressbar' o 'simple' para añadir una diapositiva inicial a cada subsección
+  subsectionpage=none,
+  % contador de página: 'none', 'counter' o 'fraction'
+  numbering=none,
+  % barra de progreso: 'none', 'head', 'frametitle' o 'foot'
+  progressbar=frametitle,
+  % fondo de los bloques estilo teorema: 'transparent' o 'fill'
+  block=fill,
+}
+
+
+% Paleta de colores
+\definecolor{accent}{RGB}{151, 186, 88}
+\colorlet{darkaccent}{accent!70!black}
+\definecolor{foreground}{RGB}{0, 0, 0}
+\definecolor{background}{RGB}{255, 255, 255}
+
+% Insertar los colores en el tema
+\setbeamercolor{normal text}{fg=foreground, bg=background}
+\setbeamercolor{alerted text}{fg=darkaccent, bg=background}
+\setbeamercolor{example text}{fg=foreground, bg=background}
+\setbeamercolor{frametitle}{fg=background, bg=accent}
+
+\setbeamercolor{headtitle}{fg=background!70!accent,bg=accent!90!foreground}
+\setbeamercolor{headnav}{fg=background,bg=accent!90!foreground}
+\setbeamercolor{section in head/foot}{fg=background,bg=accent}
+
+% 
+\defbeamertemplate*{headline}{miniframes theme no subsection}{
+  % Caja para mostrar título y autor encima de cada diapositiva
+  % Nosotros no 
+  %% \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,
+  %%   leftskip=.3cm,rightskip=.3cm plus1fil]{headtitle}
+  %%   {\usebeamerfont{title in head/foot}\insertshorttitle}
+  %%   \hfill
+  %%   \leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}
+  %% \end{beamercolorbox}
+  %% \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+  %% \end{beamercolorbox}
+
+  % Caja para mostrar navegación encima de cada diapositiva
+  \begin{beamercolorbox}{headnav}
+    \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+  \end{beamercolorbox}
+}
+
+% eye-candy; sintasix más bonita
+\newcommand{\seccion}[1]{\input{./sections/#1}}
+\newcommand{\foo}{\hspace{-2.3pt}$\bullet$ \hspace{5pt}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\re}{\operatorname{Re}}
+\newcommand{\cow}{\overline{co}^{\omega^*}}
+
+% Meta
+\title{Cálculo lambda y Lógica Intuicionista}
+\subtitle{Diferentes ópticas del mismo problema}
+\date{\today}
+\institute{EsLibre 2021}
+\author{Pedro Bonilla Nadal}
+\titlegraphic{}
+\newtheorem{lema}{Lema}
+\newtheorem{teorema}{Teorema}
+\newtheorem{corolario}{Corolario}
+\newtheorem{proposicion}{Proposición}
+\newtheorem{definicion}{Definición}
+
+
+\begin{document}
+\maketitle
+\begin{frame}{Contenidos}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents [hideallsubsections]
+\end{frame}
+
+\section{Un sistema de computo}
+\begin{frame}[Abstraer el problema de Computar]
+
+\end{frame}
+
+\begin{frame}[Cálculo Lambda no Tipado]
+
+\end{frame}
+
+\begin{frame}{Reducciónes}
+  
+\end{frame}
+
+\begin{frame}[Interpretación del sistema en Teoría de Conjuntos]
+
+\end{frame}
+
+\begin{frame}
+  
+\end{frame}
+
+
+\begin{frame}[Números naturales]
+
+\end{frame}
+
+
+
+\section{Lógica Intuicionista}
+
+\begin{frame}[Breve Presentación]
+
+\end{frame}
+
+\begin{frame}[Sistemas deductivos]
+
+\end{frame}
+
+\begin{frame}[Calculo lambda tipado como Sistema deductivo]
+  
+\end{frame}
+\section{Curry-Howard}
+
+\begin{frame}[Curry-Howard]
+  
+\end{frame}
+
+\begin{frame}[Más allá de Curry howard]
+
+\end{frame}
+
+\begin{frame}[Bibliografía y para saber más]
+
+\end{frame}
+\end{document}
