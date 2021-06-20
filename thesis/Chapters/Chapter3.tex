@@ -215,7 +215,19 @@ This subsection we present an important result for $\lambda$-calculus: the \emph
 \end{remark}
 
 
-With this notation, we introduce the Church-Rosser Theorem, proved as done by Martin-Löf. We are going to need some tools. The first one is going to be an alternative definition of $\toheadrightarrow_{\beta\eta}$.
+With this notation, we introduce the Church-Rosser Theorem, proved as done by Martin-Löf.
+
+\begin{theorem}{Church-Rosser}\label{theo:church-rosser}
+  \begin{enumerate}
+  \item $\twoheadrightarrow_{\beta\eta}$ satisfy the Church-Rosser property.
+  \item $\twoheadrightarrow_{\beta}$ satisfy the Church-Rosser property.
+  \end{enumerate}
+\end{theorem}
+
+
+
+
+We prove the theorem only for the $ \twoheadrightarrow_{\beta\eta}$ case. We refer to [Theorem 1.32, \cite{hindley2008lambda}] for a full proof for $\twoheadrightarrow_\beta$. he first step in the proof is going to be an alternative definition of $\toheadrightarrow_{\beta\eta}$, as a completion of a new reduction $\triangleright$.
 \begin{definition}[parallel one-step reduction]
   We define the parallel one-step reduction  $\triangleright$ as the smallest relationship such that,\\
 \begin{align*}
@@ -231,7 +243,7 @@ With this notation, we introduce the Church-Rosser Theorem, proved as done by Ma
 where $x$ is any variable and $M,N,M',N'$ any term.
 \end{definition}
 
-\begin{lemma}[Characterization of $\triangleright$]
+\begin{lemma}[Characterization of $\triangleright$]\label{lemma:cr1}
   Let $M,M'$ be terms, then:
   \begin{enumerate}
   \item $M\to_{\beta\eta} M'\implies M \triangleright M'$
@@ -240,7 +252,7 @@ where $x$ is any variable and $M,N,M',N'$ any term.
 \end{lemma}
 \begin{proof}
   \begin{enumerate}
-  \item Using (1), (2) and (3) in an induction argument derives in $N\triangleright N$ for any term. Then, we assume that $M\to_{\beta\eta}M'$. We  apply induction on the structure of $\to_{\beta\eta}$ and conclude proving that every rule use for $\M \to_{\beta\eta} M'$ implies $M \triangleright M'$.
+  \item  We  apply induction on the structure of $\to_{\beta\eta}$. That is, we know that $\to_{\beta\eta}$ have to be constructed following a series of rules. We are going to use induction on the last rule used. Therefore we conclude  every rule use for $\M \to_{\beta\eta} M'$ implies $M \triangleright M'$.
 
     \begin{itemize}
     \item[($\beta$)] In this case, then $M=(\lambda x.Q)M$ and $M' = Q[N/x]$. Then using (4) $M \triangleright M'$.
@@ -264,8 +276,6 @@ where $x$ is any variable and $M,N,M',N'$ any term.
       Where, in every point, $x$ denote some variable, and $M,N,M',N',P,Q,Q'$ denote some term.
 \end{proof}
 
-\begin{remark} As a consequence, $\twoheadrightarrow_{\beta\eta}$ is the reflexive, transitive closure of $\triangleright$.
-  \end{remark}
 \begin{lemma}[Subtitution Lemma]If $M \triangleright M'$ and $U \triangleright U'$ , then $M [U/y] \triangleright M' [U' /y]$.
 \end{lemma}
 \begin{proof}
@@ -295,7 +305,7 @@ While the proof is rather straight forward, one can see that it does require ind
 \end{definition}
 
 
-\begin{lemma}[Maximal Parallel one-step]
+\begin{lemma}[Maximal Parallel one-step]\label{lemma:cr2}
   If $M\triangleright M'$ then $M'\triangleright M^*$.
 \end{lemma}
 \begin{proof}
@@ -318,30 +328,11 @@ While the proof is rather straight forward, one can see that it does require ind
     \end{itemize}
 \end{proof}
 
-\begin{remark}
-  We have thus proved that $\triangleright$ have the diamond property.
-\end{remark}
 
-\begin{remark}
-  If a relation $\to$ satisfy the diamond property, its closure $\twoheadrightarrow$ satisfy the Church-Rosser property.
-\end{remark}
+\begin{proof}[Proof of Theorem \ref{theo:church-rosser}]   If a relation $\to$ satisfy the diamond property, its reflexive, transitive closure $\twoheadrightarrow$ satisfy the Church-Rosser property. As a consequence of lemma \ref{lemma:cr2}, we know that $\triangleright$ satisfy the diamond property.  By lemma \ref{lemma:cr1} we know that the reflexive, transitive closure of $\triangleright$ is $\twoheadrightarrow_{\beta\eta}$.
+\end{proof}
 
-
-As a direct consequence of the previous lemmas, we prove the Church-Rosser theorem.
-\begin{theorem}{Church-Rosser}
-  $\twoheadrightarrow_{\beta\eta}$ satisfy the Church-Rosser property.
-\end{theorem}
-
-Now let take a moment to comment on the usefulness of each reduction. We can say that $\beta$ reduction is the soul of computation  while $\eta$ is useful to cleanup the results. In fact, Church-Rosser is also stated in an alternative form that only includes $\beta$-reduction, with a rather similar proof that we omit, but can be checked in [Theorem 1.32, \cite{hindley2008lambda}].
-
-\begin{theorem}
-  $\twoheadrightarrow_{\beta}$ satisfy the Church-Rosser property.
-\end{theorem}
-
-This theorem gives coherence to the definitions, as it states that any two deduction are basically the same but for the order of the steps. Therefore we can consider $\lambda$-calculus and operate, with $\alpha$-equivalence and $\twoheadrightarrow_{\beta\eta}$ reduction to derives terms. This can be used to define \emph{normal} forms for untyped lambda-terms. More infomation on normalization can be found on \cite{selinger2008lecture}. \\
-
-
-
+Now let take a moment to comment on the usefulness of each reduction. We can say that $\beta$ reduction is the soul of computation  while $\eta$ is useful to cleanup the results.  This can be used to define \emph{normal} forms for untyped lambda-terms. More infomation on normalization can be found on \cite{selinger2008lecture}. \\
 
 
 \subsection{Fixed points and Programming}
@@ -350,14 +341,14 @@ In this subsection we expose the basic rudiments for programming in untyped $\la
 \begin{definition}[Boolean in untyped lambda-calculus] \label{def:untyped-natural} 
   We define the two values $T$ and $F$, true and false, as:
   \begin{align*}
-    T &= \lambda xy.z,\\
-    F &= \lambda xy.z.
+    \operatorname{True} &= \lambda xy.z,\\
+    \operatorname{False} &= \lambda xy.z.
   \end{align*}
   We also define the operations:
   \begin{align*}
-    \operatorname{Not} &= \lambda a.aFT,\\
-    \operatorname{And} &= \lambda ab.abF,\\
-    \operatorname{Or} &= \lambda ab.aTb.
+    \operatorname{Not} &= \lambda a.a\operatorname{False}\operatorname{True},\\
+    \operatorname{And} &= \lambda ab.ab\operatorname{False},\\
+    \operatorname{Or} &= \lambda ab.a\operatorname{True}b.
   \end{align*}
 \end{definition}
 
@@ -367,7 +358,7 @@ We can check that this construction left us with the basis of a boolean logic, a
   We define the $\operatorname{If} = \lambda x.x$.  
 \end{definition}
 
-We can see that in this case, $\operatorname{If} T M N = M$ and $\operatorname{If} F M N = N$. This construction is very natural and widely used in computer programs. Next, we will define Naturals number. 
+We can see that in this case, $\operatorname{If} \operatorname{True} M N = M$ and $\operatorname{If} \operatorname{False} M N = N$. This construction is very natural and widely used in computer programs. Next, we will define Naturals number. 
 
 \begin{definition}[Natural numbers in untyped lambda-calculus] \label{def:untyped-natural} 
 Let $f,x$ be fixed $\lambda$-terms, and write $f^nx = f(f(f(...(f(x))...)))$. Then, for each $n \in \mathbb N$, we define the \emph{nth Church numeral} as $\overline n=\lambda fx.f^nx$.
@@ -404,10 +395,9 @@ This existence of fixed point theorem is really useful, as we can now define \em
   \end{align*}
                                 
 \end{definition}
-
-Suppose that we want to define the factorial such that
+Suppose that we want to define the factorial. We want that:
 $$\operatorname{fact} n = \operatorname{If}(\operatorname{iszero} n)(1)(\operatorname{mult}(n)(\operatorname{fact} (\operatorname{pred}(n))),$$
-in orther to do that, we can simply see of all terms, what is a fixed point of:
+in orther to do that, look for a fixed point of:
 $$\lambda f. \lambda n.\operatorname{If}(\operatorname{iszero}n)(1)(\operatorname{mult}(n)(f (\operatorname{pred}(n))),$$
 and thus $\operatorname{fact}=\Theta \lambda f.\lambda n. \operatorname{If}(\operatorname{iszero}n)(1)(\operatorname{mult}(n)(f (\operatorname{pred}(n)))$. In general:
 
@@ -427,33 +417,24 @@ This operator is used for the Curry's paradox.\\
 
 \subsection{Rosser-Kleene and Curry's Paradoxes}
 
-In this subsection we explain the deficits in untyped $\lambda$-calculus, that was the original Church construction, that eventually leads into the definition of \emph{typed} $\lambda$-\emph{calculus}.
-
-An aproximation of this argument can be done if we consider domains of functions to be sets. In particular untyped $\lambda$-calculus allow functions to be applied to themselves. This is going to be troublesome, considering domains as sets, as this will be a clear infringement of \emph{ZF Axiom Theory}\cite{kunen2014set}. Namely, the infinite descending sequence
-$$f\ni \{f,f(f)\}\ni f \ni \{f,f(f)\}...$$
-in contradiction with the \emph{regularity axiom}. An approach that seek solving this problems is presented in the next section, starring the introduction of types.  \\
-
-This last idea, despite being clear and loud to the intuition, is not a proof of inconsistency as there is no need for domains to be sets. Nonetheless, there was another problem that is to be deal that was noticed before. $\lamdba$-calculus was proposed to be a deductive system. The  \emph{Kleene-Rosser paradox}, first exhibited in \cite{kleene1935inconsistency} proved that simply typed $\lambda$-calculus is inconsistent. This paradox was perfected in 1958 by Curry \cite{curry1958combinatory} with the so called \emph{Curry's paradox}. \\
-
- To solve these problems, a very natural idea is included: the use of types in our computation system. This idea is very natural nowadays, as nearly everyone learns to program priors to a deep academic career. However, we must not forget that the origin was not to use types because we liked them initially, but because they really allow us to avoid logical problems.  
-
-\subsection{Lambda calculus as a computation system}
-Around 1930, people start thinking about what mean for a function to be computable. There were three major answer to this question (section 4, \cite{cardone2006history}):
-\begin{itemize}
-\item In 1930s Alonzo Church introduces the notion of $\lambda$-calculus, in which a function is computable if we can write it as a recursive-lambda term onto Church's numerals, that is, if we can deduce the result after a (hopefully finite) deduction steps.
-\item Later, Alan Turing, who had previously been a doctoral student of Alonzo Church, developed the concept of the Turing machine, in which a function is computable if a tape machine with a limited set of operations is capable of reproducing it.
-\item Meanwhile, Gödel define the computable function as the minimum set of function such that some properties (such as the existence of a successor function) are includes, and is closed under some operations. 
-\end{itemize}
-
-The goal of this three mathematicians was to solve the Entscheidungsproblem\cite{hilbert1999principles}.\\
-
-The interest for this type of problems was clear for the mathematical community as the goal was to propose an algorithm that solve every theorem and can be computed. The Church-Turing thesis fromally proved that these three independently generated notions were in fact equivalent\cite{copeland1997church}.\\
+In this subsection we explain the deficits in untyped $\lambda$-calculus, that was the original Church construction, that eventually leads into the definition of \emph{typed} $\lambda$-\emph{calculus}.\\
 
 
-This thesis is also formulated in a philosophical background, to state that every effective computable function system is equivalent to those three. While it can not be formally proven, it has near-universal acceptance to date. Any computing system that can replicate, and thus is equivalent, to either Turing Machines Calculus or $\lambda$-Calculus is said to be \emph{Turing Complete}.\\
+We can start by having a quick reasoning, as shown in \cite{sep-lambda-calculus}.
 
-Nonetheless, after the formalization of the solution of this problem there were a last problem that was not adverted: the finiteness of time. SAT is the problem that has as input a propositional logic formula and solve whether it is satisfiable. This problem is NP-complete, quite famously the firs of these problems\cite{cook1971complexity}. If we consider the analogous problem for first order algebra, we have an even more complex P-space-complete problem, being almost intractable in worst cases to this date. As a happy consequence for us, much work is left to be done in this area \cite{cook2006p}. 
 
+{TODO This Summer: expand this subsection properly.}
+
+% An aproximation of this argument can be done if we consider domains of functions to be sets. In particular untyped $\lambda$-calculus allow functions to be applied to themselves. This is going to be troublesome, considering domains as sets, as this will be a clear infringement of \emph{ZF Axiom Theory}\cite{kunen2014set}. Namely, the infinite descending sequence
+% $$f\ni \{f,f(f)\}\ni f \ni \{f,f(f)\}...$$
+% in contradiction with the \emph{regularity axiom}. An approach that seek solving this problems is presented in the next section, starring the introduction of types.  \\
+
+% This last idea, despite being clear and loud to the intuition, is not a proof of inconsistency as there is no need for domains to be sets. Nonetheless, there was another problem that is to be deal that was noticed before. $\lamdba$-calculus was proposed to be a deductive system. The  \emph{Kleene-Rosser paradox}, first exhibited in \cite{kleene1935inconsistency} proved that simply typed $\lambda$-calculus is inconsistent. This paradox was perfected in 1958 by Curry \cite{curry1958combinatory} with the so called \emph{Curry's paradox}. \\
+
+%  To solve these problems, a very natural idea is included: the use of types in our computation system. This idea is very natural nowadays, as nearly everyone learns to program priors to a deep academic career. However, we must not forget that the origin was not to use types because we liked them initially, but because they really allow us to avoid logical problems.  
+
+
+ 
 \section{Typed $\lambda$-Calculus}
 \emph{Typed $\lambda$-calculus} is a refinement of untyped $\lambda$-calculus, presented as a for the Rosser-Kleene paradox. In this we will introduce the concept of typing. This idea is intended to restrict the ability of types to combine with each other. We start defining \emph{simply typed }$\lambda$\emph{-calculus}, on which we only consider a handfull of basic types, and product and function types. In opposition we can study \emph{dependent typing}, where types can be construct onto each other.
 
@@ -527,18 +508,8 @@ Note that not every term can be typed, namely the two previous examples of bad-b
 
 By assigning type we mean assigning types to the free and bound variables. Further on, when talking about terms we will refer to simply type $\lambda$-terms. On these terms, we can define substitution just like we defined it on untyped $\lambda$-calculus.
 
-\subsection{Unification of typing}
 
-We can consider two standards in typing: \emph{Church Style} and \emph{Curry Style}.
-\begin{itemize}
-\item Church style,  first shown in \cite{church1940formulation}, is an explicit system, as we do only consider expression with well defined types, in the same way that a function is consider with regard to it domain and codomain. In summary, the typing of a function is the first part of the definition of it, so you can define $f:(0,1)\to (0,1)$ and just then define $f(x)=1/x$. This domain is not it only possible domain, but it what we choose it to be. 
-\item Curry style on the other hand, gain some of the notions of untyped $\lambda$-calculus and consider expression as function. To continue the real function analogy, it consider that the function $f(x)=x^2$ just exists, and one can check that it is well defined on $\R$. \\
-\end{itemize}
-More information about the typing style can be found on Chapter 10 and 11 of \cite{hindley2008lambda}. \\
-
-Despite this apparent differences, both typing styles can be \emph{unified}. An unifier is a pair of substitution that makes two type styles equal as typed templates. Such an unifier is based onta an algorithm based on type inference. This is instrumental to languages  as relevant \texttt{python}, that works with implicit typed variables. How this algorithms for unification is shown in great detail in chapter 9  of \cite{selinger2008lecture}. Due to this unification, we can consider only explicitely typed terms without any remorse.
-
-\subsection{Church-Rosser on simply typed $\lambda$-calculus}
+\subsection{Reductions simply typed $\lambda$-calculus}
 
 To talk Church-Rosser, we have to talk reduction. Reductions are basically the same but for the additional structure added that we need to respect: 
 
@@ -572,8 +543,10 @@ We can now talk about about Church-Rosser.  Lets check that it does not hold. Fo
 
 Despite this, $\beta$-reduction does maintain the Church-Rosser property, so from a computational point of view there is no problem at all.
 
-\subsection{Expanded Typing}
-
+\subsection{Minimal and Expanded Typing}
+\subsubsection{Minimal Typing}
+The already explained $\lambda$-calculus can be reduce to a slimmer version. In fact, the only type truly necessary are the function types,  
+\subsubsection{Expanded Typing}
 We can add to the definition of typing by considering the sum Type. The idea is to have two types $A$ and $B$ and be able to consider a term $\lambda x^{A+B}. x+1$. That is, we can consider two types to be acceptable by a function. This notion, commonplace in engineering, has to be formalized to be acceptable:
 
 \begin{definition}
@@ -606,6 +579,21 @@ For this typing, three new rules are included for type derivation, in addition t
     $$  (\square)\qquad  {\displaystyle\Gamma \vdash M:0 \over \Gamma \vdash \square^A M:A}.$$
   \end{itemize}
 \end{definition}
+
+\subsubsection{Pure and impure typed $\lambda$-calculus}
+
+
+\subsection{Unification of typing}
+
+We can consider two standards in typing: \emph{Church Style} and \emph{Curry Style}.
+\begin{itemize}
+\item Church style,  first shown in \cite{church1940formulation}, is an explicit system, as we do only consider expression with well defined types, in the same way that a function is consider with regard to it domain and codomain. In summary, the typing of a function is the first part of the definition of it, so you can define $f:(0,1)\to (0,1)$ and just then define $f(x)=1/x$. This domain is not it only possible domain, but it what we choose it to be. 
+\item Curry style on the other hand, gain some of the notions of untyped $\lambda$-calculus and consider expression as function. To continue the real function analogy, it consider that the function $f(x)=x^2$ just exists, and one can check that it is well defined on $\R$. \\
+\end{itemize}
+More information about the typing style can be found on Chapter 10 and 11 of \cite{hindley2008lambda}. \\
+
+Despite this apparent differences, both typing styles can be \emph{unified}. An unifier is a pair of substitution that makes two type styles equal as typed templates. Such an unifier is based onta an algorithm based on type inference. This is instrumental to languages  as relevant \texttt{python}, that works with implicit typed variables. How this algorithms for unification is shown in great detail in chapter 9  of \cite{selinger2008lecture}. Due to this unification, we can consider only explicitely typed terms without any remorse.
+
 \section{Curry-Howard bijection}
 \subsection{Natural deduction}
 In this section we succinctly introduce the notation of propositional intuitionistic logic, in order to work with them further in the chapter. Therefore, we spare our readers of yet another comprehensive introduction of the widely known propositional logic. Should it be required, more information of propositional logic can be found in, for example, \cite{marek2009introduction} and \cite{wadler2015propositions}. Natural deduction originally appears in the works of \cite{gentzen1935untersuchungen}. \\
@@ -724,4 +712,27 @@ And we can see that this pairing holds because we can see that Typing rules
 With this construction we have develop a pairing in syntax,  now we can make a pairing in semantics. The million dollar question is: Who do we relate the concept of term with? We relate it with the concept of truth derivation. That is, given a term $M$  of type $C$ with associated formula $F$. By replacing each typing rule needed to deduce $M:C$  with an associated derivation rule, we can get a truth derivation, and conversely with a truth derivation of $F\to \top$ from $\Gamma=\{\}$.\\
 
 We can mentioned prior, we can vary lightly the definitions, but an analogue pairing still holds. For example, we can consider an intuitionistic logic where there is no $\lor$ nor $\bot$ in a pairing with (unextended) simply typed. Further on the text we will examine this variation of pairings.
+
+\section{Lambda calculus as a computation system}
+{TODO This Summer: expand this subsection properly.}
+
+\begin{itemize}
+
+\end{itemize}
+
+Around 1930, people start thinking about what mean for a function to be computable. There were three major answer to this question (section 4, \cite{cardone2006history}):
+\begin{itemize}
+\item In 1930s Alonzo Church introduces the notion of $\lambda$-calculus, in which a function is computable if we can write it as a recursive-lambda term onto Church's numerals, that is, if we can deduce the result after a (hopefully finite) deduction steps.
+\item Later, Alan Turing, who had previously been a doctoral student of Alonzo Church, developed the concept of the Turing machine, in which a function is computable if a tape machine with a limited set of operations is capable of reproducing it.
+\item Meanwhile, Gödel define the computable function as the minimum set of function such that some properties (such as the existence of a successor function) are includes, and is closed under some operations. 
+\end{itemize}
+
+The goal of this three mathematicians was to solve the Entscheidungsproblem\cite{hilbert1999principles}.\\
+
+The interest for this type of problems was clear for the mathematical community as the goal was to propose an algorithm that solve every theorem and can be computed. The Church-Turing thesis fromally proved that these three independently generated notions were in fact equivalent\cite{copeland1997church}.\\
+
+
+This thesis is also formulated in a philosophical background, to state that every effective computable function system is equivalent to those three. While it can not be formally proven, it has near-universal acceptance to date. Any computing system that can replicate, and thus is equivalent, to either Turing Machines Calculus or $\lambda$-Calculus is said to be \emph{Turing Complete}.\\
+
+Nonetheless, after the formalization of the solution of this problem there were a last problem that was not adverted: the finiteness of time. SAT is the problem that has as input a propositional logic formula and solve whether it is satisfiable. This problem is NP-complete, quite famously the firs of these problems\cite{cook1971complexity}. If we consider the analogous problem for first order algebra, we have an even more complex P-space-complete problem, being almost intractable in worst cases to this date. As a happy consequence for us, much work is left to be done in this area \cite{cook2006p}. 
 

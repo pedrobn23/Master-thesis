@@ -99,8 +99,14 @@
   \setbeamertemplate{section in toc}[sections numbered]
   \tableofcontents [hideallsubsections]
 \end{frame}
-
-\section{Un sistema de computo}
+\begin{frame}{Objetivos}
+  \begin{enumerate}
+  \item Dar las ideas que hay detrás de la visión formal de la teoría.
+  \item Exponer resultados interesantes.
+  \item Que todo el mundo se lleve algo a casa.
+  \end{enumerate}
+\end{frame}
+\section{Cálculo no tipado}
 \begin{frame}{Abstraer el problema de Computar}
   \begin{itemize}
   \item Los problemas del milenio de Hilbert.
@@ -109,29 +115,58 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[Cálculo Lambda no Tipado]
+\begin{frame}{Cálculo no Tipado}
 \begin{definicion}
   The formulas of  $\lambda$-calculus are built via the BNF:
   $$A,B ::= x\ |\ (AB)\ |\ (\lambda x.A) .$$
   where $x$ denote any variable in $\mathcal{V}$.
 \end{definicion}
 
+\begin{example}
+  Generic example
+\end{example}
+
 \end{frame}
 
 \begin{frame}{Reducciónes}
   
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{|l|l|l|}
+      \hline
+      Name & Main rule & Equivalence \\
+            \hline
+      $\alpha$ & $ (\lambda x. M) =_\alpha \lambda y. M[x/y]$& Yes\\
+      $\beta$ & $(\lambda x.M)N \to_\beta M[N/x]$& No\\
+      $\eta$ & ${\displaystyle (\lambda x.Mx) \to_\eta M }$& No\\
+      \hline
+    \end{tabular}
+  \end{center}
+  \caption{\label{tab:reductions}Reducciones}
+\end{table}
+
 \end{frame}
 
-\begin{frame}[Interpretación del sistema en Teoría de Conjuntos]
-
-\end{frame}
-
-\begin{frame}
+\section{Cálculo lambda tipado}
+\begin{frame}{¿Por qué querriamos tipos?}
+  \begin{itemize}
+  \item Tenemos 
+  \end{itemize}
   
 \end{frame}
 
 
-\begin{frame}[Números naturales]
+\begin{frame}{Breve Presentación}
+
+\end{frame}
+
+
+\begin{frame}[Naturaleza del tipado]
+  
+\end{frame}
+
+
+\begin{frame}{Números naturales}
 
 \end{frame}
 
@@ -139,28 +174,28 @@
 
 \section{Lógica Intuicionista}
 
-\begin{frame}[Breve Presentación]
+\begin{frame}{Breve Presentación}
 
 \end{frame}
 
-\begin{frame}[Sistemas deductivos]
+\begin{frame}{Sistemas deductivos}
 
 \end{frame}
 
-\begin{frame}[Calculo lambda tipado como Sistema deductivo]
+\begin{frame}{Cálculo lambda tipado como Sistema deductivo}
   
 \end{frame}
 \section{Curry-Howard}
 
-\begin{frame}[Curry-Howard]
+\begin{frame}{Curry-Howard}
   
 \end{frame}
 
-\begin{frame}[Más allá de Curry howard]
+\begin{frame}{Más allá de Curry howard}
 
 \end{frame}
 
-\begin{frame}[Bibliografía y para saber más]
+\begin{frame}{Bibliografía y para saber más}
 
 \end{frame}
 \end{document}
