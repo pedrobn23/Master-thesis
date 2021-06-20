@@ -509,7 +509,7 @@ Note that not every term can be typed, namely the two previous examples of bad-b
 By assigning type we mean assigning types to the free and bound variables. Further on, when talking about terms we will refer to simply type $\lambda$-terms. On these terms, we can define substitution just like we defined it on untyped $\lambda$-calculus.
 
 
-\subsection{Reductions simply typed $\lambda$-calculus}
+\subsection{Reductions in simply typed $\lambda$-calculus}
 
 To talk Church-Rosser, we have to talk reduction. Reductions are basically the same but for the additional structure added that we need to respect: 
 
@@ -539,6 +539,8 @@ We define the single-step $\eta$-reduction $\to_\eta$ as the smallest relationsh
   Similarly, we define the multiple-step $\eta$-reduction $\twoheadrightarrow_\eta$ as the transitive reflexive closure of $\to_\eta$, and the $\eta$-equivalence as the symmetric closure of $\twoheadrightarrow_\eta$.
 \end{definition}
 
+\begin{remark} Note that we basically just add new rules so that $\beta$ and $\eta$ reductions pair with the new syntax provided by the product.
+\end{remark} 
 We can now talk about about Church-Rosser.  Lets check that it does not hold. For example, if $x: A\times 1$ then we can consider $M=\langle \pi_1x, \pi_2x\rangle$. Because of the rule $\eta_1$, we have that $M \to_{\eta}\langle \pi_1 x, *\rangle$, but taking $\eta_\times$ into account we can check that $M \to_{\eta} x$. \\
 
 Despite this, $\beta$-reduction does maintain the Church-Rosser property, so from a computational point of view there is no problem at all.
