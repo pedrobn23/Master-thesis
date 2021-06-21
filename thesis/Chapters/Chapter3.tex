@@ -436,11 +436,11 @@ We can start by having a quick reasoning, as shown in \cite{sep-lambda-calculus}
 
  
 \section{Typed $\lambda$-Calculus}
-\emph{Typed $\lambda$-calculus} is a refinement of untyped $\lambda$-calculus, on which the concept of typing is introduced tfm. We start defining \emph{basic simply typed }$\lambda$\emph{-calculus}, on which we only consider a handfull of basic types, and product and function types. In opposition we can study \emph{dependent typing}, where types can be construct onto each other.
+\emph{Typed $\lambda$-calculus} is a refinement of untyped $\lambda$-calculus, on which the concept of typing is introduced. We are going to present three aproximation to simply typing: \emph{minimal, basic and extended simply typed }$\lambda$\emph{-calculus}. 
 
 \subsection{Definition}
 
- We synthesize the definitions of typing presented in \cite{lambek1988introduction} or \cite{selinger2008lecture}. We structure this definition in three steps: types, terms (sometimes called terms) and equations.
+ We synthesize the definitions of typing presented in \cite{lambek1988introduction} or \cite{selinger2008lecture}. We structure this definition in three steps: types, terms  and equations.
 
 
 \begin{definition}
@@ -462,27 +462,29 @@ As it happens in sets, where we have that we can consider the set of functions b
 
 
 \begin{definition}
-  The \emph{raw typed $\lambda$-terms} of simply typed $\lambda$-calculus are built via the BNF:
+  The \emph{raw terms} of basic simply typed $\lambda$-calculus are built via the BNF:
   $$A,B ::= x\ |\ AB\ |\ \lambda x^t.A \ |\ \langle A,B \rangle\ |\ \pi_1A\ |\ \pi_2A\ |\ *.$$
   where $x$ denote any variables, and $t$ denote any type. 
 \end{definition}
 \begin{definition}
-  
+  We say that a term is closed if it has no free variables.
 \end{definition}
+\begin{remark}
+  We avoid the meticulous redefinition of free and bounded variable and use the one that naturally translates from untyped lambda calculus.
+\end{remark}
 
-
-In this definition we intend to define $\pi_i$ in a way that $\pi_i \langle A_1,A_2\rangle = A_i$, and such that $*$ is the only term of type $1$.\\
 
 The main difference with untyped calculus, is that every bound variable has a type. That is, for the expression $(\lambda x^t.M)N$ to be coherent we require $N$ to be of type $t$. This led us to require some sort of condition to $N$ for being of type $t$.\\
 
 Nonetheless raw terms have some other meaningless terms, such as projections of a non-pair $\pi_1(\lambda x^t.x)$. We solve all this problems at once with the \emph {Typing rules}. This rules will restricts the semantics of terms. We start by defining \emph{typing context}.
 
 \begin{definition}
-  When a term $M$ is of type $t$, denoted as $M:t$. A typing context is a set of assumption $\Gamma = (x_1:A_1)$, on which we assume each variable $x_i$ to be of type $A_i$.
+We state by $M:t$  that a term $M$ is of type $t$. A typing context is a set of assumption $\Gamma = (x_1:A_1)$, on which we assume each variable $x_i$ to be of type $A_i$.
 \end{definition}
 
-From this definition, we can state the typing rules, from which we will be able to provide typing. We use the notation $\Gamma \vdash M:A$ meaning that the typing context $\Gamma$ derives in term $M$ being of type $A$. 
-
+\begin{remark}
+  From this definition, we can state the typing rules, from which we will be able to provide typing. We use the notation $\Gamma \vdash M:A$ meaning that the typing context $\Gamma$ derives in term $M$ being of type $A$. 
+\end{remark}
 
 
 \begin{definition}[Typing Rules]\label{def:typing-rules}
@@ -506,10 +508,12 @@ and conversely:
 
 
 
-Note that not every term can be typed, namely the two previous examples of bad-behaviour: $\pi_1(\lambda x^t. x)$ and $(\lambda x^t.M)N$ where $N$ is not of type $t$. Thus, in simply typed $\lambda$-calculus, we only work with typed terms.
+\begin{remark}
+  Not every term can be typed, namely the two previous examples of bad-behaviour: $\pi_1(\lambda x^t. x)$ and $(\lambda x^t.M)N$ where $N$ is not of type $t$. Thus, in simply typed $\lambda$-calculus, we only work with typed terms.
+\end{remark}
 
 \begin{definition}
-  A \emph{simply typed $\lambda$-term} is a raw typed $\lambda$-term that, together with a typing context of every variable, is subject to be typed.
+  The terms of \emph{basic simply typed $\lambda$-calculus} is a raw typed $\lambda$-term that, together with a typing context of every variable, is subject to be typed.
 \end{definition}
 
 By assigning type we mean assigning types to the free and bound variables. Further on, when talking about terms we will refer to simply type $\lambda$-terms. On these terms, we can define substitution just like we defined it on untyped $\lambda$-calculus.
@@ -526,7 +530,7 @@ To talk Church-Rosser, we have to talk reduction. Reductions are basically the s
 \item[]$(\beta_{\times,i})$: $\pi_i\langle M_1,M_2\rangle \to_\beta M_i$.\\
 \item[]$(\operatorname{cong}_1)$: If $ M \to_\beta M'$ then $MN \to_\beta M'N$.\\
 \item[]$(\operatorname{cong}_2)$: If $ N \to_\beta N'$ then $ MN \to_\beta MN'$.\\
-\item[]$(\zeta)$: If $M\to_\beta M'$ then $(\lambda x.M) \to_\beta \lambda x.M'$.\\
+\item[]$(\zeta)$: If $M\to_\beta M'$ then $(\lambda x^t.M) \to_\beta \lambda x^t.M'$.\\
 \end{itemize}
 We define the \emph{multiple-step} $\beta$\emph{-reduction} $\twoheadrightarrow_\beta$ as the reflexive, transitive closure of $\to_\beta$.
 \end{definition}
@@ -534,7 +538,7 @@ We define the \emph{multiple-step} $\beta$\emph{-reduction} $\twoheadrightarrow_
 \begin{definition}
 We define the single-step $\eta$-reduction $\to_\eta$ as the smallest relationship such that: 
 \begin{itemize}
-\item[]$(\eta)$: $(\lambda x.Mx) \to_\eta M}$,para todo $ x \not  \in FV(M)$.\\
+\item[]$(\eta)$: $(\lambda x^t.Mx) \to_\eta M}$,para todo $ x \not  \in FV(M)$.\\
 \item[]$(\eta_1)$: $\langle\pi_1 M, \pi_2 M\rangle\to_\eta M$.\\
 \item[]$(\eta_\times)$: If $M:1$ then $M \to_\eta *$ . \\
 \item[]$(\operatorname{cong}_1)$: If $ M \to_\eta M'$ then $MN \to_\eta M'N$.\\
@@ -556,7 +560,7 @@ Despite this, $\beta$-reduction does maintain the Church-Rosser property, so fro
 The already explained $\lambda$-calculus can be reduce to a slimmer version. In fact, the only type truly necessary are the function types. We present it succinctly.
 
 \begin{definition}
-  The types of simply typed $\lambda$-calculus are built via the BNF:
+  The types of minimal simply typed $\lambda$-calculus are built via the BNF:
   $$A,B ::= \iota |\ A\to B.$$
   where $\iota$ denote a basic type. 
 \end{definition}
@@ -564,7 +568,7 @@ The already explained $\lambda$-calculus can be reduce to a slimmer version. In 
 
 
 \begin{definition}
-  The \emph{raw typed $\lambda$-terms} of simply typed $\lambda$-calculus are built via the BNF:
+  The raw term of minimal simply typed $\lambda$-calculus are built via the BNF:
   $$A,B ::= x\ |\ AB\ |\ \lambda x^t.A.$$
   where $x$ denote any variables, and $t$ denote any type. 
 \end{definition}
@@ -584,11 +588,14 @@ $$  (var)\qquad  {\displaystyle \over \Gamma \vdash x_i:A_i},\qquad  i=  1,..,n.
   \end{itemize}
 \end{definition}
 
+\begin{definition}
+  The terms of minimal simply typed lambda calculus are the raw terms that are subject to being typed under a certain Type context.
+\end{definition}
 \begin{remark}
   We have simply trimmed the fundamental part of the basic definition.
 \end{remark}
 \subsubsection{Expanded Typing}
-We can add to the definition of typing by considering the sum Type. The idea is to have two types $A$ and $B$ and be able to consider a term $\lambda x^{A+B}. x+1$. That is, we can consider two types to be acceptable by a function. This notion, commonplace in engineering, has to be formalized to be acceptable:
+We can add to the definition of typing by considering the sum Type. The idea is to have two types $A$ and $B$ and be able to consider a term $\lambda x^{A+B}. x+1$. That is, we can consider two types to be acceptable by a function. 
 
 \begin{definition}
   The types of expanded simply typed $\lambda$-calculus are built via the BNF:
@@ -596,9 +603,10 @@ We can add to the definition of typing by considering the sum Type. The idea is 
   where $\iota$ denote a basic type. 
 \end{definition}
 
-We proceed to define the raw typed $\lambda$-terms. We have the same consideration as previously, so that only those being subject to typing will be considered terms. Unification of typing considerations also holds.
+We proceed to define the raw typed $\lambda$-terms.
+
 \begin{definition}
-  The \emph{expanded raw typed $\lambda$-terms} of simply typed $\lambda$-calculus are built via the BNF:
+  The raw terms of expanded simply typed $\lambda$-calculus are built via the BNF:
   \begin{align*}
     A,B, C ::= x\ &|\ AB\ |\ \lambda x^t.A \ |\ \langle A,B \rangle\ |\ \pi_1A\ |\ \pi_2A\ |\ * \\
                &|\ \iin_1 A\ |\ \iin_2 A \ |\ \ccase A ; x^{t_1}.B\oo x^{t_2}.C \ |\ \square^t. 
@@ -606,7 +614,7 @@ We proceed to define the raw typed $\lambda$-terms. We have the same considerati
   where $x$ denote any variables, and $t$ denote any type. 
 \end{definition}
 
-Probably the only exotic of this term is $\ccase A ; x^{t_1}.B\oo x^{t_2}.C$. This abstracts the idea that a union term behaves differently in each type that is included. In the typing laws we will see that it is necessary that the type returned by the application of a variable in a function of type union must always converge to the same type ($case$ rule).\\
+The term $\ccase A ; x^{t_1}.B\oo x^{t_2}.C$ abstracts the idea of a function on  an union term behaves differently in each type that is included. In the typing laws we will see that it is necessary that the type returned by the application of a variable in a function of type union must always converge to the same type ($case$ rule).\\
 
 For this typing, three new rules are included for type derivation, in addition to the previously defined in \ref{def:typing-rules}:
 \begin{definition}[Typing Rules]
@@ -621,9 +629,13 @@ For this typing, three new rules are included for type derivation, in addition t
   \end{itemize}
 \end{definition}
 
+We have the same consideration as previously, so that only those being subject to typing will be considered terms. Unification of typing considerations also holds.
+\begin{definition}
+  The terms of expanded simply typed lambda calculus are the raw terms that are subject to being typed under a certain Type context.
+\end{definition}
 \subsubsection{Pure and impure typed $\lambda$-calculus}
 
-We have seen that a typing context can vary which terms are subject to be formed and which does not. This consideration will be important later in our discussion, when we consider . In this sense, we can assume that, associated with each typing context, a different lambda computation is generated. This distinction inspires the following definition.
+We have seen that a typing context can vary which terms are subject to be formed and which does not. This consideration will be important later in our discussion, when we consider the category of $\lambda$-calculus. In this sense, we can assume that, associated with each typing context, a different lambda computation is generated. This distinction inspires the following definition.
 
 
 \begin{definition}
@@ -654,7 +666,7 @@ Despite this apparent differences, both typing styles can be \emph{unified}. An 
 
 \section{Curry-Howard bijection}
 \subsection{Natural deduction}
-In this section we succinctly introduce the notation of propositional intuitionistic logic, in order to work with them further in the chapter. Therefore, we spare our readers of yet another comprehensive introduction of the widely known propositional logic. Should it be required, more information of propositional logic can be found in, for example, \cite{marek2009introduction} and \cite{wadler2015propositions}. Natural deduction originally appears in the works of \cite{gentzen1935untersuchungen}. \\
+In this section we succinctly introduce the notation of propositional intuitionistic logic, in order to work with them further in the chapter. As we will discuss them in more depth the deduction system in next chapter, we spare our readers of yet another comprehensive introduction of the widely known intuitional propositional logic. Should it be required, more information of propositional logic can be found in, for example, \cite{marek2009introduction} and \cite{wadler2015propositions}. Natural deduction originally appears in the works of \cite{gentzen1935untersuchungen}.In this section, we present the more general form. \\
 
 Thorough this section we replicate notations and process done when defining typed $\lambda$-calculus. This is done purposely, as our aim is to proof an equivalence between both system. We start by considering the alphabet consisting a set of countable many variables $x,y,z,...$ as done previously in lambda-calculus, $\top$ and $\bot$ 
 
@@ -665,9 +677,9 @@ Thorough this section we replicate notations and process done when defining type
 \end{definition}
 
 
-Note that we consider a logic without law of excluded middle. This approach, although somewhat demodé in modern mathematics, was highly popular at the beginning of the twentieth century. It sought to solve the problems of mathematical foundations, in particular the \emph{principle of explosion}. \\
 
-Having the syntax done, is time to provide meaning. We want $\top$ to be the truth value. A formula is true if $A \to \top$. Conversely, a formula is \emph{not-true} or \emph{false} (sometimes denoted as $\neg A$) if $ A \to \bot$. In addition, we want all the formulas from which we can derive certain to be true. For this we will define, analogously to the typing-contex from the previous chapter, what a \emph{truth-assumption} is and  what the rules of deduction are.
+
+Having the syntax done, is time to provide meaning. We want $\top$ to be the truth value. A formula is true if $\top \to A$\footnote{check this}. Conversely, a formula is \emph{not-true} or \emph{false} (sometimes denoted as $\neg A$) if $ A \to \bot$. In addition, we want all the formulas from which we can derive certain to be true. For this we will define, analogously to the typing-contex from the previous chapter, what a \emph{truth-assumption} is and  what the rules of deduction are.
 
 \begin{definition}
  A truth-assumption is a set of variables $\Gamma = \{x_1,...,x_n\}$ that we assume to be true. An \emph{judgement} $\Gamma \vdash B$ states that from truth assumption $\Gamma$, the formula $B$ can be deduced to be true. 
@@ -702,8 +714,8 @@ and conversely:
 
 
 
+Note that we consider a logic without law of excluded middle. This approach, although somewhat demodé in modern mathematics, was highly popular at the beginning of the twentieth century. It sought to solve the problems of mathematical foundations, in particular the \emph{principle of explosion}. \\
 
-So, what properties make this logic interesting? By not having the law of the excluded third, we have a system in which all proofs must be constructive. Therefore, we can view proofs as programs. We will formalize this idea of viewing proofs as programs in the next section, by relating our computational system and our intuitionistic logic. \\
 
 To work with this logic, we usually work in the usual \emph{truth derivation}. That is, having a formula $F$, we use the previously introduced rules in other to see whether can they be derivated from the truth assumption. More often than not, we consider the empty assumption, therefore we are working with \emph{tautologies}
 
@@ -762,17 +774,17 @@ And we can see that this pairing holds because we can see that Typing rules
 
 \begin{itemize}
 \item We pair the concept of a formula being true with the concept of a type having a term. We formalize this by pairing truth assumption $\Gamma=\{A\}$ is with the typing context $\Gamma\vdash M:A$. 
-\item We can relate $(var)$ with $(ax)$ and $(*)$ with $(\top)$.
-\item We can relate $(app)$ with $(\to_1)$ and $(abs)$ with $(\to_2)$.
-\item We can relate $(\pi_i)$ with $(\land_1)$ and $(\land_2)$ with $(pair)$.
-\item We can relate $(\iin_i)$ with $(\lor_1^i)$ and $(\lor_2)$ with $(\ccase)$.
-\item We can relate $0$ with $\bot$.
+\item We can pair $(var)$ with $(ax)$ and $(*)$ with $(\top)$.
+\item We can pair $(app)$ with $(\to_1)$ and $(abs)$ with $(\to_2)$.
+\item We can pair $(\pi_i)$ with $(\land_1)$ and $(\land_2)$ with $(pair)$.
+\item We can pair $(\iin_i)$ with $(\lor_1^i)$ and $(\lor_2)$ with $(\ccase)$.
+\item We can pair $0$ with $\bot$.
 \end{itemize}
 
 
-With this construction we have develop a pairing in syntax,  now we can make a pairing in semantics. The million dollar question is: Who do we relate the concept of term with? We relate it with the concept of truth derivation. That is, given a term $M$  of type $C$ with associated formula $F$. By replacing each typing rule needed to deduce $M:C$  with an associated derivation rule, we can get a truth derivation, and conversely with a truth derivation of $F\to \top$ from $\Gamma=\{\}$.\\
+Finally, we pair the terms  with the truth derivations. That is, given a term $M$  of type $C$ with associated formula $F$. By replacing each typing rule needed to deduce $M:C$  with an associated derivation rule, we can get a truth derivation, and conversely with a truth derivation of $F\to \top$ from $\Gamma=\{\}$.\\
 
-We can mentioned prior, we can vary lightly the definitions, but an analogue pairing still holds. For example, we can consider an intuitionistic logic where there is no $\lor$ nor $\bot$ in a pairing with (unextended) simply typed. Further on the text we will examine this variation of pairings.
+From this pairing we can define different ...
 
 \section{Lambda calculus as a computation system}
 {TODO This Summer: expand this subsection properly.}
