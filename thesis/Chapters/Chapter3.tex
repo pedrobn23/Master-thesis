@@ -293,7 +293,7 @@ As we define in \ref{def:substition} a capture-avoiding substitution, in the sen
 While the proof is rather straight forward, one can see that it does require induction, and thus the length of it. \footnote{Maybe add some explanation here.}
 
 \begin{definition}[Maximal parallel one-step reduction]
-  Given a term $M$, the \emph{maximal parallel one-step reduction} $M*$ is defined inductively:
+  Given a term $M$, the \emph{maximal parallel one-step reduction} $M^*$ is defined inductively:
   \begin{itemize}
   \item $(x)^*  =x$ 
   \item $(PN)*=P^*N^*$ but for $\beta$-reductions.
@@ -332,7 +332,7 @@ While the proof is rather straight forward, one can see that it does require ind
 \begin{proof}[Proof of Theorem \ref{theo:church-rosser}]   If a relation $\to$ satisfy the diamond property, its reflexive, transitive closure $\twoheadrightarrow$ satisfy the Church-Rosser property. As a consequence of lemma \ref{lemma:cr2}, we know that $\triangleright$ satisfy the diamond property.  By lemma \ref{lemma:cr1} we know that the reflexive, transitive closure of $\triangleright$ is $\twoheadrightarrow_{\beta\eta}$.
 \end{proof}
 
-Now let take a moment to comment on the usefulness of each reduction. We can say that $\beta$ reduction is the soul of computation  while $\eta$ is useful to cleanup the results.  This can be used to define \emph{normal} forms for untyped lambda-terms. More infomation on normalization can be found on \cite{selinger2008lecture}. \\
+Now let take a moment to comment on the usefulness of each reduction. We can say that $\beta$ reduction is the soul of computation  while $\eta$ is useful to cleanup the results.  This can be used to define \emph{normal} forms for untyped lambda-terms. More infomation on normalization can be found on \cite[Section 7]{selinger2008lecture} and \cite{baader1999term}. \\
 
 
 \subsection{Fixed points and Programming}
@@ -436,7 +436,7 @@ We can start by having a quick reasoning, as shown in \cite{sep-lambda-calculus}
 
  
 \section{Typed $\lambda$-Calculus}
-\emph{Typed $\lambda$-calculus} is a refinement of untyped $\lambda$-calculus, presented as a for the Rosser-Kleene paradox. In this we will introduce the concept of typing. This idea is intended to restrict the ability of types to combine with each other. We start defining \emph{simply typed }$\lambda$\emph{-calculus}, on which we only consider a handfull of basic types, and product and function types. In opposition we can study \emph{dependent typing}, where types can be construct onto each other.
+\emph{Typed $\lambda$-calculus} is a refinement of untyped $\lambda$-calculus, on which the concept of typing is introduced tfm. We start defining \emph{basic simply typed }$\lambda$\emph{-calculus}, on which we only consider a handfull of basic types, and product and function types. In opposition we can study \emph{dependent typing}, where types can be construct onto each other.
 
 \subsection{Definition}
 
@@ -444,17 +444,19 @@ We can start by having a quick reasoning, as shown in \cite{sep-lambda-calculus}
 
 
 \begin{definition}
-  The types of simply typed $\lambda$-calculus are built via the BNF:
+  The types of basic simply typed $\lambda$-calculus are built via the BNF:
   $$A,B ::= \iota |\ A\to B\ |\ A \times B  \ |\ 1.$$
   where $\iota$ denote a basic type. 
 \end{definition}
-
+\begin{remark}
+We usually refer to basic simply typed $\lambda$-calculus as simply typed $\lambda$-calculus.
+\end{remark}
 
 
 % Lets start laying some bricks useful for the intuition. $\iota$ type is foundational type. We consider also the type $1$. Others author, such as \cite{lambek1988introduction} prefer to include a type for every natural. Nonetheless, we consider that we can repeat the construction realized in untyped lambda-calculus to consider this typing. \\
 
 
-As it happens in sets, where we have that we can consider the set of functions between two set, here we can consider the type of function between two types. Surely this can get to mind a categorical construction already presented. We continue defining the terms. Further on, we will use terms and terms interchangeably. This types are called \emph{function types}.\\
+As it happens in sets, where we have that we can consider the set of functions between two set, here we can consider the type of function between two types. This types are called \emph{function types}.\\
 
 
 
@@ -464,6 +466,10 @@ As it happens in sets, where we have that we can consider the set of functions b
   $$A,B ::= x\ |\ AB\ |\ \lambda x^t.A \ |\ \langle A,B \rangle\ |\ \pi_1A\ |\ \pi_2A\ |\ *.$$
   where $x$ denote any variables, and $t$ denote any type. 
 \end{definition}
+\begin{definition}
+  
+\end{definition}
+
 
 In this definition we intend to define $\pi_i$ in a way that $\pi_i \langle A_1,A_2\rangle = A_i$, and such that $*$ is the only term of type $1$.\\
 
@@ -543,11 +549,44 @@ We define the single-step $\eta$-reduction $\to_\eta$ as the smallest relationsh
 \end{remark} 
 We can now talk about about Church-Rosser.  Lets check that it does not hold. For example, if $x: A\times 1$ then we can consider $M=\langle \pi_1x, \pi_2x\rangle$. Because of the rule $\eta_1$, we have that $M \to_{\eta}\langle \pi_1 x, *\rangle$, but taking $\eta_\times$ into account we can check that $M \to_{\eta} x$. \\
 
-Despite this, $\beta$-reduction does maintain the Church-Rosser property, so from a computational point of view there is no problem at all.
+Despite this, $\beta$-reduction does maintain the Church-Rosser property, so from a computational point of view there is no problem at all. 
 
 \subsection{Minimal and Expanded Typing}
 \subsubsection{Minimal Typing}
-The already explained $\lambda$-calculus can be reduce to a slimmer version. In fact, the only type truly necessary are the function types,  
+The already explained $\lambda$-calculus can be reduce to a slimmer version. In fact, the only type truly necessary are the function types. We present it succinctly.
+
+\begin{definition}
+  The types of simply typed $\lambda$-calculus are built via the BNF:
+  $$A,B ::= \iota |\ A\to B.$$
+  where $\iota$ denote a basic type. 
+\end{definition}
+
+
+
+\begin{definition}
+  The \emph{raw typed $\lambda$-terms} of simply typed $\lambda$-calculus are built via the BNF:
+  $$A,B ::= x\ |\ AB\ |\ \lambda x^t.A.$$
+  where $x$ denote any variables, and $t$ denote any type. 
+\end{definition}
+
+
+
+\begin{definition}[Typing Rules]\label{def:typing-rules}
+  We define the following typing rules, for each typing context $\Gamma$.
+  \begin{itemize}
+    \item Every variable is of the type marked by the context, namely:
+$$  (var)\qquad  {\displaystyle \over \Gamma \vdash x_i:A_i},\qquad  i=  1,..,n.$$
+
+\item From a term of type $A\to B$ we can derive a term of type $B$, from a term of type $A$:
+  $$(app)\qquad  {\displaystyle \Gamma \vdash M:A\to B\qquad \Gamma \vdash N:A      \over \Gamma \vdash MN:B}.$$
+  Conversely, we can deduce th
+  $$(abs)\qquad  {\displaystyle \Gamma, x: A\vdash M: B  \over \Gamma \vdash \lambda x^A.m:A\to B}.$$
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  We have simply trimmed the fundamental part of the basic definition.
+\end{remark}
 \subsubsection{Expanded Typing}
 We can add to the definition of typing by considering the sum Type. The idea is to have two types $A$ and $B$ and be able to consider a term $\lambda x^{A+B}. x+1$. That is, we can consider two types to be acceptable by a function. This notion, commonplace in engineering, has to be formalized to be acceptable:
 
@@ -584,7 +623,24 @@ For this typing, three new rules are included for type derivation, in addition t
 
 \subsubsection{Pure and impure typed $\lambda$-calculus}
 
+We have seen that a typing context can vary which terms are subject to be formed and which does not. This consideration will be important later in our discussion, when we consider . In this sense, we can assume that, associated with each typing context, a different lambda computation is generated. This distinction inspires the following definition.
 
+
+\begin{definition}
+  A basic (resp. minimal, extended) lambda calculus is a triple $(\Xi, \Lambda, \Gamma)$ such that:
+  \begin{itemize}
+  \item $\Xi$ is the collection of types,
+  \item $\Lambda$ is the collection of terms,
+  \item $\Gamma$ is a typing context,
+  \end{itemize}
+  where all rules of basic (resp. minimal, extended) lambda calculus are satisfied. When there
+  exists no more types and terms that those derived from the definition, and $\Gamma=\{\}$, it is called a \emph{pure basic (resp. minimal, extended) lambda calculus}.   
+\end{definition}
+\begin{remark}
+  Often, in a lambda calculus, is usual to consider terms up to $\alpha\beta\eta$-equivalence. 
+\end{remark}
+
+The way to generate a new lambda calculus, is to create a new type $t$, (often, based on other types), and to create a (possibly abstract) new term $M$ with typing context $\{M:t\}$.
 \subsection{Unification of typing}
 
 We can consider two standards in typing: \emph{Church Style} and \emph{Curry Style}.
@@ -685,15 +741,18 @@ Having already asked ourselves when does a term have a type, it is natural to ar
 We can create a pairing between type and formulas by pairing variables with variables and:
 \begin{table}[!h]
 \begin{center}
-\begin{tabular}{c|c}
-  Types  & Formulas  \\
+\begin{tabular}{|l|c|c|}
+\hline
+  Typing name & Types  & Formulas  \\
   \hline
-  Type 1 & $\top$ \\
-  Type 0 & $\bot$ \\
-  Function type $\to$   & Implication $\to$  \\
-  Product type $\times$ & Conjuction $\land$ \\
-  Sum type $+$     & Disjuction $\lor$ \\
-
+  Minimal     & Function type $\to$   & Implication $\to$  \\
+  \hline 
+  Basic      & Type 1 & $\top$ \\
+             & Product type $\times$ & Conjuction $\land$ \\
+  \hline
+  Expanded   & Type 0 & $\bot$ \\
+             & Sum type $+$     & Disjuction $\lor$ \\
+\hline
 \end{tabular}
 \caption*{\label{tab:table-name} Pairing of formulas and terms.}
 \end{center}
