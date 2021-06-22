@@ -78,6 +78,9 @@
 \newcommand{\K}{\mathbb{K}}
 \newcommand{\re}{\operatorname{Re}}
 \newcommand{\cow}{\overline{co}^{\omega^*}}
+\newcommand{\oo}{\operatorname{ or }}
+\newcommand{\ccase}{\operatorname{case}}
+\newcommand{\iin}{\operatorname{in}}
 
 % Meta
 \title{Cálculo lambda y Lógica Intuicionista}
@@ -109,90 +112,199 @@
 \section{Cálculo no tipado}
 \begin{frame}{Abstraer el problema de Computar}
   \begin{itemize}
-  \item Los problemas del milenio de Hilbert.
+  \item Los problemas del siglo de Hilbert.
   \item Solución de Turing inspirada en el cómputo ``con lápiz y papel''.
   \item Solución de Church inspirada en el concepto de sustitución.
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Cálculo no Tipado}
-\begin{definicion}
-  The formulas of  $\lambda$-calculus are built via the BNF:
-  $$A,B ::= x\ |\ (AB)\ |\ (\lambda x.A) .$$
-  where $x$ denote any variable in $\mathcal{V}$.
-\end{definicion}
-
-\begin{example}
-  Generic example
-\end{example}
-
+  \begin{definicion}
+    Los terminos del cálculo $\lambda$ se construyen mediante la expresión:
+    $$A,B ::= x\ |\ (\lambda x.A)\ |\ (AB) .$$
+    donde $x$ denota cualquier variable de un conjunto numerable $\mathcal{V}$.
+  \end{definicion}
+  \pause
+  \begin{example}
+    \begin{itemize}
+    \item $(\lambda x.(x+4)) (3) = 7.$
+    \item $(\lambda x.\lambda y. y+x)(\lambda z. z^2) = \lambda y. \lambda z. y+z^2 $
+    \end{itemize}
+  \end{example}
 \end{frame}
 
+\begin{frame}{Números naturales}
+  Programar es: Números naturales y recursión.
+  \begin{itemize}
+  \item Naturales de Church:
+    $$\overline n = \lambda f.\lambda x. f^n x$$
+  \item Operación predecesor:
+    $$\operatorname{predecesor} =\lambda n.\lambda f.\lambda x. n (\lambda g.\lambda h. h (g f)) (\lambda u.x) (\lambda u.u). $$
+  \item ¿Se os ocurre como hacer una operación de punto fijo?
+  \end{itemize}
+\end{frame}
+
+
 \begin{frame}{Reducciónes}
-  
-\begin{table}[h]
-  \begin{center}
-    \begin{tabular}{|l|l|l|}
-      \hline
-      Name & Main rule & Equivalence \\
-            \hline
-      $\alpha$ & $ (\lambda x. M) =_\alpha \lambda y. M[x/y]$& Yes\\
-      $\beta$ & $(\lambda x.M)N \to_\beta M[N/x]$& No\\
-      $\eta$ & ${\displaystyle (\lambda x.Mx) \to_\eta M }$& No\\
-      \hline
-    \end{tabular}
-  \end{center}
-  \caption{\label{tab:reductions}Reducciones}
-\end{table}
+  \begin{table}[h]
+    \begin{center}
+      \begin{tabular}{|l|l|l|}
+        \hline
+        Name & Main rule & Equivalence \\
+        \hline
+        $\alpha$ & $ (\lambda x. M) =_\alpha \lambda y. M[x/y]$& Yes\\
+        $\beta$ & $(\lambda x.M)N \to_\beta M[N/x]$& No\\
+        $\eta$ & ${\displaystyle (\lambda x.Mx) \to_\eta M }$& No\\
+        \hline
+      \end{tabular}
+    \end{center}
+    \caption{\label{tab:reductions}Reducciones}
+  \end{table}
 
 \end{frame}
 
 \section{Cálculo lambda tipado}
 \begin{frame}{¿Por qué querriamos tipos?}
   \begin{itemize}
-  \item Tenemos 
+  \item Ya existían como solución a los problemas de Russel.
+  \item Aunque no haya ninguna incosistencia, había partes que no eran agradables.
+    \begin{example}[Cita Stanford]
+      Si consideramos ...
+    \end{example}
+  \item A posteriori, nos ayudan a programar. 
   \end{itemize}
-  
 \end{frame}
 
 
 \begin{frame}{Breve Presentación}
+  \begin{definition}
+    The types of basic simply typed $\lambda$-calculus are built via the BNF:
+    $$A,B ::= \iota |\ A\to B \ |\ 1.$$
+    where $\iota$ denote a basic type. 
+  \end{definition}
+\end{frame}
+\begin{frame}
+  \begin{definition}
+Los terminos no depurados de el calculo lambda tipado son:
+    $$A,B ::= x\ |\ AB\ |\ \lambda x^t.A .$$
+  \end{definition}
 
+   Declaramos por $M:t$ que un término $M$ es del tipo $t$. Un contexto de tipificación es un conjunto de supuestos $\Gamma = (x_1:A_1)$, en el que suponemos que cada variable $x_i$ es del tipo $A_i$.
+\end{frame}
+
+\begin{frame}
+
+  \begin{definition}[Typing Rules]\label{def:typing-rules}
+    \begin{itemize}
+    \item  Variable asumidas son del tipo asumido, $*$ es de tipo 1.
+      $$  (var)\qquad  {\displaystyle \over \Gamma \vdash x_i:A_i},\qquad  i=  1,..,n.$$
+
+      $$  (*)\qquad  {\displaystyle \over \Gamma\vdash *:1}.$$
+
+    \item Aplicación y abstracción:
+      $$(app)\qquad  {\displaystyle \Gamma \vdash M:A\to B\qquad \Gamma \vdash N:A      \over \Gamma \vdash MN:B}.$$
+
+      $$(abs)\qquad  {\displaystyle \Gamma, x: A\vdash M: B  \over \Gamma \vdash \lambda x^A.m:A\to B}.$$
+    \end{itemize}
+  \end{definition}
 \end{frame}
 
 
-\begin{frame}[Naturaleza del tipado]
-  
+\begin{frame}{Naturaleza del tipado}
+
+  Hay dos aproximaciones:
+  \begin{itemize}
+  \item Curry style: Defines una función e infieres su tipo:
+    \begin{center}
+      \texttt{a = 4}
+    \end{center}
+  \item Curch style: Defines un tipo y a partir de el los términos:
+    \begin{center}
+      \texttt{int a = 4}
+    \end{center}
+  \end{itemize}
+Ambos estilos de escritura pueden ser unificados. Un unificador es un par de sustituciones que hace que dos estilos de tipado sean iguales como plantillas tipadas. Tal unificador se basa en un algoritmo basado en la inferencia de tipos.
 \end{frame}
 
 
 \begin{frame}{Números naturales}
+  Aproximación opuesta. En lugar de existir como resultado, los añadimos como estructura.
+      $$A,B, C ::= ...\ |\ \mathfrak{o}\ |\ S(A)\ |\ I_t(A,B,C);$$
+Se podrían hacer los números de church, sin embargo no tendríamos un tipado correcto. Esta consideración además conecta con los números naturales de Lawvere en Teoría de Categorías.
 
 \end{frame}
 
 
 
+
+\begin{frame}{Extensiones}
+  \begin{itemize}
+  \item Tipos:
+    $$A,B ::= \iota |\ A\to B\ |\ A \times B \ |\ A + B  \ |\ 1\ |\ 0.$$
+  \item Terminos:
+    \begin{align*}
+      A,B, C ::= x\ &|\ AB\ |\ \lambda x^t.A \ |\ \langle A,B \rangle\ |\ \pi_1A\ |\ \pi_2A\ |\ * \\
+                    &|\ \iin_1 A\ |\ \iin_2 A \ |\ \ccase A ; x^{t_1}.B\oo x^{t_2}.C \ |\ \square^t.
+    \end{align*}
+  \end{itemize}
+\end{frame}
 \section{Lógica Intuicionista}
 
 \begin{frame}{Breve Presentación}
-
+  \begin{definicion}
+    La presentamos mediante la BNF:
+  $$A,B ::= x |\ A\to B\ |\ A \land B \ |\ A \lor B \ |\ \top \ |\ \bot .$$
+\end{definicion}
+Todas las normas habituales menos tercio excluido. Dadas dos fórmulas $A,B$, notaremos $A\vdash B$ al hecho de que de $A$ se deduce siempre $B$.
 \end{frame}
 
 \begin{frame}{Sistemas deductivos}
-
+  Podemos ver la lógica como un sistema deductivo (que es un grafo):
+  \begin{itemize}
+  \item Las formulas serían los objetos.
+  \item Las reducciones serían las flechas.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Cálculo lambda tipado como Sistema deductivo}
-  
+  Podemos ver la lógica como un sistema deductivo (que es un grafo):
+  \begin{itemize}
+  \item Los tipos serían los objetos.
+  \item Los terminos serían las flechas.
+  \end{itemize}  
 \end{frame}
+
 \section{Curry-Howard}
 
 \begin{frame}{Curry-Howard}
+
+  Existe una biyección de la Lógica proposicional intuicionista y el calculo lambda extendido.
+\begin{table}[!h]
+\begin{center}
+  \begin{tabular}{|c|c|}
+  \hline
+  Types  & Formulas  \\
+  \hline
+  type $\to$   & Implication $\to$  \\
+  \hline 
+  Type 1 & $\top$ \\
+  Product type $\times$ & Conjuction $\land$ \\
+  \hline
+  Type 0 & $\bot$ \\
+  Sum type $+$     & Disjuction $\lor$ \\
+  \hline
+\end{tabular}
+\end{center}
+\end{table}
   
 \end{frame}
 
 \begin{frame}{Más allá de Curry howard}
-
+  \begin{itemize}
+  \item Si incluyeramos tipado dependiente: lógica de primer orden.
+  \item Bijección de Lambek con Categorías Cartesianas Cerradas.
+  \item Bijección de Seely del tipado de Martin-Löf y Categorías Cartesianas Cerradas Locáles. 
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Bibliografía y para saber más}

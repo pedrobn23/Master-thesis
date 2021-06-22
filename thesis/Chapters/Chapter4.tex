@@ -34,7 +34,7 @@ We see that in our derivations we sometimes need to change the truth-assumption 
 
 
 
-\subsubsection{Logical Systems as Deduction systems}
+\subsection{Logical Systems as Deduction systems}
 In  the fashion of previous definitions we can reformulate the logical systems as deduction systems.\\
 \begin{definition}
   A conjunction calculus is a deductive system $D$ where there is a specified object $\top$ and an operation $\land: Ob(D)\times Ob(D) \to Ob(D)$ such that:
@@ -67,7 +67,7 @@ Similarly to $\pi_i$, we will usually denote just $\varepsilon$.
   \end{enumerate}
 \end{definition}
 
-\subsubsection{Categorical systems as Deduction systems}
+\subsection{Categorical systems as Deduction systems}
 
 We have already note how a category is a particular case of a deduction system. We can consider how are the logical systems, but we only select those who are also categories.\\
 
@@ -167,7 +167,7 @@ To do this, we are going to use the properties of the adjoint that is generated 
   Given a cartesian closed category A and any graph morpshim $F: G \to \mathcal U(A)$ there is a unique morsphism in $Cart$  
 \end{proposition}
 
-
+\section{Categorical understanding of simply typed $\lambda$-calculus}
 \subsection{Natural Numbers}
 
 
@@ -276,14 +276,9 @@ Lastly, we can consider the effect of lambeck description in $\beta$-reduction.
 
 The objective of this section is to finish forming an idea that has been present for some time in this work: the existence of several $\lambda$-calculations. \\
 
-While in chapter 3, in the manner of the classical sources on the subject, we have seen a pure proposition-based calculus, deviated from time to time with the help of truth assumptions. In reality we can consider the already known $\lambda$-calculus as a basis for each of its instances. Similarly to the group structure, where then there are formally many group instances, we have a $\lambda$-calculus in every structure that allow $\lambda$-calculus rules and operators.\\
+In the previous chapter, we have formalized the idea of having different $\lambda$-calculus, seeing it as a structure. We may continue by defining the category of $\lambda$-calculus. For that we first define the concept of morphism as a structure preserving mapping.
 
-Here, we can use the Curry-Howard isomorphism to ease the definition definition.
-\begin{definition}[Instances of $\lambda$-calculus]
-  A deductive system $D$ is a typed $\lambda$-calculus with natural numbers if it is a positive intuitionistic calculus ...
-\end{definition}
 
-We have just defined a structure. Let's define its morphisms:
 
 \begin{definition}[Morphisms of lambda-calculus]
   Let $\Lambda, \Lambda '$ be $\lambda$-calculus. A morphism $F: \Lambda \to \Lambda '$ is a function that
@@ -291,23 +286,22 @@ We have just defined a structure. Let's define its morphisms:
   \item Maps types in $\Lambda$ to types in $\Lambda '$.
   \item Maps Terms in $\Lambda$ to terms in $\Lambda '$.
   \item Preserves structures $\to, \times, \pi, ...$
-  \item Preserves $\beta$-equivalence.
+  \item Preserves $\alpha\beta\eta$-equivalence.
 \end{enumerate}
 \end{definition}
 \begin{remark}
 We let the structure part undefined, as we can consider a morphism of the different lamdba calculus structures previously defined.
 \end{remark}
-so we can end up considering the category of the various $\lambda$-calculus. 
 
 
 \begin{definition}[Category of lambda-calculus]
-  We can define the category of lambda-calculus  $\LC$ as the category that:
+  We can define the category of minimal (resp. basic, expanded) typed $\lambda$-calculus  as the category that:
   \begin{itemize}
-  \item Have as objects the different $\lambda$-calculus.
+  \item Have as objects the different minimal (resp. basic, expanded) typed $\lambda$-calculus.
   \item Have as arrow the $\lambda$-calculus morphisms.
 \end{definition}
 
-\subsubsection{A language from a Closed Cartesian Category}
+\subsection{A language from a Closed Cartesian Category}
 
 Up to this moment, we have related that a closed cartesian category is a positive intuitionistic calculus, that is equivalent to  typed $\lambda$-calculus, with some extra structure. The idea is now clear: we are going to generate a typed $\lambda$-calculus from a closed cartesian category. Now, we are going to deduce the existence of the internal language.\\
 
