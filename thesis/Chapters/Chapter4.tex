@@ -287,6 +287,7 @@ In the previous chapter, we have formalized the idea of having different $\lambd
   \item Maps Terms in $\Lambda$ to terms in $\Lambda '$.
   \item Preserves structures $\to, \times, \pi, ...$
   \item Preserves $\alpha\beta\eta$-equivalence.
+  \item If $a\in \Lambda$ is a closed term, so is $F(a)$.
 \end{enumerate}
 \end{definition}
 \begin{remark}
@@ -308,13 +309,37 @@ Up to this moment, we have related that a closed cartesian category is a positiv
 \begin{definition}
   Let $C$ be a closed cartesian category. Then its \emph{internal language} $\LL (A)$ is the $\lambda$-calculus that:
 \begin{itemize}
-\item Has as types the objects of $C$, with $1,N, A\times B, B^A$ having the same pairing as with deduction systems.
-\item Has as terms of type $A$ the polynomials expressions $\varphi(x_1,..,x_n): \Top \to A$ that are obtained by the indeterminates $1\to x$ and the preexiting arrows $1\to A\in Ar(C)$ .
-\item 
+\item Has as types the objects of $C$, with the following pairing:
+
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+  Typing name & Types  & Closed cartesian categories  \\
+  \hline
+  Minimal     & Function type $A\to B$   &  Exponential object $B^A$  \\
+  \hline 
+  Basic      & Type 1 & Terminal object $T$ \\
+             & Product type $\times$ & Product object $\land$ \\
+\hline
+\end{tabular}
+\caption*{\label{tab:table-name} Pairing of Types and object in Closed cartesian categories.}
+\end{center}
+\end{table}
+
+\item  Has as terms of type $A$ the polynomials expressions $\varphi(x_1,..,x_n): \Top \to A$ that are obtained by the indeterminates $1\to x$ and the preexiting arrows $1\to A\in Ar(C)$.
+\item Has equality induced by:
+  \begin{itemize}
+  \item TODO: Unify the notions of $\beta$ equivalence and lambek equality.
+  \end{itemize}
 \end{definition}
 
+\begin{remark}
+  Lets unpack the definition of terms. In any simply typed $\lambda$-calculus, we consider raw terms and then we consider only those that are subject to be typable. This, was later understood as any term being a proof of veracity of a type, via the Curry-Howard isomorphism. So, to maintain this idea of the arrows of the language being proof of veracity, we see them as arrows $f:\top \to A$, that is, as deduction from truth.
+ \end{remark}
 
 
+ In fact, $\LL $ can be defined as a categori from $CCart$ to $\LC$. 
 
 
 
