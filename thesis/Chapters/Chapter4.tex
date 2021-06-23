@@ -153,18 +153,14 @@ These propositions allow us to easily define graph completions to generate a to 
 \begin{proof}
   We have proved that it is already a closed cartesian category. Extra considerations are dual to does already considered for a cartesian category.
 \end{proof}
-\subsection{Adjoint of hypotheses}
+\subsection{Logic in closed cartesian categories}
 
-We will now proceed to talk about unfinished products. This is as simple as asking: what would happen if this new truth existed? Or to put it another way in our new language, what if this new arrow were embedded in our graph. We will now study these inclusions and their consequences.\\
+We want now to introduce an idea of logic implications in the context of a closed cartesian category $C$. For that, we can use the naive idea to consider the terminal object $\top \to A$, as a value of truth, and then deduce that any object $a\in C$ such that there exists an arrow $f:\top \to a$, then $A$ is also true. In this idea, the natural progression is to consider a $a$ to be true by desire, so we add a new arrow $x:\top \to a$ to the category, and complete the category so the axiom of metacategories are still satisfied. \\
 
-To do this, we are going to use the properties of the adjoint that is generated between the forgetful functor $\mathcal U$ and the free category $\mathcal{F}$ functor.{\color {red} add example in chapter 2}.\\
+In this section we are going to formalize the idea of the previous paragraph. The goal is to eventually proof the \emph{functional completeness} of closed cartesian categories. 
 
-
-
-\begin{definition}[Category of closed cartesian categories]
-\end{defintion}
 \begin{proposition}
-  Given a cartesian closed category A and any graph morpshim $F: G \to \mathcal U(A)$ there is a unique morsphism in $Cart$  
+  Given a cartesian closed category $A$ and any graph morpshim $F: G \to \mathcal U(A)$ there is a unique morsphism in $Cart$  
 \end{proposition}
 
 \section{Categorical understanding of simply typed $\lambda$-calculus}
