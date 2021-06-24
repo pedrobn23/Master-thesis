@@ -159,6 +159,27 @@ We want now to introduce an idea of logic implications in the context of a close
 
 In this section we are going to formalize the idea of the previous paragraph. The goal is to eventually proof the \emph{functional completeness} of closed cartesian categories. 
 
+\begin{definition}
+Given a (cartesian, closed cartesian) category $A$, we say that an \emph{assumption} is an intedeterminate arrow $x: a \to b \in A$, not necessarily included in $Ar(A)$. 
+\end{definition}
+\begin{definition}[\cite[Section 5]{lambek1988introduction}]
+  Given a (cartesian, closed cartesian) category $A$, and a assumption $x: a \to b$, we define the \emph{category $A$ based on the assumption $x$} $A[x]$ as the category that have:
+  \begin{enumerate}
+  \item As objects the same object as in $A$.
+  \item As arrows the indeterminate $x$ in addition to $Ar(A)$ and all the needed convination between those two.
+  \end{enumerate}
+  we also consider the following equivalence $\cong$ between arrows:
+  \begin{itemize}
+  \item Preserve $A$-equivalence: for all $g:b\to c,f:a\to b, h: a\to c\in A$ such that $gf=h \in A$ then $gf \cong h$ in $A[x]$.
+  \item Preserve composition: for all $f:a\to b,f':a\to b,g:b\to c,g': b \to c\in Ar(A[x])$ such that $f\cong f', g\cong g'$ we have $fg\ong f'g'$.
+  \item Preserve identity: for all $f:a\to b\in A[x]$ we have $f1_a\cong f \con 1_bf$.
+  \item Associative: for all $f:a\to b, g:b\to c, h: c\to d$ we have $(fg)h\cong f(gh)$.
+  \end{itemize}
+\end{definition}
+\begin{remark}
+We define the equivalence on arrows $\cong$ so that the inclusion $A\hookrightarrow A[x]$ is a functor.
+\end{remark}
+
 \begin{proposition}
   Given a cartesian closed category $A$ and any graph morpshim $F: G \to \mathcal U(A)$ there is a unique morsphism in $Cart$  
 \end{proposition}
