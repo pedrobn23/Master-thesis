@@ -124,7 +124,6 @@
     $$A,B ::= x\ |\ (\lambda x.A)\ |\ (AB) .$$
     donde $x$ denota cualquier variable de un conjunto numerable $\mathcal{V}$.
   \end{definicion}
-  \pause
   \begin{example}
     \begin{itemize}
     \item $(\lambda x.(x+4)) (3) = 7.$
@@ -145,32 +144,33 @@
 \end{frame}
 
 
-\begin{frame}{Reducciónes}
-  \begin{table}[h]
-    \begin{center}
-      \begin{tabular}{|l|l|l|}
-        \hline
-        Name & Main rule & Equivalence \\
-        \hline
-        $\alpha$ & $ (\lambda x. M) =_\alpha \lambda y. M[x/y]$& Yes\\
-        $\beta$ & $(\lambda x.M)N \to_\beta M[N/x]$& No\\
-        $\eta$ & ${\displaystyle (\lambda x.Mx) \to_\eta M }$& No\\
-        \hline
-      \end{tabular}
-    \end{center}
-    \caption{\label{tab:reductions}Reducciones}
-  \end{table}
-
-\end{frame}
+% \begin{frame}{Reducciónes}
+%   \begin{table}[h]
+%     \begin{center}
+%       \begin{tabular}{|l|l|l|}
+%         \hline
+%         Name & Main rule & Equivalence \\
+%         \hline
+%         $\alpha$ & $ (\lambda x. M) =_\alpha \lambda y. M[x/y]$& Yes\\
+%         $\beta$ & $(\lambda x.M)N \to_\beta M[N/x]$& No\\
+%         $\eta$ & ${\displaystyle (\lambda x.Mx) \to_\eta M }$& No\\
+%         \hline
+%       \end{tabular}
+%     \end{center}
+%     \caption{\label{tab:reductions}Reducciones}
+%   \end{table}
+% \end{frame}
 
 \section{Cálculo lambda tipado}
 \begin{frame}{¿Por qué querriamos tipos?}
   \begin{itemize}
   \item Ya existían como solución a los problemas de Russel.
   \item Aunque no haya ninguna incosistencia, había partes que no eran agradables.
-    \begin{example}[Cita Stanford]
-      Si consideramos ...
+    \begin{example}
+      Consideramos funciones como conjuntos de parejas ordenadas, contradicción con \emph{axioma de regularidad}. \\
+       Nota: No es necesario considerar las funciones como conjuntos de pares ordenados.
     \end{example}
+
   \item A posteriori, nos ayudan a programar. 
   \end{itemize}
 \end{frame}
@@ -179,14 +179,14 @@
 \begin{frame}{Breve Presentación}
   \begin{definition}
     The types of basic simply typed $\lambda$-calculus are built via the BNF:
-    $$A,B ::= \iota |\ A\to B \ |\ 1.$$
+    $$A,B ::= \iota |\ A\to B .$$
     where $\iota$ denote a basic type. 
   \end{definition}
 \end{frame}
 \begin{frame}
   \begin{definition}
 Los terminos no depurados de el calculo lambda tipado son:
-    $$A,B ::= x\ |\ AB\ |\ \lambda x^t.A .$$
+    $$A,B ::= x^t\ |\ AB\ |\ \lambda x^t.A .$$
   \end{definition}
 
    Declaramos por $M:t$ que un término $M$ es del tipo $t$. Un contexto de tipificación es un conjunto de supuestos $\Gamma = (x_1:A_1)$, en el que suponemos que cada variable $x_i$ es del tipo $A_i$.
@@ -199,12 +199,10 @@ Los terminos no depurados de el calculo lambda tipado son:
     \item  Variable asumidas son del tipo asumido, $*$ es de tipo 1.
       $$  (var)\qquad  {\displaystyle \over \Gamma \vdash x_i:A_i},\qquad  i=  1,..,n.$$
 
-      $$  (*)\qquad  {\displaystyle \over \Gamma\vdash *:1}.$$
-
     \item Aplicación y abstracción:
       $$(app)\qquad  {\displaystyle \Gamma \vdash M:A\to B\qquad \Gamma \vdash N:A      \over \Gamma \vdash MN:B}.$$
 
-      $$(abs)\qquad  {\displaystyle \Gamma, x: A\vdash M: B  \over \Gamma \vdash \lambda x^A.m:A\to B}.$$
+      $$(abs)\qquad  {\displaystyle \Gamma, x: A\vdash M: B  \over \Gamma \vdash \lambda x^A.M:A\to B}.$$
     \end{itemize}
   \end{definition}
 \end{frame}
@@ -307,7 +305,29 @@ Todas las normas habituales menos tercio excluido. Dadas dos fórmulas $A,B$, no
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Bibliografía y para saber más}
 
-\end{frame}
+ \section{Bibliografía}
+\begin{thebibliography}{9}
+
+
+\begin{frame}{Bibliografía y para saber más}
+\bibitem{SET}
+  \textsc{Alama, J. and Korbmacher, J.},\\ \textit{The Lambda Calculus}, \\ The Stanford Encyclopedia of Philosophy (2021).
+\bibitem{Higher}
+\textsc{Lambek, J. and Scott, P. J.},\\ \textit{Introduction to higher-order categorical logic},\\ Cambridge university Press, (1988).
+\bibitem{Hindely}
+  \textsc{Hindley, J. R. and Seldin, J. P.},\\ \textit{Lambda-calculus and Combinators, an Introduction},\\ Cambridge university Press, (2008).
+\end{frame}{}
+\begin{frame}{Bibliografía y para saber más II}
+\bibitem{Seely}
+\textsc{Seely, R. A.},\\ \textit{Locally cartesian closed categories and type theory}.\\ In Mathematical proceedings of the Cambridge philosophical society (Vol. 95, No. 1, pp. 33-48). Cambridge University Press, (1984).
+
+\bibitem{Lectures}
+\textsc{Selinger, P.},\\ \textit{Lecture notes on the lambda calculus},\\  arXiv preprint arXiv:0804.3434, (2008).
+
+\end{frame}{}
+
+
+\end{thebibliography}
+ 
 \end{document}
