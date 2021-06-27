@@ -83,7 +83,7 @@
 \newcommand{\iin}{\operatorname{in}}
 
 % Meta
-\title{Cálculo lambda y Lógica Intuicionista}
+\title{Cálculo Lambda y Lógica Intuicionista}
 \subtitle{Diferentes ópticas del mismo problema}
 \date{26 de junio de 2021}
 \institute{EsLibre 2021}
@@ -94,6 +94,7 @@
 \newtheorem{corolario}{Corolario}
 \newtheorem{proposicion}{Proposición}
 \newtheorem{definicion}{Definición}
+\newtheorem{ejemplo}{Ejemplo}
 
 
 \begin{document}
@@ -110,30 +111,30 @@
   \end{enumerate}
 \end{frame}
 \section{Cálculo no tipado}
-\begin{frame}{Abstraer el problema de Computar}
+\begin{frame}{Abstraer el problema de computar}
   \begin{itemize}
   \item Los problemas del siglo de Hilbert.
-  \item Solución de Turing inspirada en el cómputo ``con lápiz y papel''.
+  \item Solución de Turing inspirada en el cómputo con lápiz y papel.
   \item Solución de Church inspirada en el concepto de sustitución.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Cálculo no Tipado}
+\begin{frame}{Cálculo no tipado}
   \begin{definicion}
     Los terminos del cálculo $\lambda$ se construyen mediante la expresión:
     $$A,B ::= x\ |\ (\lambda x.A)\ |\ (AB) .$$
     donde $x$ denota cualquier variable de un conjunto numerable $\mathcal{V}$.
   \end{definicion}
-  \begin{example}
+  \begin{ejemplo}
     \begin{itemize}
     \item $(\lambda x.(x+4)) (3) = 7.$
     \item $(\lambda x.\lambda y. y+x)(\lambda z. z^2) = \lambda y. \lambda z. y+z^2 $
     \end{itemize}
-  \end{example}
+  \end{ejemplo}
 \end{frame}
 
 \begin{frame}{Números naturales}
-  Programar es: Números naturales y recursión.
+  Programar es: números naturales y recursión.
   \begin{itemize}
   \item Naturales de Church:
     $$\overline n = \lambda f.\lambda x. f^n x$$
@@ -166,10 +167,10 @@
   \begin{itemize}
   \item Ya existían como solución a los problemas de Russel.
   \item Aunque no haya ninguna incosistencia, había partes que no eran agradables.
-    \begin{example}
+    \begin{ejemplo}
       Consideramos funciones como conjuntos de parejas ordenadas, contradicción con \emph{axioma de regularidad}. \\
        Nota: No es necesario considerar las funciones como conjuntos de pares ordenados.
-    \end{example}
+    \end{ejemplo}
 
   \item A posteriori, nos ayudan a programar. 
   \end{itemize}
@@ -177,24 +178,24 @@
 
 
 \begin{frame}{Breve Presentación}
-  \begin{definition}
-    The types of basic simply typed $\lambda$-calculus are built via the BNF:
+  \begin{definicion}
+Los tipos del cálculo $\lambda$ simplemente tipado se contruyen con la BNF:
     $$A,B ::= \iota |\ A\to B .$$
-    where $\iota$ denote a basic type. 
-  \end{definition}
+donde $\iota$ describe un tipo básico.
+  \end{definicion}
 \end{frame}
 \begin{frame}
-  \begin{definition}
+  \begin{definicion}
 Los terminos no depurados de el calculo lambda tipado son:
     $$A,B ::= x^t\ |\ AB\ |\ \lambda x^t.A .$$
-  \end{definition}
+  \end{definicion}
 
    Declaramos por $M:t$ que un término $M$ es del tipo $t$. Un contexto de tipificación es un conjunto de supuestos $\Gamma = (x_1:A_1)$, en el que suponemos que cada variable $x_i$ es del tipo $A_i$.
 \end{frame}
 
 \begin{frame}
 
-  \begin{definition}[Typing Rules]\label{def:typing-rules}
+  \begin{definicion}[Typing Rules]\label{def:typing-rules}
     \begin{itemize}
     \item  Variable asumidas son del tipo asumido, $*$ es de tipo 1.
       $$  (var)\qquad  {\displaystyle \over \Gamma \vdash x_i:A_i},\qquad  i=  1,..,n.$$
@@ -204,7 +205,7 @@ Los terminos no depurados de el calculo lambda tipado son:
 
       $$(abs)\qquad  {\displaystyle \Gamma, x: A\vdash M: B  \over \Gamma \vdash \lambda x^A.M:A\to B}.$$
     \end{itemize}
-  \end{definition}
+  \end{definicion}
 \end{frame}
 
 
@@ -212,11 +213,11 @@ Los terminos no depurados de el calculo lambda tipado son:
 
   Hay dos aproximaciones:
   \begin{itemize}
-  \item Curry style: Defines una función e infieres su tipo:
+  \item \emph{Curry style}: Defines una función e infieres su tipo,
     \begin{center}
       \texttt{a = 4}
     \end{center}
-  \item Curch style: Defines un tipo y a partir de el los términos:
+  \item \emph{Curch style}: Defines un tipo y a partir de el los términos,
     \begin{center}
       \texttt{int a = 4}
     \end{center}
@@ -227,8 +228,8 @@ Ambos estilos de escritura pueden ser unificados. Un unificador es un par de sus
 
 \begin{frame}{Números naturales}
   Aproximación opuesta. En lugar de existir como resultado, los añadimos como estructura.
-      $$A,B, C ::= ...\ |\ \mathfrak{o}\ |\ S(A)\ |\ I_t(A,B,C);$$
-Se podrían hacer los números de church, sin embargo no tendríamos un tipado correcto. Esta consideración además conecta con los números naturales de Lawvere en Teoría de Categorías.
+      $$A,B, C ::= ...\ |\ \mathfrak{o}\ |\ S(A)\ |\ I_t(A,B,C).$$
+Se podrían hacer los números de Church, sin embargo no tendríamos un tipado correcto. Esta consideración además conecta con los números naturales de Lawvere en teoría de categorías.
 
 \end{frame}
 
@@ -246,7 +247,7 @@ Se podrían hacer los números de church, sin embargo no tendríamos un tipado c
     \end{align*}
   \end{itemize}
 \end{frame}
-\section{Lógica Intuicionista}
+\section{Lógica intuicionista}
 
 \begin{frame}{Breve Presentación}
   \begin{definicion}
@@ -264,7 +265,7 @@ Todas las normas habituales menos tercio excluido. Dadas dos fórmulas $A,B$, no
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Cálculo lambda tipado como Sistema deductivo}
+\begin{frame}{Cálculo lambda tipado como sistema deductivo}
   Podemos ver la lógica como un sistema deductivo (que es un grafo):
   \begin{itemize}
   \item Los tipos serían los objetos.
@@ -281,15 +282,15 @@ Todas las normas habituales menos tercio excluido. Dadas dos fórmulas $A,B$, no
 \begin{center}
   \begin{tabular}{|c|c|}
   \hline
-  Types  & Formulas  \\
+  Tipos  & Fórmulas  \\
   \hline
-  type $\to$   & Implication $\to$  \\
+  tipo $\to$   & Implicación $\to$  \\
   \hline 
-  Type 1 & $\top$ \\
-  Product type $\times$ & Conjuction $\land$ \\
+  Tipo 1 & $\top$ \\
+  Tipo producto $\times$ & Conjucción $\land$ \\
   \hline
-  Type 0 & $\bot$ \\
-  Sum type $+$     & Disjuction $\lor$ \\
+    Tipo 0 & $\bot$ \\
+    Tipo Unión$+$     & Disjucción $\lor$ \\
   \hline
 \end{tabular}
 \end{center}
