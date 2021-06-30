@@ -65,7 +65,7 @@ In a diagram:
     \end{itemize}
   \end{example}
 
-  Dualy, we can consider an \emph{universal arrow from $S$ to $c$} or simply universal arrow from $S$:
+  Dually, we can consider an \emph{universal arrow from $S$ to $c$} or simply universal arrow from $S$:
 \begin{definition}\label{def:univ-arrow2}
   Let $S: D \to C$ be a functor and $c \in Ob(C)$, an \emph{universal arrow}  from $c$ to $S$ is a pair $(d,u)$ with $d\in Ob(D), u:c \to Sd \in Ar(C)$, such that for every $(e,f)$ with $e\in Ob(D)$  and $f:c\to Sd$ there exists an unique $f':r,d\in Ar(D)$ such that $u\circ Sf' = f$.
 
@@ -102,18 +102,18 @@ Then, given any two sets $a,b\in Ob(Sets)$, $u=(\pi_1,\pi_2)$ is an universal ar
       Let $S: D \to C$ be a functor and $u:c\to Sr\in Ar(C)$. Then $u$ is an universal arrow if and, only if, the function $\varphi:\hom_D(r,\cdot)\to \hom(c,S\cdot)$ such that $\varphi(d)(f)= Sf\circ u$ for all $f\in \hom_D(r,d)$ is a natural bijection. Conversely, every natural bijection is uniquely determined by an universal arrow $u:c\to Sr$. 
   \end{proposition}
   \begin{proof}
-    Let $u$ be universal. Then for $\varphi$ to be a natural transformation the diagram 
+    Let $u$ be universal. Then, $\varphi$ is clearly a bijection. For $\varphi$ to be a natural transformation the diagram 
     \[
       \begin{tikzcd}
-        \hom_D(r,d)\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(d)} & \hom_C(r,Sd)\arrow{d}{\hom_C(r,Sg)}\\
-        \hom_D(r,d')\arrow{r}{\varphi(d')} & \hom_C(r,Sd')
+        \hom_D(r,d)\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(d)} & \hom_C(c,Sd)\arrow{d}{\hom_C(c,Sg)}\\
+        \hom_D(r,d')\arrow{r}{\varphi(d')} & \hom_C(c,Sd')
       \end{tikzcd}
     \]
 
     should commute for all $g\in Ar(D)$. As this is a diagram in the category of sets, we can check the commutativity by checking it element wise. For any $f \in\hom_D(r,d)$:
     \[
       \begin{tikzcd}
-        f\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(d)} & Sf\circ u \arrow{d}{\hom_C(r,Sg)}\\
+        f\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(d)} & Sf\circ u \arrow{d}{\hom_C(c,Sg)}\\
         g\circ f \arrow{r}{\varphi(d')} & S(g\circ f) \circ u = Sg\circ Sf \circ u
       \end{tikzcd}
     \]
@@ -140,13 +140,14 @@ Then, given any two sets $a,b\in Ob(Sets)$, $u=(\pi_1,\pi_2)$ is an universal ar
 
     and since $\varphi$ is a bijection, for every $f\in \hom_C(r,Sd)$ there is an unique function $f' = \varphi(d)^{-1}(f)$ such that $Sf'\circ u = f$, thus being $u$ universal.
 
-\end{proof}
-From this theorem there is a definition that arises:
+  \end{proof}
+  
+  This proposition, sometimes called Yoneda's proposition \cite[p. 81]{mac2013categories}, is of capital importance. Later on this chapter, we will study \emph{adjunctions} and this proposition will enable us to fully understand the relationship between adjunctions and universality. From result there is a definition that arises:
 
 \begin{definition}
   Let $D$ be a category with small home-sets and let $F:D\to C$ be a functor. A representation of a functor $K:D\to Set$ is a pair $(r,\varphi)$ with $r \in Ob(D)$ and $ \varphi$ a natural isomorphism  such that
   $$D(r,\cdot) \equiv_{\varphi} F.$$
-  A functor is said to be \emph{re-presentable} whenever it has a representation.
+  A functor is said to be \emph{representable} whenever it has a representation.
 \end{definition}
 
 Note that therefore a universal arrow induces a natural isomorphism $D(r,d)\equiv C(c,Sd)$ and this induces a representation of the functor $C(c,S\cdot): D\to Set$, being these three equivalent.
@@ -179,10 +180,10 @@ is well defined and we can define $\mathcal{M}_g = \gamma^{-1}(g)$. An interesti
 Similarly to this two example, with the Yoneda lemma we will have a functor $F:D\to Set$ and one representation of this functor. We will classify the natural transformation of these functors by the set in the image of $F$! Interestingly enough, there will be applications where the complex object is not the space of naturals transformations, but the images of $F$ (see \ref{Cayleys} for an example). Lets proceed to enunciate and proof the result.
 
 \begin{theorem}\cite[Section 3.2]{mac2013categories}
-  Let $D$ be a category with small home-sets, $F:D\to Set$ be a functor, and $r\in Ob(D)$. Then there is a bijection
+  Let $D$ be a category with small home-sets, $K:D\to Set$ be a functor, and $r\in Ob(D)$. Then there is a bijection
   \begin{align*}
-    \tau:Nat(\hom_D(r,\cdot), F\cdot) &\equiv Fr\\
-    \tau(\alpha:\hom_D(r,\cdot)\to F\cdot)& = \alpha(r)(1_r)
+    \tau:Nat(\hom_D(r,\cdot), K\cdot) &\equiv Kr\\
+    \tau(\alpha:\hom_D(r,\cdot)\to K\cdot)& = \alpha(r)(1_r)
   \end{align*}
   Where $\tau$ is natural in $K$(as an object of $Set^{D}$) and in $r$.
 \end{theorem}
@@ -198,14 +199,17 @@ Writing $\alpha(r)(1_r) = u$ we have that:
     \[
       \begin{tikzcd}
         1_r\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\alpha(r)} & u\arrow{d}{Kg}\\
-        g\arrow{r}{\alpha(d)} & \alpha(d)(g)=Kg(u)
+        g\circ 1_r = g\arrow{r}{\alpha(d)} & \alpha(d)(g)=Kg\circ u
       \end{tikzcd}
     \]
 
     Therefore every natural transformation is uniquely identified by the value of $u$, therefore $\tau$ is injective. Moreover, for every $u$ in $Kr$, we can define a natural transformation following the previous diagram, therefore, $\tau$ is bijective.\\
 
-To see that $\tau$ we is natural we have to consider for which functor it is natural. Consider the functor \emph{Evaluation} $E: Set^D\times D$ that maps each $(F,c)\to Fc$, and the functor $N:Set^D\times D\to Nat(\hom_D(r,\cdot),K)$ the set of natural transformations. Finally, $\tau:N\to E$ is a natural transformation.
+To see that $\tau$ we is natural we have to consider for which functor it is natural. Consider the functor \emph{evaluation} $E: Set^D\times D$ that maps each $(F,c)\to Fc$, and the functor $N:Set^D\times D\to Nat(\hom_D(r,\cdot),K)$ the set of natural transformations. Finally, $\tau:N\to E$ is a natural transformation.
 \end{proof}
+\begin{remark}
+  The existence of an evaluation will be revisited when we consider \emph{closed cartesian cateogries} in  \ref{subsect:CCC}. This categories (in general, closed categories) will generalized the idea of a category having an exponential object suitable for evaluation. In this case, we are unadvertedly using that $Cat$ is a closed cartesian category.
+\end{remark}
 
 The first functor that we will want to apply this result is to the $\hom_{\cdot}$ functor. But this functor is a bifunctor, so to get the full result of this lemma applied to the full bifunctor we may restate this lemma to contravariant functors.
 
@@ -253,7 +257,7 @@ So we have the isomorphism of groups that is stated in Cayley's Theorem.\\
 We continue our exploration of Yoneda lemma by defining the \emph{Yoneda Embedding}. For that we define the contravariant functor $h_a = \hom_C(\cdot, a)$. Then the contravariant Yoneda lemma tell us that:
 $$Nat(h_a,h_b) \equiv_{\tau_a} \hom(a,b).$$
 
-We then can define a fully faithfull embedding $\upsilon: C \to Set^{C^{op}}$ such that 
+We then can define a fully faithfuls embedding $\upsilon: C \to Set^{C^{op}}$ such that 
 \begin{align*}
   \upsilon a  &= \hom_C(A, \cdot)\qquad \forall a \in Ob(C), \\
   \upsilon f &= \tau_a^{-1} (f)\qquad\qquad \forall f:b\to a\in Ar(C).
@@ -366,7 +370,7 @@ Analogously, we can define the coproduct, on which instead of defining an arrow 
     \begin{theorem}[Mitchell's Theorem] If A is a small abelian category, then there is a covariant full faithful exact functor $F : A \to Ab$.
     \end{theorem}
 
-    As a consequence, any statement ``$p$ implies $q$'' where $p$ and $q$ are categorical statmenet about a diagram in $A$, if is true in  $Ab$, it holds true in $A$.
+    As a consequence, any statement ``$p$ implies $q$'' where $p$ and $q$ are categorical statement about a diagram in $A$, if is true in  $Ab$, it holds true in $A$.
   \end{itemize}
 \end{example}
 
@@ -419,12 +423,37 @@ and define:
 
 \begin{example}
   \begin{itemize}
-  \item Let $A,B,C\in Ob(Set)$ , and let  $f : C \to A, g : C \to B\in Ar(Set)$. The pushout of $f$ and $g$ is the disjoint union of $X$ and $Y$, where elements sharing a common preimage (in $Z$).
+  \item Fiber Product: The fiber product is the canonical pullback of the $Top$ category. Let $X,Y,Z$ be topological spaces and let $f:X\to Z$ and $g: Y\to Z$ be continous function. Then we define the fiber product as:
+    $$X\times_ZY = \{(x,y) \in X\times Y: fx=gy\}.$$ Note that, although it not usually noted, $X\times_Z Y$ depend on both $f$ and $g$. In a diagram:
+\[
+  \begin{tikzcd}
+    X\times_Z Y\arrow{r}{\pi_2}\arrow[swap]{d}{\pi_1} & Y\arrow{d}{g}\\
+    X\arrow{r}{f} & Z
+\end{tikzcd}
+\]
+where $\pi_i$ are the projection inherited from $X\times Y$. It is easy to check that, for any topological space $Q$ and any $f':Q\to X, g': Q \to Y$ such that
+\[
+  \begin{tikzcd}
+    Q\arrow{r}{f'}\arrow[swap]{d}{g'} & Y\arrow{d}{g}\\
+    X\arrow{r}{f} & Z
+\end{tikzcd}
+\]
+there is an unique $u:Q\to X\times_Z Y$ that maps $q\mapsto (f'q,g'q)$ for every $q\in Q$.\\
+\item Seifert-Van-Kampen: This theorem is a classic result in Algebraic topology, that can be found in any classical source, such as \cite{munkres2000topology}. It was independently discovered by Seifert \cite{seifert1931konstruktion} and Van-Kampen \cite{van1933connection}.  We present the result as in \cite{brown1967groupoids}. We denote $\pi_1$ the fundamental groupoid functor, and by $i_1,i_2,j_1,j_2$ the canonical inclusions. \\
+  \begin{theorem}[Seifert-Van-Kampen]
+Let the topological space $X$  be covered by the interiors of two subspaces $X_1,X_2$ and let $A$
+ be a set which meets each path component of $X_1, X_2$ and $X_0=X_1\cap X_2$.Then $A$  meets each path component of $X$  and the following diagram is a pushout in the category of groupoids:
+\[
+  \begin{tikzcd}
+    \pi_1(X_0,A)\arrow{r}{\pi_1(i_1)}\arrow[swap]{d}{\pi_1(i_2)} & \pi_1(X_1,A)\arrow{d}{\pi_1(j_1)}\\
+    \pi_1(X_2,A)\arrow{r}{\pi_1(j_2)} & \pi_1(X,A).\\
+\end{tikzcd}
+\]
 
-  \item Fiber Product: The fiber product is the canonical pullback of 
+\end{theorem}
 
-   \item Seifert-Van-Kampen (Si tienes valor).
-  \end{itemize}
+
+\end{itemize}
 \end{example}
 
 Note the  similarity of the pullback/pushout and the one of product/coproduct notation-wise. To understand these we have to consider the similarities of both construction. We are going to focus on the similarities of product and pullback, letting the coproduct/pushouts as duals.\\
@@ -652,7 +681,7 @@ We define $G_0d = c$. Also note  that $\eta d$ is universal from $d$ to $F$. The
   
 
 
-  \subsection{Closed Cartesian Categories}
+  \subsection{Closed Cartesian Categories}\label{subsect:CCC}
 
   The notion of product seen in \ref{prod-univ} is a notion that seek to catch the essence of what the Cartesian product is in the category of Set. In this category it happens that for any two objects, one can consider the product without any hesitance about it existence. A \emph{Cartesian category} will be a category that, in some sense, maintain this property (of being closed under Cartesian product). Formally: 
   \begin{definition}
@@ -717,21 +746,8 @@ We can consider, now that we have a category with evaluation, products and a ter
   A \emph{cocartesian} category is a category with a specified initial object $\bot$ and for which every finite coproduct exists. A \emph{bicartesian} category is a category that is both cartesian and cocartesian.
 \end{definition}
 
-  \begin{definition}A \emph{closed bicartesian category} is a bicartesian category such that
-  \begin{center}
-  \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
-$ F_{3}^b:C \to C$\\
-$ \qquad c \to c\times b$\\
-  \end{tabular}
-\end{center}
-has a \emph{specified} right adjoint, denoted by:
-\begin{center}
-  \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
-$ G_{3}^b:C \to C$\\
-$ \qquad c \to c^b$\\
-  \end{tabular}
-\end{center}
-
+\begin{definition}A \emph{closed bicartesian category} is a bicartesian category that is also a closed cartesian category.
+\end{definition}
 
 \begin{definition}[Category of closed cartesian categories]
 \end{defintion}
