@@ -56,7 +56,7 @@ Traditionally, mathematics is based on the set theory. When we start set theory 
     \begin{itemize}
     \item \emph{Associative}: given arrows $f,g,h$, we have that,
       $$(g\circ f) \circ h = g \circ (f \circ h).$$
-    \item \emph{Unit}: given an object $a$, and arrows $f,g$ such that $\dom (f)= a$ and %$\docom (g) = a$, we have that,
+    \item \emph{Unit}: given an object $a$, and arrows $f,g$ such that $\dom (f)= a$ and $\codom (g) = a$, we have that,
       $$1_a \circ g = g, \qquad f \circ 1_a = f.$$
     \end{itemize}
   \end{itemize}
@@ -458,13 +458,6 @@ Before explaining composition between natural transformation, it is useful to pr
 
 Let us define the composition of two natural transformation. We will start defining the composition of two natural tranformations $\sigma, \tau$ as:
 
-
-Due to this representation, this composition of natural transformations is called \emph{vertical composition}, in opposition to the \emph{horizontal composition} (def. \ref{horizontal-composition}).
-
-\begin{definition}\label{vertical-composition}
-  Let $C$ and $B$ be two categories, $R,S,T : C \to B$ be functors, and let $\tau: R \to S$, $\sigma:S\to T$. We define the composition $(\tau \circ \sigma)c = \tau c\circ \sigma c$.
-\end{definition}
-
 \[
   \begin{tikzcd}[column sep=huge]
     A
@@ -476,6 +469,13 @@ Due to this representation, this composition of natural transformations is calle
     \arrow[shorten <=3pt,shorten >=2pt,Rightarrow,to path={(G) -- node[label=left:$\sigma$] {} (H)}]{}
   \end{tikzcd}
 \]
+
+Due to this representation, this composition of natural transformations is called \emph{vertical composition}, in opposition to the \emph{horizontal composition} (def. \ref{horizontal-composition}).
+
+\begin{definition}\label{vertical-composition}
+  Let $C$ and $B$ be two categories, $R,S,T : C \to B$ be functors, and let $\tau: R \to S$, $\sigma:S\to T$. We define the composition $(\tau \circ \sigma)c = \tau c\circ \sigma c$.
+\end{definition}
+
 
 To see that $(\tau \circ \sigma)$ is a natural transformation it suffices the following diagram \cite{stack-composition-natural}:
 
