@@ -56,7 +56,7 @@ Traditionally, mathematics is based on the set theory. When we start set theory 
     \begin{itemize}
     \item \emph{Associative}: given arrows $f,g,h$, we have that,
       $$(g\circ f) \circ h = g \circ (f \circ h).$$
-    \item \emph{Unit}: given an object $a$, and arrows $f,g$ such that $\dom (f)= a$ and $\docom (g) = a$, we have that,
+    \item \emph{Unit}: given an object $a$, and arrows $f,g$ such that $\dom (f)= a$ and %$\docom (g) = a$, we have that,
       $$1_a \circ g = g, \qquad f \circ 1_a = f.$$
     \end{itemize}
   \end{itemize}
@@ -88,9 +88,9 @@ From now on, we will work based on set theory. Despite that, it is useful to tak
 \footnote{{\color{black} There is a discussion here that must be addressed at the end}}That is, a graph/category is a pair $(O,A)$ where a collection $O$ consisting of all objects as well as a collection $A$ consisting of all arrows. Their elements hold the same properties that objects and arrows hold on metacategories / metagraph.\\
 
 
-We will focus on the category. First, we define the function homeset of a category $C=(O,A)$, wrote as $\hom_{C}$, as the function:
+We will focus on the category. First, we define the function homeset of a category $C=(O,A)$, wrote as $\hhom_{C}$, as the function:
 \begin{align*}
-  && \hom_{C}: O \times O &\mapsto \mathcal{P}(A)&\\
+  && \hhom_{C}: O \times O &\mapsto \mathcal{P}(A)&\\
   \displaystyle &\ &(a,b)&\mapsto \{f\in A | f:a\to b\}&
 \end{align*}
 
@@ -161,7 +161,7 @@ In categories, we have a kind of different approach to the subject. Instead of f
 \end{definition}
 
 
-Is easy to follow that if a morphism has a left and a right inverse, they must be the same, thus implying the uniqueness of the inverse. Also one can see that this functions define, by precomposition, bijections between $\hom(a,c)$ and $\hom(b,c)$ for all $c\in O$.\\
+Is easy to follow that if a morphism has a left and a right inverse, they must be the same, thus implying the uniqueness of the inverse. Also one can see that this functions define, by precomposition, bijections between $\hhom(a,c)$ and $\hhom(b,c)$ for all $c\in O$.\\
 
 We will now proceed to talk about certain arrows and objects that have properties that distinguish them from others.  The most useful example to gain an intuition of these properties is that of the $FinSet$ category, of all finite sets and functions between them.  Considering special arrows:\\
 
@@ -251,15 +251,15 @@ Lets provide some examples of functors:\\
   \item Fundamental group: In the context of algebraic topology we have the functor of the fundamental group $\Pi_1: Top_* \to Grp$. The most famous property of this function is that
 
     
-    \begin{displayquote}
+ %   \begin{displayquote}
       Given continuous application $ f,g:X \to Y$ between two topological spaces induces an application of the group of loops of $X$ on the group of loops of $Y$ such that $\Pi_1(f \circ g) = \Pi_1(f) \circ \Pi_1(g)$.
-    \end{displayquote}
+  %  \end{displayquote}
 
     that is, the functoriality of the function (taking also into account the fact that the identity of topological spaces is mapped to the identity of group). 
 
   \item Stone-\v{C}ech compactification\label{example:stone-cech}:  From the realm of functional análisis we have the following theorem:
 
-    \begin{theorem} Let $\mathbb{K}=\mathbb R $ or $\mathbb C$ and let $\Omega$ be a completely regular Hausdorff topological space. Then there exists a compact Hausdorff topological space $\beta \Omega$ and a homeomorphism $\Phi$, from $\Omega$ to a dense subset of $\beta\Omega$. Moreover, for every continuous and bounded function $f: \Omega \to \K$ there exists a unique $\overline{f} \in C(\beta \Omega)$ such that $\overline{f}\circ \Phi = f$ and the application $f \to \overline{f}$ is an isomorphism. Finally, $\beta \Omega$ is uniquely determined up to isomorphism by the above properties.
+    \begin{theorem} Let $\mathbb{K}=\mathbb R $ or $\mathbb C$ and let $\Omega$ be a completely regular Hausdorff topological space. Then there exists a compact Hausdorff topological space $\beta \Omega$ and a homeomorphism $\Phi$, from $\Omega$ to a dense subset of $\beta\Omega$. Moreover, for every continuous and bounded function $f: \Omega \to K$ there exists a unique $\overline{f} \in C(\beta \Omega)$ such that $\overline{f}\circ \Phi = f$ and the application $f \to \overline{f}$ is an isomorphism. Finally, $\beta \Omega$ is uniquely determined up to isomorphism by the above properties.
     \end{theorem}
 
     \begin{proof}
@@ -318,10 +318,10 @@ Lets provide some examples of functors:\\
 We can now construct the category of all small categories $Cat$. This category has as object all small categories and as arrows all functor between them. Note that $Cat$ does not contain itself, since it is a large category.\\
 
 We can consider some properties in functors. Note that we can consider a functor $T:C\to D$ as a set function over homeset, that is, a function: 
-$$T:\hom_C(a,b) \to \{Tf: Ta \to Tb | f \in C\} \subset \hom_D(Ta,Tb)$$
+$$T:\hhom_C(a,b) \to \{Tf: Ta \to Tb | f \in C\} \subset \hhom_D(Ta,Tb)$$
 
 \begin{definition}
-  A functor $T:C\to D$ is \emph{full} if it is surjective as a function over homesets, i.e. if the function $T:\hom_C(a,b) \to  \hom_D(Ta,Tb)$  is surjective for every $a,b \in C$. A functor is \emph{faithfull} if it is injective over homesets.
+  A functor $T:C\to D$ is \emph{full} if it is surjective as a function over homesets, i.e. if the function $T:\hhom_C(a,b) \to  \hhom_D(Ta,Tb)$  is surjective for every $a,b \in C$. A functor is \emph{faithfull} if it is injective over homesets.
 \end{definition}
 
 As we have defined the concept of opposite category, we can consider functors $T:C^{op} \to D$. It is customary to refer to this type of functions a \emph{contravariant} functor from $C$ to $D$ and regular functors $F:C\to D$ as \emph{covariant}.
@@ -418,29 +418,29 @@ Complementary, for any two functors $F:D\to B, G:D\to C$ we can define a functor
   \end{tikzcd}
 \]
 
-A functor $F: B^{op}\times C \to D$ is called  a \emph{bifunctor}. Arguably the most important bifunctor is the $\hom_C$ function. Given a category $C$ we can see $\hom_C: C^{op}\times C \to Set$ as a bifunctor such that for all $a,b \in Ob(C)$:
+A functor $F: B^{op}\times C \to D$ is called  a \emph{bifunctor}. Arguably the most important bifunctor is the $\hhom_C$ function. Given a category $C$ we can see $\hhom_C: C^{op}\times C \to Set$ as a bifunctor such that for all $a,b \in Ob(C)$:
 \[
-  \hom_C(\cdot,\cdot)(a,b) = \hom_C (a,b) 
+  \hhom_C(\cdot,\cdot)(a,b) = \hhom_C (a,b) 
 \]
-for the object. For the arrows, for all $f:a\to a', g:b\to b' \in C$ and for all $h\in \hom_C(a',b)$:
+for the object. For the arrows, for all $f:a\to a', g:b\to b' \in C$ and for all $h\in \hhom_C(a',b)$:
 \begin{align*}
-  \hom_C(f^{op},g): \hom_C (a',b)  & \to \hom_C(a,b'), \\
-  \hom_C(f^{op},g) (h)   &= g \circ h \circ f.
+  \hhom_C(f^{op},g): \hhom_C (a',b)  & \to \hhom_C(a,b'), \\
+  \hhom_C(f^{op},g) (h)   &= g \circ h \circ f.
 \end{align*}
 
-From this bifunctor we can define two functors for every $c\in Ob(C),g:d\to d' \in C, h\in \hom_C(c,d) $:
+From this bifunctor we can define two functors for every $c\in Ob(C),g:d\to d' \in C, h\in \hhom_C(c,d) $:
 \begin{itemize}
-\item  The functor $\hom_C(c, \cdot):C\to Set$ such that for all $d \in Ob(C)$:
+\item  The functor $\hhom_C(c, \cdot):C\to Set$ such that for all $d \in Ob(C)$:
   \[
-   \hom_C(c,\cdot) &= \hom_C (c,d),
+   \hhom_C(c,\cdot) = \hhom_C (c,d),
  \]
  and
   \begin{align*}
-    \hom_C(c,g): \hom_C (a,d) & \to \hom_C(a,d'),\\
-    \hom_C(c,g) (h)   &= g \circ h .
+    \hhom_C(c,g): \hhom_C (a,d) & \to \hhom_C(a,d'),\\
+    \hhom_C(c,g) (h)   &= g \circ h .
   \end{align*}
 This functor is often called the \emph{post-composition} functor.
-\item  The covariant functor $\hom_C(\cdot, c):C^{op}\to Set$, defined analogously.This functor is often called the \emph{pre-composition} functor.
+\item  The covariant functor $\hhom_C(\cdot, c):C^{op}\to Set$, defined analogously.This functor is often called the \emph{pre-composition} functor.
 \end{itemize}
 \subsubsection{Functor Categories}
 We continue by defining functor categories, that is, categories where we consider the functors as objects and natural transformation as arrows in some sense. This concept will be instrumental in further consideration in the realm of functional programming (in particular, in the definition of a monad).\\
@@ -457,6 +457,14 @@ Before explaining composition between natural transformation, it is useful to pr
 \]
 
 Let us define the composition of two natural transformation. We will start defining the composition of two natural tranformations $\sigma, \tau$ as:
+
+
+Due to this representation, this composition of natural transformations is called \emph{vertical composition}, in opposition to the \emph{horizontal composition} (def. \ref{horizontal-composition}).
+
+\begin{definition}\label{vertical-composition}
+  Let $C$ and $B$ be two categories, $R,S,T : C \to B$ be functors, and let $\tau: R \to S$, $\sigma:S\to T$. We define the composition $(\tau \circ \sigma)c = \tau c\circ \sigma c$.
+\end{definition}
+
 \[
   \begin{tikzcd}[column sep=huge]
     A
@@ -468,12 +476,6 @@ Let us define the composition of two natural transformation. We will start defin
     \arrow[shorten <=3pt,shorten >=2pt,Rightarrow,to path={(G) -- node[label=left:$\sigma$] {} (H)}]{}
   \end{tikzcd}
 \]
-
-Due to this representation, this composition of natural transformations is called \emph{vertical composition}, in opposition to the \emph{horizontal composition} (def. \ref{horizontal-composition}).
-
-\begin{definition}\label{vertical-composition}
-  Let $C$ and $B$ be two categories, $R,S,T : C \to B$ be functors, and let $\tau: R \to S$, $\sigma:S\to T$. We define the composition $(\tau \circ \sigma)c = \tau c\circ \sigma c$.
-\end{definition}
 
 To see that $(\tau \circ \sigma)$ is a natural transformation it suffices the following diagram \cite{stack-composition-natural}:
 
@@ -554,7 +556,7 @@ Note that this is not the only way in which to define the composition of natural
 
 Lets formalize this composition:
 \begin{definition}\label{horizontal-composition}
-  Let $B,C,D$ be categories, $F,G: B \to C, F',G':C\to D$ be functors, and let $\tau: F \to G$, $\sigma:F'\to G'$, we define the horizontal composition $(\tau \circ \sigma): F\circ F' \to G\circ G'$ by: $$(\sigma \circ \tau) c = \simga F c \circ G' \tau c$$  for all $c\in B$.
+  Let $B,C,D$ be categories, $F,G: B \to C, F',G':C\to D$ be functors, and let $\tau: F \to G$, $\sigma:F'\to G'$, we define the horizontal composition $(\tau \circ \sigma): F\circ F' \to G\circ G'$ by: $$(\sigma \circ \tau) c = \sigma F c \circ G' \tau c$$  for all $c\in B$.
 \end{definition}
 
 In this case we can see that the composition of two natural transformation is indeed a natural transformation due to the commutativity of:
@@ -582,6 +584,7 @@ When we have to consider both compositions at the same time we denote the vertic
 \end{proposition}
 \begin{proof}
   We have a structure like   
+
   \[
     \begin{tikzcd}[column sep=huge]
       A
@@ -599,6 +602,7 @@ When we have to consider both compositions at the same time we denote the vertic
       \arrow[shorten <=3pt,shorten >=2pt,Rightarrow,to path={(G') -- node[label=left:$\sigma'$] {} (H')}]{}
     \end{tikzcd}
   \]
+
   From the  naturality of $\tau'$ we have that for all $c\in A$:
   \begin{align*}
     ((\sigma'\cdot \tau')\circ (\sigma\cdot \tau))(c)
@@ -615,7 +619,7 @@ When we have to consider both compositions at the same time we denote the vertic
 
 To finally consider the relation between products, and the functor category we can see that given three small categories $A,B,C$ we have a bijection:
 
-$$\hom_{Cat}(A\times B, C) \cong \hom_{Cat}(A, C^B).$$
+$$\hhom_{Cat}(A\times B, C) \cong \hhom_{Cat}(A, C^B).$$
 
 This fact will be taken into account further in the text, as this will mean that the functor $\cdot \times B: Cat \to Cat$ has a right adjoint.
 \subsubsection{Comma Category}
