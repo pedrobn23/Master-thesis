@@ -39,7 +39,6 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{mathpazo} % Use the Palatino font by default
 \usepackage[font=itshape]{quoting} 
 \usepackage[toc,page]{appendix}
-\usepackage[nogin]{Sweave}
 \usepackage{pdfpages}
 \usepackage[backend=biber,style=numeric]{biblatex} 
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
@@ -187,21 +186,21 @@ Dr. Ángel González Prieto  \\ \emph{Departamento de Matemáticas \\ Universida
 \thispagestyle{empty}
 \label{Part1}
 
-%\input{Chapters/Chapter1}
-% \input{Chapters/Chapter2}
+\input{Chapters/Chapter1}
+\input{Chapters/Chapter2}
 
 
-% \part{Lambda Calculus}
-% \label{Part2}
+\part{Lambda Calculus}
+\label{Part2}
 
 
-% \input{Chapters/Chapter3}
-% \input{Chapters/Chapter4}
+\input{Chapters/Chapter3}
+\input{Chapters/Chapter4}
 
-% \appendix
-% \input{Chapters/apendix1}
+\appendix
+\input{Chapters/apendix1}
 
-%\section*{Acknowledgements}
+\section*{Acknowledgements}
 
 
 
