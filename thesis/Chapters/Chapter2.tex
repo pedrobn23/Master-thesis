@@ -673,7 +673,7 @@ For the canonical example we may introduce a really organic concept: the \emph{s
     
     \begin{itemize}
     \item[$ii)\implies i)$] Given an equivalent adjoint $(F,G,\varphi,\eta,\varepsilon)$, then $F$ is an equivalence with $G,\eta,\varepsilon$. 
-    \item[$i)\implies iii)$] $\varphi: GF\equiv I_C$ implies that for every $c\in Ob(C)$ we can consider $c\equiv GFc$. We select $a=Fc$\footnote{Duda, Sección 4.4 Maclane.} Then considering the natural isomorphism $\zeta: FG\equiv I_D$ states for every $f:a\to a'\in D$
+    \item[$i)\implies iii)$] $\varphi: GF\equiv I_C$ implies that for every $c\in Ob(C)$ we can consider $c\equiv GFc$. Then considering the natural isomorphism $\zeta: FG\equiv I_D$ states for every $f:a\to a'\in D$
 \[
 \begin{tikzcd}
   FGa \arrow{d}{FG f}& a\arrow{d}{f}\arrow{l}{\zeta^{-1} a}\\
@@ -757,7 +757,13 @@ These adjoints provide us with a lot of information:
 \item First of all, as every product exists, and it specified by $F_2$, we can define $F_3^b$ for every $b$. Then, it adjointness states that:
   $$\hom_C(c\times b, d) \equiv \hom_C(c,d^b)   $$
 
-  This object $d^b$ is called the exponential object or map object. The intuitive notion is that this object represent in some way the arrows from $b$ to $c$, being a generalization of the function set of two small sets. The best way to understand this adjoint is by the natural transformation $\varepsilon^b(c^b\times b) = c$. In this context, this is called \emph{evaluation arrow}. In the context of $Set$ this amount to the classic evaluation of a function.\\
+  This object $d^b$ is called the exponential object or map object. To define this adjoint, we have defined a functor $F_3^b$ on both functor and arrows ($F_3^b(f:a\to a') = f\times 1_b: a\times b\to a'\times b$), but the functor $G_3^b$ is defined only on the objects. To specify the adjoint we need to provide an arrow $\varepsilon$:
+  $$\varepsilon: F_3^bG_3^b(c) = c^b\times b \to c = I(c)$$
+  that is natural in $c$ and universal from $F_3^b$ to $c$.\\
+
+
+
+  The intuitive notion is that this object represent in some way the arrows from $b$ to $c$, being a generalization of the function set of two small sets. The best way to understand this adjoint is by the natural transformation $\varepsilon^b(c^b\times b) = c$. In this context, this is called \emph{evaluation arrow}. In the context of $Set$ this amount to the classic evaluation of a function.\\
 
 \end{itemize}
 \begin{remark}
@@ -771,14 +777,15 @@ Cartesian Closed Categories will be reformulated in Chapter 4, proposition \ref{
 
 \begin{example}
   \begin{itemize}
-  \item $Set$
-  \item The category of compactly generated Hausdorff spaces.
-  \item We will prove later that lambda calculus is, in some sense, a closed cartesian category.
+  \item $Set$. We have the set $\{*\}$ as a terminal object, products as in example \ref{example:prod}. Given two sets $C, B$ we can define the exponential object $C^B= \hhom (B,C)$. The adjointness is then implied by the currification process:
+    $$g: A\times B \to C \mapsto f: A \to B^C,$$
+    where $f(a)(\cdot) = g(a,\cdot)$.
+  \item We will prove in chapter \ref{chap:4} that $\lambda$-calculus is, in some sense, a closed cartesian category.
   \end{itemize}
 \end{example}
 
 
-We can consider, now that we have a category with evaluation, products and a terminal object, what if we consider also the duals. 
+We can consider the duals:
 
 \begin{definition}
   A \emph{cocartesian} category is a category with a specified initial object $\bot$ and for which every finite coproduct exists. A \emph{bicartesian} category is a category that is both cartesian and cocartesian.
