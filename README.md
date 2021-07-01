@@ -9,16 +9,16 @@ Here I will be updating when each section state:
   - Ready.
   
 - Chapter 2: 
-  - Section 1: Ready
-  - Section 2: Some examples are left to do.
+  - Ready  - still to be checked over.
 
 - Chapter 3:
-  - Ready - still to be check over.
-  
+  - Ready - still to be checked over.
   
 - Chapter 4:
   - Work in Progress
-  
+
+I have also a todo.md file that is also rarely updated. Right now it has some work that I am purposely delaying until August.
+
 ## Acknowledges
 Thanks a lot to Ángel González Prieto for supervising this work. 
 
