@@ -52,14 +52,14 @@ In a diagram:
   
   \begin{example}\ 
     \begin{itemize}
-    \item Quotient Group: This property states that, for any two groups $N\lhd G$ with $\pi: G \to N$ the canonical projection, and any group homomorphism $f:G\to K$ such that $N\subset \ker f$ there exists an unique $\overline f: H \to K$ such that $\overline f  \circ \pi = f$.\\
+    \item Quotient group: This property states that, for any two groups $N\lhd G$ with $\pi: G \to N$ the canonical projection, and any group homomorphism $f:G\to K$ such that $N\subset \ker f$ there exists an unique $\overline f: H \to K$ such that $\overline f  \circ \pi = f$.\\
       
       The question now is, how is this a universal property. This is an example of a universal element. Considering the functor $H: Grp\to Set$:
       $$HG' = \{f:G\to G'\in Ar(Grp) : F(N)=\{0\} \},$$
       
       Then, $(G/N, \pi)$ is an universal element for $H$. From this property alone the three isomorphism theorems can be deduced. Therefore, we only have to prove this result to have the full power of these theorems in any context (e.g. Rings, K-Algebra, or Topological spaces).
 
-    \item Tensor Product: Given an right $R$-module $A$ and a left $R$-module $B$ one can consider the tensor product as an abelian group $A\otimes_R B$ and an $R$-biadditive function
+    \item Tensor product: Given an right $R$-module $A$ and a left $R$-module $B$ one can consider the tensor product as an abelian group $A\otimes_R B$ and an $R$-biadditive function
       $$h:A\times B\to A \otimes_R B,$$
       such that  for every $R$-biadditive $f:A\times B \to G$ it exists an unique $\overline f$ such that $\overline f\circ h=f$. Is easy to follow that tensor product can be reformulated as an universal arrow $\varphi:A\time B \to A\otimes_R B$ from $A\times B$ to the identity functor in the category of $R$-additive groups along with $R$-additive functions.
     \end{itemize}
@@ -146,7 +146,7 @@ Then, given any two sets $a,b\in Ob(Sets)$, $u=(\pi_1,\pi_2)$ is an universal ar
 
 \begin{definition}
   Let $D$ be a category with small home-sets and let $F:D\to C$ be a functor. A representation of a functor $K:D\to Set$ is a pair $(r,\varphi)$ with $r \in Ob(D)$ and $ \varphi$ a natural isomorphism  such that
-  $$D(r,\cdot) \equiv_{\varphi} F.$$
+  $$D(r,\cdot) \equiv_{\varphi} F\cdot.$$
   A functor is said to be \emph{representable} whenever it has a representation.
 \end{definition}
 
@@ -439,10 +439,12 @@ where $\pi_i$ are the projection inherited from $X\times Y$. It is easy to check
 \end{tikzcd}
 \]
 there is an unique $u:Q\to X\times_Z Y$ that maps $q\mapsto (f'q,g'q)$ for every $q\in Q$.\\
-\item Seifert-Van-Kampen: This theorem is a classic result in Algebraic topology, that can be found in any classical source, such as \cite{munkres2000topology}. It was independently discovered by Seifert \cite{seifert1931konstruktion} and Van-Kampen \cite{van1933connection}.  We present the result as in \cite{brown1967groupoids}. We denote $\pi_1$ the fundamental groupoid functor, and by $i_1,i_2,j_1,j_2$ the canonical inclusions. \\
+\item Seifert-Van-Kampen: This theorem is a classic result in Algebraic topology, that can be found in any classical source, such as \cite{munkres2000topology}. It was independently discovered by Seifert \cite{seifert1931konstruktion} and Van-Kampen \cite{van1933connection}.  We present the result as in  Brown's paper\cite{brown1967groupoids}.\\
+
+  We denote by $\pi_1(X,A)$ the fundamental groupoid of the topological space $X$ over the set $A\subset X$. This notion was first showed by Brown. $\pi_1(X,X)$ would be the classical full fundamental groupoid, and $\pi_1(X,x_0)$ for some $x_0\in X$ would be the fundamental group of $X$ over $x_0$. Let us present the result.
   \begin{theorem}[Seifert-Van-Kampen]
 Let the topological space $X$  be covered by the interiors of two subspaces $X_1,X_2$ and let $A$
- be a set which meets each path component of $X_1, X_2$ and $X_0=X_1\cap X_2$.Then $A$  meets each path component of $X$  and the following diagram is a pushout in the category of groupoids:
+ be a set which meets each path component of $X_1, X_2$ and $X_0=X_1\cap X_2$, and $i_1: X_0 \to X_i,j_i: X_i \to X $ be the canonical inclusions. Then $A$  meets each path component of $X$  and the following diagram is a pushout in the category of groupoids:
 \[
   \begin{tikzcd}
     \pi_1(X_0,A)\arrow{r}{\pi_1(i_1)}\arrow[swap]{d}{\pi_1(i_2)} & \pi_1(X_1,A)\arrow{d}{\pi_1(j_1)}\\
@@ -486,13 +488,13 @@ In both case, the universal property consists of having an arrow to a generated 
 
 \section{Adjoints}
 
-Adjointness is a fundamental theory within Category theory. It relates the homesets of two functors $F:C\to D, G:D\to C$. The importance of adjoints however, comes from it ubiquity among mathematics, often relate with the ubiquity of universality. This notion was first presented by Daniel M. Kan in \cite{kan1958adjoint}. For this section we follow the material presented in \cite{mac2013categories}.\\
+Adjointness is a fundamental theory within Category theory. It relates the homesets of two functors $F:C\to D, G:D\to C$. The importance of adjoints however, comes from it ubiquity among mathematics, often relate with the ubiquity of universality. This notion was first presented by Daniel M. Kan in \cite{kan1958adjoint}. For this section we follow the material presented in \cite{mac2013categories}. Adjoints are also called Adjunctions.\\
 
-We  will start by providing some intuitive notions, before a formal definition. Take the Forgetful Functor $U:Grp\to Set$, and the Free Group Functor $\mathcal{F}:Set\to Grp$. We can see that it is not difficult to consider that we can compose $F$ and $G$ to make endofunctors. These endofunctors are far from being identities, nonetheless we have still a great relation between them: for every set $X$ and group $G$, there is a function $f: X \to UG$ for each morphism $g:FX\to U$. Conversely, any function from $X$ to $UG$ induces a morphism. \\
+We  will start by providing some intuitive notions, before a formal definition. Take the Forgetful Functor $U:Grp\to Set$, and the Free group Functor $\mathcal{F}:Set\to Grp$. We can see that it is not difficult to consider that we can compose $F$ and $G$ to make endofunctors. These endofunctors are far from being identities, nonetheless we have still a great relation between them: for every set $X$ and group $G$, there is a function $f: X \to UG$ for each morphism $g:FX\to U$. Conversely, any function from $X$ to $UG$ induces a morphism. \\
 
 Any avid reader will detect by this point the taste of universality. But there is a bit more, we have a bijective relation on every image home-set of both $F$ and $G$. This is the underlying property of adjointness - to relate home-sets. Lets formalize this idea:
 \begin{definition}
-  Let $C,D$ be categories. And adjunction is a triple $(F,G,\varphi):D\to C$ where $F,G$ are functors:
+  Let $D,C$ be categories. And adjunction is a triple $(F,G,\varphi):D\to C$ where $F,G$ are functors:
   \[
     \begin{tikzcd}
       D\arrow[r, shift left=.5ex, "G"{name=F}] &
@@ -501,13 +503,15 @@ Any avid reader will detect by this point the taste of universality. But there i
   \]
   while $\varphi$ is a transformation that maps each $(c,d) \in Ob(C\times D)$ with a bijection:
   \[
-    \varphi_{c,d}:\hom_C(Fd, c)\equiv\hom_D(d, Gc).
+    \varphi_{c,d}:\hom_A(Fd, c)\equiv\hom_X(d, Gc).
   \]
-  which is natural in $c$ and $d$.
+  which is natural in $c$ and $d$. 
 \end{definition}
 
-We have a bit to unpack in this definition. We will start to understand in what sense $\varphi$ is natural. Remembering about $N$ functor in Yoneda's Lemma, we can see that it is natural bijection from $\varphi:Hom_C(F\cdot, \cdot)\to \hom_D(\cdot, G\cdot)$ in each variable. That is,  for every $f:d\to d'\in C,k:c\to c' \in D$ the diagrams
-
+\begin{remark}
+  but we will stick with the notation of $F$ being the \emph{left adjoint} and $G$ being the \emph{right adjoint}, denoted as $F\dashv_\varphi G$ or just $F\dashv G$. When a functor \emph{is} a left (resp. right) adjoint it \emph{has} a right (resp. left) adjoint.\\
+\end{remark}
+We have a bit to unpack in this definition. We will start to understand that $\varphi:Hom_C(F\cdot, \cdot)\to \hom_D(\cdot, G\cdot)$ is a natural bijection in each variable. That is, for every $f:d\to d'\in C,k:c\to c' \in D$ the following diagrams commutes.
 \[
 \begin{tikzcd}
  \hom_C(Fd,c) \arrow{d}{\hom_C(Fd,\cdot)(g)}\arrow{r}{\varphi_{c,d}}
@@ -519,9 +523,19 @@ We have a bit to unpack in this definition. We will start to understand in what 
   \end{tikzcd}
 \]
 
-commutes. \\
+The definition of adjoint can be reworked as:
+\begin{proposition}\label{description:adjoint}
+  An adjoint can be described as a bijection that send each $f:Fx\to a\in A$ to $\varphi(f):x\to Ga$ such that, for every $h:x\to x'\in X, k: a\to a'\in A$:
+  $$\varphi(k\circ f) = Gk \circ \varphi(f), \qquad \varphi(f\circ Fh) = \varphi(f)\circ h.$$
+\end{proposition}
+\begin{proof}
+These conditions ensures the naturality of the bijection.
+\end{proof}
+\begin{remark}
+  It is equivalent to require $\varphi^{-1}$ to be natural.
+\end{remark}
 
-We can follow by considering the important notation decision: how to call the adjoints. This is a quite ambiguous notation, but we will stick with the notation of $F$ being the \emph{left adjoint} and $G$ being the \emph{right adjoint}. When a functor \emph{is} a left (resp. right) adjoint it \emph{has} a right (resp. left) adjoint. This notation comes from where is the functor placed in the home-set, when making the bijection.\\
+This proposition, that can be obviated and is rarely used by itself, is really important as it encapsulate the idea behind the commonplace concepts of \emph{unit} and \emph{counit}. The key reasoning behind these objects is to consider what would happen whenever $f$ is the identity, following the notation of the previous proposition. This provide us of full control of the bijection based only on arrow $\varphi(f)$. This is also the fundamental idea behind proposition \ref{Yoneda-proposition}.\\
 
 We have already suggested the relationship between universality and adjointness. We can summary that relation in the following property:
 \begin{proposition}\label{prop:univAdjoint}
@@ -531,33 +545,37 @@ We have already suggested the relationship between universality and adjointness.
     $$\varphi(f:Fd\to c) = Gf\circ \eta(d): d\to G c.$$
   \item a natural transformation $\epsilon: FG\to I_C$ such that $\varepsilon(c):FGc\to c$ is universal from $c$ to $F$ and we can define:
     $$\varphi(g:d\to Gc) = \varepsilon(c)\circ Fg: Fd\to c.$$
+\item We have that the natural transformation $\eta_{G\cdot} \circ G(\varepsilon_\cdot)$ is the identity natural transformation.
   \end{itemize}
 \end{proposition}
+\begin{remark}
+  We can therefore consider an adjoint $(F,G,\varphi)$ as a quintuple  $(F,G,\varphi,\eta,\varepsilon)$. $\eta$ is usually called the \emph{unit} and $\varepsilon$ is called the \emph{counit}.
+\end{remark}
+
 \begin{proof}
   \begin{itemize}
-  \item Let $a=Fd$, then we have that
+  \item Let $a=Fd$, then we have a natural bijection $\varphi$:
     $$\hom_C(a, c)\equiv\hom_D(d, Gc).$$
-
-    and by proposition \ref{Yoneda-proposition} we have an universal arrow $\eta (d):d\to Ga=GFd$ is provided. The function $d\to \eta(d)$ is natural $I_D\to GF$ as:
+By proposition \ref{Yoneda-proposition} we have an universal arrow $\eta_d:d\to Ga=GFd$ is provided, where $\eta_d = \varphi(1_a)$. The function $d\to \eta(d)$ is natural $I_D\to GF$ as the following diagram commutes due to the naturality of $\varphi$:
     \[
   \begin{tikzpicture}
   \node {\begin{tikzcd}[column sep=20mm]
       d\ar[r,"\eta c"]\ar[d,"h"] & GFd\ar[d,"GFh"]\\
-      d'\ar[r,"\eta c'"] & GFd''
+      d'\ar[r,"\eta c'"] & GFd''.
   \end{tikzcd}};
 \end{tikzpicture}
 \]
-commutes. 
-  \item Analogous.
+
+\item Analogous.
+\item $1_Ga = G(\varepsilon_a)\circ \eta_{Ga}$.
   \end{itemize} 
 \end{proof}
-
 
 From this proposition we can see that we may be able to define an adjoint based only on the universal arrows provided. We can summary a few equivalent definition of adjoint:
 \begin{proposition}\label{prop:equivdefinition}
   Each adjoint $(F,G,\varphi,\eta,\varepsilon):D\to C$ is completely determined by the items in any one of the following list:
   \begin{enumerate}
-  \item $F,G$ and a natural transformation $\eta:1_D\to GF$ such that $\eta(d)$ is universal for every $d\in \Ob(D)$.
+  \item $F,G$ and a natural transformation $\eta:1_D\to GF$ such that $\eta(d)$ is universal for every $d\in Ob(D)$.
   \item $F,G$ and a natural transformation $\varepsilon:FG\to 1_C$ such that $\varepsilon(c)$ is universal for every $c\in \Ob(C)$.
   \item $G$ and for each $d\in Ob(D)$:
     \begin{itemize}
@@ -573,10 +591,12 @@ From this proposition we can see that we may be able to define an adjoint based 
   \item  $F,G$ and two natural transformation $\eta: I_D\to GF$, $\varepsilon: FG\to I_C$ such that both composites are identities.
   \end{enumerate}
 \end{proposition}
+
 \begin{proof}
   \begin{enumerate}
     
-  \item We need to define the natural bijection $\varphi: C(Fd,c)\to D(d,Gc)$. Defining  $\varphi(g) = Gg\circ \eta(c)$ for each $g:Fd \to c$. Is is well define as $Gg\circ \eta(c): d\to Gc$ and it is a bijection  due to $\eta(x)$ universality.\\
+  \item We need to define the natural bijection $\varphi: \hom_C(F\cdot,\cdot)\to \hom_D(\cdot,G\cdot)$. Let  for each $g:Fd \to c$:
+    $$\varphi(g) = Gg\circ \eta(c)\in .$$ Is is well define as $Gg\circ \eta(c): d\to Gc$ and it is a bijection  due to $\eta(x)$ universality.\\
 
     It is natural in $d$ because $\eta$ is natural and is natural in $c$ because $G$ s a functor.
   \item Dual of the previous.
@@ -589,17 +609,35 @@ From this proposition we can see that we may be able to define an adjoint based 
 \]
     So the only way to define $Fh= \eta (x) \circ h$. We conclude applying 1.
   \item Dual of the previous.
-  \end{enumerate}
+  \item We use $\eta$ and $\varsepsilon$ to define two functions:
+    \[
+    \begin{tikzcd}
+      \hom_C(Fd,c) \arrow[r, shift left=.5ex, "\tau"{name=F}] &
+      \hom_D(d,Gc)\arrow[l, shift left=1ex, "\sigma"{name=G}] \\
+    \end{tikzcd}
+  \]
+
+  such that $\tau(f) = Gf\circ \eta_d$ and $\sigma(g)=\varpesilon_d \circ Fg$. as both composites are the identity, $\tau \circ \sigma$ and $\sigma \circ \tau$ are the identities. It is clearly natural due to proposition \ref{description:adjoint}.
+\end{enumerate}
 \end{proof}
 To further illustrate this concept we present some examples:
 \begin{example}
   \begin{itemize}
-  \item Free category from a graph and forgetful functor
-  \item \v{C}ech compactification.
+  \item Free category from a graph and forgetful functor:  Given a graph $G$, we can define the free category $\mathcal{F}(G)$ by adding the arrows needed for the graph to satisfy the category axioms, that is:
+    \begin{itemize}
+    \item $\mathcal{F}(G)$ has as objects all nodes in $G$.
+    \item $\mathcal{F}(G)$ has as arrows all identities in $G$, and every finite composition $f=f_1\circ f_2\circ ... \circ f_n$ where $f_i$ is either an identity or an arrow in $G$. Note that the concept of arrow composition in graph can be applied directly from it categorical definition.
+    \end{itemize}
+    
+    Then, we can define a functor $\mathcal{F}:Graph \to Cat$ that maps every (small) graph $G$ to $\mathcal{F}(G)$ and every graph morphism $\varphi$ to a category morphism, that take
+    $$f=f_1\circ f_2\circ ... \circ f_n \mapsto (\mathcal{F}\varphi) f = \varphi (f_1)\circ \varphi (f_2)\circ ... \circ \varphi (f_n).$$
+
+    We can see that we have an adjoint $F \dashv U$ where the unit is given by the insertion of generators.
+  \item \v{C}ech compactification\cite{nlab:stone-cech_compactification}: We have presented in \ref{example:stone-cech} the $\beta: Hauss \to Comp$ Stone-\v{C}ech functor. If we consider the injection of categories $i: Comp \to Hauss$ we can check that is an adjoint $\beta \dashv i$.
   \end{itemize}
 \end{example}
 
-{\color{red} TODO? Lastly, we are going to study the  and prove a theorem that allow us to include parameters in adjoints.}
+%TODO: Lastly, we are going to study the  and prove a theorem that allow us to include parameters in adjoints.
 
 
 
