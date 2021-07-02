@@ -478,20 +478,15 @@ Up to this moment, we have related that a closed cartesian category is a positiv
 
  Now we repeat the process as with $\LL$ and define a functor $\CC: \LC \to CCart$.
  \begin{proposition}
-   Let $C\in Ob(Cart_N)$, $\LL (C)$ be the internal language of a $C$ and let $F:C\to C'\in CCart$.  We define the functor $\LL (F)$:
+   Let $L\in Ob(\LC)$, $\CC (L)$ be the generated closed cartesian category of $L$ and let $F:L\to L'\in \LC$.  We define the functor $\CC (F)$:
    \begin{itemize}
-   \item $\LL (F) (a) = F(a)$ for every $a\in Ob(C)$.
-   \item $\LL (x^a) = x^{f(a)}$ for every assumption in $C$.
-   \item $\LL (F) (\varphi(x_1,..,x_n)) = F_{x_1,...,x_n}(\varphi(x_1,...,x_n))$ for $x_i$ variables and all  polynomial in $C[x_1,...,x_n]$, where $F_{x_1,...,x_n}$ is the unique arrow in $CCart_N$  such that the following diagram commutes:
-     \[
-       \begin{tikzcd}
-         C[x_1,...,x_n]\arrow[dashed]{rr}{F_{x_1,...,x_n}}&& C'[x_1,...,x_n]\\
-         C \arrow{rr}{F}\arrow[hookrightarrow]{u}{}&& C'\arrow[hookrightarrow]{u}{}
-       \end{tikzcd}
-     \]
-     
+   \item $\CC (F) (a) = F(a)$ for every $a\in Ob(C)$.
+   \item $\CC (F) (\lambda x^a. b(x) :a \to a') = \lambda x^{F(a)}. F(b(x))$.
    \end{itemize}
  \end{proposition}
+ \begin{proof}
+
+ \end{proof}
 
  \subsubsection{Equivalence}
  After defining $L$ we want to show that it is an equivalence of categories. We shall obtain a functor $C$ in the opposite direction.  
