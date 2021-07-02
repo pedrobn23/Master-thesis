@@ -577,17 +577,8 @@ From this proposition we can see that we may be able to define an adjoint based 
   \begin{enumerate}
   \item $F,G$ and a natural transformation $\eta:1_D\to GF$ such that $\eta(d)$ is universal for every $d\in Ob(D)$.
   \item $F,G$ and a natural transformation $\varepsilon:FG\to 1_C$ such that $\varepsilon(c)$ is universal for every $c\in \Ob(C)$.
-  \item $G$ and for each $d\in Ob(D)$:
-    \begin{itemize}
-    \item an object $F_0(d)\in Ob(C)$.
-    \item an universal arrow $\nu(x):d \to GF_0 d$.
-    \end{itemize}
-    Then $F$ has $F_0$ as object function and $F(h:d\to d') = \eta(x')\circ h$.
-  \item $F$ and for each $c\in Ob(C)$:
-    \begin{itemize}
-    \item an object $G_0(c)\in Ob(D)$.
-    \item an universal arrow $\varepsilon(c):c \to GF_0 c$.
-    \end{itemize}
+  \item $G$ and for each $d\in Ob(D)$, an object $F_0(d)\in Ob(C)$ and an universal arrow $\nu(x):d \to GF_0 d$.
+  \item $F$ and for each $c\in Ob(C)$, an object $G_0(c)\in Ob(D)$ and an universal arrow $\varepsilon(c):c \to GF_0 c$.
   \item  $F,G$ and two natural transformation $\eta: I_D\to GF$, $\varepsilon: FG\to I_C$ such that both composites are identities.
   \end{enumerate}
 \end{proposition}
@@ -595,19 +586,19 @@ From this proposition we can see that we may be able to define an adjoint based 
 \begin{proof}
   \begin{enumerate}
     
-  \item We need to define the natural bijection $\varphi: \hom_C(F\cdot,\cdot)\to \hom_D(\cdot,G\cdot)$. Let  for each $g:Fd \to c$:
-    $$\varphi(g) = Gg\circ \eta(c)\in .$$ Is is well define as $Gg\circ \eta(c): d\to Gc$ and it is a bijection  due to $\eta(x)$ universality.\\
+  \item We need to define the natural bijection $\varphi: \hom_C(F\cdot,\cdot)\to \hom_D(\cdot,G\cdot)$. Let  for each $f:Fd \to c$:
+    $$\varphi(g) = Gf\circ \eta(c): d \to Gc$$ Is well defined and it is a bijection  due to $\eta(d)$ universality.\\
 
     It is natural in $d$ because $\eta$ is natural and is natural in $c$ because $G$ s a functor.
   \item Dual of the previous.
-  \item We will proof that there is only one functor with $F_0$ as object function such that $\eta (x): I_D\to GF$ is natural. The naturality and universality told us that each $h:d\to d'\in Ob(D)$ induces two arrows:
+  \item We will proof that there is only one functor with $F_0$ as object function such that $\eta (d): I_D\to GF$ is natural. The naturality and universality told us that each $h:d\to d'\in Ob(D)$ induces two arrows:
 \[
 \begin{tikzcd}
   F_0 d\arrow[dashed]{d} & d\arrow{d}{h}\arrow{r}{\eta (d)}&GF_0d\arrow[dashed]{d}\\
   F_0 d'& d'\arrow{r}{\eta (d')} & GF_0d'
 \end{tikzcd}
 \]
-    So the only way to define $Fh= \eta (x) \circ h$. We conclude applying 1.
+    So the only way to define $Fh= \eta (d) \circ h$. We conclude applying 1.
   \item Dual of the previous.
   \item We use $\eta$ and $\varsepsilon$ to define two functions:
     \[
@@ -732,7 +723,7 @@ We define $G_0d = c$. Also note  that $\eta d$ is universal from $d$ to $F$. The
 Nonetheless, further on the text we will need categories with some even nicer properties. These categories are called \emph{closed catersian categories}. We will define them formally first, and after unpack the information that the definition contains:
   
   \begin{definition}\label{def:CCC}
-    A $C$ is closed cartesian if each of the following functors:
+    A $C$ is closed cartesian category, ccc for short, if each of the following functors:
 \begin{center}
   \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
     $\qquad F_1:C\to 1$&$ F_2=\Delta: C \to C\times C $&$ F_{3}^b:C \to C$\\
@@ -745,6 +736,7 @@ has a \emph{specified} right adjoint, denoted by:
     $\qquad G_1:1\to C$&$ G_2:  C\times C\to C $&$ G_{3}^b:C \to C$\\
     $\qquad \qquad e\to t$&$ \  \qquad (c,b)\to c \times b$&$ \qquad c \to c^b$\\
   \end{tabular}
+  where there is one $F_3^b\dashv G_3^b$ for every $b\in \Ob(C)$.
 \end{center}
 
 These adjoints provide us with a lot of information:
@@ -757,9 +749,15 @@ These adjoints provide us with a lot of information:
 \item First of all, as every product exists, and it specified by $F_2$, we can define $F_3^b$ for every $b$. Then, it adjointness states that:
   $$\hom_C(c\times b, d) \equiv \hom_C(c,d^b)   $$
 
-  This object $d^b$ is called the exponential object or map object. To define this adjoint, we have defined a functor $F_3^b$ on both functor and arrows ($F_3^b(f:a\to a') = f\times 1_b: a\times b\to a'\times b$), but the functor $G_3^b$ is defined only on the objects. To specify the adjoint we need to provide an arrow $\varepsilon$:
+  This object $d^b$ is called the exponential object or map object. Note that to fully define the adjoint we can take one of two steps,  the functor $G_3^b$ is defined only on the objects:
+  \begin{itemize}
+  \item We can define how $G_3^b$ acts on arrows.
+  \item We can  provide an arrow $\varepsilon$:
   $$\varepsilon: F_3^bG_3^b(c) = c^b\times b \to c = I(c)$$
-  that is natural in $c$ and universal from $F_3^b$ to $c$.\\
+  that is natural in $c$ and universal from $F_3^b$ to $c$.
+  \end{itemize}
+
+\
 
 
 
@@ -794,7 +792,10 @@ We can consider the duals:
 \begin{definition}A \emph{closed bicartesian category} is a bicartesian category that is also a closed cartesian category.
 \end{definition}
 
-\begin{definition}[Category of closed cartesian categories]
-\end{defintion}
+  As with almost every structure, a category can be deduced is the one of the objects along with structure-preserving functors.
 
-\end{definition}
+  \begin{definition}[Category of closed cartesian categories]
+    We can define the \emph{category of closed cartesian categories} $Cart$ that has as objects all small ccc, and as objects all functors that preserve the specified terminal, products and exponential objects.
+  \end{defintion}
+
+The morphism of cccs are often called \emph{cartesian closed functors.}

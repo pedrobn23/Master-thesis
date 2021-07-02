@@ -67,7 +67,7 @@ Note that $\pi_i^{A_1,A_2}$ depend on both $A_1,A_2$. in the absence of ambiguit
   Note that we use $[]$ to avoid ambiguity between $\to$ as operator or as simply an arrow.
 \end{remark}
 Similarly to $\pi_i$, we will usually denote just $\varepsilon$. 
-\begin{definition}
+\begin{definition}\label{def:intuipropcalculus}
   A \emph{intuitionistic propositional calculus} is a positive intuitionistic calculus where there is a specified object $\bot$ and an operation $\lor: Ob(D)\times Ob(D) \to Ob(D)$ such that:
   \begin{enumerate}
   \item For each $A\in Ob(D)$ there is an arrow $\square_A: \Bot\to A$.
@@ -80,12 +80,16 @@ Similarly to $\pi_i$, we will usually denote just $\varepsilon$.
 
 We have already note how a category is a particular case of a deduction system. We can consider how are the logical systems, but we only select those who are also categories.\\
 
-\begin{remark} {\color{red} remark $\langle f_1,f_2\rangle$ and $[f_1,f_2]$}
+\begin{remark}Now that  we see categories as deduction system, we have a notation problems. We will identify $A\land B$ with $A\times B$. While in a deductive system we have define $\langle f_1,f_2\rangle : C \to A\land B$ we have done the same in categories, meaning $\langle f_1,f_2\rangle : C \land C \to A \land B$.\\
+
+  This was necessary in deduction system to not put a burden of having a diagonal arrow $C\to C\land C$. This make though some extra verbosity in functions like $\langle h\pi_1, \pi_2\rangle : C\times B \to A\times B$, that would otherwise be the much more legible $\langle h, 1_b\rangle: C\times B \to A \times B$.\\ 
+
+  The consideration with $[f_1,f_2]$ is dual.
   
 \end{remark}
 
 
-\begin{proposition}
+\begin{proposition}\label{prop:CartCategory2}
   A cartesian category $\mathcal{C}$ is a deduction system that is both conjunction system and a category where:
   \begin{enumerate}
   \item $f:A\to T\implies f=O_A$.
@@ -114,37 +118,54 @@ Thus, we can start seeing the kind of bijection already shown in the Curry Howar
 \begin{proposition}\label{def2:CCC}
   A closed cartesian category $\mathcal{C}$ is a deduction system that is a positive intuitionistic calculus that is also a category such that:
   \begin{enumerate}
-  \item   For all $h: C\times B \to A$ , we have that $\varepsilon \langle h^* \pi_1, \pi_2\rangle = h$.
-  \item   For all $k: C\to [B \to A]$ , we have that $(\varepsilon \langle k \pi_1, \pi_2\rangle)^* = k$.
+  \item   For all $h: c\times b \to a$ , we have that $\varepsilon \langle h^* \pi_1, \pi_2\rangle = h$.
+  \item   For all $k: c\to [b \to a]$ , we have that $(\varepsilon \langle k \pi_1, \pi_2\rangle)^* = k$.
   \end{enumerate}
 \end{proposition}
 
 \begin{proof}
   
-  Lets begin checking that $\mathcal{C}$ is a positive intuitionistic calculus and holds 1. and 2. As it is a cartesian category, by it does satisfy the requirements for being a conjunction calculus. Pairing the exponential object $cA^B$ with the function object $B\to A$. As in definition \ref{def:CCC}, we have  3 adjoints, the first two of them are already considered as we have that $C$ is a cartesian category. We now study the third of them and remember that $F_3^B=F$ and $G_3^B=G$ are both adjoint, i.e.:
-  $$\hom_C(C \times B, A) \equiv \hom(C, A^B)$$
+  Lets begin checking that $\mathcal{C}$ is a positive intuitionistic calculus and holds 1. and 2. As it is a cartesian category, it is a conjunction calculus.
+  \begin{itemize}
+  \item We identify $a\to b$ with the exponential object $b^a$. For every $b\in Ob(C)$, following the notation from definition \ref{def:CCC}, we have an adjoint $F_3^b\dashv G_3^b = (F^b,G^b,\varphi^b,\eta^b,\varepsilon^b)$. Then, we define the arrows from definition \ref{def:positivecalculus} as
+$$\varepsilon^{a,b}: [(b \to a) \land b]\to a = \varepsilon^b(a), \qquad g^* = \varphi(g).$$
+\item Then, 1. is only consider that, given an $h: F_3^b c = c\times b \to a$, we have that, $\varepsilon^b(a) \circ F_3^b(\varphi(h)) = h$, due to the fact that $$(\varphi^b)^{-1}(h: d \to Gc) = \varepsilon^b(c)\circ F_3^b(h).$$
+\item Conversely, if part 1. was the left part of the inverse definition, 2. is the right part.
+\end{itemize}
 
-  Therefore, we can check the second part in definition \ref{def:positivecalculus}. Then, remembering proposition \ref{prop:univAdjoint}, we can deduce the existence of a natural transformation  $\varepsilon: FG \to I_C$ i.e. $\varepsilon: A^B\times A = (B\to A)\land A \to A$, having the first part in definition \ref{def:positivecalculus}.\\
+To prove that any intuitionistic calculus that is also a category is a ccc, we just made the same pairing, $a\times b = a\land b$ and $a\to b = b^a$ to define $F_b^3$ on both objects and arrows, (where $F_b^3(h:a\to a') = \langle h, 1_b\rangle $), define $G_3^b$ on objects, and define $\varepsilon^b(a)$ as $\varepsilon^{a,b}$.
 
-  The proof of 1. and 2. are conditions of universality. Lets unpack 1. as 2. is the same reasoning on the other side of the adjoint. We have (remember that, in the notation of part I: $\langle h^*\pi_1, \pi_2\rangle = \langle h^*,1_B\rangle$, and we used to note $h^*=\varphi(h)$):
-  \[
-    \begin{tikzcd}
-      C\times B\arrow{d}{h}&C\arrow{d}{h^*} & C\times B\arrow{d}{\langle h^*,1_B\rangle} & A^B\times B\arrow{d}{\varepsilon}\\
-      A & A^B = B\to A & A^B\times B & A 
-    \end{tikzcd}
-  \]
 
-  therefore, putting it all together, and remembering the \emph{evaluation} fashion of $\varepsilon$ (i.e., we have that the following diagram commutes. The 
 
-  \[
-    \begin{tikzcd}
-      C\times B\arrow{d}{h} \arrow{r}{\langle h^*,1_B\rangle}& A^B\times B \arrow[swap]{dl}{\varepsilon}\\
-      A&
-    \end{tikzcd}
-  \]
+
+
+
+
+
+  % As it is a cartesian category, by it does satisfy the requirements for being a conjunction calculus. Pairing the exponential object $cA^B$ with the function object $B\to A$. As in definition \ref{def:CCC}, we have  3 adjoints, the first two of them are already considered as we have that $C$ is a cartesian category. We now study the third of them and remember that $F_3^B=F$ and $G_3^B=G$ are both adjoint, i.e.:
+  % $$\hom_C(C \times B, A) \equiv \hom(C, A^B)$$
+
+  % Therefore, we can check the second part in definition \ref{def:positivecalculus}. Then, remembering proposition \ref{prop:univAdjoint}, we can deduce the existence of a natural transformation  $\varepsilon: FG \to I_C$ i.e. $\varepsilon: A^B\times A = (B\to A)\land A \to A$, having the first part in definition \ref{def:positivecalculus}.\\
+
+  % The proof of 1. and 2. are conditions of universality. Lets unpack 1. as 2. is the same reasoning on the other side of the adjoint. We have (remember that, in the notation of part I: $\langle h^*\pi_1, \pi_2\rangle = \langle h^*,1_B\rangle$, and we used to note $h^*=\varphi(h)$):
+  % \[
+  %   \begin{tikzcd}
+  %     C\times B\arrow{d}{h}&C\arrow{d}{h^*} & C\times B\arrow{d}{\langle h^*,1_B\rangle} & A^B\times B\arrow{d}{\varepsilon}\\
+  %     A & A^B = B\to A & A^B\times B & A 
+  %   \end{tikzcd}
+  % \]
+
+  % therefore, putting it all together, and remembering the \emph{evaluation} fashion of $\varepsilon$ (i.e., we have that the following diagram commutes. The 
+
+  % \[
+  %   \begin{tikzcd}
+  %     C\times B\arrow{d}{h} \arrow{r}{\langle h^*,1_B\rangle}& A^B\times B \arrow[swap]{dl}{\varepsilon}\\
+  %     A&
+  %   \end{tikzcd}
+  % \]
 
   
-  To do the converse, is enough to made the same pairings and apply the notions of universality of $\varepsilon$ in  and apply \ref{prop:equivdefinition} to check that such adjoints are define via $\arepsilon$.
+  % To do the converse, is enough to made the same pairings and apply the notions of universality of $\varepsilon$ in  and apply \ref{prop:equivdefinition} to check that such adjoints are define via $\arepsilon$.
 \end{proof}
 
 These propositions allow us to easily define graph completions to generate a to generate from these CCCs and positive conjunction calculus.
@@ -164,34 +185,46 @@ These propositions allow us to easily define graph completions to generate a to 
 \end{proof}
 \subsection{Logic in closed cartesian categories}
 
-We want now to introduce an idea of logic implications in the context of a closed cartesian category $C$. For that, we can use the naive idea to consider the terminal object $\top \to A$, as a value of truth, and then deduce that any object $a\in C$ such that there exists an arrow $f:\top \to a$, then $A$ is also true. In this idea, the natural progression is to consider a $a$ to be true by desire, so we add a new arrow $x:\top \to a$ to the category, and complete the category so the axiom of metacategories are still satisfied. \\
-
-In this section we are going to formalize the idea of the previous paragraph. The goal is to eventually proof the \emph{functional completeness} of closed cartesian categories. 
+We want now to introduce an idea of logic implications in the context of a closed cartesian category $C$. For that, we can use the naive idea to consider the terminal object $\top \to A$, as a value of truth, and then deduce that any object $a\in C$ such that there exists an arrow $f:\top \to a$, then $A$ is also true. In this idea, the natural progression is to consider a $a$ to be true by desire, so we add a new arrow $x:\top \to a$ to the category, and complete the category so the axiom of metacategories are still satisfied. In this section we are going to formalize this idea.\\
 
 \begin{definition}
 Given a (cartesian, closed cartesian) category $A$, we say that an \emph{assumption} is an intedeterminate arrow $x: a \to b \in A$, not necessarily included in $Ar(A)$. 
 \end{definition}
-\begin{definition}[\cite[Section 5]{lambek1988introduction}]
-  Given a (cartesian, closed cartesian) category $A$, and a assumption $x: a \to b$, we define the \emph{category $A$ based on the assumption $x$} $A[x]$ as the category that have:
+\begin{definition}\cite[Part I, Chapter 5]{lambek1988introduction}
+  Given a (cartesian, closed cartesian) category $A$, and a assumption $x: a \to b$, we define the \emph{category $A$ based on the assumption $x$}, denoted by $A[x]$, as the category that have:
   \begin{enumerate}
   \item As objects the same object as in $A$.
   \item As arrows the indeterminate $x$ in addition to $Ar(A)$ and all the needed convination between those two.
   \end{enumerate}
   we also consider the following equivalence $\cong$ between arrows:
   \begin{itemize}
-  \item Preserve $A$-equivalence: for all $g:b\to c,f:a\to b, h: a\to c\in A$ such that $gf=h \in A$ then $gf \cong h$ in $A[x]$.
-  \item Preserve composition: for all $f:a\to b,f':a\to b,g:b\to c,g': b \to c\in Ar(A[x])$ such that $f\cong f', g\cong g'$ we have $fg\ong f'g'$.
+  \item Preserve $A$-equivalence: for all $g:b\to c,f:a\to b, h: a\to c\in A$,
+    \begin{center}
+      $gf=h \in A\qquad $ implies $\qquad gf \cong h\in A[x].$
+    \end{center}
+
+  \item Preserve composition: for all $f:a\to b,f':a\to b,g:b\to c,g': b \to c\in Ar(A[x])$,
+    \begin{center}
+      $f\cong f', g\cong g'\qquad$ implies $\qquad fg\cong f'g'$.
+    \end{center}
+    
   \item Preserve identity: for all $f:a\to b\in A[x]$ we have $f1_a\cong f \con 1_bf$.
   \item Associative: for all $f:a\to b, g:b\to c, h: c\to d$ we have $(fg)h\cong f(gh)$.
   \end{itemize}
+  Arrows in $A[x]$ are called \emph{polinomials} in $x$.
 \end{definition}
 \begin{remark}
 We define the equivalence on arrows $\cong$ so that the inclusion $A\hookrightarrow A[x]$ is a functor.
 \end{remark}
 
-\begin{proposition}
-  Given a cartesian closed category $A$ and any graph morpshim $F: G \to \mathcal U(A)$ there is a unique morsphism in $Cart$  
-\end{proposition}
+
+\begin{remark}
+  Note that the terms can be formed by the arrows $1\to A\in C$, the indeterminates $x^A: 1 \to A$,  and the term forming operations:
+    \begin{align*}
+a,b,f,\varphi(x^A) := \langle a,b\rangle: 1 \to A\times B \ |\ fa: 1 \to B\ |\ \lambda x^A. \varphi(x^A): 1 \to [A\to B]
+    \end{align*}
+where we require $a: 1\to A, & b: 1 \to B,   f: A \to B, \varphi(x^a): 1 \to B$
+\end{remark}
 
 \section{Categorical understanding of simply typed $\lambda$-calculus}
 \subsection{Natural Numbers}
@@ -237,6 +270,9 @@ and is denoted as $(1,h,g)$. Considering the category $(C_*^J)'$ with objects as
 
 Every time natural are talked, induction have to appear in some part. The intuition of the categorical concept is that we have a object $N$ that is the set of every natural, and a successor arrow $S$. 
 
+\begin{definition}[Category of closed cartesian categories]
+    We can define the \emph{category of closed cartesian categories with natural numbers} $Cart_N$ that has as objects all small ccc, and as objects all functors that preserve the specified terminal, products and exponential objects.
+  \end{defintion}
 {\color{red} Maybe add the proposition and corollary 9.1 and 9.2 of Lambeck.}
 
 
@@ -333,7 +369,7 @@ We let the structure part undefined, as we can consider a morphism of the differ
 Up to this moment, we have related that a closed cartesian category is a positive intuitionistic calculus, that is equivalent to  typed $\lambda$-calculus, with some extra structure. The idea is now clear: we are going to generate a typed $\lambda$-calculus from a closed cartesian category. Now, we are going to deduce the existence of the internal language.\\
 
 \begin{definition}
-  Let $C$ be a closed cartesian category. Then its \emph{internal language} $\LL (A)$ is the $\lambda$-calculus that:
+  Let $C$ be a closed cartesian category. Then its \emph{internal language} $\LL (C)$ is the $\lambda$-calculus that:
 \begin{itemize}
 \item Has as types the objects of $C$, with the following pairing:
 
@@ -345,7 +381,7 @@ Up to this moment, we have related that a closed cartesian category is a positiv
   \hline
   Minimal     & Function type $A\to B$   &  Exponential object $B^A$  \\
   \hline 
-  Basic      & Type 1 & Terminal object $T$ \\
+  Basic      & Type 1 & Terminal object $\top$ \\
              & Product type $\times$ & Product object $\land$ \\
 \hline
 \end{tabular}
@@ -353,26 +389,114 @@ Up to this moment, we have related that a closed cartesian category is a positiv
 \end{center}
 \end{table}
 
-\item  Has as terms of type $A$ the polynomials expressions $\varphi(x_1,..,x_n): \Top \to A$ that are obtained by the indeterminates $1\to x$ and the preexiting arrows $1\to A\in Ar(C)$.
-\item Has equality induced by:
+\item  Has as terms of type $A$ the polynomials expressions $\varphi(x_1,..,x_n): 1 \to A$ that are obtained by the indeterminates $1\to x$ and the preexiting arrows $1\to A\in Ar(C)$.
+\item Has equality as induced in $A[x_1,...,x_n]$, that is, terms are equivalent whenever they are as polynomials over their free variables. \\
   \begin{itemize}
-  \item TODO: Unify the notions of $\beta$ equivalence and lambek equality.
+    
   \end{itemize}
 \end{definition}
+\begin{remark}
+  There is a subtle pairing between indeterminates $x^A: 1 \to A$ in $C$ and variable $x^A: A$ in $\LL (C)$, that comes from polynomials consisting only on indeterminates.\\
+\end{remark}
 
 \begin{remark}
-  Lets unpack the definition of terms. In any simply typed $\lambda$-calculus, we consider raw terms and then we consider only those that are subject to be typable. This, was later understood as any term being a proof of veracity of a type, via the Curry-Howard isomorphism. So, to maintain this idea of the arrows of the language being proof of veracity, we see them as arrows $f:\top \to A$, that is, as deduction from truth.
- \end{remark}
+  In any simply typed $\lambda$-calculus, we consider raw terms and then we consider only those that are subject to be typable. This, was later understood as any term being a proof of veracity of a type, via the Curry-Howard isomorphism. So, to maintain this idea of the arrows of the language being proof of veracity, we see them as arrows $f:\top \to A$, that is, as deduction from truth. \\
+\end{remark}
 
 
- In fact, $\LL $ can be defined as a categori from $CCart$ to $\LC$. 
+ In fact, $\LL $ can be defined as a Functor from $CCart$ to $\LC$. For that we need to define how does it act on cartesian closed functors. \\
 
+ \begin{proposition}
+   Let $C\in Ob(Cart_N)$, $\LL (C)$ be the internal language of a $C$ and let $F:C\to C'\in CCart$.  We define the functor $\LL (F)$:
+   \begin{itemize}
+   \item $\LL (F) (a) = F(a)$ for every $a\in Ob(C)$.
+   \item $\LL (x^a) = x^{f(a)}$ for every assumption in $C$.
+   \item $\LL (F) (\varphi(x_1,..,x_n)) = F_{x_1,...,x_n}(\varphi(x_1,...,x_n))$ for $x_i$ variables and all  polynomial in $C[x_1,...,x_n]$, where $F_{x_1,...,x_n}$ is the unique arrow in $CCart_N$  such that the following diagram commutes:
+     \[
+       \begin{tikzcd}
+         C[x_1,...,x_n]\arrow[dashed]{rr}{F_{x_1,...,x_n}}&& C'[x_1,...,x_n]\\
+         C \arrow{rr}{F}\arrow[hookrightarrow]{u}{}&& C'\arrow[hookrightarrow]{u}{}
+       \end{tikzcd}
+     \]
+     
+   \end{itemize}
+ \end{proposition}
 
+ \begin{proposition}
+   If $C$ has natural numbers, $\LL (C)$ has natural numbers. 
+ \end{proposition}
+ \begin{proposition}
+   If $F: C\to C \in CCart_N$, then $\LL (F)$ maintain natural numbers.
+ \end{proposition}
+ \subsubsection{Cartesian Closed Category of a Language}
 
-\subsubsection{Equivalence}
-After defining $L$ we want to show that it is an equivalence of categories. We shall obtain a functor $C$ in the opposite direction.  
+ Given a typed $\lambda$-calculus, we are going to construct a ccc conversely to the process done previously.
 
-% \subsubsection{Deduction Theorem}
+ \begin{definition}
+   Given a typed lambda calculus $L$ we can construct a \emph{generated closed cartesian category}, denoted as $\CC (L)$ as follow:
+   \begin{itemize}
+   \item As object it has the types in $L$.
+   \item As arrows $f:a\to b$ it has the lambdas $\lambda x^a. b(x)$ where $b(x)$ is a term that may have $x^a$ as a free variable.
+   \item Arrows are considered as equivalence classes up to $\alpha\beta\eta$-equivalence.
+   \end{itemize}
+ \end{definition}
+
+ The following proposition is discussed in plenty of sources. We choose adapt the approximation done by \cite{seely1984locally} to dependent typing, instead of following the main source \cite{lambek1985cartesian} as we consider that it has a more natural approach.
+ \begin{proposition}
+   $\CC (L)$ is a cartesian closed category. 
+ \end{proposition}
+ \begin{proof}
+   We start checking the category axioms:
+   \begin{itemize}
+   \item Identity is defined by $\lambda x^a.x$.
+   \item Composition of $\lambda x^a. f(x):  a\to b$ and $\lambda x^b. g(x^b): b \to c$ then the composition is defined by $\lambda x^a. g(f(x)): a \to c$.
+   \item Associativity follows from $\beta$-equivalence.\\
+   \end{itemize}
+   To provide the terminal object:
+   \begin{itemize}
+   \item The type $1$ is the terminal object. By $\eta_x$ the only term of type $1$ is $*$ up to equivalence. Therefore, any arrow $t:a \to 1$ must be equivalent to $\lambda x^a. *$.\\
+   \end{itemize}
+   To provide the product type for two type $a,b$.
+   \begin{itemize}
+   \item The type product is provided by $a \times b$.
+   \item The projections are provided by $\beta_{x,i}$ with the projections $\pi_1,\pi_2$.
+   \item Given three types $a,b,c$ and lambdas $\lambda x^a. f(x) : a\to b$, $\lambda x^a. g(x) : a\ to c$.
+   \item Properties 2. and 3. in proposition \ref{prop:CartCategory2} comes directly from $\eta_x$ and $\beta_{x,i}$ equivalence rules.\\
+   \end{itemize}
+   To provide the exponential type (and thus have a conjunction calculus):
+   \begin{itemize}
+   \item The exponential type $a^b$ is $b\to a$.
+   \item Given $h = \lambda x^{a\times b}. f(x): a\times b \to c$  we define $h^* = \lambda x^a. \lambda y^b. f(\langle x,y\rangle)$.
+   \item There is an arrow $\varepsilon^{a,b} = \lambda y^{a\to b \times a}. (\pi_1(y))(\pi_2(y))$.
+   \item TODO:Check this. Properties 1. and 2. in proposition \ref{def2:CCC} comes from $\beta$ and $\zeta$ equivalence rules.
+   \end{itemize}
+ \end{proof}
+
+ \begin{proposition}
+ If $L$ has a natural numbers structure, then $\CC (L)$ has a natural number structure.
+ \end{proposition}
+
+ Now we repeat the process as with $\LL$ and define a functor $\CC: \LC \to CCart$.
+ \begin{proposition}
+   Let $C\in Ob(Cart_N)$, $\LL (C)$ be the internal language of a $C$ and let $F:C\to C'\in CCart$.  We define the functor $\LL (F)$:
+   \begin{itemize}
+   \item $\LL (F) (a) = F(a)$ for every $a\in Ob(C)$.
+   \item $\LL (x^a) = x^{f(a)}$ for every assumption in $C$.
+   \item $\LL (F) (\varphi(x_1,..,x_n)) = F_{x_1,...,x_n}(\varphi(x_1,...,x_n))$ for $x_i$ variables and all  polynomial in $C[x_1,...,x_n]$, where $F_{x_1,...,x_n}$ is the unique arrow in $CCart_N$  such that the following diagram commutes:
+     \[
+       \begin{tikzcd}
+         C[x_1,...,x_n]\arrow[dashed]{rr}{F_{x_1,...,x_n}}&& C'[x_1,...,x_n]\\
+         C \arrow{rr}{F}\arrow[hookrightarrow]{u}{}&& C'\arrow[hookrightarrow]{u}{}
+       \end{tikzcd}
+     \]
+     
+   \end{itemize}
+ \end{proposition}
+
+ \subsubsection{Equivalence}
+ After defining $L$ we want to show that it is an equivalence of categories. We shall obtain a functor $C$ in the opposite direction.  
+ 
+ % \subsubsection{Deduction Theorem}
 % We proceed with the tating that an arrow $f:\top \to A$ does exists in our deduction system. It can be deduced in both positive (without $\lor$ and $\bot$) an intuitionistic calculus that is $A \land B\vdash C$ then $A \vdash C\to B$. This theorem is more interesting to state in the new optics of deduction systems:
 % \begin{theorem}[Proposition 2.1, \cite{lambek1988introduction}]
 %   In a positive  calculus, if assuming the existence of an arrow $f:\top \to A$ implies the existence of an arrow $g: B\to C$, then there exists an arrow $h: A\land B\to C$ that does not depend on $f$.

@@ -251,9 +251,9 @@ Lets provide some examples of functors:\\
   \item Fundamental group: In the context of algebraic topology we have the functor of the fundamental group $\Pi_1: Top_* \to Grp$. The most famous property of this function is that
 
     
- %   \begin{displayquote}
-      Given continuous application $ f,g:X \to Y$ between two topological spaces induces an application of the group of loops of $X$ on the group of loops of $Y$ such that $\Pi_1(f \circ g) = \Pi_1(f) \circ \Pi_1(g)$.
-  %  \end{displayquote}
+   \begin{displayquote}
+      ``Given continuous application $ f,g:X \to Y$ between two topological spaces induces an application of the group of loops of $X$ on the group of loops of $Y$ such that $\Pi_1(f \circ g) = \Pi_1(f) \circ \Pi_1(g)$.''
+   \end{displayquote}
 
     that is, the functoriality of the function (taking also into account the fact that the identity of topological spaces is mapped to the identity of group). 
 
@@ -610,7 +610,7 @@ When we have to consider both compositions at the same time we denote the vertic
     & = H' ( \sigma c \circ \tau c) \circ (\sigma' (Fc)\circ \tau' (F c) )  \\
     & = H' ( \sigma c) \circ H'(\tau c) \circ \sigma' (Fc)\circ \tau' (F c)   \\
     &  = H' ( \sigma c) \circ
-      \sigma'Gc \circ G' \tau c%H'(\tau c) \circ \sigma' (Fc)
+      \sigma'Gc \circ G' \tau cH'(\tau c) \circ \sigma' (Fc)
       \circ \tau' (F c)   \\ 
     &  = (\sigma' \circ \sigma) (c) \circ  (\tau \circ \tau) (c)   \\
     &  = ((\sigma' \circ \sigma) \cdot  (\tau' \circ \tau)) (c). 
@@ -702,7 +702,3 @@ We can represent the previous definition by:
 
 
 The name comma category comes from is alternative notation $(S\downarrow T) = (S,T)$. We prefer the $(S\downarrow T)$ as it is more clear, nonetheless it is clear that before modern text editor became popular, the original comma notation had a big plus.
-
-\begin{example}
-  TODO: Example including the concept of locality·
-\end{example}
