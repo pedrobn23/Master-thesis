@@ -413,17 +413,17 @@ Another implementation of the fixed point operator is \emph{Curry's paradoxical 
   $$\operatorname{Y}=\lambda f.(\lambda x.f(x x)) (\lambda x.f(x x)).$$
 \end{definition}
 
-This operator is used for the Curry's paradox.\\
+This operator is used for the Curry's paradox \cite{sep-curry-paradox}.\\
 
-\subsection{Rosser-Kleene and Curry's Paradoxes}
+% \subsection{Rosser-Kleene and Curry's Paradoxes}
 
-In this subsection we explain the deficits in untyped $\lambda$-calculus, that was the original Church construction, that eventually leads into the definition of \emph{typed} $\lambda$-\emph{calculus}.\\
-
-
-We can start by having a quick reasoning, as shown in \cite{sep-lambda-calculus}.
+% In this subsection we explain the deficits in untyped $\lambda$-calculus, that was the original Church construction, that eventually leads into the definition of \emph{typed} $\lambda$-\emph{calculus}.\\
 
 
-{TODO This Summer: expand this subsection properly.}
+% We can start by having a quick reasoning, as shown in \cite{sep-lambda-calculus}.
+
+
+% {TODO This Summer: expand this subsection properly.}
 
 % An aproximation of this argument can be done if we consider domains of functions to be sets. In particular untyped $\lambda$-calculus allow functions to be applied to themselves. This is going to be troublesome, considering domains as sets, as this will be a clear infringement of \emph{ZF Axiom Theory}\cite{kunen2014set}. Namely, the infinite descending sequence
 % $$f\ni \{f,f(f)\}\ni f \ni \{f,f(f)\}...$$
@@ -787,12 +787,7 @@ Finally, we pair the terms  with the truth derivations. That is, given a term $M
 From this pairing we can define different ...
 
 \section{Lambda calculus as a computation system}
-{TODO This Summer: expand this subsection properly.}
-
-\begin{itemize}
-
-\end{itemize}
-
+% TODO: Expand this section properly. 
 Around 1930, people start thinking about what mean for a function to be computable. There were three major answer to this question (section 4, \cite{cardone2006history}):
 \begin{itemize}
 \item In 1930s Alonzo Church introduces the notion of $\lambda$-calculus, in which a function is computable if we can write it as a recursive-lambda term onto Church's numerals, that is, if we can deduce the result after a (hopefully finite) deduction steps.
