@@ -7,7 +7,7 @@ In these chapter we raise bridges between Category Theory, $\lambda$-calculus, a
 In this chapter we do an important work of unification and organization of the sources used. In general, whenever the connection of category theory and lambda calculus is presented, these previous ones are introduced in their most similar description. We consider that this approach, while requiring less work, loses in knowledge and intuitions.\\
 
 
- Avoiding this work means that the bijection does not convey a fundamental idea. A closed Cartesian category naturally extracts the essence of programming. In particular, (following the notation of the definition), it is the adjoint $G_3$ and the unity of this adjoint that allows us to consider functions and application of functions as elements of the category, thus having a computational system.\\
+Avoiding this work means that the bijection does not convey a fundamental idea. A closed Cartesian category naturally extracts the essence of programming. In particular, (following the notation of the definition), it is the adjoint $G_3$ and the unity of this adjoint that allows us to consider functions and application of functions as elements of the category, thus having a computational system.\\
 
 In this chapter we will begin by giving the anticipated definition of deductive system, and from this we will be able to give an equational definition of closed Cartesian categories.  After this we will define the categories of the various lambda calculi, and finally prove the existence of an adjoint equivalence between the two.\\
 
@@ -124,12 +124,12 @@ Thus, we can start seeing the kind of bijection already shown in the Curry Howar
   Lets begin checking that $\mathcal{C}$ is a positive intuitionistic calculus and holds 1. and 2. As it is a Cartesian category, it is a conjunction calculus.
   \begin{itemize}
   \item We identify $a\to b$ with the exponential object $b^a$. For every $b\in Ob(C)$, following the notation from definition \ref{def:CCC}, we have an adjoint $F_3^b\dashv G_3^b = (F^b,G^b,\varphi^b,\eta^b,\varepsilon^b)$. Then, we define the arrows from definition \ref{def:positivecalculus} as
-$$\varepsilon^{a,b}: [(b \to a) \land b]\to a = \varepsilon^b(a), \qquad g^* = \varphi(g).$$
-\item Then, 1. is only consider that, given an $h: F_3^b c = c\times b \to a$, we have that, $\varepsilon^b(a) \circ F_3^b(\varphi(h)) = h$, due to the fact that $$(\varphi^b)^{-1}(h: d \to Gc) = \varepsilon^b(c)\circ F_3^b(h).$$
-\item Conversely, if part 1. was the left part of the inverse definition, 2. is the right part.
-\end{itemize}
+    $$\varepsilon^{a,b}: [(b \to a) \land b]\to a = \varepsilon^b(a), \qquad g^* = \varphi(g).$$
+  \item Then, 1. is only consider that, given an $h: F_3^b c = c\times b \to a$, we have that, $\varepsilon^b(a) \circ F_3^b(\varphi(h)) = h$, due to the fact that $$(\varphi^b)^{-1}(h: d \to Gc) = \varepsilon^b(c)\circ F_3^b(h).$$
+  \item Conversely, if part 1. was the left part of the inverse definition, 2. is the right part.
+  \end{itemize}
 
-To prove that any intuitionistic calculus that is also a category is a ccc, we just made the same pairing, $a\times b = a\land b$ and $a\to b = b^a$ to define $F_b^3$ on both objects and arrows, (where $F_b^3(h:a\to a') = \langle h, 1_b\rangle $), define $G_3^b$ on objects, and define $\varepsilon^b(a)$ as $\varepsilon^{a,b}$.
+  To prove that any intuitionistic calculus that is also a category is a ccc, we just made the same pairing, $a\times b = a\land b$ and $a\to b = b^a$ to define $F_b^3$ on both objects and arrows, (where $F_b^3(h:a\to a') = \langle h, 1_b\rangle $), define $G_3^b$ on objects, and define $\varepsilon^b(a)$ as $\varepsilon^{a,b}$.
 
 
 
@@ -183,52 +183,67 @@ These propositions allow us to easily define graph completions to generate a to 
 
 We want now to introduce an idea of logic implications in the context of a closed Cartesian category $C$. For that, we can use the naive idea to consider the terminal object $\top \to A$, as a value of truth, and then deduce that any object $a\in C$ such that there exists an arrow $f:\top \to a$, then $A$ is also true. In this idea, the natural progression is to consider a $a$ to be true by desire, so we add a new arrow $x:\top \to a$ to the category, and complete the category so the axiom of metacategories are still satisfied. In this section we are going to formalize this idea.
 \begin{definition}
-Given a (Cartesian, closed Cartesian) category $A$, we say that an indeterminate arrow $x: a \to b; a,b \in A$ is an arrow $x:a \to b$  not necessarily included in $Ar(A)$. 
+  Given a (Cartesian, closed Cartesian) category $A$, we say that an \emph{indeterminate} arrow $x: a \to b; a,b \in A$ is an arrow $x:a \to b$  not necessarily included in $Ar(A)$. Indeterminates are also called \emph{assumptions}.
 \end{definition}
 \begin{remark}\label{remark-indeterminates}
   Whenever we talk about an indeterminate arrow, we just talk about an arrow with the special quality that it does not have to exist within our predefined set of arrows. The new emphasis is that we do not care what arrow it is exactly, in a similar way as it is usually do with numeric variables. 
 \end{remark}
+
 \begin{definition}\cite[Part I, Chapter 5]{lambek1988introduction}
-  Given a (Cartesian, closed Cartesian) category $A$, and a assumption $x: a \to b$, we define the \emph{category $A$ based on the assumption $x$}, denoted by $A[x]$, as the category that have:
+  Given a (Cartesian, closed Cartesian) category $A$, and a indeterminate $x: a \to b$, we define the \emph{category of $A$ based on the indeterminate $x:a\to b$}, denoted by $A[x]$, as the category that have:
   \begin{enumerate}
   \item As objects the same object as in $A$.
-  \item As arrows the indeterminate $x$ in addition to $Ar(A)$ and all the needed combination between those two.
-  \end{enumerate}
-  we also consider the following equivalence $\cong$ between arrows:
-  \begin{itemize}
-  \item Preserve   $A$-equivalence: for all $g:b\to c,f:a\to b, h: a\to c\in A$,
-    \begin{center}
-      $gf=h \in A\qquad $ implies $\qquad gf \cong h\in A[x].$
-    \end{center}
+  \item As arrows it has the indeterminate $x$ in addition to $Ar(A)$ and all the needed combination between those two, under the equivalence relationship:
+    \begin{itemize}
+    \item Preserve   $A$-equivalence: for all $g:b\to c,f:a\to b, h: a\to c\in A$,
+      \begin{center}
+        $gf=h \in A\qquad $ implies $\qquad gf \cong h\in A[x].$
+      \end{center}
 
-  \item Preserve composition: for all $f:a\to b,f':a\to b,g:b\to c,g': b \to c\in Ar(A[x])$,
-    \begin{center}
-      $f\cong f', g\cong g'\qquad$ implies $\qquad fg\cong f'g'$.
-    \end{center}
-    
-  \item Preserve identity: for all $f:a\to b\in A[x]$ we have $f1_a\cong \con 1_bf$.
-  \item Associative: for all $f:a\to b, g:b\to c, h: c\to d$ we have $(fg)h\cong f(gh)$.
-  \end{itemize}
-  Arrows in $A[x]$ are called \emph{polynomials} in $x$.
+    \item Preserve composition: for all $f:a\to b,f':a\to b,g:b\to c,g': b \to c\in Ar(A[x])$,
+      \begin{center}
+        $f\cong f', g\cong g'\qquad$ implies $\qquad fg\cong f'g'$.
+      \end{center}
+      
+    \item Preserve identity: for all $f:a\to b\in A[x]$ we have $f1_a\cong f \cong \con 1_bf$.
+    \item Associative: for all $f:a\to b, g:b\to c, h: c\to d$ we have $(fg)h\cong f(gh)$.
+    \end{itemize}
+  \end{enumerate}
+  Thus arrows are equivalence classes. Arrows in $A[x]$ are called \emph{polynomials} in $x$.
 \end{definition}
 \begin{remark}
-We define the equivalence on arrows $\cong$ so that the inclusion $A\hookrightarrow A[x]$ is a functor.
+  We define the equivalence on arrows $\cong$ so that the inclusion $A\hookrightarrow A[x]$ is a functor.
 \end{remark}
-
-
+\begin{definition}
+Let $A$ be a (Cartesian, closed Cartesian) category and $X=\{x_1:a_1 \to b_1, ... x_n:a_n \to b_n\}$ be a set of assumptions. We define the category $A[X]$ as $A[x_1][x_2]..[x_n]$.
+\end{definition}
 \begin{remark}
-  Note that the terms can be formed by the arrows $1\to A\in C$, the indeterminates $x^A: 1 \to A$,  and the term forming operations:
-    \begin{align*}
-a,b,f,\varphi(x^A) := \langle a,b\rangle: 1 \to A\times B \ |\ fa: 1 \to B\ |\ \lambda x^A. \varphi(x^A): 1 \to [A\to B]
-    \end{align*}
-where we require $a: 1\to A, & b: 1 \to B,   f: A \to B, \varphi(x^a): 1 \to B$
+Note that for every permutation $\sigma : \{1,...,n\}\to \{1,..,n\}$, we have that $A[x_1]...[x_n]\cong A[x_{\sigma(1)}]...[x_{\sigma(n)}]$. 
 \end{remark}
 
+% \begin{remark}
+%   Note that the terms can be formed by the arrows $1\to A\in C$, the indeterminates $x^A: 1 \to A$,  and the term forming operations:
+%   \begin{align*}
+      %       a,b,f,\varphi(x^A) := \langle a,b\rangle: 1 \to A\times B \ |\ fa: 1 \to B\ |\ \lambda x^A. \varphi(x^A): 1 \to [A\to B]
+      %     \end{align*}
+      %       where we require $a: 1\to A, & b: 1 \to B,   f: A \to B, \varphi(x^a): 1 \to B$
+                                             %                                              \end{remark}
+\begin{proposition}\label{unique-polynomial-functor}Let $C,C'$ be (Cartesian, closed Cartesian) categories, $F$ be a (Cartesian, closed Cartesian) Functor, and $X={x_1,...,x_n}, X'={x_1',...,x_n'}$ be sets of assumptions for $C$ and $C'$ respectively. Then there is an unique (Cartesian, closed Cartesian) Functor $F_{x_1,...,x_n}$ such that $F(x_i)=x_i'$ the following diagram commutes. 
+  \[
+    \begin{tikzcd}
+      C[X]\arrow[dashed]{rr}{F_{X\to X'}}&& C'[X]\\
+      C \arrow{rr}{F}\arrow[hookrightarrow]{u}{}&& C'\arrow[hookrightarrow]{u}{}
+    \end{tikzcd}
+  \]
+\end{proposition}
+\begin{proof}
+Immediate as $C[x_1,...,x_n]$ is the expansion of $C$ and ${x_1,...,x_n}$.  
+\end{proof}
 \section{Categorical understanding of simply typed $\lambda$-calculus}
 \subsection{Natural Numbers}
 
 
-We begin this section by motivating the introduction of natural numbers. The importance of these is that we want a computation system. These systems, in a modern practical case, are actually intended to compute a function from the natural numbers to the natural numbers (either on a tape in a Turing machine, a recursion as in Gödel's computational system, or an abstract formalization in $\lambda$-calculus).
+We begin this section by motivating the introduction of natural numbers. The importance of these is that we want a computation system. These systems, in a modern practical case, are actually intended to compute a function from the natural numbers to the natural numbers (either on a tape in a Turing machine, a recursion as in Gödel's computational system, or an abstract formalization in $\lambda$-calculus).\\
 
 We have already seen how natural numbers can be done in untyped calculus. However in this section we will approach the problem, formalizing the notion for typed calculus and introducing the concept of natural numbers in categories.
 
@@ -237,13 +252,13 @@ We have already seen how natural numbers can be done in untyped calculus. Howeve
 
 \begin{definition}
   Given a closed Cartesian category $C$,  $(N,S:N\to N)\in Ob(C)\times Ar(C)$ is said to be a \emph{natural number} when, for every $f:A\to A\in C$, there is an unique $h$ such that
-\[
-  \begin{tikzcd}
-    1\arrow{dr}{a}\arrow{r}{0} & N\arrow{r}{S}\arrow[dashed]{d}{h} & N\arrow[dashed]{d}{h}\\
-    & A\arrow{r}{f} & A
-  \end{tikzcd}
-\]
-When $h$ exists but is not necessarily unique $(N,S)$ is said to be a \emph{weak natural number}.
+  \[
+    \begin{tikzcd}
+      1\arrow{dr}{a}\arrow{r}{0} & N\arrow{r}{S}\arrow[dashed]{d}{h} & N\arrow[dashed]{d}{h}\\
+      & A\arrow{r}{f} & A
+    \end{tikzcd}
+  \]
+  When $h$ exists but is not necessarily unique $(N,S)$ is said to be a \emph{weak natural number}.
 \end{definition}
 
 We can consider natural numbers as an initial object. Having a closed Cartesian category $C$, we can consider it as a marked category $C_*$, such as in $Set_*$, with the specified object being $\top =1$. We can also consider the category $J$ provided by the diagram:
@@ -269,8 +284,8 @@ and is denoted as $(1,h,g)$. Considering the category $(C_*^J)'$ with objects as
 Every time natural are talked, induction have to appear in some part. The intuition of the categorical concept is that we have a object $N$ that is the set of every natural, and a successor arrow $S$. 
 
 \begin{definition}[Category of closed Cartesian categories]
-    We can define the \emph{category of closed Cartesian categories with natural numbers} $Cart_N$ that has as objects all small ccc, and as objects all functors that preserve the specified terminal, products and exponential objects.
-  \end{defintion}
+  We can define the \emph{category of closed Cartesian categories with natural numbers} $CCart_N$ that has as objects all small ccc, and as objects all functors that preserve the structure of closed Cartesian categories and added natural numbers structure.
+\end{defintion}
 {\color{red} Maybe add the proposition and corollary 9.1 and 9.2 of Lambeck.}
 
 
@@ -278,7 +293,7 @@ Every time natural are talked, induction have to appear in some part. The intuit
 
 As a consequence of the Curry-Howard isomorphism we have the identification between logic and lambda-calculus. Afterwards, as we start consider different deduction system  (conjunction calculus, positive, intuitionistic) in logic, we can consider different typed $\lambda$-calculus(basic, standard, expanded), each one paired with a deduction system. Finally, we restricted these deduction systems to the world of categories these gave us also another set of paired categories (Cartesian, closed Cartesian, closed bi Cartesian).\\
 
-Having laid the intuition of what is a natural number in category theory we can proceed to explain what a natural number is in Typed $\lambda$-calculus. Relating the notions of typed $\lambda$-calculus shown in \cite[Section 10]{lambek1988introduction}, \cite[Section 6]{selinger2008lecture} and \cite[Section 10]{cardone2006history}, we can see that it is opted by Lambek to include to simply include some structure over the basic type $\iota$ to provide with a natural number type:
+Having laid the intuition of what is a natural number in category theory we can proceed to explain what a natural number is in Typed $\lambda$-calculus. Relating the notions of typed $\lambda$-calculus shown in \cite[Section 10]{lambek1988introduction}, \cite[Section 6]{selinger2008lecture} and \cite[Section 10]{cardone2006history}, we can see that it is opted by Lambek to include to simply include some structure over the basic type $\iota$  to provide with a natural number type:
 
 \begin{remark}
   Remember that $\iota$ was a basic type with no added structure.
@@ -288,14 +303,14 @@ Having laid the intuition of what is a natural number in category theory we can 
   \begin{align*}
     A,B, C ::= ...\ |\ \mathfrak{o}\ |\ S(A)\ |\ I_t(A,B,C);
   \end{align*}
-for every type $T$, and the related typing rules:
+  for every type $T$, and the related typing rules:
   \begin{itemize}
   \item If $N$ is of type $\iota$ so is $S(N)$:
     $$  (S)\qquad  {\displaystyle\Gamma \vdash N:\iota \over \Gamma \vdash S(N):\iota}.$$
     In addition, $\mathfrak{o}$ is of type $\iota$:
-    $$  (\mathfrak{o})\qquad  {\displaystyle\Gamma \vdash \over \Gamma \vdash \mathfrak{o}:\iota}.$$
+    $$  (\mathfrak{o})\qquad  {\displaystyle\over \Gamma \vdash \mathfrak{o}:\iota}.$$
   \item If $M: A$, $H: A\to A$ and $N\in \iota$ then we can apply $H$ to $M$, $N$ times and get a result in $A$:
-        $$  (I)\qquad  {\displaystyle\Gamma \vdash N:\iota, \qquad \Gamma \vdash M:A,\qquad \Gamma \vdash H:A\to A \over \Gamma \vdash I_A(M,H,N):\iota}.$$
+    $$  (I)\qquad  {\displaystyle\Gamma \vdash N:\iota, \qquad \Gamma \vdash M:A,\qquad \Gamma \vdash H:A\to A \over \Gamma \vdash I_A(M,H,N):\iota}.$$
   \end{itemize}
 \end{definition}
 
@@ -343,12 +358,13 @@ In chapter 3, we have described how there exists different $\lambda$-calculus, t
 \begin{definition}[Morphisms of lambda-calculus]
   Let $\Lambda, \Lambda '$ be minimal (resp. basic, expanded) $\lambda$-calculus (resp. with natural numbers). A morphism $F: \Lambda \to \Lambda '$ is a function that
   \begin{enumerate}
-  \item Maps types in $\Lambda$ to types in $\Lambda '$, Terms in $\Lambda$ to terms in $\Lambda '$ and if $a\in \Lambda$ is a closed term, so is $F(a)$.
-  
-  \item Preserves the structure of minimal (resp. basic, expanded) $\lambda$-calculus (resp. with natural numbers) up to $\alpha$-equivalence, $beta$-reduction and $\eta$-reduction (and thus $\beta$-equivalence and $\eta$-equivalence).
+  \item Maps types in $\Lambda$ to types in $\Lambda '$, Terms in $\Lambda$ to terms in $\Lambda '$ and if $a\in \Lambda$ is a closed term, so is $F(a)$, and sends variables to variables. For example: $$F(1) = 1, \qquad F(*) = * \qquad or \qquad F(A+B) =F(A)+F(B).$$
+    
+  \item Preserves the structure of minimal (resp. basic, expanded) $\lambda$-calculus (resp. with natural numbers) up to $\alpha$-equivalence, $\beta$-equivalence and $\eta$-equivalence. 
 
-  \item 
-\end{enumerate}
+  \end{enumerate}
+
+  Morphisms of $\lambda$-calculus will be also called $\lambda$-morphism for short, in cases of ambiguity.
 \end{definition}
 
 
@@ -361,34 +377,33 @@ In chapter 3, we have described how there exists different $\lambda$-calculus, t
   Similarly, we can define the category of minimal (resp. basic, expanded) with natural numbers as in remark \ref{remark-natural-numbers}, adding that morphism should also preserve natural numbers.
 \end{definition}
 
-\subsection{A language from a Closed Cartesian Category}
+\subsection{The internal language of a Closed Cartesian Category}
 
 Up to this moment, we have related that a closed Cartesian category is a positive intuitionistic calculus, that is equivalent to  typed $\lambda$-calculus, with some extra structure.\\
 
-Now we have to consider the original ideas that are consider to be considered the precursor of categorical thinking: the poincare functor.l This functor is, in short,  sees how to consider a group within a topology, and see that we can infer group morphism from topologies homeomorphism. We have here the same idea: we map every ccc to a lambda-calculus and viceversa.\\ 
+Now we have to consider the original ideas that are consider to be considered the precursor of categorical thinking: the poincare functor.l This functor is, in short,  sees how to consider a group within a topology, and see that we can infer group morphism from topologies homeomorphism. This is the original idea behind the functors, and we will now provide an example that is similar in flavor to the poincare functor: we will generate a $lambda$-calculus from a CCC.\\ 
 
 
 
 \begin{definition}
   Let $C$ be a closed Cartesian category. Then its \emph{internal language} $\LL (C)$ is the $\lambda$-calculus that:
-\begin{itemize}
-\item Has as types the objects of $C$, with function types generated by exponential types, conjunction types by product types, and the 1 type by the terminal object $\top \in Ob(C)$.% \begin{table}[!h]
-% \begin{center}
-% \begin{tabular}{|l|c|c|}
-% \hline
-%   Typing name & Types  & Closed Cartesian categories  \\
-%   \hline
-%   Minimal     & Function type $A\to B$   &  Exponential object $B^A$  \\
-%   \hline 
-%   Basic      & Type 1 & Terminal object $\top$ \\
-%              & Product type $\times$ & Product object $\land$ \\
-%   \hline   
-% \end{tabular}
-% \caption*{\label{tab:table-name} Pairing of Types and object in closed Cartesian categories.}
-% \end{center}
-% \end{table}A
-\item In $\LL(A)$ a type $t$ variable $x^{t_i}$ is just an indeterminate  $x:1 \to t_i$, and a term $\lambda x^t. M$ of type $A$ is just a polynomial $\varphi(x):1 \to A$ on an indeterminate $x: 1 \to t$, with the following terms forming operations:
-  INCLUDE TERM FORMING OPERATION.
+  \begin{itemize}
+  \item Has as types the objects of $C$, with function types generated by exponential types, conjunction types by product types, and the 1 type by the terminal object $\top \in Ob(C)$.% \begin{table}[!h]
+      %       \begin{center}
+      %       \begin{tabular}{|l|c|c|}
+      %       \hline
+      %       Typing name & Types  & Closed Cartesian categories  \\
+      %       \hline
+      %       Minimal     & Function type $A\to B$   &  Exponential object $B^A$  \\
+      %       \hline 
+      %       Basic      & Type 1 & Terminal object $\top$ \\
+      %                                            & Product type $\times$ & Product object $\land$ \\
+      %       \hline   
+      %     \end{tabular}
+      %       \caption*{\label{tab:table-name} Pairing of Types and object in closed Cartesian categories.}
+      %       \end{center}
+      %       \end{table}A
+  \item In $\LL(A)$ a variable $x^{t_i}$ of type $t$ is just an indeterminate  $x:1 \to t_i$, and terms of type $A$ are just a polynomial $\varphi(x_1^{t_1},...,x_n^{t_n}):1 \to A$ over indeterminate $x_i: 1 \to t_i,$ for $i$ in $1,...,n$.
   \end{itemize}
 
 \end{definition}
@@ -397,105 +412,103 @@ Now we have to consider the original ideas that are consider to be considered th
   In any simply typed $\lambda$-calculus, we consider raw terms and then we consider only those that are subject to be typable. This, was later understood as any term being a proof of veracity of a type, via the Curry-Howard isomorphism. So, to maintain this idea of the arrows of the language being proof of veracity, we see them as arrows $f:\top \to A$, that is, as deduction from truth. \\
 \end{remark}
 
+Now, we have to define how the functor behave over morphism.
 
- In fact, $\LL $ can be defined as a Functor from $CCart$ to $\LC$. For that we need to define how does it act on Cartesian closed functors. \\
+\begin{definition}
+  Let $F:C\to C'\in CCart_N$. We define $\LL (F)$ as the $\lambda$-morphism such that:
+  \begin{itemize}
+  \item $\LL (F) (a)= F(a)$ for every term $a$, that is, for every $a\in Ob(C)$.
+  \item $\LL (x^a) = x^{F(a)}$ for every variables $x^a \in\LL(C)$, that is, for every assumption $x: 1 \to A$ in $C$.
+  \item Let $X= \{x_1^{t_1},...,x_n^{t_n}\}$ be a set of indeterminates. Then for ever polynomial $\varphi$ over $X$ we have that
+    $$\LL(F)(\varphi(X):1 \to A) = F_{X\to \LL(X)}(\varphi(X):1 \to A)$$  where $F_{X\to \LL(X)}$ is defined as in proposition \ref{unique-polynomial-functor}.
+  \end{itemize}
+\end{definition}
+\end{proposition}
 
- \begin{proposition}
-   Let $C\in Ob(Cart_N)$, $\LL (C)$ be the internal language of a $C$ and let $F:C\to C'\in CCart$.  We define the functor $\LL (F)$:
-   \begin{itemize}
-   \item $\LL (F) (a) = F(a)$ for every $a\in Ob(C)$.
-   \item $\LL (x^a) = x^{f(a)}$ for every assumption in $C$.
-   \item $\LL (F) (\varphi(x_1,..,x_n)) = F_{x_1,...,x_n}(\varphi(x_1,...,x_n))$ for $x_i$ variables and all  polynomial in $C[x_1,...,x_n]$, where $F_{x_1,...,x_n}$ is the unique arrow in $CCart_N$  such that the following diagram commutes:
-     \[
-       \begin{tikzcd}
-         C[x_1,...,x_n]\arrow[dashed]{rr}{F_{x_1,...,x_n}}&& C'[x_1,...,x_n]\\
-         C \arrow{rr}{F}\arrow[hookrightarrow]{u}{}&& C'\arrow[hookrightarrow]{u}{}
-       \end{tikzcd}
-     \]
-     
-   \end{itemize}
- \end{proposition}
+\begin{proposition}
+  If $C$ has weak natural numbers, $\LL (C)$ has natural numbers. 
+\end{proposition}
+\begin{proof}
+  Let $(N,S)$ be a weak natural number in $C$. Then we can consider in $\LL(C)$ the structure:
+  
+\end{proof}
+\begin{proposition}
+  If $F: C\to C \in CCart_N$, then $\LL (F)$ maintain natural numbers.
+\end{proposition}
+\subsection{Cartesian Closed Category generated by a typed $lambda$-calculus}
 
- \begin{proposition}
-   If $C$ has natural numbers, $\LL (C)$ has natural numbers. 
- \end{proposition}
- \begin{proposition}
-   If $F: C\to C \in CCart_N$, then $\LL (F)$ maintain natural numbers.
- \end{proposition}
- \subsubsection{Cartesian Closed Category of a Language}
+Given a typed $\lambda$-calculus, we are going to construct a ccc conversely to the process done previously.
 
- Given a typed $\lambda$-calculus, we are going to construct a ccc conversely to the process done previously.
+\begin{definition}
+  Given a typed lambda calculus $L$ we can construct a \emph{generated closed Cartesian category}, denoted as $\CC (L)$ as follow:
+  \begin{itemize}
+  \item As object it has the types in $L$.
+  \item As arrows $f:a\to b$ it has the lambdas $\lambda x^a. b(x)$ where $b(x)$ is a term that may have $x^a$ as a free variable.
+  \item Arrows are considered as equivalence classes up to $\alpha\beta\eta$-equivalence.
+  \end{itemize}
+\end{definition}
 
- \begin{definition}
-   Given a typed lambda calculus $L$ we can construct a \emph{generated closed Cartesian category}, denoted as $\CC (L)$ as follow:
-   \begin{itemize}
-   \item As object it has the types in $L$.
-   \item As arrows $f:a\to b$ it has the lambdas $\lambda x^a. b(x)$ where $b(x)$ is a term that may have $x^a$ as a free variable.
-   \item Arrows are considered as equivalence classes up to $\alpha\beta\eta$-equivalence.
-   \end{itemize}
- \end{definition}
+The following proposition is discussed in plenty of sources. We choose adapt the approximation done by \cite{seely1984locally} to dependent typing, instead of following the main source \cite{lambek1985cartesian} as we consider that it has a more natural approach.
+\begin{proposition}
+  $\CC (L)$ is a Cartesian closed category. 
+\end{proposition}
+\begin{proof}
+  We start checking the category axioms:
+  \begin{itemize}
+  \item Identity is defined by $\lambda x^a.x$.
+  \item Composition of $\lambda x^a. f(x):  a\to b$ and $\lambda x^b. g(x^b): b \to c$ then the composition is defined by $\lambda x^a. g(f(x)): a \to c$.
+  \item Associativity follows from $\beta$-equivalence.\\
+  \end{itemize}
+  To provide the terminal object:
+  \begin{itemize}
+  \item The type $1$ is the terminal object. By $\eta_x$ the only term of type $1$ is $*$ up to equivalence. Therefore, any arrow $t:a \to 1$ must be equivalent to $\lambda x^a. *$.\\
+  \end{itemize}
+  To provide the product type for two type $a,b$.
+  \begin{itemize}
+  \item The type product is provided by $a \times b$.
+  \item The projections are provided by $\beta_{x,i}$ with the projections $\pi_1,\pi_2$.
+  \item Given three types $a,b,c$ and lambdas $\lambda x^a. f(x) : a\to b$, $\lambda x^a. g(x) : a\ to c$.
+  \item Properties 2. and 3. in proposition \ref{prop:CartCategory2} comes directly from $\eta_x$ and $\beta_{x,i}$ equivalence rules.\\
+  \end{itemize}
+  To provide the exponential type (and thus have a conjunction calculus):
+  \begin{itemize}
+  \item The exponential type $a^b$ is $b\to a$.
+  \item Given $h = \lambda x^{a\times b}. f(x): a\times b \to c$  we define $h^* = \lambda x^a. \lambda y^b. f(\langle x,y\rangle)$.
+  \item There is an arrow $\varepsilon^{a,b} = \lambda y^{a\to b \times a}. (\pi_1(y))(\pi_2(y))$.
+  \item TODO:Check this. Properties 1. and 2. in proposition \ref{def2:CCC} comes from $\beta$ and $\zeta$ equivalence rules.
+  \end{itemize}
+\end{proof}
 
- The following proposition is discussed in plenty of sources. We choose adapt the approximation done by \cite{seely1984locally} to dependent typing, instead of following the main source \cite{lambek1985cartesian} as we consider that it has a more natural approach.
- \begin{proposition}
-   $\CC (L)$ is a Cartesian closed category. 
- \end{proposition}
- \begin{proof}
-   We start checking the category axioms:
-   \begin{itemize}
-   \item Identity is defined by $\lambda x^a.x$.
-   \item Composition of $\lambda x^a. f(x):  a\to b$ and $\lambda x^b. g(x^b): b \to c$ then the composition is defined by $\lambda x^a. g(f(x)): a \to c$.
-   \item Associativity follows from $\beta$-equivalence.\\
-   \end{itemize}
-   To provide the terminal object:
-   \begin{itemize}
-   \item The type $1$ is the terminal object. By $\eta_x$ the only term of type $1$ is $*$ up to equivalence. Therefore, any arrow $t:a \to 1$ must be equivalent to $\lambda x^a. *$.\\
-   \end{itemize}
-   To provide the product type for two type $a,b$.
-   \begin{itemize}
-   \item The type product is provided by $a \times b$.
-   \item The projections are provided by $\beta_{x,i}$ with the projections $\pi_1,\pi_2$.
-   \item Given three types $a,b,c$ and lambdas $\lambda x^a. f(x) : a\to b$, $\lambda x^a. g(x) : a\ to c$.
-   \item Properties 2. and 3. in proposition \ref{prop:CartCategory2} comes directly from $\eta_x$ and $\beta_{x,i}$ equivalence rules.\\
-   \end{itemize}
-   To provide the exponential type (and thus have a conjunction calculus):
-   \begin{itemize}
-   \item The exponential type $a^b$ is $b\to a$.
-   \item Given $h = \lambda x^{a\times b}. f(x): a\times b \to c$  we define $h^* = \lambda x^a. \lambda y^b. f(\langle x,y\rangle)$.
-   \item There is an arrow $\varepsilon^{a,b} = \lambda y^{a\to b \times a}. (\pi_1(y))(\pi_2(y))$.
-   \item TODO:Check this. Properties 1. and 2. in proposition \ref{def2:CCC} comes from $\beta$ and $\zeta$ equivalence rules.
-   \end{itemize}
- \end{proof}
+\begin{proposition}
+  If $L$ has a natural numbers structure, then $\CC (L)$ has a natural number structure.
+\end{proposition}
 
- \begin{proposition}
- If $L$ has a natural numbers structure, then $\CC (L)$ has a natural number structure.
- \end{proposition}
+Now we repeat the process as with $\LL$ and define a functor $\CC: \LC \to CCart$.
+\begin{proposition}
+  Let $L\in Ob(\LC)$, $\CC (L)$ be the generated closed Cartesian category of $L$ and let $F:L\to L'\in \LC$.  We define the functor $\CC (F)$:
+  \begin{itemize}
+  \item $\CC (F) (a) = F(a)$ for every $a\in Ob(C)$.
+  \item $\CC (F) (\lambda x^a. b(x) :a \to a') = \lambda x^{F(a)}. F(b(x))$.
+  \end{itemize}
+\end{proposition}
+\begin{proof}
 
- Now we repeat the process as with $\LL$ and define a functor $\CC: \LC \to CCart$.
- \begin{proposition}
-   Let $L\in Ob(\LC)$, $\CC (L)$ be the generated closed Cartesian category of $L$ and let $F:L\to L'\in \LC$.  We define the functor $\CC (F)$:
-   \begin{itemize}
-   \item $\CC (F) (a) = F(a)$ for every $a\in Ob(C)$.
-   \item $\CC (F) (\lambda x^a. b(x) :a \to a') = \lambda x^{F(a)}. F(b(x))$.
-   \end{itemize}
- \end{proposition}
- \begin{proof}
+\end{proof}
 
- \end{proof}
+\subsection{Equivalence}
+After defining in the two previous sections we define two functors/ the language of a closed Cartesian category as a functor $\LL$ and the closed Cartesian category of a lambda calculus $\CC$. We now will proof that these two functors makes an adjoint equivalence. 
 
- \subsection{Equivalence}
-After defining in the two previous section the language of a closed Cartesian category as a functor $\LC$ and 
- 
- % \subsubsection{Deduction Theorem}
-% We proceed with the tating that an arrow $f:\top \to A$ does exists in our deduction system. It can be deduced in both positive (without $\lor$ and $\bot$) an intuitionistic calculus that is $A \land B\vdash C$ then $A \vdash C\to B$. This theorem is more interesting to state in the new optics of deduction systems:
-% \begin{theorem}[Proposition 2.1, \cite{lambek1988introduction}]
-%   In a positive  calculus, if assuming the existence of an arrow $f:\top \to A$ implies the existence of an arrow $g: B\to C$, then there exists an arrow $h: A\land B\to C$ that does not depend on $f$.
-% \end{theorem}
+% \subsubsection{Deduction Theorem}
+      %       We proceed with the tating that an arrow $f:\top \to A$ does exists in our deduction system. It can be deduced in both positive (without $\lor$ and $\bot$) an intuitionistic calculus that is $A \land B\vdash C$ then $A \vdash C\to B$. This theorem is more interesting to state in the new optics of deduction systems:
+      %       \begin{theorem}[Proposition 2.1, \cite{lambek1988introduction}]
+      %       In a positive  calculus, if assuming the existence of an arrow $f:\top \to A$ implies the existence of an arrow $g: B\to C$, then there exists an arrow $h: A\land B\to C$ that does not depend on $f$.
+      %       \end{theorem}
 
-% \begin{sproof}
-%   In a similar fashion of the Church-Rosser Theorem, it is solved by induction in the last rule used in the deduction.
-% \end{sproof}
+      %       \begin{sproof}
+      %       In a similar fashion of the Church-Rosser Theorem, it is solved by induction in the last rule used in the deduction.
+      %       \end{sproof}
 
 
-% As we have seen, a category is a deductive system with added structure.
+      %       As we have seen, a category is a deductive system with added structure.
 
 
