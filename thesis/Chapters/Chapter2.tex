@@ -19,130 +19,130 @@ In a diagram:
 
 \[
   \begin{tikzcd}
-      c\arrow[r, "u"] \arrow[rd, "f", swap]      & Sd \arrow[d, "Sf'", dashed]& d\arrow[d,"f'",dash]\\
-       &Se& e 
-    \end{tikzcd}
-  \]
+    c\arrow[r, "u"] \arrow[rd, "f", swap]      & Sd \arrow[d, "Sf'", dashed]& d\arrow[d,"f'",dash]\\
+    &Se& e 
+  \end{tikzcd}
+\]
 
-  Note that an universal arrow $(d,u)$ induces the unique existence of an arrow in $D$, but with interesting properties via it relationship with $S$. Usually, to provide an universal arrow we will only define the functor $S:D\to C$ and the arrow $u:c\to Sd$, letting all other information be deduced from the context.\\
-
-
-
-  The idea of universality is often regard via the notion of \emph{universal element}, in the special (and commonplace) case where $S:D\to Set$.
-
-  \begin{definition}
-    Let $S: D \to Set$, an \emph{universal element}  for $S$ is a pair $(r,e)$ with $r \in Ob(D), e \in   Sr$, such that for every $(d,x)$ with $d\in Ob(D), x\in Sd$, there is an unique arrow $f:r\to d\in D$ such that $(Sf)e = x$. 
-  \end{definition}
+Note that an universal arrow $(d,u)$ induces the unique existence of an arrow in $D$, but with interesting properties via it relationship with $S$. Usually, to provide an universal arrow we will only define the functor $S:D\to C$ and the arrow $u:c\to Sd$, letting all other information be deduced from the context.\\
 
 
-    Note that having an universal element is a particular case of having an universal arrow. Considering $*$ the set with one point (as a category) an universal element is an universal arrow $*\to H$. This is clearly seen if we consider the diagram:
-%      c\arrow[r, "u"] \arrow[rd, "f"]
-    \[
+
+The idea of universality is often regard via the notion of \emph{universal element}, in the special (and commonplace) case where $S:D\to Set$.
+
+\begin{definition}
+  Let $S: D \to Set$, an \emph{universal element}  for $S$ is a pair $(r,e)$ with $r \in Ob(D), e \in   Sr$, such that for every $(d,x)$ with $d\in Ob(D), x\in Sd$, there is an unique arrow $f:r\to d\in D$ such that $(Sf)e = x$. 
+\end{definition}
+
+
+Note that having an universal element is a particular case of having an universal arrow. Considering $*$ the set with one point (as a category) an universal element is an universal arrow $*\to H$. This is clearly seen if we consider the diagram:
+% c\arrow[r, "u"] \arrow[rd, "f"]
+\[
   \begin{tikzcd}
-     *\arrow[r, "u"] \arrow[rd, "f", swap] & Sr \arrow[d, "Sf", dashed]& r\arrow[d,"f", dash]\\
-      &Sd& d 
-    \end{tikzcd}
-  \]
+    *\arrow[r, "u"] \arrow[rd, "f", swap] & Sr \arrow[d, "Sf", dashed]& r\arrow[d,"f", dash]\\
+    &Sd& d 
+  \end{tikzcd}
+\]
 
-  where $*$ is helping us select the elements of $Sd$ and $Se$ to enforce the property.\\
+where $*$ is helping us select the elements of $Sd$ and $Se$ to enforce the property.\\
 
-  Conversely if $D$ has small homesets, we can consider an universal arrow to be a particular case of an universal element. With the same context as in \ref{def:univ-arrow} $(d,u: c\to Sd)$ is an universal arrow if, and only if, $(d, u\in  \hom_{D}(c, Sd))$ is an universal element.\\
+Conversely if $D$ has small homesets, we can consider an universal arrow to be a particular case of an universal element. With the same context as in \ref{def:univ-arrow} $(d,u: c\to Sd)$ is an universal arrow if, and only if, $(d, u\in  \hom_{D}(c, Sd))$ is an universal element.\\
 
-  The point of having these such similar definition is to have different interfaces for the concept. While most result can be easily adapted, once we got to the examples is clear when to use each concept. 
-  
-  \begin{example}\ 
-    \begin{itemize}
-    \item Quotient group: This property states that, for any two groups $N\lhd G$ with $\pi: G \to N$ the canonical projection, and any group homomorphism $f:G\to K$ such that $N\subset \ker f$ there exists an unique $\overline f: H \to K$ such that $\overline f  \circ \pi = f$.\\
-      
-      The question now is, how is this a universal property. This is an example of a universal element. Considering the functor $H: Grp\to Set$:
-      $$HG' = \{f:G\to G'\in Ar(Grp) : F(N)=\{0\} \},$$
-      
-      Then, $(G/N, \pi)$ is an universal element for $H$. From this property alone the three isomorphism theorems can be deduced. Therefore, we only have to prove this result to have the full power of these theorems in any context (e.g. Rings, K-Algebra, or Topological spaces).
+The point of having these such similar definition is to have different interfaces for the concept. While most result can be easily adapted, once we got to the examples is clear when to use each concept. 
 
-    \item Tensor product: Given an right $R$-module $A$ and a left $R$-module $B$ one can consider the tensor product as an abelian group $A\otimes_R B$ and an $R$-biadditive function
-      $$h:A\times B\to A \otimes_R B,$$
-      such that  for every $R$-biadditive $f:A\times B \to G$ it exists an unique $\overline f$ such that $\overline f\circ h=f$. Is easy to follow that tensor product can be reformulated as an universal arrow $\varphi:A\time B \to A\otimes_R B$ from $A\times B$ to the identity functor in the category of $R$-additive groups along with $R$-additive functions.
-    \end{itemize}
-  \end{example}
+\begin{example}\ 
+  \begin{itemize}
+  \item Quotient group: This property states that, for any two groups $N\lhd G$ with $\pi: G \to N$ the canonical projection, and any group homomorphism $f:G\to K$ such that $N\subset \ker f$ there exists an unique $\overline f: H \to K$ such that $\overline f  \circ \pi = f$.\\
+    
+    The question now is, how is this a universal property. This is an example of a universal element. Considering the functor $H: Grp\to Set$:
+    $$HG' = \{f:G\to G'\in Ar(Grp) : F(N)=\{0\} \},$$
+    
+    Then, $(G/N, \pi)$ is an universal element for $H$. From this property alone the three isomorphism theorems can be deduced. Therefore, we only have to prove this result to have the full power of these theorems in any context (e.g. Rings, K-Algebra, or Topological spaces).
 
-  Dually, we can consider an \emph{universal arrow from $S$ to $c$} or simply universal arrow from $S$:
+  \item Tensor product: Given an right $R$-module $A$ and a left $R$-module $B$ one can consider the tensor product as an abelian group $A\otimes_R B$ and an $R$-biadditive function
+    $$h:A\times B\to A \otimes_R B,$$
+    such that  for every $R$-biadditive $f:A\times B \to G$ it exists an unique $\overline f$ such that $\overline f\circ h=f$. Is easy to follow that tensor product can be reformulated as an universal arrow $\varphi:A\time B \to A\otimes_R B$ from $A\times B$ to the identity functor in the category of $R$-additive groups along with $R$-additive functions.
+  \end{itemize}
+\end{example}
+
+Dually, we can consider an \emph{universal arrow from $S$ to $c$} or simply universal arrow from $S$:
 \begin{definition}\label{def:univ-arrow2}
   Let $S: D \to C$ be a functor and $c \in Ob(C)$, an \emph{universal arrow}  from $c$ to $S$ is a pair $(d,u)$ with $d\in Ob(D), u:c \to Sd \in Ar(C)$, such that for every $(e,f)$ with $e\in Ob(D)$  and $f:c\to Sd$ there exists an unique $f':r,d\in Ar(D)$ such that $u\circ Sf' = f$.
-
 \end{definition}
 In a diagram:
 
 \[
   \begin{tikzcd}
-      c       & Sd \arrow[swap, l, "f"]\arrow[d, "Sf'", dashed]& d\arrow[d,"f'"]\\
-       &Se\arrow[lu, "u"]& e 
-    \end{tikzcd}
-  \]
+    c       & Sd \arrow[swap, l, "f"]\arrow[d, "Sf'", dashed]& d\arrow[d,"f'"]\\
+    &Se\arrow[lu, "u"]& e 
+  \end{tikzcd}
+\]
 
 
-  \begin{example}\label{example:prod}\ 
-    \begin{itemize}
-    \item In $Set$  we have a particular construction: the product of sets for any two sets $a,b$ along with the projections $\pi_1 a \times b \to a$ and $\pi_2 a \times b \to b$. Then, we can define the functor $\Delta: Set \to Set\times Set$ such that $\Delta c = c\times c$ for every $c\in Ob(Set)$ and $\Delta (f:c\to b): c\times c\to b\times b$ is the elements-wise application of $f$.\\
+\begin{example}\label{example:prod}\ 
+  \begin{itemize}
+  \item In $Set$  we have a particular construction: the product of sets for any two sets $a,b$ along with the projections $\pi_1 a \times b \to a$ and $\pi_2 a \times b \to b$. Then, we can define the functor $\Delta: Set \to Set\times Set$ such that $\Delta c = c\times c$ for every $c\in Ob(Set)$ and $\Delta (f:c\to b): c\times c\to b\times b$ is the elements-wise application of $f$.\\
 
-Then, given any two sets $a,b\in Ob(Sets)$, $u=(\pi_1,\pi_2)$ is an universal arrow from $\Delta$ to $(a,b)$ as
+    Then, given any two sets $a,b\in Ob(Sets)$, $u=(\pi_1,\pi_2)$ is an universal arrow from $\Delta$ to $(a,b)$ as
 
-\[
-  \begin{tikzcd}
-      (a,b)       & \Delta d=(d,d) \arrow[swap, l, "f"]\arrow[d, "\Delta f'", dashed]& d\arrow[d,"f'"]\\
-       &\Delta e=(e,e)\arrow[lu, "u"]& e 
-    \end{tikzcd}
-  \]
+    \[
+      \begin{tikzcd}
+        (a,b)       & \Delta d=(d,d) \arrow[swap, l, "f"]\arrow[d, "\Delta f'", dashed]& d\arrow[d,"f'"]\\
+        &\Delta e=(e,e)\arrow[lu, "u"]& e 
+      \end{tikzcd}
+    \]
 
-  This construction is reproducible in, among many others, $Grp, Top$ or Banach Spaces with bounded linear transformation. 
+    This construction is reproducible in, among many others, $Grp, Top$ or Banach Spaces with bounded linear transformation. 
+  \end{itemize}
 \end{example}
 
-    
-  Lastly, we will provide a characterization of universality:
-  \begin{proposition}\label{Yoneda-proposition}
-      Let $S: D \to C$ be a functor and $u:c\to Sr\in Ar(C)$. Then $u$ is an universal arrow if and, only if, the function $\varphi:\hom_D(r,\cdot)\to \hom(c,S\cdot)$ such that $\varphi(d)(f)= Sf\circ u$ for all $f\in \hom_D(r,d)$ is a natural bijection. Conversely, every natural bijection is uniquely determined by an universal arrow $u:c\to Sr$. 
-  \end{proposition}
-  \begin{proof}
-    Let $u$ be universal. Then, $\varphi$ is clearly a bijection. For $\varphi$ to be a natural transformation the diagram 
-    \[
-      \begin{tikzcd}
-        \hom_D(r,d)\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(d)} & \hom_C(c,Sd)\arrow{d}{\hom_C(c,Sg)}\\
-        \hom_D(r,d')\arrow{r}{\varphi(d')} & \hom_C(c,Sd')
-      \end{tikzcd}
-    \]
 
-    should commute for all $g\in Ar(D)$. As this is a diagram in the category of sets, we can check the commutativity by checking it element wise. For any $f \in\hom_D(r,d)$:
-    \[
-      \begin{tikzcd}
-        f\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(d)} & Sf\circ u \arrow{d}{\hom_C(c,Sg)}\\
-        g\circ f \arrow{r}{\varphi(d')} & S(g\circ f) \circ u = Sg\circ Sf \circ u
-      \end{tikzcd}
-    \]
+Lastly, we will provide a characterization of universality:
+\begin{proposition}\label{Yoneda-proposition}
+  Let $S: D \to C$ be a functor and $u:c\to Sr\in Ar(C)$. Then $u$ is an universal arrow if and, only if, the function $\varphi:\hom_D(r,\cdot)\to \hom(c,S\cdot)$ such that $\varphi(d)(f)= Sf\circ u$ for all $f\in \hom_D(r,d)$ is a natural bijection. Conversely, every natural bijection is uniquely determined by an universal arrow $u:c\to Sr$. 
+\end{proposition}
+\begin{proof}
+  Let $u$ be universal. Then, $\varphi$ is clearly a bijection. For $\varphi$ to be a natural transformation the diagram 
+  \[
+    \begin{tikzcd}
+      \hom_D(r,d)\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(d)} & \hom_C(c,Sd)\arrow{d}{\hom_C(c,Sg)}\\
+      \hom_D(r,d')\arrow{r}{\varphi(d')} & \hom_C(c,Sd')
+    \end{tikzcd}
+  \]
 
-    So the diagram commutes, and $\varphi$ is natural. The bijectivity follows from $u$ being universal.\\
+  should commute for all $g\in Ar(D)$. As this is a diagram in the category of sets, we can check the commutativity by checking it element wise. For any $f \in\hom_D(r,d)$:
+  \[
+    \begin{tikzcd}
+      f\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(d)} & Sf\circ u \arrow{d}{\hom_C(c,Sg)}\\
+      g\circ f \arrow{r}{\varphi(d')} & S(g\circ f) \circ u = Sg\circ Sf \circ u
+    \end{tikzcd}
+  \]
 
-    Lets consider now that $\varphi$ is a natural bijection. We will define $u := \varphi(r)(1_r)$ and check that $(r,u)$ is an universal arrow. As $\varphi$ is natural we have that:
+  So the diagram commutes, and $\varphi$ is natural. The bijectivity follows from $u$ being universal.\\
 
-    \[
-      \begin{tikzcd}
-        \hom_D(r,r)\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(r)} & \hom_C(r,Sr)\arrow{d}{\hom_C(r,Sg)}\\
-        \hom_D(r,d)\arrow{r}{\varphi(d)} & \hom_C(r,Sd)
-      \end{tikzcd}
-    \]
+  Lets consider now that $\varphi$ is a natural bijection. We will define $u := \varphi(r)(1_r)$ and check that $(r,u)$ is an universal arrow. As $\varphi$ is natural we have that:
 
-    Writing the diagram for the element $1_r\in\hom_D(r,r)$ and any $d\in Ob(D), g:r\to d\in \hom_D(r,d)$:
+  \[
+    \begin{tikzcd}
+      \hom_D(r,r)\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(r)} & \hom_C(r,Sr)\arrow{d}{\hom_C(r,Sg)}\\
+      \hom_D(r,d)\arrow{r}{\varphi(d)} & \hom_C(r,Sd)
+    \end{tikzcd}
+  \]
 
-    \[
-      \begin{tikzcd}
-        1_r \arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(r)} & u \arrow{d}{\hom_C(r,Sg)}\\
-        g\arrow{r}{\varphi(d)} & \varphi(d)(g)= Sg\circ u
-      \end{tikzcd}
-    \]
+  Writing the diagram for the element $1_r\in\hom_D(r,r)$ and any $d\in Ob(D), g:r\to d\in \hom_D(r,d)$:
 
-    and since $\varphi$ is a bijection, for every $f\in \hom_C(r,Sd)$ there is an unique function $f' = \varphi(d)^{-1}(f)$ such that $Sf'\circ u = f$, thus being $u$ universal.
+  \[
+    \begin{tikzcd}
+      1_r \arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\varphi(r)} & u \arrow{d}{\hom_C(r,Sg)}\\
+      g\arrow{r}{\varphi(d)} & \varphi(d)(g)= Sg\circ u
+    \end{tikzcd}
+  \]
 
-  \end{proof}
-  
-  This proposition, sometimes called Yoneda's proposition \cite[p. 81]{mac2013categories}, is of capital importance. Later on this chapter, we will study \emph{adjunctions} and this proposition will enable us to fully understand the relationship between adjunctions and universality. From result there is a definition that arises:
+  and since $\varphi$ is a bijection, for every $f\in \hom_C(r,Sd)$ there is an unique function $f' = \varphi(d)^{-1}(f)$ such that $Sf'\circ u = f$, thus being $u$ universal.
+
+\end{proof}
+
+This proposition, sometimes called Yoneda's proposition \cite[p. 81]{mac2013categories}, is of capital importance. Later on this chapter, we will study \emph{adjunctions} and this proposition will enable us to fully understand the relationship between adjunctions and universality. From result there is a definition that arises:
 
 \begin{definition}
   Let $D$ be a category with small home-sets and let $F:D\to C$ be a functor. A representation of a functor $K:D\to Set$ is a pair $(r,\varphi)$ with $r \in Ob(D)$ and $ \varphi$ a natural isomorphism  such that
@@ -156,7 +156,7 @@ Note that therefore a universal arrow induces a natural isomorphism $D(r,d)\equi
 This subsection  deals with Yoneda's Lemma. Mac Lane\cite{mac2013categories} assures the lemma first appeared in his private communication with Yoneda in 1954. With time, this result has became one of the most relevant one in Category Spaces. We will start by providing some intuition to it, followed by it proof and some use cases.\\
 
 
- This results is due to Japanese professor Nobuo Yoneda. We know about Yoneda's life thanks to the elegy that was written by Yoshiki Kinoshita\cite{YonedaLife}. Yoneda was born in Japan in 1930, and received his doctorate in mathematics from Tokyo University in 1952. He was a reviewer for international mathematical journals. In addition to his contributions to the field of mathematics, he also devoted his research to computer science.\\
+This results is due to Japanese professor Nobuo Yoneda. We know about Yoneda's life thanks to the elegy that was written by Yoshiki Kinoshita\cite{YonedaLife}. Yoneda was born in Japan in 1930, and received his doctorate in mathematics from Tokyo University in 1952. He was a reviewer for international mathematical journals. In addition to his contributions to the field of mathematics, he also devoted his research to computer science.\\
 
 
 The idea behind the Yoneda lemma can be arid at first, if one does not have a prior understanding of what the purpose and usefulness of this lemma is. In order to illustrate this idea we will introduce a (simplified) definition of Moduli Spaces, so that we have a geometric understanding of Yoneda's Lemma.\\
@@ -171,8 +171,8 @@ $$\mathcal{M} = \{\text{smooth complex non singular curves} \}/\text{isomorphism
 
 Further on when we talk about curves we will refer to smooth complex non singular curves. Note that if two curves are isomorphic then they have the same genus. Therefore the function 
 \begin{align*}
-      \gamma: \mathcal{M} &\mapsto \N\\
-      \displaystyle  [V]&\mapsto \text{genus of V} 
+  \gamma: \mathcal{M} &\mapsto \N\\
+  \displaystyle  [V]&\mapsto \text{genus of V} 
 \end{align*}
 
 is well defined and we can define $\mathcal{M}_g = \gamma^{-1}(g)$. An interesting classification of $\mathcal{M}_g$ is given when we consider that for every $g$ there exists a closed, connected, non-singular variety $U_g$ and a family $\{C_t : t \in U_g}$ such that a curve of genus $g$ will be a fibration of $C_t$.  Moreover there is a variety $M_g$ and a subjective morphism $\varphi: U_g \to M_g$ such that $\varphi(t_1)=\varphi(t_2)$ if $C_{t_1} \equiv C_{t_2}$. Therefore we are classifying the equivalence classes of $\mathcal{M}_g$ by points of the variety $M_g$ (thus generating a Moduli problem).\\
@@ -189,23 +189,23 @@ Similarly to this two example, with the Yoneda lemma we will have a functor $F:D
 \end{theorem}
 \begin{proof}
   As $\alpha$ is a natural transformation we have that, for every $g:r\to d\in Ar(D)$: 
-    \[
-      \begin{tikzcd}
-        \hom_D(r,r)\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\alpha(r)} & Kr\arrow{d}{Kg}\\
-        \hom_D(r,d)\arrow{r}{\alpha(d)} & Kd
-      \end{tikzcd}
-    \]
-Writing $\alpha(r)(1_r) = u$ we have that:
-    \[
-      \begin{tikzcd}
-        1_r\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\alpha(r)} & u\arrow{d}{Kg}\\
-        g\circ 1_r = g\arrow{r}{\alpha(d)} & \alpha(d)(g)=Kg\circ u
-      \end{tikzcd}
-    \]
+  \[
+    \begin{tikzcd}
+      \hom_D(r,r)\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\alpha(r)} & Kr\arrow{d}{Kg}\\
+      \hom_D(r,d)\arrow{r}{\alpha(d)} & Kd
+    \end{tikzcd}
+  \]
+  Writing $\alpha(r)(1_r) = u$ we have that:
+  \[
+    \begin{tikzcd}
+      1_r\arrow[swap]{d}{\hom_D(r,g)}\arrow{r}{\alpha(r)} & u\arrow{d}{Kg}\\
+      g\circ 1_r = g\arrow{r}{\alpha(d)} & \alpha(d)(g)=Kg\circ u
+    \end{tikzcd}
+  \]
 
-    Therefore every natural transformation is uniquely identified by the value of $u$, therefore $\tau$ is injective. Moreover, for every $u$ in $Kr$, we can define a natural transformation following the previous diagram, therefore, $\tau$ is bijective.\\
+  Therefore every natural transformation is uniquely identified by the value of $u$, therefore $\tau$ is injective. Moreover, for every $u$ in $Kr$, we can define a natural transformation following the previous diagram, therefore, $\tau$ is bijective.\\
 
-To see that $\tau$ we is natural we have to consider for which functor it is natural. Consider the functor \emph{evaluation} $E: Set^D\times D$ that maps each $(F,c)\to Fc$, and the functor $N:Set^D\times D\to Nat(\hom_D(r,\cdot),K)$ the set of natural transformations. Finally, $\tau:N\to E$ is a natural transformation.
+  To see that $\tau$ we is natural we have to consider for which functor it is natural. Consider the functor \emph{evaluation} $E: Set^D\times D$ that maps each $(F,c)\to Fc$, and the functor $N:Set^D\times D\to Nat(\hom_D(r,\cdot),K)$ the set of natural transformations. Finally, $\tau:N\to E$ is a natural transformation.
 \end{proof}
 \begin{remark}
   The existence of an evaluation will be revisited when we consider \emph{closed cartesian cateogries} in  \ref{subsect:CCC}. This categories (in general, closed categories) will generalized the idea of a category having an exponential object suitable for evaluation. In this case, we are unadvertedly using that $Cat$ is a closed cartesian category.
@@ -223,7 +223,7 @@ The first functor that we will want to apply this result is to the $\hom_{\cdot}
   Where $\tau$ is natural in $K$(as an object of $Set^{D}$) and in $r$.
 \end{corollary}
 \begin{proof}
-We seek to use the Yoneda lemma in the functor $F':D^{op}\to Set$ induced by $F$. Then we have that: 
+  We seek to use the Yoneda lemma in the functor $F':D^{op}\to Set$ induced by $F$. Then we have that: 
   \begin{align*}
     \tau:Nat(\hom_{D^{op}}(r,\cdot), F'\cdot) &\equiv F'r\\
     \tau(\alpha:\hom_{D^{op}}(r,\cdot)\to F'\cdot)& = \alpha(r)(1_r)
@@ -235,7 +235,7 @@ We seek to use the Yoneda lemma in the functor $F':D^{op}\to Set$ induced by $F$
 
 As we have seen, the Yoneda lemma is a direct generalization of the moduli problem. In the same vein, Yoneda's lemma is the generalisation of other problems/theorems in mathematics, most notably Cayley's lemma. It states:
 \begin{proposition} \label{Cayleys}
-Any group is isomorphic to a subgroup of a symmetric group.
+  Any group is isomorphic to a subgroup of a symmetric group.
 \end{proposition}
 
 To understand this, take a groups $G$ seen as a single-object category, and name that object $e$. Then, the functor $\hom_G(e, \cdot): G \to Set$ can be seen as a group action \ref{group-action}. Then the Yoneda lemma states that:
@@ -266,50 +266,50 @@ We then can define a fully faithfuls embedding $\upsilon: C \to Set^{C^{op}}$ su
 This functor allows us to view the category $C$ as a subcategory of the category of contravariant functors from $C$ to $Set$, which will be useful for determining "heritable" properties in $C$.
 \subsection{Properties expressed in terms of universality}
 
-  After the examples given, we define a few constructions that are commonplace in Maths. We will outline the notions of limit, pullback and product, and the dual notions of colimit, pushout and coproduct.\\
+After the examples given, we define a few constructions that are commonplace in Maths. We will outline the notions of limit, pullback and product, and the dual notions of colimit, pushout and coproduct.\\
 
-  The notions of product and pullback can be seen as particular cases of the notion of limit. To define limit we will introduce the concept of co-cone and the diagonal functor. \\
+The notions of product and pullback can be seen as particular cases of the notion of limit. To define limit we will introduce the concept of co-cone and the diagonal functor. \\
 
-  \begin{definition}
-    Let $C,J$ be categories. We can define the functor $\Delta_J: C \to C^J$ that maps $c$ to the functor from $J$ to $C$ that is constantly $c$, and maps every arrow to the identity $1_c$. 
-  \end{definition}
+\begin{definition}
+  Let $C,J$ be categories. We can define the functor $\Delta_J: C \to C^J$ that maps $c$ to the functor from $J$ to $C$ that is constantly $c$, and maps every arrow to the identity $1_c$. 
+\end{definition}
 
-  Whenever possible we will write only $\Delta$, and let the information of the category be deduced from context. $J$ is usually small and often finite. We can now consider a natural transformation $\tau: F \to \Delta c$. This can be represented as in the following diagram:
-    \[
-      \begin{tikzcd}
-        Fx_j\arrow[swap]{dr}{\tau x_j}\arrow{rr}{F g} &
-        & Fx_k\arrow{dl}{\tau x_k}\\
-        & c&
-      \end{tikzcd}
-    \]
-
-    commutes for every $g:x_j\to x_k\in Ar(j)$, for that reason, such natural transformation is usually called a co-cone. The dual notion is called cone and  is represented as:
-    \[
-      \begin{tikzcd}
-        Fx_j\arrow{rr}{F g}&
-        & Fx_k\\
-        & c\arrow{ur}[swap]{\tau x_k}\arrow{ul}{\tau x_j} &
-      \end{tikzcd}
-    \]
-
-
-    We can now define the concepts of limit and colimit. We introduce first the concept of colimit. This definition is that of an universal arrow, only in a category of functors. Following this definition, we will define the limit as its dual concept.
-  \begin{definition}
- A colimit is an object $r\in Ob(C)$ together with an universal arrow $u:F\to \Delta r \in Ar(C^J)$. The colimit is denoted by $$\lim_{\leftarrow} F = r = \colim F.$$
-  \end{definition}
-
-  The notation $\lim_{\leftarrow}$ is intuitive: in the colimit we have arrows to $F$. To represent this as a diagram, we have a co-cone $u\to \colim F$ such that for every other co-cone $\tau \to s$, it exist an unique $f$ such that the following commutes for every $x_j,x_k\in Ob(C)$:
-
+Whenever possible we will write only $\Delta$, and let the information of the category be deduced from context. $J$ is usually small and often finite. We can now consider a natural transformation $\tau: F \to \Delta c$. This can be represented as in the following diagram:
 \[
-\begin{tikzcd}
-{} & l& & \\
-& \colim F   \arrow[dashed]{u}[description]{f} \\
-x_j \arrow{ur}{u x_j} \arrow[bend left]{uur}{\tau x_j}\arrow[swap]{rr}{Fg} & & 
-x_k \arrow[swap]{dr}{u x_k}\arrow[bend right,swap]{uul}{\tau x_k}\\
-\end{tikzcd}
+  \begin{tikzcd}
+    Fx_j\arrow[swap]{dr}{\tau x_j}\arrow{rr}{F g} &
+    & Fx_k\arrow{dl}{\tau x_k}\\
+    & c&
+  \end{tikzcd}
 \]
 
-  
+commutes for every $g:x_j\to x_k\in Ar(j)$, for that reason, such natural transformation is usually called a co-cone. The dual notion is called cone and  is represented as:
+\[
+  \begin{tikzcd}
+    Fx_j\arrow{rr}{F g}&
+    & Fx_k\\
+    & c\arrow{ur}[swap]{\tau x_k}\arrow{ul}{\tau x_j} &
+  \end{tikzcd}
+\]
+
+
+We can now define the concepts of limit and colimit. We introduce first the concept of colimit. This definition is that of an universal arrow, only in a category of functors. Following this definition, we will define the limit as its dual concept.
+\begin{definition}
+  A colimit is an object $r\in Ob(C)$ together with an universal arrow $u:F\to \Delta r \in Ar(C^J)$. The colimit is denoted by $$\lim_{\leftarrow} F = r = \colim F.$$
+\end{definition}
+
+The notation $\lim_{\leftarrow}$ is intuitive: in the colimit we have arrows to $F$. To represent this as a diagram, we have a co-cone $u\to \colim F$ such that for every other co-cone $\tau \to s$, it exist an unique $f$ such that the following commutes for every $x_j,x_k\in Ob(C)$:
+
+\[
+  \begin{tikzcd}
+    {} & l& & \\
+    & \colim F   \arrow[dashed]{u}[description]{f} \\
+    x_j \arrow{ur}{u x_j} \arrow[bend left]{uur}{\tau x_j}\arrow[swap]{rr}{Fg} & & 
+    x_k \arrow[swap]{dr}{u x_k}\arrow[bend right,swap]{uul}{\tau x_k}\\
+  \end{tikzcd}
+\]
+
+
 Now, thanks to the duality of categories, we can define what a limit is in a very synthetic way:
 
 \begin{definition}
@@ -319,14 +319,14 @@ Now, thanks to the duality of categories, we can define what a limit is in a ver
 
 A limit is represented by the following diagram:
 \[
-\begin{tikzcd}
-{} & l
-\arrow[bend right,swap]{ddl}{\tau x_j}
-\arrow[bend left]{ddr}{\tau x_j} \arrow[dashed]{d}[description]{f}& & \\
-& \lim F \arrow{dr}{u x_k} \arrow{dl}[swap]{u x_j} \\
-x_j \arrow[swap]{rr}{Fg} & & 
-x_k \\
-\end{tikzcd}
+  \begin{tikzcd}
+    {} & l
+    \arrow[bend right,swap]{ddl}{\tau x_j}
+    \arrow[bend left]{ddr}{\tau x_j} \arrow[dashed]{d}[description]{f}& & \\
+    & \lim F \arrow{dr}{u x_k} \arrow{dl}[swap]{u x_j} \\
+    x_j \arrow[swap]{rr}{Fg} & & 
+    x_k \\
+  \end{tikzcd}
 \]
 
 Analogously as in the colimit notation, in the limit we have arrows from $F$, and thus the notation $\lim_{\rightarrow}$. Let focus for a while now in the notion of limit, in particular of two of its specials cases: the product and the pullback. From these cases we are going to provide most examples. \\
@@ -339,28 +339,28 @@ We have already talked about the product of categories. The product is a limit w
 
 This construction means that providing an arrow to $c_0,c_1$ determines an unique arrow to $c_0\times c_1$ and vice versa by composition with $\pi_i$. In this case, the arrows $u0, u1$ are usually called \emph{projections} and denoted by $\pi_0, \pi_1$. The notation is due to the product being a generalization of the Cartesian product in the category $Set$. It is also sometimes note with $c_0 \Pi c_1$ with $\Pi$ being standard for the sequence product. Some examples of product object in categories are:
 \begin{example}\ 
-\begin{itemize}
-\item Products from Example \ref{example:prod}.
-\item In Haskell, considering two integer types \texttt{A} and \texttt{B}, we can consider the duple type \texttt{(A,B)} that is the product, along with projections \texttt{fst} and \texttt{snd} to be a product. We can fairly easily check that, for any other integer type \texttt{C} and any morphism \texttt{f: C$\to$ (A,B)} it exist a unique \texttt{g} and \texttt{h} such that:
-\[
-\begin{tikzcd}
-{} & C \arrow[bend right,swap,dashed]{dl}{g}
-\arrow[bend left,dashed]{dr}{h} \arrow{d}[description]{f}& & \\
-A  &(A,B) \arrow{l}[swap]{fst} \arrow{r}{snd} & 
-B \\
-\end{tikzcd}
-\]
-Note that we have requested \texttt{A} and \texttt{B} to be integer types. Quite surprisingly, this construction can not be generalized in Haskell to provide a product type for every object\cite{wiki:hask}. This will provide in the future a palpable difference between our theoretical $\lambda$-calculus, and its applicable version,  Haskell.\\
+  \begin{itemize}
+  \item Products from Example \ref{example:prod}.
+  \item In Haskell, considering two integer types \texttt{A} and \texttt{B}, we can consider the duple type \texttt{(A,B)} that is the product, along with projections \texttt{fst} and \texttt{snd} to be a product. We can fairly easily check that, for any other integer type \texttt{C} and any morphism \texttt{f: C$\to$ (A,B)} it exist a unique \texttt{g} and \texttt{h} such that:
+    \[
+      \begin{tikzcd}
+        {} & C \arrow[bend right,swap,dashed]{dl}{g}
+        \arrow[bend left,dashed]{dr}{h} \arrow{d}[description]{f}& & \\
+        A  &(A,B) \arrow{l}[swap]{fst} \arrow{r}{snd} & 
+        B \\
+      \end{tikzcd}
+    \]
+    Note that we have requested \texttt{A} and \texttt{B} to be integer types. Quite surprisingly, this construction can not be generalized in Haskell to provide a product type for every object\cite{wiki:hask}. This will provide in the future a palpable difference between our theoretical $\lambda$-calculus, and its applicable version,  Haskell.\\
 
-This troubles arise from of implementation details of bottom values. Why have not anyone fix this? Well, when functions have to terminate and only finite values are considered this problems does not Arise. This condition is fairly acceptable in any engineering scenario. 
-\end{itemize}
+    This troubles arise from of implementation details of bottom values. Why have not anyone fix this? Well, when functions have to terminate and only finite values are considered this problems does not Arise. This condition is fairly acceptable in any engineering scenario. 
+  \end{itemize}
 \end{example}
 
 Analogously, we can define the coproduct, on which instead of defining an arrow to $c_0, c_1$, we define an object \emph{from} $c_0,c_1$. 
 \begin{definition}
   The coproduct is the dual definition of the product. It is denoted by $c_0 \sqcup c_1$.
 \end{definition}
- In this notation $\sqcup$ denotes an inverted $\Pi$, with the meaning of being the dual notion of the product.
+In this notation $\sqcup$ denotes an inverted $\Pi$, with the meaning of being the dual notion of the product.
 \begin{example}\ \label{example:mitchell}
   \begin{itemize}
   \item In the category $Ab$ of Abelian Group and morphism, finite products and coproducts are equivalent. This equivalence also happens in others categories, such as $R$-Modules for a ring $R$ or vector spaces. This has a underlying idea of a type of category that relates this constructions: This are all \emph{Abelian Categories}, as in \cite[Section 5.5]{rotman2008introduction}.\\
@@ -384,7 +384,7 @@ After learning about the product and the coproduct, we will focus now in the not
 \[
   P = \begin{tikzcd}
     x\arrow{r}{f} & z & y\arrow[swap]{l}{g}
-\end{tikzcd}
+  \end{tikzcd}
 \]
 
 Then we can define the pullback:
@@ -396,16 +396,16 @@ Then we can define the pullback:
 We can represent this structure in the following diagram. For any object $q$ and arrows $f':q\to Fx,g':q\to Fy$ we have:
 
 \[
-\begin{tikzcd}
-q
-\arrow[bend left]{drr}{g'}
-\arrow[bend right,swap]{ddr}{f'}
-\arrow[dashed]{dr}[description]{u} & & \\
-& Fx\times_{Fz}Fy \arrow{r}{p_2} \arrow{d}[swap]{p_1}
-& Fy \arrow{d}{Fg} \\
-& Fx \arrow[swap]{r}{Ff}
-& Fz
-\end{tikzcd}
+  \begin{tikzcd}
+    q
+    \arrow[bend left]{drr}{g'}
+    \arrow[bend right,swap]{ddr}{f'}
+    \arrow[dashed]{dr}[description]{u} & & \\
+    & Fx\times_{Fz}Fy \arrow{r}{p_2} \arrow{d}[swap]{p_1}
+    & Fy \arrow{d}{Fg} \\
+    & Fx \arrow[swap]{r}{Ff}
+    & Fz
+  \end{tikzcd}
 \]
 
 Analogously, we can define:
@@ -413,7 +413,7 @@ Analogously, we can define:
 \[
   CoP = \begin{tikzcd}
     x & z\arrow{l}{f}\arrow[swap]{r}{g} & y
-\end{tikzcd}
+  \end{tikzcd}
 \]
 
 and define:
@@ -425,37 +425,37 @@ and define:
   \begin{itemize}
   \item Fiber Product: The fiber product is the canonical pullback of the $Top$ category. Let $X,Y,Z$ be topological spaces and let $f:X\to Z$ and $g: Y\to Z$ be continous function. Then we define the fiber product as:
     $$X\times_ZY = \{(x,y) \in X\times Y: fx=gy\}.$$ Note that, although it not usually noted, $X\times_Z Y$ depend on both $f$ and $g$. In a diagram:
-\[
-  \begin{tikzcd}
-    X\times_Z Y\arrow{r}{\pi_2}\arrow[swap]{d}{\pi_1} & Y\arrow{d}{g}\\
-    X\arrow{r}{f} & Z
-\end{tikzcd}
-\]
-where $\pi_i$ are the projection inherited from $X\times Y$. It is easy to check that, for any topological space $Q$ and any $f':Q\to X, g': Q \to Y$ such that
-\[
-  \begin{tikzcd}
-    Q\arrow{r}{f'}\arrow[swap]{d}{g'} & Y\arrow{d}{g}\\
-    X\arrow{r}{f} & Z
-\end{tikzcd}
-\]
-there is an unique $u:Q\to X\times_Z Y$ that maps $q\mapsto (f'q,g'q)$ for every $q\in Q$.\\
-\item Seifert-Van-Kampen: This theorem is a classic result in Algebraic topology, that can be found in any classical source, such as \cite{munkres2000topology}. It was independently discovered by Seifert \cite{seifert1931konstruktion} and Van-Kampen \cite{van1933connection}.  We present the result as in  Brown's paper\cite{brown1967groupoids}.\\
+    \[
+      \begin{tikzcd}
+        X\times_Z Y\arrow{r}{\pi_2}\arrow[swap]{d}{\pi_1} & Y\arrow{d}{g}\\
+        X\arrow{r}{f} & Z
+      \end{tikzcd}
+    \]
+    where $\pi_i$ are the projection inherited from $X\times Y$. It is easy to check that, for any topological space $Q$ and any $f':Q\to X, g': Q \to Y$ such that
+    \[
+      \begin{tikzcd}
+        Q\arrow{r}{f'}\arrow[swap]{d}{g'} & Y\arrow{d}{g}\\
+        X\arrow{r}{f} & Z
+      \end{tikzcd}
+    \]
+    there is an unique $u:Q\to X\times_Z Y$ that maps $q\mapsto (f'q,g'q)$ for every $q\in Q$.\\
+  \item Seifert-Van-Kampen: This theorem is a classic result in Algebraic topology, that can be found in any classical source, such as \cite{munkres2000topology}. It was independently discovered by Seifert \cite{seifert1931konstruktion} and Van-Kampen \cite{van1933connection}.  We present the result as in  Brown's paper\cite{brown1967groupoids}.\\
 
-  We denote by $\pi_1(X,A)$ the fundamental groupoid of the topological space $X$ over the set $A\subset X$. This notion was first showed by Brown. $\pi_1(X,X)$ would be the classical full fundamental groupoid, and $\pi_1(X,x_0)$ for some $x_0\in X$ would be the fundamental group of $X$ over $x_0$. Let us present the result.
-  \begin{theorem}[Seifert-Van-Kampen]
-Let the topological space $X$  be covered by the interiors of two subspaces $X_1,X_2$ and let $A$
- be a set which meets each path component of $X_1, X_2$ and $X_0=X_1\cap X_2$, and $i_1: X_0 \to X_i,j_i: X_i \to X $ be the canonical inclusions. Then $A$  meets each path component of $X$  and the following diagram is a pushout in the category of groupoids:
-\[
-  \begin{tikzcd}
-    \pi_1(X_0,A)\arrow{r}{\pi_1(i_1)}\arrow[swap]{d}{\pi_1(i_2)} & \pi_1(X_1,A)\arrow{d}{\pi_1(j_1)}\\
-    \pi_1(X_2,A)\arrow{r}{\pi_1(j_2)} & \pi_1(X,A).\\
-\end{tikzcd}
-\]
+    We denote by $\pi_1(X,A)$ the fundamental groupoid of the topological space $X$ over the set $A\subset X$. This notion was first showed by Brown. $\pi_1(X,X)$ would be the classical full fundamental groupoid, and $\pi_1(X,x_0)$ for some $x_0\in X$ would be the fundamental group of $X$ over $x_0$. Let us present the result.
+    \begin{theorem}[Seifert-Van-Kampen]
+      Let the topological space $X$  be covered by the interiors of two subspaces $X_1,X_2$ and let $A$
+      be a set which meets each path component of $X_1, X_2$ and $X_0=X_1\cap X_2$, and $i_1: X_0 \to X_i,j_i: X_i \to X $ be the canonical inclusions. Then $A$  meets each path component of $X$  and the following diagram is a pushout in the category of groupoids:
+      \[
+        \begin{tikzcd}
+          \pi_1(X_0,A)\arrow{r}{\pi_1(i_1)}\arrow[swap]{d}{\pi_1(i_2)} & \pi_1(X_1,A)\arrow{d}{\pi_1(j_1)}\\
+          \pi_1(X_2,A)\arrow{r}{\pi_1(j_2)} & \pi_1(X,A).\\
+        \end{tikzcd}
+      \]
 
-\end{theorem}
+    \end{theorem}
 
 
-\end{itemize}
+  \end{itemize}
 \end{example}
 
 Note the  similarity of the pullback/pushout and the one of product/coproduct notation-wise. To understand these we have to consider the similarities of both construction. We are going to focus on the similarities of product and pullback, letting the coproduct/pushouts as duals.\\
@@ -463,13 +463,13 @@ Note the  similarity of the pullback/pushout and the one of product/coproduct no
 In both case, the universal property consists of having an arrow to a generated object only if we have an arrow to each of its generators. In this line of reasoning, we can consider that the product is a pullback where we forget about the object $z$ and its arrows. One easy way to generate that case is to consider the construction when $Fz$ is a terminal object. In that case we have that the existence of $Ff$ and $Fg$ is a tautology, and we can consider 
 
 \[
-\begin{tikzcd}
-& q
-\arrow[bend left]{dr}{q_2}
-\arrow[bend right,swap]{dl}{q_1}
-\arrow[dashed]{d}[description]{u} & & \\
- Fx  & Fx\times_{Fz}Fy \arrow{r}{\pi_1} \arrow{l}[swap]{\pi_0}& Fy \\
-\end{tikzcd}
+  \begin{tikzcd}
+    & q
+    \arrow[bend left]{dr}{q_2}
+    \arrow[bend right,swap]{dl}{q_1}
+    \arrow[dashed]{d}[description]{u} & & \\
+    Fx  & Fx\times_{Fz}Fy \arrow{r}{\pi_1} \arrow{l}[swap]{\pi_0}& Fy \\
+  \end{tikzcd}
 \]
 
 % having a product structure.  One can proceed to consider an analogous consideration with pushout and coproduct.\\
@@ -513,12 +513,12 @@ Any avid reader will detect by this point the taste of universality. But there i
 \end{remark}
 We have a bit to unpack in this definition. We will start to understand that $\varphi:Hom_C(F\cdot, \cdot)\to \hom_D(\cdot, G\cdot)$ is a natural bijection in each variable. That is, for every $f:d\to d'\in C,k:c\to c' \in D$ the following diagrams commutes.
 \[
-\begin{tikzcd}
- \hom_C(Fd,c) \arrow{d}{\hom_C(Fd,\cdot)(g)}\arrow{r}{\varphi_{c,d}}
- &\hom_D(d,Gc)\arrow{d}{\hom_D(d,G\cdot)(g)}&
-   \hom_C(Fd,c) \arrow{d}{\hom_C(F\cdot,c)(f)}\arrow{r}{\varphi_{c,d}}
+  \begin{tikzcd}
+    \hom_C(Fd,c) \arrow{d}{\hom_C(Fd,\cdot)(g)}\arrow{r}{\varphi_{c,d}}
+    &\hom_D(d,Gc)\arrow{d}{\hom_D(d,G\cdot)(g)}&
+    \hom_C(Fd,c) \arrow{d}{\hom_C(F\cdot,c)(f)}\arrow{r}{\varphi_{c,d}}
     &\hom_D(d,Gc)\arrow{d}{\hom_D(\cdot,Gc)(f)}\\
- \hom_C(Fd,c') \arrow{r}{\varphi_{c',d}}  &\hom_D(d,Gc')&
+    \hom_C(Fd,c') \arrow{r}{\varphi_{c',d}}  &\hom_D(d,Gc')&
     \hom_C(Fd,c') \arrow{r}{\varphi_{c,d'}}  &\hom_D(d,Gc')
   \end{tikzcd}
 \]
@@ -529,7 +529,7 @@ The definition of adjoint can be reworked as:
   $$\varphi(k\circ f) = Gk \circ \varphi(f), \qquad \varphi(f\circ Fh) = \varphi(f)\circ h.$$
 \end{proposition}
 \begin{proof}
-These conditions ensures the naturality of the bijection.
+  These conditions ensures the naturality of the bijection.
 \end{proof}
 \begin{remark}
   It is equivalent to require $\varphi^{-1}$ to be natural.
@@ -545,7 +545,7 @@ We have already suggested the relationship between universality and adjointness.
     $$\varphi(f:Fd\to c) = Gf\circ \eta(d): d\to G c.$$
   \item a natural transformation $\epsilon: FG\to I_C$ such that $\varepsilon(c):FGc\to c$ is universal from $c$ to $F$ and we can define:
     $$\varphi(g:d\to Gc) = \varepsilon(c)\circ Fg: Fd\to c.$$
-\item We have that the natural transformation $\eta_{G\cdot} \circ G(\varepsilon_\cdot)$ is the identity natural transformation.
+  \item We have that the natural transformation $\eta_{G\cdot} \circ G(\varepsilon_\cdot)$ is the identity natural transformation.
   \end{itemize}
 \end{proposition}
 \begin{remark}
@@ -556,18 +556,18 @@ We have already suggested the relationship between universality and adjointness.
   \begin{itemize}
   \item Let $a=Fd$, then we have a natural bijection $\varphi$:
     $$\hom_C(a, c)\equiv\hom_D(d, Gc).$$
-By proposition \ref{Yoneda-proposition} we have an universal arrow $\eta_d:d\to Ga=GFd$ is provided, where $\eta_d = \varphi(1_a)$. The function $d\to \eta(d)$ is natural $I_D\to GF$ as the following diagram commutes due to the naturality of $\varphi$:
+    By proposition \ref{Yoneda-proposition} we have an universal arrow $\eta_d:d\to Ga=GFd$ is provided, where $\eta_d = \varphi(1_a)$. The function $d\to \eta(d)$ is natural $I_D\to GF$ as the following diagram commutes due to the naturality of $\varphi$:
     \[
-  \begin{tikzpicture}
-  \node {\begin{tikzcd}[column sep=20mm]
-      d\ar[r,"\eta c"]\ar[d,"h"] & GFd\ar[d,"GFh"]\\
-      d'\ar[r,"\eta c'"] & GFd''.
-  \end{tikzcd}};
-\end{tikzpicture}
-\]
+      \begin{tikzpicture}
+        \node {\begin{tikzcd}[column sep=20mm]
+            d\ar[r,"\eta c"]\ar[d,"h"] & GFd\ar[d,"GFh"]\\
+            d'\ar[r,"\eta c'"] & GFd''.
+          \end{tikzcd}};
+      \end{tikzpicture}
+    \]
 
-\item Analogous.
-\item $1_Ga = G(\varepsilon_a)\circ \eta_{Ga}$.
+  \item Analogous.
+  \item $1_Ga = G(\varepsilon_a)\circ \eta_{Ga}$.
   \end{itemize} 
 \end{proof}
 
@@ -592,24 +592,24 @@ From this proposition we can see that we may be able to define an adjoint based 
     It is natural in $d$ because $\eta$ is natural and is natural in $c$ because $G$ s a functor.
   \item Dual of the previous.
   \item We will proof that there is only one functor with $F_0$ as object function such that $\eta (d): I_D\to GF$ is natural. The naturality and universality told us that each $h:d\to d'\in Ob(D)$ induces two arrows:
-\[
-\begin{tikzcd}
-  F_0 d\arrow[dashed]{d} & d\arrow{d}{h}\arrow{r}{\eta (d)}&GF_0d\arrow[dashed]{d}\\
-  F_0 d'& d'\arrow{r}{\eta (d')} & GF_0d'
-\end{tikzcd}
-\]
+    \[
+      \begin{tikzcd}
+        F_0 d\arrow[dashed]{d} & d\arrow{d}{h}\arrow{r}{\eta (d)}&GF_0d\arrow[dashed]{d}\\
+        F_0 d'& d'\arrow{r}{\eta (d')} & GF_0d'
+      \end{tikzcd}
+    \]
     So the only way to define $Fh= \eta (d) \circ h$. We conclude applying 1.
   \item Dual of the previous.
   \item We use $\eta$ and $\varsepsilon$ to define two functions:
     \[
-    \begin{tikzcd}
-      \hom_C(Fd,c) \arrow[r, shift left=.5ex, "\tau"{name=F}] &
-      \hom_D(d,Gc)\arrow[l, shift left=1ex, "\sigma"{name=G}] \\
-    \end{tikzcd}
-  \]
+      \begin{tikzcd}
+        \hom_C(Fd,c) \arrow[r, shift left=.5ex, "\tau"{name=F}] &
+        \hom_D(d,Gc)\arrow[l, shift left=1ex, "\sigma"{name=G}] \\
+      \end{tikzcd}
+    \]
 
-  such that $\tau(f) = Gf\circ \eta_d$ and $\sigma(g)=\varpesilon_d \circ Fg$. as both composites are the identity, $\tau \circ \sigma$ and $\sigma \circ \tau$ are the identities. It is clearly natural due to proposition \ref{description:adjoint}.
-\end{enumerate}
+    such that $\tau(f) = Gf\circ \eta_d$ and $\sigma(g)=\varpesilon_d \circ Fg$. as both composites are the identity, $\tau \circ \sigma$ and $\sigma \circ \tau$ are the identities. It is clearly natural due to proposition \ref{description:adjoint}.
+  \end{enumerate}
 \end{proof}
 To further illustrate this concept we present some examples:
 \begin{example}
@@ -628,7 +628,7 @@ To further illustrate this concept we present some examples:
   \end{itemize}
 \end{example}
 
-%TODO: Lastly, we are going to study the  and prove a theorem that allow us to include parameters in adjoints.
+% TODO: Lastly, we are going to study the  and prove a theorem that allow us to include parameters in adjoints.
 
 
 
@@ -636,161 +636,159 @@ To further illustrate this concept we present some examples:
 We can define an isomorphism of categories the same way that we define isomorphisms in any other category: an isomorphism is an arrow (Functor) with a two sided inverse. This definition, while standard, is quite restrictive. We are going to need some more lax concept of equivalence of categories, in the sense that while not being exactly the same, they are mostly the same. Formally:
 
 \begin{definition}
-A functor $F:C\to D$ is an equivalence of categories if there exists a functor $G:D\to C$  and two natural isomorphisms $\varphi: I_C \to GF$ and $\zeta: I_D\to FG$
+  A functor $F:C\to D$ is an equivalence of categories if there exists a functor $G:D\to C$  and two natural isomorphisms $\varphi: I_C \to GF$ and $\zeta: I_D\to FG$
 \end{definition}
 
 
 For the canonical example we may introduce a really organic concept: the \emph{skeleton} of a category. Quite often in mathematics we do not consider all objects of certain type, but rather objects up to isomorphism. The skeleton category of a category $C$ is another category where we consider the objects up to isomorphism. Formally:
-  \begin{definition}
-    Let $C$ be a category. The skeleton of $C$, namely $ske(C)$, is a subcategory  such that every object in $C$ is isomorphic to an object in $ske(C)$.
-  \end{definition}
+\begin{definition}
+  Let $C$ be a category. The skeleton of $C$, namely $ske(C)$, is a subcategory  such that every object in $C$ is isomorphic to an object in $ske(C)$.
+\end{definition}
 
-  The definition of equivalence of categories previously outline will allow us, for example, to consider $C\sim ske(C)$, while not being isomorphic. Continuing our discussion, it is not difficult to draw similarities between equivalences and adjoints. That motivates the further definition:
-  \begin{definition}
-    Let $(F,G,\varphi,\eta,\varepsilon)$ be an adjoint. It is called an \emph{adjoint equivalence} whenever $\eta$ and $\varepsilon$ are natural equivalences.
-  \end{definition}
-  It is clear that every adjoint equivalence induces two equivalences in $F$ and $G$. We state this idea in the following proposition:
-  \begin{proposition}\cite[Theorem 1, 4.4]{mac2013categories}
-    Let $F:C\to D$ be a functor. Then the following properties are equivalent:
-    \begin{itemize}
-    \item[i)] $F$ is an equivalence of categories.
-    \item[ii)] $F$ is part of an adjoint equivalence. 
-    \item[iii)] $F$ is full and faithfull, and each object $d\in D$ is isomorphic to $Fc$ for some object $c\in C$.  
-    \end{itemize}  
-  \end{proposition}
-  \begin{proof}\
-    \
+The definition of equivalence of categories previously outline will allow us, for example, to consider $C\sim ske(C)$, while not being isomorphic. Continuing our discussion, it is not difficult to draw similarities between equivalences and adjoints. That motivates the further definition:
+\begin{definition}
+  Let $(F,G,\varphi,\eta,\varepsilon)$ be an adjoint. It is called an \emph{adjoint equivalence} whenever $\eta$ and $\varepsilon$ are natural equivalences.
+\end{definition}
+It is clear that every adjoint equivalence induces two equivalences in $F$ and $G$. We state this idea in the following proposition:
+\begin{proposition}\cite[Theorem 1, 4.4]{mac2013categories}
+  Let $F:C\to D$ be a functor. Then the following properties are equivalent:
+  \begin{itemize}
+  \item[i)] $F$ is an equivalence of categories.
+  \item[ii)] $F$ is part of an adjoint equivalence. 
+  \item[iii)] $F$ is full and faithfull, and each object $d\in D$ is isomorphic to $Fc$ for some object $c\in C$.  
+  \end{itemize}  
+\end{proposition}
+\begin{proof}\
+  \  
+  \begin{itemize}
+  \item[$ii)\implies i)$] Given an equivalent adjoint $(F,G,\varphi,\eta,\varepsilon)$, then $F$ is an equivalence with $G,\eta,\varepsilon$. 
+  \item[$i)\implies iii)$] $\varphi: GF\equiv I_C$ implies that for every $c\in Ob(C)$ we can consider $c\equiv GFc$. Then considering the natural isomorphism $\zeta: FG\equiv I_D$ states for every $f:a\to a'\in D$
+    \[
+      \begin{tikzcd}
+        FGa \arrow{d}{FG f}& a\arrow{d}{f}\arrow{l}{\zeta^{-1} a}\\
+        FGa' \arrow{r}{\zeta a'}& a'
+      \end{tikzcd}
+    \]
 
-    
-    \begin{itemize}
-    \item[$ii)\implies i)$] Given an equivalent adjoint $(F,G,\varphi,\eta,\varepsilon)$, then $F$ is an equivalence with $G,\eta,\varepsilon$. 
-    \item[$i)\implies iii)$] $\varphi: GF\equiv I_C$ implies that for every $c\in Ob(C)$ we can consider $c\equiv GFc$. Then considering the natural isomorphism $\zeta: FG\equiv I_D$ states for every $f:a\to a'\in D$
-\[
-\begin{tikzcd}
-  FGa \arrow{d}{FG f}& a\arrow{d}{f}\arrow{l}{\zeta^{-1} a}\\
-  FGa' \arrow{r}{\zeta a'}& a'
-\end{tikzcd}
-\]
-
- there is one $FG f$ for each $f$ and we get that $G$ is faithful. Faithfullnes of $F$ can be prove simetrically. To see that $G$ is full we can consider any $h:Ga\to Ga'$ and defining $f=\zeta a\circ h \circ \zeta a'$ we follow hat $FG f = Gh$. As $T$ is faithfull, $Gf=h$ so that $G$ is full. Procees simetrically with $F$.  
-\item[$iii)\implies ii)$]
+    there is one $FG f$ for each $f$ and we get that $G$ is faithful. Faithfullnes of $F$ can be prove simetrically. To see that $G$ is full we can consider any $h:Ga\to Ga'$ and defining $f=\zeta a\circ h \circ \zeta a'$ we follow hat $FG f = Gh$. As $T$ is faithfull, $Gf=h$ so that $G$ is full. Procees simetrically with $F$.  
+  \item[$iii)\implies ii)$]
 
 
-  We need to construct $G$ so that $F$ is a left adjoint. The idea is to define $\eta$ and apply the previously developed characterizations.\\
+    We need to construct $G$ so that $F$ is a left adjoint. The idea is to define $\eta$ and apply the previously developed characterizations.\\
 
 
-  Due to the fully faithfulness of $F$ we can choose for every $d\in D$ an object $c\in C$ such that there is an isomorphism $\eta d: d \to Fc$ and for each $c'\in C, f:d\to Fc'\in D$ there is some $g\in Ar(C)$ (that exists because $F$ is full and is unique because of faithful) such that:
-\[
-\begin{tikzcd}
-  d\arrow[leftrightarrow]{r}{\eta d}\arrow[swap]{dr}{f}& Fc\arrow{d}{Fg}\\
-  & Fc'.
-\end{tikzcd} 
-\]  
+    Due to the fully faithfulness of $F$ we can choose for every $d\in D$ an object $c\in C$ such that there is an isomorphism $\eta d: d \to Fc$ and for each $c'\in C, f:d\to Fc'\in D$ there is some $g\in Ar(C)$ (that exists because $F$ is full and is unique because of faithful) such that:
+    \[
+      \begin{tikzcd}
+        d\arrow[leftrightarrow]{r}{\eta d}\arrow[swap]{dr}{f}& Fc\arrow{d}{Fg}\\
+        & Fc'.
+      \end{tikzcd} 
+    \]  
 
-We define $G_0d = c$. Also note  that $\eta d$ is universal from $d$ to $F$. Therefore, $F$ is part of an adjoint by proposition \ref{prop:equivdefinition} $F$ is part of an adjoint $(F,G,\eta, \varepsilon)$. As with every adjoint, $F (\varepsilon c)\circ \eta (Fc) =1_{Gc}$. Thus $F(\varepsilon c)$ is invertible and by  fully faithfulness of $F$ so is $\epsilon c$, thus having an adjoint equivalence.
-
-
-  %We name $\zeta: Ob(D)  \to Ob(C)$ to the mapping  such that $d\equiv F(\zeta d = c)$. Naming $\eta d: d \to c$ to the denoted isomorphism, we can see that
-% \[
-% \begin{tikzcd}
-%   c=Fd& d\arrow[swap]{l}{\eta d}\arrow{d}{f}\\
-%   & d'
-% \end{tikzcd}
-% \]
-% Now, we can apply $G$ to the diagram, and as it is faithfull, the isomorphism will be maitained it will be maintained (see example \ref{example:mitchell} for more on this idea): 
+    We define $G_0d = c$. Also note  that $\eta d$ is universal from $d$ to $F$. Therefore, $F$ is part of an adjoint by proposition \ref{prop:equivdefinition} $F$ is part of an adjoint $(F,G,\eta, \varepsilon)$. As with every adjoint, $F (\varepsilon c)\circ \eta (Fc) =1_{Gc}$. Thus $F(\varepsilon c)$ is invertible and by  fully faithfulness of $F$ so is $\epsilon c$, thus having an adjoint equivalence.
 
 
-\end{itemize}
+    % We name $\zeta: Ob(D)  \to Ob(C)$ to the mapping  such that $d\equiv F(\zeta d = c)$. Naming $\eta d: d \to c$ to the denoted isomorphism, we can see that
+    % \[
+    %   \begin{tikzcd}
+    %     c=Fd& d\arrow[swap]{l}{\eta d}\arrow{d}{f}\\
+    %     & d'
+    %   \end{tikzcd}
+    % \]
+    % Now, we can apply $G$ to the diagram, and as it is faithfull, the isomorphism will be maitained it will be maintained (see example \ref{example:mitchell} for more on this idea): 
+
+
+  \end{itemize}
 \end{proof}
 
 
-  In the next few subsection, we are going to introduce categories, with some additional structures onto them. This type of considerations, are commonplace in category theory, and will provide useful considerations.
+In the next few subsection, we are going to introduce categories, with some additional structures onto them. This type of considerations, are commonplace in category theory, and will provide useful considerations.
 
-  % \subsection{Monad}
-  
-
-
-  \subsection{Closed Cartesian Categories}\label{subsect:CCC}
-
-  The notion of product seen in \ref{prod-univ} is a notion that seek to catch the essence of what the Cartesian product is in the category of Set. In this category it happens that for any two objects, one can consider the product without any hesitance about it existence. A \emph{Cartesian category} will be a category that, in some sense, maintain this property (of being closed under Cartesian product). Formally: 
-  \begin{definition}
-    A Cartesian category is a category with a specified terminal object $T$ and for which every finite product exists.
-  \end{definition}
-  \begin{remark}
-    Finite product are equivalent to binary product.
-  \end{remark}
-
-Nonetheless, further on the text we will need categories with some even nicer properties. These categories are called \emph{closed catersian categories}. We will define them formally first, and after unpack the information that the definition contains:
-  
-  \begin{definition}\label{def:CCC}
-    A $C$ is closed cartesian category, ccc for short, if each of the following functors:
-\begin{center}
-  \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
-    $\qquad F_1:C\to 1$&$ F_2=\Delta: C \to C\times C $&$ F_{3}^b:C \to C$\\
-    $\qquad \qquad c\to e$&$ \qquad \qquad c \to  (c,c)$&$ \qquad c \to c\times b$\\
-  \end{tabular}
-\end{center}
-has a \emph{specified} right adjoint, denoted by:
-\begin{center}
-  \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
-    $\qquad G_1:1\to C$&$ G_2:  C\times C\to C $&$ G_{3}^b:C \to C$\\
-    $\qquad \qquad e\to t$&$ \  \qquad (c,b)\to c \times b$&$ \qquad c \to c^b$\\
-  \end{tabular}
-  where there is one $F_3^b\dashv G_3^b$ for every $b\in \Ob(C)$.
-\end{center}
-
-These adjoints provide us with a lot of information:
-\begin{itemize}
-\item From $F_1$ being an adjoint we get that $t$ is terminal as for every $c\in Ob(C)$:
-  $$\{id_e\} \equiv \hom_1(F_1(c), e) \equiv \hom_C(c,Ge=t)   $$
-\item From $F_2$ we get that every pair $c,b$ has a product at is states the universal property of product:
-  $$\hom_{C\times C}(F_2(c), (c',b'))\equiv \hom_{C\times C}((c,c), (c',b')) \equiv \hom_C(c,c'\times b')$$
-  that is, for every object in $c\in C$, to provide a morphism to $c\to c'\times b'$ is the same that providing to morphisms $c\to c',c\to b'$.
-\item First of all, as every product exists, and it specified by $F_2$, we can define $F_3^b$ for every $b$. Then, it adjointness states that:
-  $$\hom_C(c\times b, d) \equiv \hom_C(c,d^b)   $$
-
-  This object $d^b$ is called the exponential object or map object. Note that to fully define the adjoint we can take one of two steps,  the functor $G_3^b$ is defined only on the objects:
-  \begin{itemize}
-  \item We can define how $G_3^b$ acts on arrows.
-  \item We can  provide an arrow $\varepsilon$:
-  $$\varepsilon: F_3^bG_3^b(c) = c^b\times b \to c = I(c)$$
-  that is natural in $c$ and universal from $F_3^b$ to $c$.
-  \end{itemize}
-
-\
+% \subsection{Monad}
 
 
 
-  The intuitive notion is that this object represent in some way the arrows from $b$ to $c$, being a generalization of the function set of two small sets. The best way to understand this adjoint is by the natural transformation $\varepsilon^b(c^b\times b) = c$. In this context, this is called \emph{evaluation arrow}. In the context of $Set$ this amount to the classic evaluation of a function.\\
+\subsection{Closed Cartesian Categories}\label{subsect:CCC}
 
-\end{itemize}
+The notion of product seen in \ref{prod-univ} is a notion that seek to catch the essence of what the Cartesian product is in the category of Set. In this category it happens that for any two objects, one can consider the product without any hesitance about it existence. A \emph{Cartesian category} will be a category that, in some sense, maintain this property (of being closed under Cartesian product). Formally: 
+\begin{definition}
+  A Cartesian category is a category with a specified terminal object $T$ and for which every finite product exists.
+\end{definition}
 \begin{remark}
-Note that a Closed Cartesian category grow in the notion of a cartesian category. It is in fact a Cartesian category on which we have a function object, with an evaluation arrow that is universal.
+  Finite product are equivalent to binary product.
 \end{remark}
 
-Cartesian Closed Categories will be reformulated in Chapter 4, proposition \ref{def2:CCC}. We will use this last ideas in other to equationally present the concept. For now on, lets provide some examples of Cartesian Closed Categories:
+Nonetheless, further on the text we will need categories with some even nicer properties. These categories are called \emph{closed catersian categories}. We will define them formally first, and after unpack the information that the definition contains:
 
+\begin{definition}\label{def:CCC}
+  A $C$ is closed cartesian category, ccc for short, if each of the following functors:
+  \begin{center}
+    \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
+      $\qquad F_1:C\to 1$&$ F_2=\Delta: C \to C\times C $&$ F_{3}^b:C \to C$\\
+      $\qquad \qquad c\to e$&$ \qquad \qquad c \to  (c,c)$&$ \qquad c \to c\times b$\\
+    \end{tabular}
+  \end{center}
+  has a \emph{specified} right adjoint, denoted by:
+  \begin{center}
+    \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
+      $\qquad G_1:1\to C$&$ G_2:  C\times C\to C $&$ G_{3}^b:C \to C$\\
+      $\qquad \qquad e\to t$&$ \  \qquad (c,b)\to c \times b$&$ \qquad c \to c^b$\\
+    \end{tabular}
+    where there is one $F_3^b\dashv G_3^b$ for every $b\in \Ob(C)$.
+  \end{center}
 
- 
-
-\begin{example}
+  These adjoints provide us with a lot of information:
   \begin{itemize}
-  \item $Set$. We have the set $\{*\}$ as a terminal object, products as in example \ref{example:prod}. Given two sets $C, B$ we can define the exponential object $C^B= \hhom (B,C)$. The adjointness is then implied by the currification process:
-    $$g: A\times B \to C \mapsto f: A \to B^C,$$
-    where $f(a)(\cdot) = g(a,\cdot)$.
-  \item We will prove in chapter \ref{chap:4} that $\lambda$-calculus is, in some sense, a closed cartesian category.
+  \item From $F_1$ being an adjoint we get that $t$ is terminal as for every $c\in Ob(C)$:
+    $$\{id_e\} \equiv \hom_1(F_1(c), e) \equiv \hom_C(c,Ge=t)   $$
+  \item From $F_2$ we get that every pair $c,b$ has a product at is states the universal property of product:
+    $$\hom_{C\times C}(F_2(c), (c',b'))\equiv \hom_{C\times C}((c,c), (c',b')) \equiv \hom_C(c,c'\times b')$$
+    that is, for every object in $c\in C$, to provide a morphism to $c\to c'\times b'$ is the same that providing to morphisms $c\to c',c\to b'$.
+  \item First of all, as every product exists, and it specified by $F_2$, we can define $F_3^b$ for every $b$. Then, it adjointness states that:
+    $$\hom_C(c\times b, d) \equiv \hom_C(c,d^b)   $$
+
+    This object $d^b$ is called the exponential object or map object. Note that to fully define the adjoint we can take one of two steps,  the functor $G_3^b$ is defined only on the objects:
+    \begin{itemize}
+    \item We can define how $G_3^b$ acts on arrows.
+    \item We can  provide an arrow $\varepsilon$:
+      $$\varepsilon: F_3^bG_3^b(c) = c^b\times b \to c = I(c)$$
+      that is natural in $c$ and universal from $F_3^b$ to $c$.
+    \end{itemize}
+
+    \
+
+
+
+    The intuitive notion is that this object represent in some way the arrows from $b$ to $c$, being a generalization of the function set of two small sets. The best way to understand this adjoint is by the natural transformation $\varepsilon^b(c^b\times b) = c$. In this context, this is called \emph{evaluation arrow}. In the context of $Set$ this amount to the classic evaluation of a function.\\
+
   \end{itemize}
-\end{example}
+  \begin{remark}
+    Note that a Closed Cartesian category grow in the notion of a cartesian category. It is in fact a Cartesian category on which we have a function object, with an evaluation arrow that is universal.
+  \end{remark}
+
+  Cartesian Closed Categories will be reformulated in Chapter 4, proposition \ref{def2:CCC}. We will use this last ideas in other to equationally present the concept. For now on, lets provide some examples of Cartesian Closed Categories:
 
 
-We can consider the duals:
+  
 
-\begin{definition}
-  A \emph{cocartesian} category is a category with a specified initial object $\bot$ and for which every finite coproduct exists. A \emph{bicartesian} category is a category that is both cartesian and cocartesian.
-\end{definition}
+  \begin{example}
+    \begin{itemize}
+    \item $Set$. We have the set $\{*\}$ as a terminal object, products as in example \ref{example:prod}. Given two sets $C, B$ we can define the exponential object $C^B= \hhom (B,C)$. The adjointness is then implied by the currification process:
+      $$g: A\times B \to C \mapsto f: A \to B^C,$$
+      where $f(a)(\cdot) = g(a,\cdot)$.
+    \item We will prove in chapter \ref{chap:4} that $\lambda$-calculus is, in some sense, a closed cartesian category.
+    \end{itemize}
+  \end{example}
 
-\begin{definition}A \emph{closed bicartesian category} is a bicartesian category that is also a closed cartesian category.
-\end{definition}
+
+  We can consider the duals:
+
+  \begin{definition}
+    A \emph{cocartesian} category is a category with a specified initial object $\bot$ and for which every finite coproduct exists. A \emph{bicartesian} category is a category that is both cartesian and cocartesian.
+  \end{definition}
+
+  \begin{definition}A \emph{closed bicartesian category} is a bicartesian category that is also a closed cartesian category.
+  \end{definition}
 
   As with almost every structure, a category can be deduced is the one of the objects along with structure-preserving functors.
 
@@ -798,4 +796,4 @@ We can consider the duals:
     We can define the \emph{category of closed cartesian categories} $Cart$ that has as objects all small ccc, and as objects all functors that preserve the specified terminal, products and exponential objects.
   \end{defintion}
 
-The morphism of cccs are often called \emph{cartesian closed functors.}
+  The morphism of cccs are often called \emph{cartesian closed functors.}

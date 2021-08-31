@@ -260,9 +260,15 @@ Note that for every permutation $\sigma : \{1,...,n\}\to \{1,..,n\}$, we have th
   \]
 \end{proposition}
 \begin{proof}
-Immediate as $C[x_1,...,x_n]$ is the expansion of $C$ and ${x_1,...,x_n}$.  
+Immediate as $C[x_1,...,x_n]$ is the expansion of $C$ and ${x_1,...,x_n}$.
 \end{proof}
 
+This construction sports a nice universal property:
+
+\begin{proposition}
+  Given a (resp. Cartesian, closed Cartesian) category $A$, and indeterminate $x:a_x\to a$ over $A$, an functor $F:A\to B$ and any arrow $ b:F(a_0) \to F(a)$, theere is a unique (Cartesian, closed Cartesian) functor $f': A[x]\to B$ such that the following diagram commutes:
+  
+\end{proposition}
 
 We finish this subsection presenting a refinement of the proposition \ref{deduction-theorem}. This result is also proved by induction on the length of the proof.
 
@@ -575,7 +581,25 @@ Now we repeat the process as with $\LL$ and define a functor $\CC: \LC \to CCart
   Preservation of structures of closed cartesian structures derives directly from preservation of structures of $\lambda$-calculus of $F$.
 \end{remark}
 
+We finally explain how to add an indeterminate to $\CC(L)$, and how to characterize this construction.
 
+\begin{definition}
+  Let $L$ be a simply typed lambda-calculus and let $x\vdash a$ be a variable in $L$, we can generate the language $L(x)$ by adding the \emph{parameter} $x$ that has the same types as $L$, and the same terms except that $x$ is no longer a variable. That is, now closed terms are terms that doesn't have any free variable other than $x$.
+\end{definition}
+
+
+
+\begin{proposition}
+$\CC(L)[x] \cong \CC(L(x))$
+\end{proposition}
+\begin{proof}
+  We can define and equivalence between categories, so we can start by providing a functor $F: \CC(L)[x] \to \CC(L(x))$ such that
+  \begin{itemize}
+  \item As both categories share objects, we define the functor as the identity on objects.
+  \item $F$ maps the indeterminate $x$ to the parameter $x$.
+  \item 
+  \end{itemize}
+\end{proof}
 \subsection{Equivalence}
 After defining in the two previous sections we define two functors/ the language of a closed Cartesian category as a functor $\LL$ and the closed Cartesian category of a lambda calculus $\CC$. We now will proof that these two functors makes an adjoint equivalence. We adapted the proof from \cite[Theorem 11.3]{lambek1988introduction}, using a more clear categorical language. 
 
@@ -609,7 +633,7 @@ That is, we have to check that $\varepsilon(C)\circ \CC\LL(F) = F \circ \varepsi
 \end{itemize}
 We finish by considering that $F(g)\circ F(x^a) = F_{x^a\to (x^{F(a)})}(g \circ x^a) = F_{x^a\to (x^{F(a)})}(\varphi(x^a)) $, and therefore $\varepsilon$ is natural.\\
 
-\item[\fbox{$ 1_{\mathcal A}\cong \LL \CC $}] We define the unit $\eta$ of the adjoint equivalence similarly, such that:
+\item[\fbox{$ 1_{\mathcal A}\cong \LL \CC $}] We define the unit $\eta$ of the adjoint equivalence similarly. We start by studying the language $\LL\CC(L)$, given $L$ a language. Is easy to check that the types in both languages are the same. We then study $\CC(L)$, and remember that arrows $f:a\to b$ in $\CC(L)$ are closed terms $\lambda x^a.f(x)$ of type $a\to b$. Finally, every term $M$ of type $A$ in $\LL\CC(L)$ has the form $\varphi(x^1,...,x^n): 1 \to A$, where $\varphi(x^1,...,x^n)$ is an arrow in $\CC(L)$ dependent on some indeterminates, thus $M = lambda z^1.m(x^1,...,x^n)$
 
   \begin{itemize}
   \item For every $L\in \LC$ and every type $t\in L$ we have that $\eta(L)(t) = t$.
@@ -617,10 +641,10 @@ We finish by considering that $F(g)\circ F(x^a) = F_{x^a\to (x^{F(a)})}(g \circ 
   \end{itemize}
 
 
-  It is easy to check that $\eta(L)$ is a $\lambda$-morphism. To check that it is an isomorphism on home sets we can construct the inverse arrow $\xi(L)$
+  It is easy to check that $\eta(L)$ is a $\lambda$-morphism. To check that it is an isomorphism on home sets we can construct the inverse arrow $\nu(L)$
 
   \begin{itemize}
-  \item  $\xi(L)(t) = t$ for every type $t \in \LL\CC(L).$
+  \item  $\nu(L)(t) = t$ for every type $t \in \LL\CC(L).$
   \item  
   \end{itemize}
 
