@@ -19,7 +19,7 @@ In a diagram:
 
 \[
   \begin{tikzcd}
-    c\arrow[r, "u"] \arrow[rd, "f", swap]      & Sd \arrow[d, "Sf'", dashed]& d\arrow[d,"f'",dash]\\
+    c\arrow[r, "u"] \arrow[rd, "f", swap]      & Sd \arrow[d, "Sf'", dashed]& d\arrow[d,"f'",dashed]\\
     &Se& e 
   \end{tikzcd}
 \]
@@ -755,45 +755,43 @@ Nonetheless, further on the text we will need categories with some even nicer pr
       that is natural in $c$ and universal from $F_3^b$ to $c$.
     \end{itemize}
 
-    \
-
-
-
     The intuitive notion is that this object represent in some way the arrows from $b$ to $c$, being a generalization of the function set of two small sets. The best way to understand this adjoint is by the natural transformation $\varepsilon^b(c^b\times b) = c$. In this context, this is called \emph{evaluation arrow}. In the context of $Set$ this amount to the classic evaluation of a function.\\
 
   \end{itemize}
-  \begin{remark}
-    Note that a Closed Cartesian category grow in the notion of a cartesian category. It is in fact a Cartesian category on which we have a function object, with an evaluation arrow that is universal.
-  \end{remark}
+\end{definition}
 
-  Cartesian Closed Categories will be reformulated in Chapter 4, proposition \ref{def2:CCC}. We will use this last ideas in other to equationally present the concept. For now on, lets provide some examples of Cartesian Closed Categories:
+\begin{remark}
+  Note that a Closed Cartesian category grow in the notion of a cartesian category. It is in fact a Cartesian category on which we have a function object, with an evaluation arrow that is universal.
+\end{remark}
 
-
-  
-
-  \begin{example}
-    \begin{itemize}
-    \item $Set$. We have the set $\{*\}$ as a terminal object, products as in example \ref{example:prod}. Given two sets $C, B$ we can define the exponential object $C^B= \hhom (B,C)$. The adjointness is then implied by the currification process:
-      $$g: A\times B \to C \mapsto f: A \to B^C,$$
-      where $f(a)(\cdot) = g(a,\cdot)$.
-    \item We will prove in chapter \ref{chap:4} that $\lambda$-calculus is, in some sense, a closed cartesian category.
-    \end{itemize}
-  \end{example}
+Cartesian Closed Categories will be reformulated in Chapter 4, proposition \ref{def2:CCC}. We will use this last ideas in other to equationally present the concept. For now on, lets provide some examples of Cartesian Closed Categories:
 
 
-  We can consider the duals:
 
-  \begin{definition}
-    A \emph{cocartesian} category is a category with a specified initial object $\bot$ and for which every finite coproduct exists. A \emph{bicartesian} category is a category that is both cartesian and cocartesian.
-  \end{definition}
 
-  \begin{definition}A \emph{closed bicartesian category} is a bicartesian category that is also a closed cartesian category.
-  \end{definition}
+\begin{example}
+  \begin{itemize}
+  \item $Set$. We have the set $\{*\}$ as a terminal object, products as in example \ref{example:prod}. Given two sets $C, B$ we can define the exponential object $C^B= \hhom (B,C)$. The adjointness is then implied by the currification process:
+    $$g: A\times B \to C \mapsto f: A \to B^C,$$
+    where $f(a)(\cdot) = g(a,\cdot)$.
+  \item We will prove in chapter \ref{chap:4} that $\lambda$-calculus is, in some sense, a closed cartesian category.
+  \end{itemize}
+\end{example}
 
-  As with almost every structure, a category can be deduced is the one of the objects along with structure-preserving functors.
 
-  \begin{definition}[Category of closed cartesian categories]
-    We can define the \emph{category of closed cartesian categories} $Cart$ that has as objects all small ccc, and as objects all functors that preserve the specified terminal, products and exponential objects.
-  \end{defintion}
+We can consider the duals:
 
-  The morphism of cccs are often called \emph{cartesian closed functors.}
+\begin{definition}
+  A \emph{cocartesian} category is a category with a specified initial object $\bot$ and for which every finite coproduct exists. A \emph{bicartesian} category is a category that is both cartesian and cocartesian.
+\end{definition}
+
+\begin{definition}A \emph{closed bicartesian category} is a bicartesian category that is also a closed cartesian category.
+\end{definition}
+
+As with almost every structure, a category can be deduced is the one of the objects along with structure-preserving functors.
+
+\begin{definition}[Category of closed cartesian categories]
+  We can define the \emph{category of closed cartesian categories} $Cart$ that has as objects all small ccc, and as objects all functors that preserve the specified terminal, products and exponential objects.
+\end{definition}
+
+The morphism of cccs are often called \emph{cartesian closed functors.}

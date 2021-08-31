@@ -77,8 +77,8 @@ Similarly to $\pi_i$, we will usually denote just $\varepsilon$.
 \end{definition}
 
 \begin{definition}
-Given a conjunction calculus $D$, for every $f:A\to B \in D$ there exists an arrow $f^\to: \top \to [A\to B]$, defined as 
- $$f^\to = \left(f\circ \pi_2^{\Top,A}\right)^*.$$
+  Given a conjunction calculus $D$, for every $f:A\to B \in D$ there exists an arrow $f^\to: \top \to [A\to B]$, defined as 
+  $$f^\to = \left(f\circ \pi_2^{\Top,A}\right)^*.$$
 \end{definition}
 
 This last definition has an important meaning, It formalizes within our system the fact that if we have a proof that $A$ implies $B$, in the form of an arrow, it generates a proof that the statement "$A$ implies $B$", as an object, is also true (since it can be derived from truth value $\top$). We finish this section with the definition of assumption and the deduction theorem.\\
@@ -91,7 +91,7 @@ As we have seen during the last part of the previous chapter, there is a constan
 \begin{sproof}
   As most proofs in the previous chapter, this proposition is proved by induction on the length on the proof, and studying the list of possible last steps taken. A full proof can be found in \cite[proposition 2.1]{lambek1988introduction}.
 \end{sproof}
- This theorem  conditionally on the existence of a suitable $A$, we have a function from $B$ to $C$. We are implicitly using the idea of the adjoint $f:A\times B \to C \cong f: A \to C^B$, although it is not needed for the formalism.
+This theorem  conditionally on the existence of a suitable $A$, we have a function from $B$ to $C$. We are implicitly using the idea of the adjoint $f:A\times B \to C \cong f: A \to C^B$, although it is not needed for the formalism.
 
 
 
@@ -238,19 +238,19 @@ We want now to introduce an idea of logic implications in the context of a close
   We define the equivalence on arrows $\cong$ so that the inclusion $A\hookrightarrow A[x]$ is a functor.
 \end{remark}
 \begin{definition}
-Let $A$ be a (Cartesian, closed Cartesian) category and $X=\{x_1:a_1 \to b_1, ... x_n:a_n \to b_n\}$ be a set of indeterminates. We define the category $A[X]$ as $A[x_1][x_2]..[x_n]$.
+  Let $A$ be a (Cartesian, closed Cartesian) category and $X=\{x_1:a_1 \to b_1, ... x_n:a_n \to b_n\}$ be a set of indeterminates. We define the category $A[X]$ as $A[x_1][x_2]..[x_n]$.
 \end{definition}
 \begin{remark}
-Note that for every permutation $\sigma : \{1,...,n\}\to \{1,..,n\}$, we have that $A[x_1]...[x_n]\cong A[x_{\sigma(1)}]...[x_{\sigma(n)}]$. 
+  Note that for every permutation $\sigma : \{1,...,n\}\to \{1,..,n\}$, we have that $A[x_1]...[x_n]\cong A[x_{\sigma(1)}]...[x_{\sigma(n)}]$. 
 \end{remark}
 
 % \begin{remark}
 %   Note that the terms can be formed by the arrows $1\to A\in C$, the indeterminates $x^A: 1 \to A$,  and the term forming operations:
 %   \begin{align*}
-      %       a,b,f,\varphi(x^A) := \langle a,b\rangle: 1 \to A\times B \ |\ fa: 1 \to B\ |\ \lambda x^A. \varphi(x^A): 1 \to [A\to B]
-      %     \end{align*}
-      %       where we require $a: 1\to A, & b: 1 \to B,   f: A \to B, \varphi(x^a): 1 \to B$
-                                             %                                              \end{remark}
+%     a,b,f,\varphi(x^A) := \langle a,b\rangle: 1 \to A\times B \ |\ fa: 1 \to B\ |\ \lambda x^A. \varphi(x^A): 1 \to [A\to B]
+%   \end{align*}
+%   where we require $a: 1\to A, & b: 1 \to B,   f: A \to B, \varphi(x^a): 1 \to B$
+% \end{remark}
 \begin{proposition}\label{unique-polynomial-functor}Let $C,C'$ be (Cartesian, closed Cartesian) categories, $F$ be a (Cartesian, closed Cartesian) Functor, and $X={x_1,...,x_n}, X'={x_1',...,x_n'}$ be sets of assumptions for $C$ and $C'$ respectively. Then there is an unique (Cartesian, closed Cartesian) Functor $F_{x_1,...,x_n}$ such that $F(x_i)=x_i'$ the following diagram commutes. 
   \[
     \begin{tikzcd}
@@ -260,20 +260,35 @@ Note that for every permutation $\sigma : \{1,...,n\}\to \{1,..,n\}$, we have th
   \]
 \end{proposition}
 \begin{proof}
-Immediate as $C[x_1,...,x_n]$ is the expansion of $C$ and ${x_1,...,x_n}$.
+  Immediate as $C[x_1,...,x_n]$ is the expansion of $C$ and ${x_1,...,x_n}$.
 \end{proof}
 
-This construction sports a nice universal property:
+This construction sports a nice property:
 
-\begin{proposition}
-  Given a (resp. Cartesian, closed Cartesian) category $A$, and indeterminate $x:a_x\to a$ over $A$, an functor $F:A\to B$ and any arrow $ b:F(a_0) \to F(a)$, theere is a unique (Cartesian, closed Cartesian) functor $f': A[x]\to B$ such that the following diagram commutes:
-  
+\begin{proposition}\label{univ-polynomial}
+  Given a (resp. Cartesian, closed Cartesian) category $A$, and indeterminate $x:a_0\to a$ over $A$, an functor $F:A\to B$ and any arrow $ b:F(a_0) \to F(a)$, there is a unique (Cartesian, closed Cartesian) functor $F': A[x]\to B$ such that the following diagram commutes:
+  \[
+    \begin{tikzcd}
+      A\arrow[hookrightarrow]{r}{} \arrow[rd, "F", swap]      & A[x] \arrow[d, "F'", dashed]& x:a_0\to a\arrow[d,"f'",dashed]\\
+      &B& b:F(a_0)\to F(a) 
+    \end{tikzcd}
+  \]
 \end{proposition}
+\begin{proof}
+  Polynomials in closed Cartesian categories have to be defined inductively, with the following rules:
+  \begin{enumerate}
+  \item $x$ is a polynomial.
+  \item Every arrow $f\in A$ is a polynomial.
+  \item The composition (resp.  [composition and product],  [composition, product and $*$-operation]) of every polynomial is a polynomial.
+  \end{enumerate}
+  Thus, $F'$ is defined by the values on $x$ and $Ar(A)$, so it exists. As in this case we have both fixed, $F'$ is unique. 
+\end{proof}
+
 
 We finish this subsection presenting a refinement of the proposition \ref{deduction-theorem}. This result is also proved by induction on the length of the proof.
 
 \begin{proposition}[functional completeness]
-For every polynomial $varphi(x^a): 1\to C$ over a closed cartesian category $C[x^a]$ over an indeterminate $x:1\to a$, there is an unique $f$ such that $fx=\varphi(x)$
+  For every polynomial $varphi(x^a): 1\to C$ over a closed cartesian category $C[x^a]$ over an indeterminate $x:1\to a$, there is an unique $f$ such that $fx=\varphi(x)$
 \end{proposition}
 \section{Categorical understanding of simply typed $\lambda$-calculus}
 After introducing this new optic, we will use it to complete the lambeck equivalence. For this we will make a series of preparations. We first introduce the concept of nautral numbers in categories and in lambda typed calculations.\\
@@ -327,8 +342,8 @@ Every time natural are talked, induction have to appear in some part. The intuit
 
 \begin{definition}[Category of closed Cartesian categories]
   We can define the \emph{category of closed Cartesian categories with natural numbers} $CCart_N$ that has as objects all small ccc, and as objects all functors that preserve the structure of closed Cartesian categories and added natural numbers structure.\\
-\end{defintion}
-%{\color{red} Maybe add the proposition and corollary 9.1 and 9.2 of Lambeck.}
+\end{definition}
+% {\color{red} Maybe add the proposition and corollary 9.1 and 9.2 of Lambeck.}
 
 
 \subsubsection{Natural Numbers in Typed $\lambda$-calculus}\label{section:natural-revisited}
@@ -389,7 +404,7 @@ As a consequence of this proposition, we can consider a type $N^t$ such that $\o
 \end{enumerate}
 From this point on, we will use the Lambek description of natural numbers, letting Church numerals as a construction for untyped $\lambda$-calculus.\\
 
-%Lastly, we can consider the effect of Lambeck description in $\beta$-reduction.
+% Lastly, we can consider the effect of Lambeck description in $\beta$-reduction.
 
 \subsection{Category of typed $\lambda$-calculus}
 
@@ -433,20 +448,20 @@ Now we have to consider the original ideas that are consider to be considered th
   Let $C$ be a closed Cartesian category. Then its \emph{internal language} $\LL (C)$ is the basic $\lambda$-calculus that:
   \begin{itemize}
   \item Has as types the objects of $C$, with function types generated by exponential types, conjunction types by product types, and the 1 type by the terminal object $\top \in Ob(C)$.% \begin{table}[!h]
-      %       \begin{center}
-      %       \begin{tabular}{|l|c|c|}
-      %       \hline
-      %       Typing name & Types  & Closed Cartesian categories  \\
-      %       \hline
-      %       Minimal     & Function type $A\to B$   &  Exponential object $B^A$  \\
-      %       \hline 
-      %       Basic      & Type 1 & Terminal object $\top$ \\
-      %                                            & Product type $\times$ & Product object $\land$ \\
-      %       \hline   
-      %     \end{tabular}
-      %       \caption*{\label{tab:table-name} Pairing of Types and object in closed Cartesian categories.}
-      %       \end{center}
-      %       \end{table}A
+    % \begin{center}
+    %   \begin{tabular}{|l|c|c|}
+    %     \hline
+    %     Typing name & Types  & Closed Cartesian categories  \\
+    %     \hline
+    %     Minimal     & Function type $A\to B$   &  Exponential object $B^A$  \\
+    %     \hline 
+    %     Basic      & Type 1 & Terminal object $\top$ \\
+    %     & Product type $\times$ & Product object $\land$ \\
+    %     \hline   
+    %   \end{tabular}
+    %   \caption*{\label{tab:table-name} Pairing of Types and object in closed Cartesian categories.}
+    % \end{center}
+    % \end{table}A
   \item In $\LL(A)$ a variable $x^{t_i}$ of type $t$ is just an indeterminate  $x:1 \to t_i$, and terms of type $A$ are just a polynomial $\varphi(x_1^{t_1},...,x_n^{t_n}):1 \to A$, where each indeterminate $x_i: 1 \to t_i,$ for $i$ in $1,...,n$ represents a free variable.
   \item Provide the structure of simply lambda calculus as follows\footnote{Instead of typing rules we provide equivalent term forming operations.}:
     \begin{itemize}
@@ -454,15 +469,15 @@ Now we have to consider the original ideas that are consider to be considered th
     \item Given $\varphi(x^a):1 \to B$ we want to found $\lambda x^a.\varphi(x^a): 1 \to B^A$.  For that we first apply proposition \ref{deduction-theorem} to found $k_{x^A}\varphi(x^A): 1 \land A \to B$. After that, using the adjoint properties of the ccc, we can found:
       $$\lambda x^A.\varphi(x^A) := \left( k_{x^A}\varphi(x^A)\right)^*: 1 \to B^A.$$
       % , i.e., is the unique arrow  such that:
-%       \[
-% \begin{tikzcd}
-% {} & C \arrow[bend right,swap,dashed]{dl}{g}
-% \arrow[bend left,dashed]{dr}{h} \arrow{d}[description]{f}& & \\
-% A  &(A,B) \arrow{l}[swap]{fst} \arrow{r}{snd} & 
-% B \\
-% \end{tikzcd}
-      %       \]
-      \item Application is defined by $\epsilon$, the counit of the adjoint.
+      % \[
+      %   \begin{tikzcd}
+      %     {} & C \arrow[bend right,swap,dashed]{dl}{g}
+      %     \arrow[bend left,dashed]{dr}{h} \arrow{d}[description]{f}& & \\
+      %     A  &(A,B) \arrow{l}[swap]{fst} \arrow{r}{snd} & 
+      %     B \\
+      %   \end{tikzcd}
+      % \]
+    \item Application is defined by $\epsilon$, the counit of the adjoint.
     \end{itemize}
   \end{itemize}
 
@@ -499,15 +514,15 @@ Now, we have to define how the functor behave over morphism.
   \item we identify the $\mathfrak{o}$ term in the arrow $0: 1 \to N$, seen as a polynomial.
   \item given a term $\varphi$ of type $N$, we define $S(N)$ as $S\circ\varphi$. Every term of type $N$ is of the form $S^n\circ \mathfrak o$
   \item given a term $a$ of type $A$, a term $f$ of type $A\to A$, and a term $n$  of type $N$, remembering the identification in the category $C$ we have that $h$ exists,
-      \[
-    \begin{tikzcd}
-      1\arrow{dr}{a}\arrow{r}{0} & N\arrow{r}{S}\arrow[dashed]{d}{h} & N\arrow[dashed]{d}{h}\\
-      & A\arrow{r}{f} & A
-    \end{tikzcd}
-  \]
-\end{itemize}
+    \[
+      \begin{tikzcd}
+        1\arrow{dr}{a}\arrow{r}{0} & N\arrow{r}{S}\arrow[dashed]{d}{h} & N\arrow[dashed]{d}{h}\\
+        & A\arrow{r}{f} & A
+      \end{tikzcd}
+    \]
+  \end{itemize}
 
-Lastly, we idenfity $I_A(a,f,n)$ in $h\circ n: 1 \to A$.
+  Lastly, we idenfity $I_A(a,f,n)$ in $h\circ n: 1 \to A$.
   
 \end{proof}
 
@@ -516,9 +531,9 @@ Lastly, we idenfity $I_A(a,f,n)$ in $h\circ n: 1 \to A$.
 \end{proposition}
 
 \begin{proof}
-Directly follows from $F$ maintaining weak natural numbers. 
+  Directly follows from $F$ maintaining weak natural numbers. 
 \end{proof}
-  
+
 \subsection{Cartesian Closed Category generated by a typed $\lambda$-calculus}
 
 In this section we are going to do the converse process of the previous one, i.e., given a typed $\lambda$-calculus, we are going to construct a related ccc.
@@ -590,15 +605,17 @@ We finally explain how to add an indeterminate to $\CC(L)$, and how to character
 
 
 \begin{proposition}
-$\CC(L)[x] \cong \CC(L(x))$
+  $\CC(L)[x] \cong \CC(L(x))$
 \end{proposition}
 \begin{proof}
-  We can define and equivalence between categories, so we can start by providing a functor $F: \CC(L)[x] \to \CC(L(x))$ such that
-  \begin{itemize}
-  \item As both categories share objects, we define the functor as the identity on objects.
-  \item $F$ maps the indeterminate $x$ to the parameter $x$.
-  \item 
-  \end{itemize}
+  We can define an equivalence between categories. We show that $\CC(L(x))$ has the same property as $\CC(L)[x]$, and thus there only exists two functors $F:\CC(L(x))\to \CC(L)[x]$  and $G:\CC(L)[x] \to\CC(L(x))$ that maps $x\to x$ and thus they are inverses of each other.
+  \[
+  \begin{tikzcd}
+    \CC(L)\arrow[hookrightarrow]{r}{H} \arrow[rd, "F", swap]      & \CC(L(x)) \arrow[d, "F'", dashed]& x:a_0\to a\arrow[d,"f'",dashed]\\
+    &B& z:F(a_0)\to F(a) 
+  \end{tikzcd}
+\]
+We define $F'(a) = F(a)$ for every $b\in Ob(\CC(L))=Ob(\CC(L(x)))$. Then,  every $f \in \CC(L(x))$ has the form $f = \lambda y^b. \varphi(y^b, x)$ for some variable $y$ of type $b$ and some term with $y,x$ as free variables. It is easy to check that, $$\varphi(y, x) = [\lambda x. \varphi(y,x ) ] x =^{1.} \psi(y)x,$$ under $\beta$-equivalence, where in 1. we define $\psi (y)= \lambda x. \varphi(y,x)$. Finally, using that $\lambda y^b. \psi(y^b) \in Ar(\CC(L))$, we define $F'(f):= F(\lambda y^b. \psi(y^b)) z$.
 \end{proof}
 \subsection{Equivalence}
 After defining in the two previous sections we define two functors/ the language of a closed Cartesian category as a functor $\LL$ and the closed Cartesian category of a lambda calculus $\CC$. We now will proof that these two functors makes an adjoint equivalence. We adapted the proof from \cite[Theorem 11.3]{lambek1988introduction}, using a more clear categorical language. 
@@ -610,60 +627,64 @@ After defining in the two previous sections we define two functors/ the language
 
   \begin{enumerate}
   \item[\fbox{$\CC \LL \cong 1_{\mathcal A}$}] To prove this, we have to define the counit $\varepsilon$. Given a closed Cartesian category $\mathcal A$ we define a functor  $\varepsilon(\mathcal A)$ such that
-\begin{itemize}
-\item $\varepsilon(\mathcal A)    (a) = a$ for every $a\in Ob(\mathcal A)$.
-\item An arrow in $f:a\to b \in \CC \LL(\mathcal A)$ has the form $\lambda x^a. b(x^a)$ where $b(x^a)$ is a term in $\LL (\mathcal A)$ with only free variable being $x^a$, thus $f$ has the form $\lambda x^a. \varphi(x^a)$ for some $\varphi(x^a): 1 \to b \in \mathcal A [x^a]$. Then, we define $\varepsilon(\mathcal A)(f) = \varepsilon(\mathcal A)(\lambda x^a.\varphi(x^a))$ as the unique arrow $g$ in $C$ such that $gx^a = \varphi(x^a) \in \mathcal A[x^a]$ by functional completeness.
-\end{itemize}
-It is easy to check that this is a closed Cartesian functor.  By the uniqueness of $g$ we ensures that $$\hhom_{\CC\LL(\mathcal A)} (b,c)\cong \hhom_{\mathcal A} (b,c).$$
-We still have to check that $\varepsilon (\mathcal A)$ is a natural transformation, that is, that for every functor $F: C\to B\in CCart$ we have that
-\[
-  \begin{tikzpicture}
-    \node {\begin{tikzcd}[column sep=20mm]
-        \CC\LL(B)\ar[r,"\varepsilon(B)"]\ar[d,"\CC\LL(F)"] & B\ar[d,"F"]\\
-        \CC\LL(C)\ar[r,"\varepsilon(C)"] & C.
-    \end{tikzcd}};
-\end{tikzpicture}
-\]
+    \begin{itemize}
+    \item $\varepsilon(\mathcal A)    (a) = a$ for every $a\in Ob(\mathcal A)$.
+    \item An arrow in $f:a\to b \in \CC \LL(\mathcal A)$ has the form $\lambda x^a. b(x^a)$ where $b(x^a)$ is a term in $\LL (\mathcal A)$ with only free variable being $x^a$, thus $f$ has the form $\lambda x^a. \varphi(x^a)$ for some $\varphi(x^a): 1 \to b \in \mathcal A [x^a]$. Then, we define $\varepsilon(\mathcal A)(f) = \varepsilon(\mathcal A)(\lambda x^a.\varphi(x^a))$ as the unique arrow $g$ in $C$ such that $gx^a = \varphi(x^a) \in \mathcal A[x^a]$ by functional completeness.
+    \end{itemize}
+    It is easy to check that this is a closed Cartesian functor.  By the uniqueness of $g$ we ensures that $$\hhom_{\CC\LL(\mathcal A)} (b,c)\cong \hhom_{\mathcal A} (b,c).$$
+    We still have to check that $\varepsilon (\mathcal A)$ is a natural transformation, that is, that for every functor $F: C\to B\in CCart$ we have that
+    \[
+      \begin{tikzpicture}
+        \node {\begin{tikzcd}[column sep=20mm]
+            \CC\LL(B)\ar[r,"\varepsilon(B)"]\ar[d,"\CC\LL(F)"] & B\ar[d,"F"]\\
+            \CC\LL(C)\ar[r,"\varepsilon(C)"] & C.
+          \end{tikzcd}};
+      \end{tikzpicture}
+    \]
 
-That is, we have to check that $\varepsilon(C)\circ \CC\LL(F) = F \circ \varepsilon(B)$. This is trivially checked on objects. On arrows, we have to check that, for every $f = \lambda x^a.\varphi(x^a) \in \CC\LL(F) $ we have that $\varepsilon(C)\circ \CC\LL(F) (f)= F \circ \varepsilon(B)(f)$.
+    That is, we have to check that $\varepsilon(C)\circ \CC\LL(F) = F \circ \varepsilon(B)$. This is trivially checked on objects. On arrows, we have to check that, for every $f = \lambda x^a.\varphi(x^a) \in \CC\LL(F) $ we have that $\varepsilon(C)\circ \CC\LL(F) (f)= F \circ \varepsilon(B)(f)$.
 
-\begin{itemize}
-\item  $F \circ \varepsilon(B)(f) = F(g)$ where $g$ is the only function  such that$$gx^a = \varphi(x^a) \in \mathcal B[x^a].$$
-\item $\CC\LL(F) = \lambda x^{F(a)}.F_{x^a\to F(x^a)} \left ( \varphi(x^a)\right )$. Then we have that $\varepsilon(C)\circ \CC\LL(F) = h$ where $h$ is the only function such that $$h\circ F(x^a) = F_{x^a\to (x^{F(a)})}\left ( \varphi(x^a)\right ).$$
-\end{itemize}
-We finish by considering that $F(g)\circ F(x^a) = F_{x^a\to (x^{F(a)})}(g \circ x^a) = F_{x^a\to (x^{F(a)})}(\varphi(x^a)) $, and therefore $\varepsilon$ is natural.\\
+    \begin{itemize}
+    \item  $F \circ \varepsilon(B)(f) = F(g)$ where $g$ is the only function  such that$$gx^a = \varphi(x^a) \in \mathcal B[x^a].$$
+    \item $\CC\LL(F) = \lambda x^{F(a)}.F_{x^a\to F(x^a)} \left ( \varphi(x^a)\right )$. Then we have that $\varepsilon(C)\circ \CC\LL(F) = h$ where $h$ is the only function such that $$h\circ F(x^a) = F_{x^a\to (x^{F(a)})}\left ( \varphi(x^a)\right ).$$
+    \end{itemize}
+    We finish by considering that $F(g)\circ F(x^a) = F_{x^a\to (x^{F(a)})}(g \circ x^a) = F_{x^a\to (x^{F(a)})}(\varphi(x^a)) $, and therefore $\varepsilon$ is natural.\\
 
-\item[\fbox{$ 1_{\mathcal A}\cong \LL \CC $}] We define the unit $\eta$ of the adjoint equivalence similarly. We start by studying the language $\LL\CC(L)$, given $L$ a language. Is easy to check that the types in both languages are the same. We then study $\CC(L)$, and remember that arrows $f:a\to b$ in $\CC(L)$ are closed terms $\lambda x^a.f(x)$ of type $a\to b$. Finally, every term $M$ of type $A$ in $\LL\CC(L)$ has the form $\varphi(x^1,...,x^n): 1 \to A$, where $\varphi(x^1,...,x^n)$ is an arrow in $\CC(L)$ dependent on some indeterminates, thus $M = lambda z^1.m(x^1,...,x^n)$
+  \item[\fbox{$ 1_{\mathcal A}\cong \LL \CC $}] We start by studying the language $\LL\CC(L)$, given $L$ a language. Is easy to check that the types in both languages are the same.\\
 
-  \begin{itemize}
-  \item For every $L\in \LC$ and every type $t\in L$ we have that $\eta(L)(t) = t$.
-  \item For every term $\varphi (x_1^{t_1},...,x_n^{t_n})$, were every $x_i^t_i$ represents a free variable, to $\lambda z^1. \varphi (x_1^{t_1},...,x_n^{t_n}).$
-  \end{itemize}
+    Remember that arrows $f:a\to b$ in $\CC(L)$ are closed terms $\lambda x^a.f(x)$ of type $a\to b$. Finally, every term $M$ of type $A$ in $\LL\CC(L)$ has the form $\varphi(x^1,...,x^n): 1 \to A$, where $\varphi(x^{t_1},...,x^{t_n})$ is an arrow in $\CC(L)$ dependent on some indeterminates, thus $M =\lambda z^1.m(x^1,...,x^n)$\footnote{Here we are identifying $\CC(L)[x_1,...,x_n]$ with $\CC(L(x_1,...,x_n))$}.\\
 
 
-  It is easy to check that $\eta(L)$ is a $\lambda$-morphism. To check that it is an isomorphism on home sets we can construct the inverse arrow $\nu(L)$
+    We define the unit $\eta$ of the adjoint equivalence similarly.
+    \begin{itemize}
+    \item For every $L\in \LC$ and every type $t\in L$ we have that $\eta(L)(t) = t$.
+    \item For every term $\lamba z^1.\varphi (x_1^{t_1},...,x_n^{t_n})$, were every $x_i^{t_i}$ represents a free variable, to $\lambda z^1. \varphi (x_1^{t_1},...,x_n^{t_n}).$
+    \end{itemize}
 
-  \begin{itemize}
-  \item  $\nu(L)(t) = t$ for every type $t \in \LL\CC(L).$
-  \item  
-  \end{itemize}
 
-  Naturality is checked as in the first part of the proof, developing in each equality term. 
-\end{enumerate}
+    It is easy to check that $\eta(L)$ is a $\lambda$-morphism. To check that it is an isomorphism on home sets we can construct the inverse arrow $\nu(L)$
+
+    \begin{itemize}
+    \item  $\nu(L)(t) = t$ for every type $t \in \LL\CC(L).$
+    \item  Let $\lambda z^1.\varphi(x_1,...,x_n)$ be a term in $\LL\CC(L)$ with $x_1,...,x_n$ as free variables. We define $\nu(L)(f)= f* = \varphi(x_1,...,x_n)$.  
+    \end{itemize}
+
+    Naturality is checked as in the first part of the proof, developing in each equality term. 
+  \end{enumerate}
 \end{proof}
 
-  
+
 % \subsubsection{Deduction Theorem}
-      %       We proceed with the tating that an arrow $f:\top \to A$ does exists in our deduction system. It can be deduced in both positive (without $\lor$ and $\bot$) an intuitionistic calculus that is $A \land B\vdash C$ then $A \vdash C\to B$. This theorem is more interesting to state in the new optics of deduction systems:
-      %       \begin{theorem}[Proposition 2.1, \cite{lambek1988introduction}]
-      %       In a positive  calculus, if assuming the existence of an arrow $f:\top \to A$ implies the existence of an arrow $g: B\to C$, then there exists an arrow $h: A\land B\to C$ that does not depend on $f$.
-      %       \end{theorem}
+% We proceed with the tating that an arrow $f:\top \to A$ does exists in our deduction system. It can be deduced in both positive (without $\lor$ and $\bot$) an intuitionistic calculus that is $A \land B\vdash C$ then $A \vdash C\to B$. This theorem is more interesting to state in the new optics of deduction systems:
+% \begin{theorem}[Proposition 2.1, \cite{lambek1988introduction}]
+%   In a positive  calculus, if assuming the existence of an arrow $f:\top \to A$ implies the existence of an arrow $g: B\to C$, then there exists an arrow $h: A\land B\to C$ that does not depend on $f$.
+% \end{theorem}
 
-      %       \begin{sproof}
-      %       In a similar fashion of the Church-Rosser Theorem, it is solved by induction in the last rule used in the deduction.
-      %       \end{sproof}
+% \begin{sproof}
+%   In a similar fashion of the Church-Rosser Theorem, it is solved by induction in the last rule used in the deduction.
+% \end{sproof}
 
 
-      %       As we have seen, a category is a deductive system with added structure.
+% As we have seen, a category is a deductive system with added structure.
 
 
