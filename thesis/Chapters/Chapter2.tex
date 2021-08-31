@@ -208,7 +208,7 @@ Similarly to this two example, with the Yoneda lemma we will have a functor $F:D
   To see that $\tau$ we is natural we have to consider for which functor it is natural. Consider the functor \emph{evaluation} $E: Set^D\times D$ that maps each $(F,c)\to Fc$, and the functor $N:Set^D\times D\to Nat(\hom_D(r,\cdot),K)$ the set of natural transformations. Finally, $\tau:N\to E$ is a natural transformation.
 \end{proof}
 \begin{remark}
-  The existence of an evaluation will be revisited when we consider \emph{closed cartesian cateogries} in  \ref{subsect:CCC}. This categories (in general, closed categories) will generalized the idea of a category having an exponential object suitable for evaluation. In this case, we are unadvertedly using that $Cat$ is a closed cartesian category.
+  The existence of an evaluation will be revisited when we consider \emph{closed Cartesian categories} in  \ref{subsect:CCC}. This categories (in general, closed categories) will generalized the idea of a category having an exponential object suitable for evaluation. In this case, we are inadvertently using that $Cat$ is a closed Cartesian category.
 \end{remark}
 
 The first functor that we will want to apply this result is to the $\hom_{\cdot}$ functor. But this functor is a bifunctor, so to get the full result of this lemma applied to the full bifunctor we may restate this lemma to contravariant functors.
@@ -423,7 +423,7 @@ and define:
 
 \begin{example}
   \begin{itemize}
-  \item Fiber Product: The fiber product is the canonical pullback of the $Top$ category. Let $X,Y,Z$ be topological spaces and let $f:X\to Z$ and $g: Y\to Z$ be continous function. Then we define the fiber product as:
+  \item Fiber Product: The fiber product is the canonical pullback of the $Top$ category. Let $X,Y,Z$ be topological spaces and let $f:X\to Z$ and $g: Y\to Z$ be continuous function. Then we define the fiber product as:
     $$X\times_ZY = \{(x,y) \in X\times Y: fx=gy\}.$$ Note that, although it not usually noted, $X\times_Z Y$ depend on both $f$ and $g$. In a diagram:
     \[
       \begin{tikzcd}
@@ -655,7 +655,7 @@ It is clear that every adjoint equivalence induces two equivalences in $F$ and $
   \begin{itemize}
   \item[i)] $F$ is an equivalence of categories.
   \item[ii)] $F$ is part of an adjoint equivalence. 
-  \item[iii)] $F$ is full and faithfull, and each object $d\in D$ is isomorphic to $Fc$ for some object $c\in C$.  
+  \item[iii)] $F$ is full and faithful, and each object $d\in D$ is isomorphic to $Fc$ for some object $c\in C$.  
   \end{itemize}  
 \end{proposition}
 \begin{proof}\
@@ -670,7 +670,7 @@ It is clear that every adjoint equivalence induces two equivalences in $F$ and $
       \end{tikzcd}
     \]
 
-    there is one $FG f$ for each $f$ and we get that $G$ is faithful. Faithfullnes of $F$ can be prove simetrically. To see that $G$ is full we can consider any $h:Ga\to Ga'$ and defining $f=\zeta a\circ h \circ \zeta a'$ we follow hat $FG f = Gh$. As $T$ is faithfull, $Gf=h$ so that $G$ is full. Procees simetrically with $F$.  
+    there is one $FG f$ for each $f$ and we get that $G$ is faithful. Faithfullnes of $F$ can be prove symmetrically. To see that $G$ is full we can consider any $h:Ga\to Ga'$ and defining $f=\zeta a\circ h \circ \zeta a'$ we follow hat $FG f = Gh$. As $T$ is faithfully, $Gf=h$ so that $G$ is full. Proceed symmetrically with $F$.  
   \item[$iii)\implies ii)$]
 
 
@@ -718,10 +718,10 @@ The notion of product seen in \ref{prod-univ} is a notion that seek to catch the
   Finite product are equivalent to binary product.
 \end{remark}
 
-Nonetheless, further on the text we will need categories with some even nicer properties. These categories are called \emph{closed catersian categories}. We will define them formally first, and after unpack the information that the definition contains:
+Nonetheless, further on the text we will need categories with some even nicer properties. These categories are called \emph{closed Cartesian categories}. We will define them formally first, and after unpack the information that the definition contains:
 
 \begin{definition}\label{def:CCC}
-  A $C$ is closed cartesian category, ccc for short, if each of the following functors:
+  A $C$ is closed Cartesian category, ccc for short, if each of the following functors:
   \begin{center}
     \begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
       $\qquad F_1:C\to 1$&$ F_2=\Delta: C \to C\times C $&$ F_{3}^b:C \to C$\\
@@ -761,7 +761,7 @@ Nonetheless, further on the text we will need categories with some even nicer pr
 \end{definition}
 
 \begin{remark}
-  Note that a Closed Cartesian category grow in the notion of a cartesian category. It is in fact a Cartesian category on which we have a function object, with an evaluation arrow that is universal.
+  Note that a Closed Cartesian category grow in the notion of a Cartesian category. It is in fact a Cartesian category on which we have a function object, with an evaluation arrow that is universal.
 \end{remark}
 
 Cartesian Closed Categories will be reformulated in Chapter 4, proposition \ref{def2:CCC}. We will use this last ideas in other to equationally present the concept. For now on, lets provide some examples of Cartesian Closed Categories:
@@ -771,10 +771,10 @@ Cartesian Closed Categories will be reformulated in Chapter 4, proposition \ref{
 
 \begin{example}
   \begin{itemize}
-  \item $Set$. We have the set $\{*\}$ as a terminal object, products as in example \ref{example:prod}. Given two sets $C, B$ we can define the exponential object $C^B= \hhom (B,C)$. The adjointness is then implied by the currification process:
+  \item $Set$. We have the set $\{*\}$ as a terminal object, products as in example \ref{example:prod}. Given two sets $C, B$ we can define the exponential object $C^B= \hhom (B,C)$. The adjointness is then implied by the currying process:
     $$g: A\times B \to C \mapsto f: A \to B^C,$$
     where $f(a)(\cdot) = g(a,\cdot)$.
-  \item We will prove in chapter \ref{chap:4} that $\lambda$-calculus is, in some sense, a closed cartesian category.
+  \item We will prove in chapter \ref{chap:4} that $\lambda$-calculus is, in some sense, a closed Cartesian category.
   \end{itemize}
 \end{example}
 
@@ -782,16 +782,16 @@ Cartesian Closed Categories will be reformulated in Chapter 4, proposition \ref{
 We can consider the duals:
 
 \begin{definition}
-  A \emph{cocartesian} category is a category with a specified initial object $\bot$ and for which every finite coproduct exists. A \emph{bicartesian} category is a category that is both cartesian and cocartesian.
+  A \emph{Cartesian} category is a category with a specified initial object $\bot$ and for which every finite coproduct exists. A \emph{bi-Cartesian} category is a category that is both Cartesian and cocartesian.
 \end{definition}
 
-\begin{definition}A \emph{closed bicartesian category} is a bicartesian category that is also a closed cartesian category.
+\begin{definition}A \emph{closed bi-Cartesian category} is a bicartesian category that is also a closed Cartesian category.
 \end{definition}
 
 As with almost every structure, a category can be deduced is the one of the objects along with structure-preserving functors.
 
-\begin{definition}[Category of closed cartesian categories]
-  We can define the \emph{category of closed cartesian categories} $Cart$ that has as objects all small ccc, and as objects all functors that preserve the specified terminal, products and exponential objects.
+\begin{definition}[Category of closed Fartesian categories]
+  We can define the \emph{category of closed Cartesian categories} $Cart$ that has as objects all small ccc, and as objects all functors that preserve the specified terminal, products and exponential objects.
 \end{definition}
 
-The morphism of cccs are often called \emph{cartesian closed functors.}
+The morphism of cccs are often called \emph{closed Cartesian functors.}
