@@ -15,7 +15,13 @@ Here I will be updating when each section state:
   - Ready - still to be checked over.
   
 - Chapter 4:
-  - Work in Progress
+  - Ready - still to be checked over.
+
+- Chapter 5:
+  - WIP
+  
+- Appendix:
+  - WIP
 
 I have also a todo.md file that is also rarely updated. Right now it has some work that I am purposely delaying until August.
 
