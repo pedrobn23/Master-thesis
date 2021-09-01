@@ -1,18 +1,71 @@
 
-\chapter{Locally Cartesian closed categories}
+\chapter{Martin-L\"of theories and Seely's equality}
 \label{chap:5}
 \thispagestyle{empty}
 
- In this we use hyperdoctrines as a tool to better understand closed Cartesian categories and relate them with a new typing theory: Martin-Lof type theory.
+ In this we use hyperdoctrines as a tool to better understand closed Cartesian categories and relate them with a new typing theory: Martin-Lof type theory.\\
 
-In this chapter we introduce the notions of \cite{seely1984locally}. We continue our categorical presentation of the tip theory with the introduction of Martin Lof's type theory. This type theory, also known as intuitionistic type theory, is initially proposed as a foundation of mathematics. While I remember the sections ... in which we explained the relationship between the simply typed lambda calculus devised by curch and curry and propositional logic, this new type theory is now intended to be a complete foundation for mathematics, including first-order logic (always with no third excluded).
+ In this chapter we continue our categorical presentation of the tip theory with the introduction of Martin Lof's type theory. This type theory, also known as intuitionistic type theory, is initially proposed as a foundation of mathematics. This is really important because it implies a change of mentality, as we do no longer are so focus formalizing computation systems. \\
 
-This relationship with first-order logic arises from the hand of dependent typing. That is, in Martin Lof's type theory there is a formal structure for generating types dependent on other types. This is used (without needing to know the formalism) nowadays continuously in programming languages. 
+This relationship with first-order logic arises from the hand of dependent typing. That is, in Martin Lof's type theory there is a formal structure for generating types dependent on other types. This is used (without needing to know the formalism) nowadays continuously in programming languages. \\
 
-The most interesting part for us will be to study the new structures that arise in the theory of categories to understand this new typing. In particular, we will study local closed Cartesian category structures through hyperdoctrines. 
+The most interesting part for us will be to study the new structures that arise in the theory of categories to understand this new typing. In particular, we will study local closed Cartesian category structures through hyperdoctrines. \\
 
-The main sources for this chapter are {\color{red} TODO}
+The main sources for this chapter are  \cite{seely1984locally}, \cite{martinlof1973intuitionistic}  and \cite{mac2013categories}
 
 
 
 \section{Martin-Löf type theory}
+
+In this section we introduce rather succinctly the foundations of the type theory. This presentation follows the one done in \cite{seely1984locally}, with added insights and remarks form \cite{martinlof1973intuitionistic} and \cite{sep-type-theory-intuitionistic}.
+
+
+
+\subsection{Definition of Martin-L\"of type theory}
+
+After having previously introduced the calculations, in this one we will introduce Martin-L\"of type theory, ML for short, in a more systematic way, introducing type formation rules, term formation rules, and the equivalence rules. After that, we will introduce the category structure. Definition are adapted from \cite{seely1984locally}.\\
+
+As a founding level of mathematics, we are going to define types and terms as before. The change in enphasis comes from the fact that we will manage the notation of the Curry-Howard from the beginning, as it was done while firstly introduced by Martin-L\"of in \cite{martinlof1973intuitionistic}. In this we will always consider \emph{types as propositions} and \emph{terms as proofs}, and we will made use of this analogy to explain the properties of the theory. \\
+
+One last particularity of the Martin-L\"of is the fact that we can include details of proofs in the statement of propositions. This will be formalized further on, but explain why we need to delay the introduction of term and type rules until the definition of type-function.
+
+\subsubsection{Terms and types}
+
+The formal system that Martin-L\"of presents consists of a set of rules $a : A$, as could be predicted, that a \emph{term $a$ is of type symbol $A$}, that means that $A$ as a proposition is proved by the proof $a$. We also consider equality between term $a = b$ and equality between types $A = B$. Types will be preferably denoted by $A,B,C...$ and terms by $a,b,c...$.\\
+
+After defining the abstract concept of term and types, and before introducing the full term and type forming rule, we will introduce the concept of \emph{variables} and \emph{function constant}. \\
+
+Variables are defined analogously as in the case of simply typed lambda calculus. The statements $x: A$ represents arbitrary object of a given type. As previously, an statement of $x: A$ where $x$ is a variable is called an \emph{assumption}. We will also note the type of variables as super-index: $x^A$. As in simply typed lambda calculus, a term $a$ can depend on variables $x_1,...,x_n$, usually noted by $a(x_1,...,x_n)$. Quite importantly, as types can depend on variables, and each variable should have a type, we need to impose the \emph{condition on variables}. This state that in statement $a(x_1,..,x_n)$ it should happens that no variable $x_j$ should depend on variables $x_i$ for any $i<j$. The results of substituting $x_1:A_1,...,x_n:A_n$ with $a_1:A_1,...,a_n:A_n$ is denoted by $a(a_1,...,a_n)$. Note that in this last expression, $A_n$ can depend on $x_1,...,x_{n-1}$, thus noted $A[x_1,...,x_{n-1}]$. Variables will be prefereably denote by $x,y,z...$.\\
+
+
+Function constant is a 
+
+
+
+In addition to terms and types, that have previously been discussed, in ML theory we also consider \emph{property}.
+
+
+
+
+
+
+\begin{defintion}
+  A property is a type valued function, that is, a function from types to types.
+\end{definition}
+
+\begin{example}
+Let $\N$ be the type of every natural number and the type valued function $P(x)$ be the function that represents the property "being a prime number". We can express the fact that 3 is a natural number as $3: \N$. We can then consider  type $P(3)$ will be the proposition ``3 is a prime number''. 
+\end{example}
+
+
+
+
+The most important difference in this exposition of type theory is that now we will not present the differentiated alpha/beta/eta equivalences, but we will present them all together as a single equivalence concept. This is due to two reasons. The first is that we consider that the objective of explaining the intuition and the multiple forms of equality is already satisfied. The second is that our main interest is in the relation to Category Theorics, where we always consider all equivalences together.
+
+
+\begin{definition}
+
+\end{definition}
+
+
+Now we will have a word on \emph{universes}. 
