@@ -23,7 +23,7 @@ In this section we introduce rather succinctly the foundations of the type theor
 
 \subsection{Definition of Martin-L\"of type theory}
 
-After having previously introduced the calculations, in this one we will introduce Martin-L\"of type theory, ML for short, in a more systematic way, introducing type formation rules, term formation rules, and the equivalence rules. After that, we will introduce the category structure. Definition are adapted from \cite{seely1984locally}.\\
+After having previously introduced the calculations, in this one we will introduce Martin-L\"of type theory, ML for short, in a more systematic way, introducing type formation rules, term formation rules, and the equivalence rules. After that, we will introduce the category structure. The main source for this section is \cite{martinlof1973intuitionistic}, with summaries taken from \cite{seely1984locally} with commentary from .\\
 
 As a founding level of mathematics, we are going to define types and terms as before. The change in enphasis comes from the fact that we will manage the notation of the Curry-Howard from the beginning, as it was done while firstly introduced by Martin-L\"of in \cite{martinlof1973intuitionistic}. In this we will always consider \emph{types as propositions} and \emph{terms as proofs}, and we will made use of this analogy to explain the properties of the theory. \\
 
@@ -31,34 +31,58 @@ One last particularity of the Martin-L\"of is the fact that we can include detai
 
 \subsubsection{Terms and types}
 
-The formal system that Martin-L\"of presents consists of a set of rules $a : A$, as could be predicted, that a \emph{term $a$ is of type symbol $A$}, that means that $A$ as a proposition is proved by the proof $a$. We also consider equality between term $a = b$ and equality between types $A = B$. Types will be preferably denoted by $A,B,C...$ and terms by $a,b,c...$.\\
+The formal system that Martin-L\"of presents consists of a set of rules $a : A$, as could be predicted, that a \emph{term $a$ is of type symbol $A$}, that means that $A$ as a proposition is proved by the proof $a$. We also consider equality between term $a = b$ and equality between types $A = B$. Types will be preferably denoted by $A,B,C...$ and terms by $a,b,c$ characters..\\
 
-After defining the abstract concept of term and types, and before introducing the full term and type forming rule, we will introduce the concept of \emph{variables} and \emph{function constant}. \\
+After defining the abstract concept of term and types, and before introducing the full term and type forming rule, we will introduce the concept of \emph{variables} and \emph{function constant}:
 
-Variables are defined analogously as in the case of simply typed lambda calculus. The statements $x: A$ represents arbitrary object of a given type. As previously, an statement of $x: A$ where $x$ is a variable is called an \emph{assumption}. We will also note the type of variables as super-index: $x^A$. As in simply typed lambda calculus, a term $a$ can depend on variables $x_1,...,x_n$, usually noted by $a(x_1,...,x_n)$. Quite importantly, as types can depend on variables, and each variable should have a type, we need to impose the \emph{condition on variables}. This state that in statement $a(x_1,..,x_n)$ it should happens that no variable $x_j$ should depend on variables $x_i$ for any $i<j$. The results of substituting $x_1:A_1,...,x_n:A_n$ with $a_1:A_1,...,a_n:A_n$ is denoted by $a(a_1,...,a_n)$. Note that in this last expression, $A_n$ can depend on $x_1,...,x_{n-1}$, thus noted $A[x_1,...,x_{n-1}]$. Variables will be prefereably denote by $x,y,z...$.\\
+Variables are defined analogously as in the case of simply typed lambda calculus. The statements $x: A$ represents arbitrary object of a given type. As previously, an statement of $x: A$ where $x$ is a variable is called an \emph{assumption}. We will also note the type of variables as super-index, $x^A$. As in simply typed lambda calculus, a term $a$ can depend on variables $x_1,...,x_n$, usually noted by $a(x_1,...,x_n)$.\\
 
+  Quite importantly, as types can depend on variables, and each variable should have a type, we need to impose the \emph{condition on variables}. This state that in statement $a(x_1,..,x_n)$ it should happens that no variable $x_j$ should depend on variables $x_i$ for any $i<j$. The results of substituting $x_1:A_1,...,x_n:A_n$ with $a_1:A_1,...,a_n:A_n$ is denoted by $a(a_1,...,a_n)$. Note that in this last expression, $A_n$ can depend on $x_1,...,x_{n-1}$, thus noted $A[x_1,...,x_{n-1}]$. Variables will be prefereably denoted by $x,y,z$ characters. Further on, each time we talk about any generic type or term dependent on variables, we will always suppose the it follows the condition on variables.\\
 
-Function constant is a 
+Note that type can depend on variables, that is, on terms. They do not depend on other types directly.\\ 
+  
+Function constant is a function from terms to terms. Each function constant $f$ has associated an index $n$ with the number of argument, and also $n$ types symbols $$A_1, A_2[x_1^{A_1}],...,A_n[x_1^{A_1},...,x_1^{A_{n-1}}].$$ A function $f$ of index $n$ is called to be an \emph{$n$-ary function constant}. A 0-ary function is called a \emph{constant}.  Function constants are preferably denoted by $f,g,h$ characters. \\
 
+In addition to function constant, we can consider \emph{type valued function constants}. This have the same indicacion as above, and a 0-ary type valued function constant is called a type constant. In the analogy of terms and types, with proof and proposition, that have previously been discussed, type valued functions constants are \emph{properties}. Type valued function constants are preferably denoted by $F,G,H$ characters. By opposition, function constants are called \emph{terms valued function constants}.
 
-
-In addition to terms and types, that have previously been discussed, in ML theory we also consider \emph{property}.
-
-
-
-
-
-
-\begin{defintion}
-  A property is a type valued function, that is, a function from types to types.
-\end{definition}
 
 \begin{example}
 Let $\N$ be the type of every natural number and the type valued function $P(x)$ be the function that represents the property "being a prime number". We can express the fact that 3 is a natural number as $3: \N$. We can then consider  type $P(3)$ will be the proposition ``3 is a prime number''. 
 \end{example}
 
+Now we are in place to describe the formation rules.
+
+\begin{definition}[Type formation rules, 1.1.1 \cite{seely1984locally}]
+  The following are to be terms of the indicate types:
+  \begin{enumerate}
+  \item 1 is a type.
+  \item If $F(x_1,..,x_n)$ is a type-valued function constant, then $F(a_1,...,a_n)$ is a type, with  $x_1:A_1,...,x_n:A_n$ with $a_1:A_1,...,a_n:A_n$.
+  \item If $a,b$ are terms, then $I(a,b)$ is a type.
+  \item If $A$ is a type and $B(x^A)$ are types, then $\prod x^A. B(x^A)$ and  $\sum x^A. B(x^A)$
+    
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}[Term formation rules, 1.1.2 \cite{seely1984locally}]
+  The following are to be types:
+  \begin{enumerate}
+  \item $*:1$.
+  \item For every type $A$, there exists countable many variables $x_i^A : A$, $i\in \N$.
+  \item If $f(x_1,..,x_n)$ is a term-valued function constant, then $f(a_1,...,a_n)$ is a term of appropriate type, with  $x_1:A_1,...,x_n:A_n$ with $a_1:A_1,...,a_n:A_n$.
+  \item If $t(x^A) : B(x^A)$, then:
+    $$\lambda x^A.t(x^A) : \prod x^A. B(x^A).$$
+
+    Conversely, if $f : \prod x^A. B(x^A)$ and $a:A$, $f(a) : B(a)$.
+  \item If $a:A$ and $b:B(a)$, then $\langle a, b\rangle : \sum x^a. B(x)$. Conversely, $c : \sum x^a. B(x)$, $\pi (c) : A$ and $\pi'(c) : B(\pi(c))$. 
+  \item If $a:A$, then $r(a): I(a,a)$. 
+  \end{enumerate}
+\end{definition}
 
 
+
+
+
+\subsubsection{Equivalences}
 
 The most important difference in this exposition of type theory is that now we will not present the differentiated alpha/beta/eta equivalences, but we will present them all together as a single equivalence concept. This is due to two reasons. The first is that we consider that the objective of explaining the intuition and the multiple forms of equality is already satisfied. The second is that our main interest is in the relation to Category Theorics, where we always consider all equivalences together.
 
