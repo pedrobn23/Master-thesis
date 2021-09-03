@@ -656,7 +656,7 @@ The property that each arrow should satisfy can be represented as:
 \begin{example} Let $U:Grp \to Set$ be the forgetful functor, and let $X\in Ob(Set)$. We can consider $(X\downarrow U)$ where every object is a function of Sets $f: X\to Ug$ for a group $g$.  
 \end{example}
 
-One can easily now deduce the dual concept of the category $(b\uparrow S)$ represented by: \\
+One can easily now deduce the dual concept of the category $(S\uparrow b)$ represented by: \\
 \begin{center}
   objects: $
   \begin{tikzcd}
@@ -670,6 +670,13 @@ One can easily now deduce the dual concept of the category $(b\uparrow S)$ repre
     Sd\ar[rr, "Sh", swap]\ar[uur, "f"] & & Sd'\ar[uul,"f'",swap]
   \end{tikzcd}$.
 \end{center}
+
+Categories $S\uparrow b$ where $S= id$ are particularly useful, and will be studied more thoroughly in Chapter \ref{chap:5}.
+
+\begin{definition}\label{def:slice-cat}
+  let $C$ be a category and $a$ be an object of $C$. We define the \emph{slice category} $C/a$ as:
+  $$C/a :=(a\uparrow 1_C).$$
+\end{definition}
 
 Now suppose that we have three categories $B,C,D$ and two functors $S,T$ such that
 \[
@@ -702,3 +709,5 @@ We can represent the previous definition by:
 
 
 The name comma category comes from is alternative notation $(S\downarrow T) = (S,T)$. We prefer the $(S\downarrow T)$ as it is more clear, nonetheless it is clear that before modern text editor became popular, the original comma notation had a big plus.
+
+
