@@ -31,9 +31,7 @@ One last particularity of the Martin-L\"of is the fact that we can include detai
 
 \subsubsection{Terms and types}
 
-The formal system that Martin-L\"of presents consists of a set of rules $a : A$, as could be predicted, that a \emph{term $a$ is of type symbol $A$}, that means that $A$ as a proposition is proved by the proof $a$. We also consider equality between term $a = b$ and equality between types $A = B$. Types will be preferably denoted by $A,B,C...$ and terms by $a,b,c$ characters..\\
-
-After defining the abstract concept of term and types, and before introducing the full term and type forming rule, we will introduce the concept of \emph{variables} and \emph{function constant}:
+The formal system that Martin-L\"of presents consists of a set of rules $a : A$, as could be predicted, that a \emph{term $a$ is of type symbol $A$}, that means that $A$ as a proposition is proved by the proof $a$. We also consider equality between term $a = b$ and equality between types $A = B$. Types will be preferably denoted by $A,B,C...$ and terms by $a,b,c$ characters.After defining the abstract concept of term and types, and before introducing the full term and type forming rule, we will introduce the concept of \emph{variables} and \emph{function constant}.\\
 
 Variables are defined analogously as in the case of simply typed lambda calculus. The statements $x: A$ represents arbitrary object of a given type. As previously, an statement of $x: A$ where $x$ is a variable is called an \emph{assumption}. We will also note the type of variables as super-index, $x^A$. As in simply typed lambda calculus, a term $a$ can depend on variables $x_1,...,x_n$, usually noted by $a(x_1,...,x_n)$.\\
 
@@ -59,7 +57,7 @@ Now we are in place to describe the formation rules.
   \item 1 is a type.
   \item If $F(x_1,..,x_n)$ is a type-valued function constant, then $F(a_1,...,a_n)$ is a type, with  $x_1:A_1,...,x_n:A_n$ with $a_1:A_1,...,a_n:A_n$.
   \item If $a,b$ are terms, then $I(a,b)$ is a type.
-  \item If $A$ is a type and $B(x^A)$ are types, then $\prod x^A. B(x^A)$ and  $\sum x^A. B(x^A)$
+  \item If $A$ is a type and $B(x^A)$ are types, then $\Pi x^A. B(x^A)$ and  $\Sigma x^A. B(x^A)$
   \end{enumerate}
 \end{definition}
 
@@ -70,30 +68,33 @@ Now we are in place to describe the formation rules.
   \item For every type $A$, there exists countable many variables $x_i^A : A$, $i\in \N$.
   \item If $f(x_1,..,x_n)$ is a term-valued function constant, then $f(a_1,...,a_n)$ is a term of appropriate type, with  $x_1:A_1,...,x_n:A_n$ with $a_1:A_1,...,a_n:A_n$.
   \item If $t(x^A) : B(x^A)$, then:
-    $$\lambda x^A.t(x^A) : \prod x^A. B(x^A).$$
+    $$\lambda x^A.t(x^A) : \Pi x^A. B(x^A).$$
 
-    Conversely, if $f : \prod x^A. B(x^A)$ and $a:A$, $f(a) : B(a)$ and $(\lambda x^A.t(x^A))(a) : B(a)$.
-  \item If $a:A$ and $b:B(a)$, then $\langle a, b\rangle : \sum x^a. B(x)$. Conversely, $c : \sum x^a. B(x)$, $\pi (c) : A$ and $\pi'(c) : B(\pi(c))$. 
+    Conversely, if $f : \Pi x^A. B(x^A)$ and $a:A$, $f(a) : B(a)$ and $(\lambda x^A.t(x^A))(a) : B(a)$.
+  \item If $a:A$ and $b:B(a)$, then $\langle a, b\rangle : \Sigma x^a. B(x)$. Conversely, $c : \Sigma x^a. B(x)$, $\pi (c) : A$ and $\pi'(c) : B(\pi(c))$. 
   \item If $a:A$, then $r(a): I(a,a)$. If $a,b : A$, $c : I(a,b)$, $d : C(a,a,r(a))$, where $C(x^A,y^A,z^{I(a,a)})$, then $\sigma_d[a,b,c] : C(a,b,c)$.  
   \end{enumerate}
 \end{definition}
 
 
-We can now explain the intuition behind this structures. We can start with the \emph{Cartesian product of a family of types}. This is represented by $\prod x^A. B(x^A)$. In the analogy proposition-types, we have that this represents the statement $\forall x \in A : B(x)$. Similarly, a proof of such a statement is a function that take an arbitrary object $a:A$ and return a proof for $B(a)$, and thus we define the terms of this types as lambdas $\lambda x^A.t(x^A) : \prod x^A. B(x^A).$.\\
+We can now explain the intuition behind this structures:
+
+\begin{itemize}
+  \item We can start with the \emph{Cartesian product of a family of types}, that is denoted by $\Pi x^A. B(x^A)$. In the analogy proposition-types, we have that this represents the statement $\forall x \in A : B(x)$. Similarly, a proof of such a statement is a function that take an arbitrary object $a:A$ and return a proof for $B(a)$, and thus we define the terms of this types as lambdas $\lambda x^A.t(x^A) : \Pi x^A. B(x^A).$.\\
 
 
-We follow explaining the \emph{disjoint union of a family type}, that is denoted by $\sum x^A. B(x^A)$ and represents the statement $\exists x \in A : B(x)$. As this type of statement is solved by providing an object and a proof of such statement, we thus define the terms of this typed as pairs $\langle x^A, y^{B(x^A)}\rangle$ of an element and its associated proof. As every pair type, it has projections $\pi,\pi'$. This type is also understood as the type of every element of $A$ such that $B(x)$ holds.
-
+\item We follow explaining the \emph{disjoint union of a family type}, that is denoted by $\Sigma x^A. B(x^A)$ and represents the statement $\exists x \in A : B(x)$. As this type of statement is solved by providing an object and a proof of such statement, we thus define the terms of this typed as pairs $\langle x^A, y^{B(x^A)}\rangle$ of an element and its associated proof. As every pair type, it has projections $\pi,\pi'$. This type is also understood as the type of every element of $A$ such that $B(x)$ holds.
+\end{itemize}
 \begin{example}
  The set of every real number is:
 
-    $$\R := \left(\sum x^{\N\to\QQ}\right).\left(\prod n^\N\right).\left(\prod m^\N\right).\left(|x_{m+n} - x_m| \le 2^{-m}\right),$$
+    $$\R := \left(\Sigma x^{\N\to\QQ}\right).\left(\Pi n^\N\right).\left(\Pi m^\N\right).\left(|x_{m+n} - x_m| \le 2^{-m}\right),$$
     
   where in the second example we use the density property of $\QQ$ in $\R$.\\
 \end{example}
 
 In the particular case of $B(x)$ having the same type $B$ for every $a:A$, we denote:
-$$A\to B:= \prod x^A. B(x^A),\qquad A\times B := \sum x^A. B(x^A).$$
+$$A\to B:= \Pi x^A. B(x^A),\qquad A\times B := \Sigma x^A. B(x^A).$$
 
 Finally, as a mayor difference from previously, we can consider the identity type $I(a,b)$, that represent the proposition of $a$ and $b$, now regarded as object, are identical, with $r(a)$ being the proof of reflexivity of $a$. 
 
@@ -128,7 +129,7 @@ The most important difference in this exposition of type theory is that now we w
 After having presented the Martin-L\"of as presented originally, in this subsection we will explain the modifications that Seely does to the structure. This modifications appear in Seely's previous works \cite{seely1977hyperdoctrines}\footnote{Unlike the other works cited, Seely's doctoral thesis was not available digitally. We have only found available a physical version from the Cambridge Library and thus we were not able to read it. We trust its contents to the references made by Seely himself in his other works cited.} and \cite{seely1983hyperdoctrines}. Seely introduce the following definition:
 
 \begin{definition}
-  Let $z : \sum x^A.B(x)$ be a variable, and $C(z)$ a type that on $z$ but not on $x:A$ neither on $y:B(x^A)$. Then, for every $t(x,y) : C(\langle x, y\rangle)$ there exists $\tilde t (z) : C(z)$, defined by:
+  Let $z : \Sigma x^A.B(x)$ be a variable, and $C(z)$ a type that on $z$ but not on $x:A$ neither on $y:B(x^A)$. Then, for every $t(x,y) : C(\langle x, y\rangle)$ there exists $\tilde t (z) : C(z)$, defined by:
   $$\tilde t (z) := t(\pi(z),\pi'(z)): C(z).$$
 \end{definition}
 
@@ -143,15 +144,34 @@ With this definition, mantaining the notation, we also introduce the following e
 
 
 \subsubsection{Universes}
-Now we will have a word on \emph{universes}. TODO Sunday.
+Now we will have a word on \emph{universes}.Let us begin this discussion with an illustrative example, as introduced by martin lof. Let us imagine that we want to consider the type of sequences of natural numbers as 
 
-\subsection{Category of Martin-Löf type theory}
+$$\Sigma x^\N. F(x),$$
+
+where
+
+\[   
+     \begin{cases}
+       F(0):= N_1,\\
+       F((s(x)):= F(x)\times \N.
+     \end{cases}
+\]
+
+$N_1$ is a placeholder type for empty sequences. This definition can be done by recursion on the types. But for this we would need some type $V$ with closed for the product. Similarly we can argue to have the same recursion property with a closed set for $A \to B$.\\ 
+
+To consider this type we will introduce the type V which will be called universe, whose objects will be the types. In addition we will consider a reflection principle that allows us to work with all operations without leaving the universe.  The problem begin with the interpretation of Russel paradox in this context, given by Girard in \cite{girard1972interpretation}. To avoid this problem, we need to avoid messing with the equivalent in ML of the \emph{regularity axiom} in ZFC.\\
 
 
+Then we consider that $V$ is not a type contained in $V$. Thus we can, similarly to what we did with categories, consider as \emph{small}, all the types within $V$, and $V$ itself and all types which are built from it are \emph{large} types. By iterating this construction we can obtain a sequence:
 
-\section{Local Cartesian closed categories}
+$$V = V_0 : V_1 : V_2 ...$$
 
-this new typing system will be related to the categorical structure "local closed Cartesian categories". Instead of following the classical process of introducing the concept formally so that in the course of a technical demonstration one can see why they are related, we believe that there is extra value in explaining the idea behind the formalism.\\
+where every $V_i$ is a type from the ``type type'' $V_{i+1}$. 
+
+
+\section{Local Cartesian closed categories and hyperdoctrines}
+\subsection{Local Cartesian closed categories}
+This new typing system will be related to the categorical structure "local closed Cartesian categories". Instead of following the classical process of introducing the concept formally so that in the course of a technical demonstration one can see why they are related, we believe that there is extra value in explaining the idea behind the formalism.\\
 
 
 What is the key reason why ML can be considered as a larger structure? Indeed, it is the part by which we can include information about the terms in the typed ones, giving real information about the needs to make a proof system that underlies the mathematics. With this in mind we have to ask ourselves how we can modify the closed Cartesian Category structure so that it pairs with this new typing.  The key idea then comes in considering slice categories (see Definition \ref{def:slice-cat})\footnote{Historically, the actual process was relating first order with LCC, and after that doing the same with ML theories.}.\\
@@ -170,10 +190,10 @@ A \emph{locally Cartesian closed category}, LCC for short,  is a category $C$ wi
   If a category $C$ has finite limits, thus every category $C/a$ with $a\in Ob(C)$  has also finite limits. This needs not to happen with exponent object, being this the main quality of LCCs.
 \end{remark}
 
-
 \subsection{Hyperdoctrines}
-\subsubsection{Definition of hyperdoctrine}
-As a tool for dealing with LCC we are going to introduce hyperdoctrines. This were introduced in by Lawvere as part of his influential work \cite{lawvere1969adjointness}. The notion of a hyperdoctrine is essentially an axiomatization of the collection of slices of a locally cartesian closed category.
+
+
+As a tool for dealing with LCC we are going to introduce hyperdoctrines. This were introduced in by Lawvere as part of his influential work \cite{lawvere1969adjointness}. The notion of a hyperdoctrine is essentially an axiomatization of the collection of slices of a locally cartesian closed category\cite{nlab:hyperdoctrine}.
 
 \begin{definition}
   Let $C$ be a category with finite limits. A $C$-indexed category $P$ is a collection that  consists of:
@@ -183,25 +203,33 @@ As a tool for dealing with LCC we are going to introduce hyperdoctrines. This we
   \end{enumerate}
 \end{definition}
 \begin{remark}
-  Any category $C$ with finite limits, is self-indexed, with $C(a)=C/a$ and $C(f)$ defined by pullback, for every $a\in Ob(C), f\in Ar(C)$. 
-\end{remark}
+  Any category $C$ with finite limits, is self-indexed, with $C(b)=C/b$ and $C(f:b_1\to b_2)=f^*: C/b_2 \to C/b_1$ defined by pullback. That is, given an object $g:a\to b_2 \in C/b_2$, by the pullback diagram:
+    \[
+      \begin{tikzpicture}
+        \node {\begin{tikzcd}
+            a \times_{b_2} b_1 \ar[r,"p_2"]\ar[d,"p_1"] & a\ar[d,"g"]\\
+            b_1\ar[r,"f"] & b_2.
+          \end{tikzcd}};
+      \end{tikzpicture}
+    \]
+
+    we can define $f^*(g) = p_1$, with $p_i$ as in definition \ref{def:pullback}. This has clear inspirations in topology, as many things in this area, with notation $f^*$ for the contravariant pullback functor given as in Grothendieck's six operations\cite{nlab:six_operations}.\\
+  \end{remark}
+   
   We can see that $P$ is, in summary, an contravariant functor from $C$ to $Cat$. Properties from $(\cdot)^*$ derive from the fact that arrows in $Cat$ are functors. Therefore a $C$-indexes category is just an object of $Cat^C$.\\
-
-Notation $f^*$ is chosen by Seely as a reminiscent of the pullback notation on Topos theory.
-
 
 \begin{definition}
   A $C$-indexes category $P$ is a hyperdoctrine if:
   \begin{enumerate}
   \item $P(a)$ is closed Cartesian for every $a\in Ob(C)$.
   \item $f^*$ preserves exponent for every $f\in Ar(C)$.
-  \item $f^*$ has adjoints $\sum_f \dashv f^* \dashv \prod_f$.
-  \item $P$ satisfies the Beck condition: if the following diagram is a pullback in $C$, then for any object $\varphi$ of $P(c)$, $\sum_k h^*(\varphi) \cong f^*\sum_g(\varphi)$.
+  \item $f^*$ has adjoints $\Sigma_f \dashv f^* \dashv \Pi_f$.
+  \item $P$ satisfies the Beck condition: if the following diagram is a pullback in $C$, then for any object $\varphi$ of $P(c)$, $\Sigma_k h^*(\varphi) \cong f^*\Sigma_g(\varphi)$.
     \[
       \begin{tikzpicture}
         \node {\begin{tikzcd}
             d\ar[r,"h"]\ar[d,"k"] & c\ar[d,"g"]\\
-            a\ar[r,"f"] & b.
+            a\ar[r,"f"] &   b.
           \end{tikzcd}};
       \end{tikzpicture}
     \]
@@ -212,21 +240,26 @@ Notation $f^*$ is chosen by Seely as a reminiscent of the pullback notation on T
   \begin{itemize}
   \item For each $a\in Ob(C)$, $P_1(a)\cong P_2(a)$.
   \item For each $f\in Ar(C)$, $P_1(f)(a)\cong P_2(f)(a)$.
-    DUDA: Mirar 2.6 en seely y comentarselo a Angel.
   \end{itemize}
 \end{definition}
 
 Note that if $P_1\cong P_2$ as $C$-indexed categories, and $P_1$ is a hypedoctrine, the $P_2$ is an hyperdoctrine.
 
+\begin{remark}
+  Similar to the definition of $f^*$ with the pullback, we can define the functor $\Sigma_f: C/b_1 \to C/b_2$ via post-composition. 
+\end{remark}
 
-\subsubsection{Caracterization of LCC}
+
+Now we proceed to presents and explain the following theorem.
+
 \begin{theorem}
   If $C$ has finite limits, then $C$ is a LCC if, and only if, as a $C$-indexed category $C$ is a hyperdoctrine. 
 \end{theorem}
 
-This result, as noted in \cites{seely1984locally}, can be deduced from results showed in Freid's famous work ``Aspect of Topoi'', \cite[Section 1.3]{freyd1972aspects}. Nonetheless, this implication is not trivial. Thus, we now proceed to detail a bit this proof. During this discussion $C$ is a category, $b\in Ob(C)$ and $f:a\to b\in Ar(C)$.
+This result, as noted in \cites{seely1984locally}, can be deduced from results showed in \cite[Section 1.3]{freyd1972aspects}. Nonetheless, as Freyd never talks about hyperdoctrines, it is a bit blurry. Thus, we now proceed to detail a bit this proof, avoiding some proofs but carefully pointing out where to find this statements. During this discussion $C$ is a category, $a,b\in Ob(C)$ and $f:b_1\to b_2\in Ar(C)$.\\
 
-\begin{definition}[\cite[Section 2]{nlab:reflective_subcategory}]
+
+\begin{definition}[Section 2, \cite{nlab:reflective_subcategory}]
 Definition 2.1. A full subcategory $i:C\hookrightarrow D$ is reflective if the inclusion functor $i$ has a left adjoint $T\dashv i$:
   \[
     \begin{tikzcd}
@@ -238,7 +271,6 @@ The left adjoint is sometimes called the reflector,
 \end{definition}
 
 \begin{example}
-
   $Ab$ is a reflective subcategory of $Grp$, with reflector given by the abelianization of a group.
 \end{example}
 
@@ -248,23 +280,42 @@ In reflective subcategories the inclusion $i:C\hookrightarrow D$ creates all lim
 \end{proposition}
 
 
-\begin{proposition}[Proposition 1.31,\cite{freyd1972aspects}]
+\begin{theorem}[Proposition 1.31,\cite{freyd1972aspects}]
 Let $A$ be a CCC and $A'\subset A$ be a full reflexive subcategory with reflector  $R$. Then $R$ preserves products iff for all $b,a\in Ob(A')$, we have that $b^a\in A'$.
-\end{proposition}
-\begin{proposition}
-Let $C$ be a category. We define the functor $\sum_b : C/b \to C$ as the forgetful functor for every $b\in Ob(C)$. Then $\sum_b$ preserves and reflects colimits, equalizers, pullbacks and monomorphisms.
-\end{proposition}
+\end{theorem}
+\begin{corollary}
+Let $C$ be a category. We define the functor $\sigma_b : C/b \to C$ as the forgetful functor for every $b\in Ob(C)$. Then $\sigma_b$ preserves and reflects colimits, equalizers, pullbacks and monomorphisms.
+\end{corollary}
 
 If $C$ has finite products, we can define the functor $\times_b: C \to C/b$ such that:
 \begin{itemize}
 \item For each $a\in Ob(C)$, $\times_b(a) := \pi':a\times b \to b$.
-\item For each $f\in Ar(C)$, $\times_b(f) := f\times 1_b: a\times b \to f(a)\times b$.
+\item For each $g:a\to g(a)\in Ar(C)$, $\times_b(f) := g\times 1_{b}: \times b \to g(a)\times b$.
 \end{itemize}
 
-We can check that $\sum_b \dashv \times_b$. Finally, we have the following proposition:
-
-\begin{proposition}
-  
+\begin{proposition}[Proposition 1.33,\cite{freyd1972aspects}]
+  $\sigma_b \dashv \times_b$.\\
 \end{proposition}
 
+Note that $(C/b_2)/(b_1\to b_2)$ is isomorphic to $C/b_1$. With this identification we have $$\times_{b_1\to b_2} = f^*,\qquad \text{and} \qquad\sigma_{(b_1\to b_2)} = \Sigma_f.$$
 
+with this note we have two important things to point out:
+\begin{itemize}
+\item We have that each $f^*$ have a left adjoint $\Sigma_f$. It can be checked that in the context of $C$ having finite limits, that they satisfy the Beck condition. 
+\item To prove that $f^*$ has a right adjoint for each $f$ if, and only if, for each $b\in Ob(C)$ we have that $C/b$ is cartesian closed, it suffices to proof such for $\times_b$.\\
+\end{itemize}
+
+On implication directly derives from the following proposition
+\begin{proposition}[Proposition 1.34,\cite{freyd1972aspects}]
+  For $C$ cartesian closed, $\times_b: C\to C/b$ has a right adjoint.
+\end{proposition}
+
+The other implication can be check by noting that, if $\times_b$ has a right-adjoint $\#_b$, then we have:
+$$(\cdot \times b, a) = \left( \sigma_b(\times_b(\cdot)), A\right) \cong^{1.} \left( \times_b(\cdot), \times_b(A)\right)  \cong^{2.} \left( \cdot, \#(\times_b(A)\right)), $$
+
+where in 1. and 2. we use adjointness. Thus, we can define $a^b:= \#_b(\times_b(a))$.
+
+
+\section{Internal Language of a Local closed Cartesian category}
+
+\section{Interpretation of Martin-L\"of theories}
