@@ -124,6 +124,9 @@ The most important difference in this exposition of type theory is that now we w
 \end{definition}
 
 %\footnote{Reflexive, transitive and symmetric properties are not needed in the defintion and in fact can be derived from 6\cite[1.3]{seely1984locally}. We nonetheless included them as a natural part of the definition of equality to favor readability.}.
+\begin{remark}
+  After having define the structure, as with typed lambda-calculus in section \ref{section:pureandimpure}, we point out that each system of terms and types that follow these rules is said to be a ML theory. 
+\end{remark}
 \subsubsection{Seely's enlargement}
 
 After having presented the Martin-L\"of as presented originally, in this subsection we will explain the modifications that Seely does to the structure. This modifications appear in Seely's previous works \cite{seely1977hyperdoctrines}\footnote{Unlike the other works cited, Seely's doctoral thesis was not available digitally. We have only found available a physical version from the Cambridge Library and thus we were not able to read it. We trust its contents to the references made by Seely himself in his other works cited.} and \cite{seely1983hyperdoctrines}. Seely introduce the following definition:
@@ -233,6 +236,7 @@ As a tool for dealing with LCC we are going to introduce hyperdoctrines. This we
           \end{tikzcd}};
       \end{tikzpicture}
     \]
+    
   \end{enumerate}
 \end{definition}
 \begin{definition}
@@ -316,6 +320,130 @@ $$(\cdot \times b, a) = \left( \sigma_b(\times_b(\cdot)), A\right) \cong^{1.} \l
 where in 1. and 2. we use adjointness. Thus, we can define $a^b:= \#_b(\times_b(a))$.
 
 
-\section{Internal Language of a Local closed Cartesian category}
+\section{The closed Cartesian category of a Martin-L\"of theory}
+\label{InternalLCC}
+In this section we are going to explain how to create a local cartesian category. To do that, we define the function $\CC$ that take a ML theory and return a category, and them proceed to proof that such a category is an LCC.
 
+\begin{definition}
+  Let $M$ be a ML theory. We define the category $\CC(M)$ as the category that has:
+  \begin{itemize}
+  \item As objects all closed types of $M$.
+  \item As arrows $f:a\to b$ are all closed terms of type $a\to b$.
+  \end{itemize}
+\end{definition}
+
+Further on, we will consider $M$ an arbitrary ML theory.
+\begin{proposition}\label{prop:CM1}
+  $\CC(M)$ is a Cartesian category.
+\end{proposition}
+\begin{proof}
+    \begin{itemize}
+  \item Operations:
+    \begin{itemize}
+      
+    \item \emph{Identity}: given an object $a\in \CC(M)$, define $1_a := \lambda x^a.x$. 
+    \item \emph{Composition}: given a pair of arrows $f:a\to b =  lambda x^a. \varphi(x)$ and , $g:b \to c = lambda x^b. \psi(x)$ in $\CC(M)$, define $$f\circ g := \lambda x^a. \psi (\varphi(x)). $$
+    \end{itemize}
+
+  \item Properties:
+    \begin{itemize}
+    \item \emph{Associative}: given an extra arrow $h:c\to d = lambda x^c. \rho(x)$, we have that,
+      $$h \circ (g\circ f)  = h\circ \lambda x^a.\psi(\varphi(x))  = \lambda x^a.\rho(\psi(\varphi(x))) =  \lambda x^a.\rho(\psi(x)) \circ f =  (h\circ g)\circ f.$$
+    \item \emph{Unit}: 
+      $$f \circ 1_a = \lambda x^a. \varphi(x) = f.$$
+Proceed analogously to check that $1_b \circ f =f$
+    \end{itemize}
+
+
+\item Terminal object: Type 1 is the terminal object, due to $t: 1$ implying $t=*$ and thus $\lambda x^a. *$ being the only term of type $a\to 1$. 
+\item Product:  product for types $a$ and $b$ is given by $a\times b$, and projections by $\pi, \pi'$.
+  \end{itemize}
+\end{proof}
+
+\begin{proposition}
+  Given $f:a\to b, g:c\to b$, the pullback
+  \[
+    \begin{tikzpicture}
+      \node {\begin{tikzcd}
+          a\times_b c \ar[d,"p_1"]\ar[r,"p_2"] & c\ar[d,"g"]\\
+          a\ar[r,"f"] &   b.
+        \end{tikzcd}};
+    \end{tikzpicture}
+  \]
+  is defined by $a\times_b c := \Sigma x^a. \Sigma y^c. I(t(x),s(y))$, with $p_1=\pi$ and $p_2=\pi'\pi$.
+\end{proposition}
+\begin{proof}
+  Given $f',g'$ such that:
+
+  
+\[
+  \begin{tikzcd}
+    q
+    \arrow[bend left]{drr}{g'}
+%     \arrow[dashed]{dr}[description]{u}x
+    \arrow[bend right,swap]{ddr}{f'} & & \\
+    & a\times_{b}c \arrow{r}{p_2} \arrow{d}[swap]{p_1} & c \arrow{d}{g} \\
+    & c \arrow[swap]{r}{f}   & b
+  \end{tikzcd}
+\]
+
+as $ff' = gg'$note that there is a term $\rho(x) = r(f(f'(x))) : I(f(f'(x)), g(g'(x)))$. We can define $$u: q\to a\times_b c = \lambda x^q. \langle f'(x),\langle g'(x),\rho(x)\rangle\rangle$$
+and by equality rules we can check that is the only object of type $I(f(f'(x^q)), g(g'(x^q)))$ such that $up_1 = f',up_2=g'$.
+\end{proof}
+\begin{remark}
+Note how the pullback is designed exactly as the fiber product (see example \ref{fiber-product}), with the construction translated to ML theory.
+\end{remark}
+
+\begin{proposition}\label{prop:CM2}
+$\CC(M)$ is cartesian closed.
+\end{proposition}
+\begin{proof}
+  Given an object $b$, we can define of the adjoint $F_3^b\dashv G_3^b$ (see definition \ref{def:CCC}) by the bijection$\varphi: \hom(a\times b, c) \to \hom(a, c^b)$ such that
+  $$\varphi(t:a\times b\to c) = \lambda x^a.\lambda y^b. t(\langle x,y\rangle) : a\to c^b = a\to (b\to c),$$
+  with inverse:
+  $$\varphi^{-1}(t:a\times c^b) = \lambda x^{a\times b}. s(\pi'(z))(\pi(z)) : a\times b\to c.$$
+\end{proof}
+\begin{remark}
+  Note that the evaluation is the clasical $\epsilon  = \lambda x^{(c^b\times b)}.\pi(x)(\pi'(x))$.
+\end{remark}
+Now, we have a nice structure for $C=\CC(M)$ as a closed cartesian category. Further on, we are to proof that it is, in fact, locally cartesian closed.  The strategy will be the following:  we are going to define a $C$-indexed hyperdoctrine $P(M)$, and proof that $C$ and $P(M)$ are equals as $C$-indexed categories.
+
+\begin{definition} $P(M)$ is the $C$-indexed category such that:
+  \begin{itemize}
+  \item For an object $a\in C$, $P(M)$ is the category with:
+    \begin{itemize}
+    \item objects are the types depending only on $x^a$.
+    \item arrows $f: b\to c$ are all terms of type $a(x)\to b(x)$ that only depends on $x^a$.
+    \end{itemize}
+  \item for an arrow $f:a\to b = \lambda x^a.\varphi(x)$, $f^*$ is defined by precomposition, i.e. given a type or term $e(x^b)$ in $P(M)(b)$, $f^*(e) = e(f(x^a))$.  
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}
+$P(M)(a)$ is cartesian closed.
+\end{proposition}
+\begin{proof}
+  Repeat proofs for proposition \ref{prop:CM1} and proposition \ref{prop:CM2} step by step considering in each term an extra parameter.
+\end{proof}
+
+
+\begin{proposition}
+For each $a\in Ob(C)$, $C/a\cong P(M)(a)$.
+\end{proposition}
+\begin{proof}
+\begin{lemma}
+
+\end{lemma}
+
+\begin{lemma}
+
+\end{lemma}
+\end{proof}
+\begin{theorem}
+  $\CC(M)$ is locally cartesian closed.
+\end{theorem}
+\begin{proof}
+We proof that, as $C$ indexed categories, $C\cong P(M)$.
+\end{proof}
 \section{Interpretation of Martin-L\"of theories}
+\label{InterpretationLCC}
