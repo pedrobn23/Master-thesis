@@ -342,7 +342,8 @@ Further on, we will consider $M$ an arbitrary ML theory.
     \begin{itemize}
       
     \item \emph{Identity}: given an object $a\in \CC(M)$, define $1_a := \lambda x^a.x$. 
-    \item \emph{Composition}: given a pair of arrows $f:a\to b =  lambda x^a. \varphi(x)$ and , $g:b \to c = lambda x^b. \psi(x)$ in $\CC(M)$, define $$f\circ g := \lambda x^a. \psi (\varphi(x)). $$
+    \item \emph{Composition}: given a pair of arrows $f:a\to b =  \lambda x^a. \varphi(x)$ and , $g:b \to c = \lambda x^b. \psi(x)$ in $\CC(M)$, define:
+      $$f\circ g := \lambda x^a. \psi (\varphi(x)). $$
     \end{itemize}
 
   \item Properties:
@@ -351,7 +352,7 @@ Further on, we will consider $M$ an arbitrary ML theory.
       $$h \circ (g\circ f)  = h\circ \lambda x^a.\psi(\varphi(x))  = \lambda x^a.\rho(\psi(\varphi(x))) =  \lambda x^a.\rho(\psi(x)) \circ f =  (h\circ g)\circ f.$$
     \item \emph{Unit}: 
       $$f \circ 1_a = \lambda x^a. \varphi(x) = f.$$
-Proceed analogously to check that $1_b \circ f =f$
+Proceed analogously to check that $1_b \circ f =f$.
     \end{itemize}
 
 
@@ -449,7 +450,7 @@ To proof this proposition we are going to introduce two adjoint functors for eve
     \item For every object $f:b\to a\in Ob(C/a)$ is sent to the type\footnote{Note that we are defining the inverse.}:
       $$\Phi(f)=\Sigma y^b.I(x,f(y)).$$
     \item For every arrow $h: (f:b\to a)\to (g:b\to a)$ is sent to the term:
-      $$\Phi(h) = \lambda z^{\Phi(f)} \langle h(\pi(z)), \rho\rangle,$$
+      $$\Phi(h) = \lambda z^{\Phi(f)}. \langle h(\pi(z)), \rho\rangle,$$
       with $\rho : I(x,g(h(\pi(z))))$ is defined from $$\pi'(z) : I(x,f(\pi(z)))\qquad\text{and}\qquad r(f(\pi(z))) : I (f(\pi(z)), g(h(\pi(z)))),$$ and transitivity of $I(\cdot,\cdot)$.
     \end{itemize}
 
@@ -475,7 +476,7 @@ To proof this proposition we are going to introduce two adjoint functors for eve
   Note that lemma \ref{lemma:CM3} is based on the intuition of $\Phi(f)$ being the inverse of $f$. 
 \end{remark}
 
-\begin{lemma}
+\begin{lemma}\label{lemma:CM4}
 For $b(x^a)$ a type, the objects $b(x^a)$ and $\Sigma y^{\Sigma x^a.b(x)}. I(x,\pi(y))$ are isomorphic in $P(M)(a)$.
 \end{lemma}
 \begin{proof}
@@ -486,12 +487,17 @@ For $b(x^a)$ a type, the objects $b(x^a)$ and $\Sigma y^{\Sigma x^a.b(x)}. I(x,\
 Proceed analogously as in previous lemma to check isomorphism. 
 \end{proof}
 
+% A proof for the following result can be found in \cite[Section 3, sublemma 3.2.3.3]{seely1984locally}.
+% \begin{lemma}\label{lemma:CM5}
+%   If $a$ is a closed type, $b(x^a)$ a type in $P(M)(a)$, then there is a bijection between the set of terms $$
+% \end{lemma}
 
-\begin{lemma}
-  TODO
-\end{lemma}
+
 \begin{proof}[proof of proposition \ref{lemma:hyperdoc}]
-  TODO
+  We have to define two natural bijection. We check that $\Psi\circ\Phi(f:b\to a) = \pi: \Sigma x^a. \Sigma y^b.I(x,f(y)) \to a$. We define the counit $\varepsilon$ by the lemma \ref{lemma:CM3}, as we have that there is an equivalent $\tilde \pi : b \to a$ with an arrow given by the composition with the isomorphism. By the equivalence arrows we can check that in fact $\tilde \pi = f$, providing the counit. Naturality follows from the definitions.\\
+
+  Unit $\eta$ proceed similarly from lemma \ref{lemma:CM4}.
+
 \end{proof}
 \begin{theorem}
   $\CC(M)$ is locally cartesian closed.
@@ -508,7 +514,10 @@ Proceed analogously as in previous lemma to check isomorphism.
         \end{tikzcd}};
     \end{tikzpicture}
   \]
-  where we use the notation $f_P^*$ and $f_C^*$ to diferentiate functor induced in different indexes categories. 
+  where we use the notation $f_P^*$ and $f_C^*$ to diferentiate functor induced in different indexes categories.   Let $t:c\to a \in Ob(C/a)$. We can see that
+  $$\Psi\circ f^*\circ \Phi(t) = \pi: \Sigma x^a. \Sigma y^b.I(f(x),t(y)) \to b,$$
+  being this the definition of pullback of $t$ along $f$, thus equal to $f_C^*$.
 \end{proof}
 \section{Interpretation of Martin-L\"of theories}
 \label{InterpretationLCC}
+In this last section we proceed to introduce the concept of interpretation of an ML theory in a CCC. We consider this of particular interest, since we show a different view than the one presented in the previous chapter on how to consider the equivalence/pairings arising between typing theories and categorical theories.
