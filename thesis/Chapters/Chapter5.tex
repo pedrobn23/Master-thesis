@@ -120,10 +120,10 @@ The most important difference in this exposition of type theory is that now we w
   \item $\sigma_d[a,a,r(a)]=d$, if $f(a,b,c)\in C(a,b,c)$ then $f=\sigma(f(a,a,r(a)))(a,b,c)$. Lastly, if $a(x), b(x):A(x)$ and $t(x) : I(a(x),b(x))$, then $a(x)=b(x)$ and $t(x)=r(a(x))$.
   \end{enumerate}
 
-  Finally, we have the  usual internal coherence rules. That is, is reflexive, transitive and symmetric In addition, if $a=b : A$, and $c:B(x^A)$ then $c(a)=c(b)$ and $a:A, b:B, a=b$ implies $A=B$.
+  Finally, we have the  usual internal coherence rules. That is, is reflexive, transitive and symmetric In addition, if $a=b : A$, and $c:B(x^A)$ then $c(a)=c(b)$ and $a:A, b:B, a=b$ implies $A=B$. Reflexive, transitive and symmetric properties for equivalence $I(\cdot, \cdot)$ can be derived from the rules \cite[1.3]{seely1984locally}.
 \end{definition}
 
-%\footnote{Reflexive, transitive and symmetric properties are not needed in the defintion and in fact can be derived from 6\cite[1.3]{seely1984locally}. We nonetheless included them as a natural part of the definition of equality to favor readability.}.
+%\footnote{. We nonetheless included them as a natural part of the definition of equality to favor readability.}.
 \begin{remark}
   After having define the structure, as with typed lambda-calculus in section \ref{section:pureandimpure}, we point out that each system of terms and types that follow these rules is said to be a ML theory. 
 \end{remark}
@@ -419,6 +419,9 @@ Now, we have a nice structure for $C=\CC(M)$ as a closed cartesian category. Fur
   \end{itemize}
 \end{definition}
 
+\begin{remark}
+  In the context of $P(M)(a)$ variable $x$ will be used as the ever available variable $x^a$, and thus we would use primarily $y$ as standard variable symbol.
+\end{remark}
 \begin{proposition}
 $P(M)(a)$ is cartesian closed.
 \end{proposition}
@@ -427,23 +430,85 @@ $P(M)(a)$ is cartesian closed.
 \end{proof}
 
 
-\begin{proposition}
+\begin{proposition}\label{lemma:hyperdoc}
 For each $a\in Ob(C)$, $C/a\cong P(M)(a)$.
 \end{proposition}
+
+To proof this proposition we are going to introduce two adjoint functors for every $a\in Ob(C)$, and then proof with the help of two lemmas than the composition of this functors is naturally isomorphic to the identity.
+
+  \[
+    \begin{tikzcd}
+      C/a=\CC(M)/a\arrow[ shift left=.5ex, "\Phi"{name=T}]{r}{} &
+      P(M)(a)\arrow[ shift left=1ex, "\Psi"{name=i}]{l}{} \\
+    \end{tikzcd}
+  \]
+  \begin{itemize}
+  \item We define $\Phi$ as the functor such that:
+
+    \begin{itemize}
+    \item For every object $f:b\to a\in Ob(C/a)$ is sent to the type\footnote{Note that we are defining the inverse.}:
+      $$\Phi(f)=\Sigma y^b.I(x,f(y)).$$
+    \item For every arrow $h: (f:b\to a)\to (g:b\to a)$ is sent to the term:
+      $$\Phi(h) = \lambda z^{\Phi(f)} \langle h(\pi(z)), \rho\rangle,$$
+      with $\rho : I(x,g(h(\pi(z))))$ is defined from $$\pi'(z) : I(x,f(\pi(z)))\qquad\text{and}\qquad r(f(\pi(z))) : I (f(\pi(z)), g(h(\pi(z)))),$$ and transitivity of $I(\cdot,\cdot)$.
+    \end{itemize}
+
+  \item We define $\Psi$ as the functor such that:
+    \begin{itemize}
+    \item For every object (type) $b(x^a)\in Ob(P(M)(a))$, $\Psi(b(x))$ is the projection $\pi:b(x)\to a \in C/a$ associated with $\Sigma x^a. b(x)$.
+    \item For every arrow $t(x^a): b(x^a) \to c(x^a)$ is sent to the term:
+      $$\Psi(t) = \lambda z^{\Sigma x^a. b(x)}. \langle \pi(z), t(\pi(z))(\pi'(z))\rangle.$$
+    \end{itemize}
+  \end{itemize}
+\begin{lemma}\label{lemma:CM3}
+  Let $f: b\to a= \lambda x^b.f(x)$ be a term in $M$. Then $b$ and $\Sigma x^a.\Phi(f)(x)$ are isomorphic in $C$.
+\end{lemma}
 \begin{proof}
+  We want to define two morphisms $i:b \to \Sigma x^a. \Sigma y^b. I(x,f(y))$, $: \Sigma x^a. \Sigma y^b. I(x,f(y)) \to b$ in $C$\footnote{in the definition we do a notation simplification, $j$ shall receive a single variable an use $\pi$ and $\pi'$ to access the internal.},
+  $$i = \lambda y^b. \langle f(y),\langle y, r(f(u))\rangle \rangle,$$
+  and
+  $$j = \lambda \langle x^a, \langle y^b, z^{I(x,f(y))} \rangle\rangle . y .$$
+  Clearly $j(i(y)) = y$, and $i(j(\langle x^a, \langle y^b, z^{I(x,f(y))} \rangle\rangle)) = \langle f(y),\langle y, r(f(u))\rangle \rangle$, and equality arises from definition of $\Phi$.
+\end{proof}
+
+\begin{remark}
+  Note that lemma \ref{lemma:CM3} is based on the intuition of $\Phi(f)$ being the inverse of $f$. 
+\end{remark}
+
 \begin{lemma}
-
+For $b(x^a)$ a type, the objects $b(x^a)$ and $\Sigma y^{\Sigma x^a.b(x)}. I(x,\pi(y))$ are isomorphic in $P(M)(a)$.
 \end{lemma}
+\begin{proof}
+  We want to define two morphisms $i(x^a):b(x) \to\Sigma y^{\Sigma x^a.b(x)}. I(x,\pi(y))$ and $j:\Sigma x^a. \Sigma y^b. I(x,f(y)) \to b$ in $P(M)(a)$:
+  $$i(x^a) = \lambda z^{b(x)}. \langle\langle x, z\rangle, r(x) \rangle,$$
+  and
+  $$j(x^a) = \lambda \langle x_\#^a, z^{b(x_\#^a)} \rangle, v^{I(x,x_\#)}\rangle). z .$$
+Proceed analogously as in previous lemma to check isomorphism. 
+\end{proof}
+
 
 \begin{lemma}
-
+  TODO
 \end{lemma}
+\begin{proof}[proof of proposition \ref{lemma:hyperdoc}]
+  TODO
 \end{proof}
 \begin{theorem}
   $\CC(M)$ is locally cartesian closed.
 \end{theorem}
 \begin{proof}
-We proof that, as $C$ indexed categories, $C\cong P(M)$.
+  We proof that, as $C$ indexed categories, $C\cong P(M)$. Finally, as $P(M)(a)$ is a CCC, so is $\CC(M)/a$ for each $a$.\\
+
+  Given proposition \ref{lemma:hyperdoc} it is only left to show that $\Phi$ and $\Psi$ commutes with $f^*$. It suffices to show that:
+    \[
+    \begin{tikzpicture}
+      \node {\begin{tikzcd}
+          C/a \ar[d,"\Phi"]\ar[r,"f_C^*"] & C/b\\
+          P(M)(a)\ar[r,swap,"f_P^*"] &   P(M)(b)\ar[u,"\Psi"]
+        \end{tikzcd}};
+    \end{tikzpicture}
+  \]
+  where we use the notation $f_P^*$ and $f_C^*$ to diferentiate functor induced in different indexes categories. 
 \end{proof}
 \section{Interpretation of Martin-L\"of theories}
 \label{InterpretationLCC}
