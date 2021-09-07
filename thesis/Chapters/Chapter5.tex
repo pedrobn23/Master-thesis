@@ -518,6 +518,50 @@ Proceed analogously as in previous lemma to check isomorphism.
   $$\Psi\circ f^*\circ \Phi(t) = \pi: \Sigma x^a. \Sigma y^b.I(f(x),t(y)) \to b,$$
   being this the definition of pullback of $t$ along $f$, thus equal to $f_C^*$.
 \end{proof}
+
+
 \section{Interpretation of Martin-L\"of theories}
 \label{InterpretationLCC}
-In this last section we proceed to introduce the concept of interpretation of an ML theory in a CCC. We consider this of particular interest, since we show a different view than the one presented in the previous chapter on how to consider the equivalence/pairings arising between typing theories and categorical theories.
+In this last section we proceed to introduce the concept of interpretation of an ML theory in a LCC. We consider this of particular interest, since we show a different view than the one presented in the previous chapter on how to consider the equivalence/pairings arising between typing theories and categorical theories.\\
+
+We define an interpretation as done by Seely. We decide to extend this definition with numerous remark, to provide another layer of understanding of the concept. Through this chapter, $M$ will represent a ML theory, and $C$ will represent a LCC. This chapter is based on \cite[Section 4]{seely1984locally}
+
+% \begin{definition}[Definition]
+%   An interpretation $\overline{\cdot}: M\to C$ consist of:
+%   \begin{enumerate}
+%   \item For a type-value function constant, $F$, with arguments of types $t_1,...,t_n,$ a morphism $\phi: \overline{F} \to \overline{t_n}$ of $C$.
+%   \item For a term-valued function constant, $f$, with arguments of types $t_1,...,t_n$ and value of types $a$, a morphism $\oveline{f}:$
+%   \end{enumerate}
+% \end{definition}
+
+\begin{definition}[Interpretation of a Martin-L\"of theory]
+  We define an interpretation $\overline{\cdot}$, is a mapping such that:
+  \begin{itemize}
+  \item a type depending on a free variable $x^a$ will be interpreted as an object $\chi: \overline{x} \to $in $C/\overline{a}$, for a suitable $\overline{a}$.
+  \item terms will be interpreted as morphisms in the appropriate slice categories.
+  \end{itemize}
+  In particular, a closed type $t$, will correspond to an object $\overline{t}\in C$.
+\end{defintion}
+\begin{remark}
+  Lets analyze the considerations that are held whenever considering a type $t_{n+1}(x_1^{t_1},...,x_n^{t_n})$ that satisfy the condition on variables. $t_1$, being closed, correspond to an object $\overline t_1\in C$. Then we proceed to consider $t_2(x_1^{t_1})$, then $\overline t_2$ is a morphism $\chi_2:\overline t_2\to \overline t_1$. Then we type $t_{3}(x_1^{t_1}, x_2^{t_2})$, is maps to $\chi_3: \overline{t_3}\to \overline{t_2}$. This also induced a morphism $\chi_3' = \langle \chi_2\chi_3, \chi_3\rangle$.
+\end{remark}
+
+
+\begin{definition}[Interpretation of a Martin-L\"of theory - second part]
+  The following equalities must be true:
+  \begin{itemize}
+  \item The substitution of a variable in a type is defined as $\overline{a(t)} = \overline t^* \overline a$, where $a$ is type dependent on a variable $x^b$ and $t : b$ is a term.
+  \item The following type formation rules holds:
+    \begin{enumerate}
+    \item $\overline 1 = \top$ the terminal object in $C$.
+    \item $\overline{I(x_1^a,x_2^a)} = \delta_{\overline{a}}: \overline{a} \to \overline{a}\times \overline{a}}$.\footnote{In view of substitution, $I(a,b)$ would be the equalizer.}
+    \item If $a,b(x^a)$ are types interpreted as $\alpha: \overline a \to \overline x$, $\beta: \overline b \to \overline a$ then:
+      $$\overline{\Pi x^a. b(x)} = \Pi_\alpha \beta, \qquad \overline{\Sigma x^a. b(x)} = \Sigma_\alpha \beta$$
+    \end{enumerate}
+  \item The following type formation rules holds:
+    \begin{enumerate}
+    \item $\overline * = id_\top: \top \to \top$.
+    \item 
+    \end{enumerate}
+  \end{itemize}
+\end{definition}
