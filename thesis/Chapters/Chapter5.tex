@@ -3,9 +3,9 @@
 \label{chap:5}
 \thispagestyle{empty}
 
- In this we use hyperdoctrines as a tool to better understand closed Cartesian categories and relate them with a new typing theory: Martin-Lof type theory.\\
+In this we use hyperdoctrines as a tool to better understand closed Cartesian categories and relate them with a new typing theory: Martin-Lof type theory.\\
 
- In this chapter we continue our categorical presentation of the tip theory with the introduction of Martin Lof's type theory. This type theory, also known as intuitionistic type theory, is initially proposed as a foundation of mathematics. This is really important because it implies a change of mentality, as we do no longer are so focus formalizing computation systems. \\
+In this chapter we continue our categorical presentation of the tip theory with the introduction of Martin Lof's type theory. This type theory, also known as intuitionistic type theory, is initially proposed as a foundation of mathematics. This is really important because it implies a change of mentality, as we do no longer are so focus formalizing computation systems. \\
 
 This relationship with first-order logic arises from the hand of dependent typing. That is, in Martin Lof's type theory there is a formal structure for generating types dependent on other types. This is used (without needing to know the formalism) nowadays continuously in programming languages. \\
 
@@ -35,17 +35,17 @@ The formal system that Martin-L\"of presents consists of a set of rules $a : A$,
 
 Variables are defined analogously as in the case of simply typed lambda calculus. The statements $x: A$ represents arbitrary object of a given type. As previously, an statement of $x: A$ where $x$ is a variable is called an \emph{assumption}. We will also note the type of variables as super-index, $x^A$. As in simply typed lambda calculus, a term $a$ can depend on variables $x_1,...,x_n$, usually noted by $a(x_1,...,x_n)$.\\
 
-  Quite importantly, as types can depend on variables, and each variable should have a type, we need to impose the \emph{condition on variables}. This state that in statement $a(x_1,..,x_n)$ it should happens that no variable $x_j$ should depend on variables $x_i$ for any $i<j$. The results of substituting $x_1:A_1,...,x_n:A_n$ with $a_1:A_1,...,a_n:A_n$ is denoted by $a(a_1,...,a_n)$. Note that in this last expression, $A_n$ can depend on $x_1,...,x_{n-1}$, thus noted $A[x_1,...,x_{n-1}]$. Variables will be prefereably denoted by $x,y,z$ characters. Further on, each time we talk about any generic type or term dependent on variables, we will always suppose the it follows the condition on variables.\\
+Quite importantly, as types can depend on variables, and each variable should have a type, we need to impose the \emph{condition on variables}. This state that in statement $a(x_1,..,x_n)$ it should happens that no variable $x_j$ should depend on variables $x_i$ for any $i<j$. The results of substituting $x_1:A_1,...,x_n:A_n$ with $a_1:A_1,...,a_n:A_n$ is denoted by $a(a_1,...,a_n)$. Note that in this last expression, $A_n$ can depend on $x_1,...,x_{n-1}$, thus noted $A[x_1,...,x_{n-1}]$. Variables will be prefereably denoted by $x,y,z$ characters. Further on, each time we talk about any generic type or term dependent on variables, we will always suppose the it follows the condition on variables.\\
 
 Note that type can depend on variables, that is, on terms. They do not depend on other types directly.\\ 
-  
+
 Function constant is a function from terms to terms. Each function constant $f$ has associated an index $n$ with the number of argument, and also $n$ types symbols $$A_1, A_2[x_1^{A_1}],...,A_n[x_1^{A_1},...,x_1^{A_{n-1}}].$$ A function $f$ of index $n$ is called to be an \emph{$n$-ary function constant}. A 0-ary function is called a \emph{constant}.  Function constants are preferably denoted by $f,g,h$ characters. \\
 
 In addition to function constant, we can consider \emph{type valued function constants}. This have the same indicacion as above, and a 0-ary type valued function constant is called a type constant. In the analogy of terms and types, with proof and proposition, that have previously been discussed, type valued functions constants are \emph{properties}. Type valued function constants are preferably denoted by $F,G,H$ characters. By opposition, function constants are called \emph{terms valued function constants}.
 
 
 \begin{example}\label{example:primeML}
-Let $\N$ be the type of every natural number and the type valued function $P(x)$ be the function that represents the property "being a prime number". We can express the fact that 3 is a natural number as $3: \N$. We can then consider  type $P(3)$ will be the proposition ``3 is a prime number''. 
+  Let $\N$ be the type of every natural number and the type valued function $P(x)$ be the function that represents the property "being a prime number". We can express the fact that 3 is a natural number as $3: \N$. We can then consider  type $P(3)$ will be the proposition ``3 is a prime number''. 
 \end{example}
 
 \subsubsection{Full typing structure}
@@ -76,31 +76,34 @@ Now we are in place to describe the formation rules.
   \end{enumerate}
 \end{definition}
 
+\begin{remark}
+  Note that we only define terms to be dependent on the same variables as their types. See \cite[Section 2.2]{martinlof1973intuitionistic} for more information.
+\end{remark}
 
 We can now explain the intuition behind this structures:
 
 \begin{itemize}
-  \item We can start with the \emph{Cartesian product of a family of types}, that is denoted by $\Pi x^A. B(x^A)$. In the analogy proposition-types, we have that this represents the statement $\forall x \in A : B(x)$. Similarly, a proof of such a statement is a function that take an arbitrary object $a:A$ and return a proof for $B(a)$, and thus we define the terms of this types as lambdas $\lambda x^A.t(x^A) : \Pi x^A. B(x^A).$.\\
+\item We can start with the \emph{Cartesian product of a family of types}, that is denoted by $\Pi x^A. B(x^A)$. In the analogy proposition-types, we have that this represents the statement $\forall x \in A : B(x)$. Similarly, a proof of such a statement is a function that take an arbitrary object $a:A$ and return a proof for $B(a)$, and thus we define the terms of this types as lambdas $\lambda x^A.t(x^A) : \Pi x^A. B(x^A).$.\\
 
 
 \item We follow explaining the \emph{disjoint union of a family type}, that is denoted by $\Sigma x^A. B(x^A)$ and represents the statement $\exists x \in A : B(x)$. As this type of statement is solved by providing an object and a proof of such statement, we thus define the terms of this typed as pairs $\langle x^A, y^{B(x^A)}\rangle$ of an element and its associated proof. As every pair type, it has projections $\pi,\pi'$. This type is also understood as the type of every element of $A$ such that $B(x)$ holds.
 \end{itemize}
 \begin{example}
- The set of every real number is:
+  The set of every real number is:
 
-    $$\R := \left(\Sigma x^{\N\to\QQ}\right).\left(\Pi n^\N\right).\left(\Pi m^\N\right).\left(|x_{m+n} - x_m| \le 2^{-m}\right),$$
-    
+  $$\R := \left(\Sigma x^{\N\to\QQ}\right).\left(\Pi n^\N\right).\left(\Pi m^\N\right).\left(|x_{m+n} - x_m| \le 2^{-m}\right),$$
+  
   where in the second example we use the density property of $\QQ$ in $\R$.\\
 \end{example}
 
-In the particular case of $B(x)$ having the same type $B$ for every $a:A$, we denote:
+In the particular case of $B(x^A)$ having the same type $B$ for every $a:A$, we denote:
 $$A\to B:= \Pi x^A. B(x^A),\qquad A\times B := \Sigma x^A. B(x^A).$$
 
 Finally, as a mayor difference from previously, we can consider the identity type $I(a,b)$, that represent the proposition of $a$ and $b$, now regarded as object, are identical, with $r(a)$ being the proof of reflexivity of $a$. 
 
 
 \begin{remark}
-  As it happens in the previous chapter, we can consider an expansion with the sum type of $A+B$, as is presented in \cite[Section 1.6]{martinlof1973intuitionistic}. In the shake of brevity, we avoid it as it is not interesting from a categoric viewpoint.
+  As it happens in the previous chapter, we can consider an expansion with the sum type of $A+B$, as is presented in \cite[Section 1.6]{martinlof1973intuitionistic}. In the shake of brevity, we avoid it as it is not as interesting from a categoric viewpoint.
 \end{remark}
 
 \subsection{Equivalences and universes}
@@ -123,7 +126,7 @@ The most important difference in this exposition of type theory is that now we w
   Finally, we have the  usual internal coherence rules. That is, is reflexive, transitive and symmetric In addition, if $a=b : A$, and $c:B(x^A)$ then $c(a)=c(b)$ and $a:A, b:B, a=b$ implies $A=B$. Reflexive, transitive and symmetric properties for equivalence $I(\cdot, \cdot)$ can be derived from the rules \cite[1.3]{seely1984locally}.
 \end{definition}
 
-%\footnote{. We nonetheless included them as a natural part of the definition of equality to favor readability.}.
+% \footnote{. We nonetheless included them as a natural part of the definition of equality to favor readability.}.
 \begin{remark}
   After having define the structure, as with typed lambda-calculus in section \ref{section:pureandimpure}, we point out that each system of terms and types that follow these rules is said to be a ML theory. 
 \end{remark}
@@ -154,10 +157,10 @@ $$\Sigma x^\N. F(x),$$
 where
 
 \[   
-     \begin{cases}
-       F(0):= N_1,\\
-       F((s(x)):= F(x)\times \N.
-     \end{cases}
+  \begin{cases}
+    F(0):= N_1,\\
+    F((s(x)):= F(x)\times \N.
+  \end{cases}
 \]
 
 $N_1$ is a placeholder type for empty sequences. This definition can be done by recursion on the types. But for this we would need some type $V$ with closed for the product. Similarly we can argue to have the same recursion property with a closed set for $A \to B$.\\ 
@@ -186,7 +189,7 @@ This allow us to consider arrows (terms) as objects (types) in local contexts, b
 \end{definition}
 
 \begin{definition}
-A \emph{locally Cartesian closed category}, LCC for short,  is a category $C$ with finite limits, such that for any object $a$ of $C$, the slice category $C/a $ is Cartesian closed.
+  A \emph{locally Cartesian closed category}, LCC for short,  is a category $C$ with finite limits, such that for any object $a$ of $C$, the slice category $C/a $ is Cartesian closed.
 \end{definition}
 
 \begin{remark}
@@ -207,19 +210,19 @@ As a tool for dealing with LCC we are going to introduce hyperdoctrines. This we
 \end{definition}
 \begin{remark}
   Any category $C$ with finite limits, is self-indexed, with $C(b)=C/b$ and $C(f:b_1\to b_2)=f^*: C/b_2 \to C/b_1$ defined by pullback. That is, given an object $g:a\to b_2 \in C/b_2$, by the pullback diagram:
-    \[
-      \begin{tikzpicture}
-        \node {\begin{tikzcd}
-            a \times_{b_2} b_1 \ar[r,"p_2"]\ar[d,"p_1"] & a\ar[d,"g"]\\
-            b_1\ar[r,"f"] & b_2.
-          \end{tikzcd}};
-      \end{tikzpicture}
-    \]
+  \[
+    \begin{tikzpicture}
+      \node {\begin{tikzcd}
+          a \times_{b_2} b_1 \ar[r,"p_2"]\ar[d,"p_1"] & a\ar[d,"g"]\\
+          b_1\ar[r,"f"] & b_2.
+        \end{tikzcd}};
+    \end{tikzpicture}
+  \]
 
-    we can define $f^*(g) = p_1$, with $p_i$ as in definition \ref{def:pullback}. This has clear inspirations in topology, as many things in this area, with notation $f^*$ for the contravariant pullback functor given as in Grothendieck's six operations\cite{nlab:six_operations}.\\
-  \end{remark}
-   
-  We can see that $P$ is, in summary, an contravariant functor from $C$ to $Cat$. Properties from $(\cdot)^*$ derive from the fact that arrows in $Cat$ are functors. Therefore a $C$-indexes category is just an object of $Cat^C$.\\
+  we can define $f^*(g) = p_1$, with $p_i$ as in definition \ref{def:pullback}. This has clear inspirations in topology, as many things in this area, with notation $f^*$ for the contravariant pullback functor given as in Grothendieck's six operations\cite{nlab:six_operations}.\\
+\end{remark}
+
+We can see that $P$ is, in summary, an contravariant functor from $C$ to $Cat$. Properties from $(\cdot)^*$ derive from the fact that arrows in $Cat$ are functors. Therefore a $C$-indexes category is just an object of $Cat^C$.\\
 
 \begin{definition}
   A $C$-indexes category $P$ is a hyperdoctrine if:
@@ -264,14 +267,14 @@ This result, as noted in \cites{seely1984locally}, can be deduced from results s
 
 
 \begin{definition}[Section 2, \cite{nlab:reflective_subcategory}]
-Definition 2.1. A full subcategory $i:C\hookrightarrow D$ is reflective if the inclusion functor $i$ has a left adjoint $T\dashv i$:
+  Definition 2.1. A full subcategory $i:C\hookrightarrow D$ is reflective if the inclusion functor $i$ has a left adjoint $T\dashv i$:
   \[
     \begin{tikzcd}
       C\arrow[hookrightarrow, shift left=.5ex, "i"{name=T}]{r}{} &
       D\arrow[ shift left=1ex, "T"{name=i}]{l}{} \\
     \end{tikzcd}
   \]
-The left adjoint is sometimes called the reflector,
+  The left adjoint is sometimes called the reflector,
 \end{definition}
 
 \begin{example}
@@ -280,15 +283,15 @@ The left adjoint is sometimes called the reflector,
 
 
 \begin{proposition}[Section 2, \cite{nlab:reflective_subcategory}]
-In reflective subcategories the inclusion $i:C\hookrightarrow D$ creates all limits of $D$ and $C$ has all colimits which $D$ admits.
+  In reflective subcategories the inclusion $i:C\hookrightarrow D$ creates all limits of $D$ and $C$ has all colimits which $D$ admits.
 \end{proposition}
 
 
 \begin{theorem}[Proposition 1.31,\cite{freyd1972aspects}]
-Let $A$ be a CCC and $A'\subset A$ be a full reflexive subcategory with reflector  $R$. Then $R$ preserves products iff for all $b,a\in Ob(A')$, we have that $b^a\in A'$.
+  Let $A$ be a CCC and $A'\subset A$ be a full reflexive subcategory with reflector  $R$. Then $R$ preserves products iff for all $b,a\in Ob(A')$, we have that $b^a\in A'$.
 \end{theorem}
 \begin{corollary}
-Let $C$ be a category. We define the functor $\sigma_b : C/b \to C$ as the forgetful functor for every $b\in Ob(C)$. Then $\sigma_b$ preserves and reflects colimits, equalizers, pullbacks and monomorphisms.
+  Let $C$ be a category. We define the functor $\sigma_b : C/b \to C$ as the forgetful functor for every $b\in Ob(C)$. Then $\sigma_b$ preserves and reflects colimits, equalizers, pullbacks and monomorphisms.
 \end{corollary}
 
 If $C$ has finite products, we can define the functor $\times_b: C \to C/b$ such that:
@@ -337,7 +340,7 @@ Further on, we will consider $M$ an arbitrary ML theory.
   $\CC(M)$ is a Cartesian category.
 \end{proposition}
 \begin{proof}
-    \begin{itemize}
+  \begin{itemize}
   \item Operations:
     \begin{itemize}
       
@@ -352,12 +355,12 @@ Further on, we will consider $M$ an arbitrary ML theory.
       $$h \circ (g\circ f)  = h\circ \lambda x^a.\psi(\varphi(x))  = \lambda x^a.\rho(\psi(\varphi(x))) =  \lambda x^a.\rho(\psi(x)) \circ f =  (h\circ g)\circ f.$$
     \item \emph{Unit}: 
       $$f \circ 1_a = \lambda x^a. \varphi(x) = f.$$
-Proceed analogously to check that $1_b \circ f =f$.
+      Proceed analogously to check that $1_b \circ f =f$.
     \end{itemize}
 
 
-\item Terminal object: Type 1 is the terminal object, due to $t: 1$ implying $t=*$ and thus $\lambda x^a. *$ being the only term of type $a\to 1$. 
-\item Product:  product for types $a$ and $b$ is given by $a\times b$, and projections by $\pi, \pi'$.
+  \item Terminal object: Type 1 is the terminal object, due to $t: 1$ implying $t=*$ and thus $\lambda x^a. *$ being the only term of type $a\to 1$. 
+  \item Product:  product for types $a$ and $b$ is given by $a\times b$, and projections by $\pi, \pi'$.
   \end{itemize}
 \end{proof}
 
@@ -377,26 +380,26 @@ Proceed analogously to check that $1_b \circ f =f$.
   Given $f',g'$ such that:
 
   
-\[
-  \begin{tikzcd}
-    q
-    \arrow[bend left]{drr}{g'}
-%     \arrow[dashed]{dr}[description]{u}x
-    \arrow[bend right,swap]{ddr}{f'} & & \\
-    & a\times_{b}c \arrow{r}{p_2} \arrow{d}[swap]{p_1} & c \arrow{d}{g} \\
-    & c \arrow[swap]{r}{f}   & b
-  \end{tikzcd}
-\]
+  \[
+    \begin{tikzcd}
+      q
+      \arrow[bend left]{drr}{g'}
+      % \arrow[dashed]{dr}[description]{u}x
+      \arrow[bend right,swap]{ddr}{f'} & & \\
+      & a\times_{b}c \arrow{r}{p_2} \arrow{d}[swap]{p_1} & c \arrow{d}{g} \\
+      & c \arrow[swap]{r}{f}   & b
+    \end{tikzcd}
+  \]
 
-as $ff' = gg'$note that there is a term $\rho(x) = r(f(f'(x))) : I(f(f'(x)), g(g'(x)))$. We can define $$u: q\to a\times_b c = \lambda x^q. \langle f'(x),\langle g'(x),\rho(x)\rangle\rangle$$
-and by equality rules we can check that is the only object of type $I(f(f'(x^q)), g(g'(x^q)))$ such that $up_1 = f',up_2=g'$.
+  as $ff' = gg'$note that there is a term $\rho(x) = r(f(f'(x))) : I(f(f'(x)), g(g'(x)))$. We can define $$u: q\to a\times_b c = \lambda x^q. \langle f'(x),\langle g'(x),\rho(x)\rangle\rangle$$
+  and by equality rules we can check that is the only object of type $I(f(f'(x^q)), g(g'(x^q)))$ such that $up_1 = f',up_2=g'$.
 \end{proof}
 \begin{remark}
-Note how the pullback is designed exactly as the fiber product (see example \ref{fiber-product}), with the construction translated to ML theory.
+  Note how the pullback is designed exactly as the fiber product (see example \ref{fiber-product}), with the construction translated to ML theory.
 \end{remark}
 
 \begin{proposition}\label{prop:CM2}
-$\CC(M)$ is cartesian closed.
+  $\CC(M)$ is cartesian closed.
 \end{proposition}
 \begin{proof}
   Given an object $b$, we can define of the adjoint $F_3^b\dashv G_3^b$ (see definition \ref{def:CCC}) by the bijection$\varphi: \hom(a\times b, c) \to \hom(a, c^b)$ such that
@@ -424,7 +427,7 @@ Now, we have a nice structure for $C=\CC(M)$ as a closed cartesian category. Fur
   In the context of $P(M)(a)$ variable $x$ will be used as the ever available variable $x^a$, and thus we would use primarily $y$ as standard variable symbol.
 \end{remark}
 \begin{proposition}
-$P(M)(a)$ is cartesian closed.
+  $P(M)(a)$ is cartesian closed.
 \end{proposition}
 \begin{proof}
   Repeat proofs for proposition \ref{prop:CM1} and proposition \ref{prop:CM2} step by step considering in each term an extra parameter.
@@ -432,35 +435,35 @@ $P(M)(a)$ is cartesian closed.
 
 
 \begin{proposition}\label{lemma:hyperdoc}
-For each $a\in Ob(C)$, $C/a\cong P(M)(a)$.
+  For each $a\in Ob(C)$, $C/a\cong P(M)(a)$.
 \end{proposition}
 
 To proof this proposition we are going to introduce two adjoint functors for every $a\in Ob(C)$, and then proof with the help of two lemmas than the composition of this functors is naturally isomorphic to the identity.
 
-  \[
-    \begin{tikzcd}
-      C/a=\CC(M)/a\arrow[ shift left=.5ex, "\Phi"{name=T}]{r}{} &
-      P(M)(a)\arrow[ shift left=1ex, "\Psi"{name=i}]{l}{} \\
-    \end{tikzcd}
-  \]
+\[
+  \begin{tikzcd}
+    C/a=\CC(M)/a\arrow[ shift left=.5ex, "\Phi"{name=T}]{r}{} &
+    P(M)(a)\arrow[ shift left=1ex, "\Psi"{name=i}]{l}{} \\
+  \end{tikzcd}
+\]
+\begin{itemize}
+\item We define $\Phi$ as the functor such that:
+
   \begin{itemize}
-  \item We define $\Phi$ as the functor such that:
-
-    \begin{itemize}
-    \item For every object $f:b\to a\in Ob(C/a)$ is sent to the type\footnote{Note that we are defining the inverse.}:
-      $$\Phi(f)=\Sigma y^b.I(x,f(y)).$$
-    \item For every arrow $h: (f:b\to a)\to (g:b\to a)$ is sent to the term:
-      $$\Phi(h) = \lambda z^{\Phi(f)}. \langle h(\pi(z)), \rho\rangle,$$
-      with $\rho : I(x,g(h(\pi(z))))$ is defined from $$\pi'(z) : I(x,f(\pi(z)))\qquad\text{and}\qquad r(f(\pi(z))) : I (f(\pi(z)), g(h(\pi(z)))),$$ and transitivity of $I(\cdot,\cdot)$.
-    \end{itemize}
-
-  \item We define $\Psi$ as the functor such that:
-    \begin{itemize}
-    \item For every object (type) $b(x^a)\in Ob(P(M)(a))$, $\Psi(b(x))$ is the projection $\pi:b(x)\to a \in C/a$ associated with $\Sigma x^a. b(x)$.
-    \item For every arrow $t(x^a): b(x^a) \to c(x^a)$ is sent to the term:
-      $$\Psi(t) = \lambda z^{\Sigma x^a. b(x)}. \langle \pi(z), t(\pi(z))(\pi'(z))\rangle.$$
-    \end{itemize}
+  \item For every object $f:b\to a\in Ob(C/a)$ is sent to the type\footnote{Note that we are defining the inverse.}:
+    $$\Phi(f)=\Sigma y^b.I(x,f(y)).$$
+  \item For every arrow $h: (f:b\to a)\to (g:b\to a)$ is sent to the term:
+    $$\Phi(h) = \lambda z^{\Phi(f)}. \langle h(\pi(z)), \rho\rangle,$$
+    with $\rho : I(x,g(h(\pi(z))))$ is defined from $$\pi'(z) : I(x,f(\pi(z)))\qquad\text{and}\qquad r(f(\pi(z))) : I (f(\pi(z)), g(h(\pi(z)))),$$ and transitivity of $I(\cdot,\cdot)$.
   \end{itemize}
+
+\item We define $\Psi$ as the functor such that:
+  \begin{itemize}
+  \item For every object (type) $b(x^a)\in Ob(P(M)(a))$, $\Psi(b(x))$ is the projection $\pi:b(x)\to a \in C/a$ associated with $\Sigma x^a. b(x)$.
+  \item For every arrow $t(x^a): b(x^a) \to c(x^a)$ is sent to the term:
+    $$\Psi(t) = \lambda z^{\Sigma x^a. b(x)}. \langle \pi(z), t(\pi(z))(\pi'(z))\rangle.$$
+  \end{itemize}
+\end{itemize}
 \begin{lemma}\label{lemma:CM3}
   Let $f: b\to a= \lambda x^b.f(x)$ be a term in $M$. Then $b$ and $\Sigma x^a.\Phi(f)(x)$ are isomorphic in $C$.
 \end{lemma}
@@ -477,14 +480,14 @@ To proof this proposition we are going to introduce two adjoint functors for eve
 \end{remark}
 
 \begin{lemma}\label{lemma:CM4}
-For $b(x^a)$ a type, the objects $b(x^a)$ and $\Sigma y^{\Sigma x^a.b(x)}. I(x,\pi(y))$ are isomorphic in $P(M)(a)$.
+  For $b(x^a)$ a type, the objects $b(x^a)$ and $\Sigma y^{\Sigma x^a.b(x)}. I(x,\pi(y))$ are isomorphic in $P(M)(a)$.
 \end{lemma}
 \begin{proof}
   We want to define two morphisms $i(x^a):b(x) \to\Sigma y^{\Sigma x^a.b(x)}. I(x,\pi(y))$ and $j:\Sigma x^a. \Sigma y^b. I(x,f(y)) \to b$ in $P(M)(a)$:
   $$i(x^a) = \lambda z^{b(x)}. \langle\langle x, z\rangle, r(x) \rangle,$$
   and
   $$j(x^a) = \lambda \langle x_\#^a, z^{b(x_\#^a)} \rangle, v^{I(x,x_\#)}\rangle). z .$$
-Proceed analogously as in previous lemma to check isomorphism. 
+  Proceed analogously as in previous lemma to check isomorphism. 
 \end{proof}
 
 % A proof for the following result can be found in \cite[Section 3, sublemma 3.2.3.3]{seely1984locally}.
@@ -506,7 +509,7 @@ Proceed analogously as in previous lemma to check isomorphism.
   We proof that, as $C$ indexed categories, $C\cong P(M)$. Finally, as $P(M)(a)$ is a CCC, so is $\CC(M)/a$ for each $a$.\\
 
   Given proposition \ref{lemma:hyperdoc} it is only left to show that $\Phi$ and $\Psi$ commutes with $f^*$. It suffices to show that:
-    \[
+  \[
     \begin{tikzpicture}
       \node {\begin{tikzcd}
           C/a \ar[d,"\Phi"]\ar[r,"f_C^*"] & C/b\\
@@ -537,13 +540,72 @@ We define an interpretation as done by Seely. We decide to extend this definitio
 \begin{definition}[Interpretation of a Martin-L\"of theory]
   We define an interpretation $\overline{\cdot}$, is a mapping such that:
   \begin{itemize}
-  \item a type depending on a free variable $x^a$ will be interpreted as an object $\chi: \overline{x} \to $in $C/\overline{a}$, for a suitable $\overline{a}$.
-  \item terms will be interpreted as morphisms in the appropriate slice categories.
+  \item A closed type $t$ correspond to an object $\overline t\in C$.
+  \item A type $t(x^a)$ will be interpreted as an object $\tau: \overline{t} \to \overline{a}$ in $C/\overline{a}$. 
+  \item For a type $b(x^a)$ mapped to $\beta : \overline b \to \overline a $, a term $t(x^a) : b(x^a)$ maps to a morphism $\overline t$ such that:
+    \[
+      \begin{tikzpicture}
+        \node {\begin{tikzcd}
+            \overline a \ar[rr,"\overline t"]\ar[rd,swap, "1_{\overline a}"] &  & \overline b\ar[ld, "\beta"] \\
+            &   \overline a &
+          \end{tikzcd}};
+      \end{tikzpicture}
+    \]
   \end{itemize}
-  In particular, a closed type $t$, will correspond to an object $\overline{t}\in C$.
+
+  If we have a type $a$ we will sometimes interpret it by $\alpha : \overline a \to \overline x$, where $\overline x$ represents any possible dependencies on variables.
 \end{defintion}
 \begin{remark}
-  Lets analyze the considerations that are held whenever considering a type $t_{n+1}(x_1^{t_1},...,x_n^{t_n})$ that satisfy the condition on variables. $t_1$, being closed, correspond to an object $\overline t_1\in C$. Then we proceed to consider $t_2(x_1^{t_1})$, then $\overline t_2$ is a morphism $\chi_2:\overline t_2\to \overline t_1$. Then we type $t_{3}(x_1^{t_1}, x_2^{t_2})$, is maps to $\chi_3: \overline{t_3}\to \overline{t_2}$. This also induced a morphism $\chi_3' = \langle \chi_2\chi_3, \chi_3\rangle$.
+  Note than a type $t$ not depending on any variable is, in fact, a type depending on an variable $x^1$. If we remember the original foundation of ML theories as proof theories, and remember the fact that to proof a type is the same as to proof that it is derivable form truth itself. Similar conclusions can be done with a term. 
+\end{remark}
+
+\begin{remark}
+  Note that, in mapping a type, we have a codomain fixed, but not so the domain of the arrow and the arrow itself to which the type is mapped. This notation is resolved by sending a term in a latin letter, to the greek equivalent letter as arrow, and an overline latin letter as codomain. For example:
+  
+  \begin{figure}[!h]
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \toprule
+        Type & Arrow & Codomain \\
+        \midrule
+        $a$ & $\alpha$ & $\overline a$\\
+        $b$ & $\beta$ & $\overline b$\\
+        $r$ & $\rho$ & $\overline r$\\
+        $s$ & $\sigma$ & $\overline s$\\
+        $t$ & $\tau$ & $\overline t$\\
+        $x$ & $\chi$ & $\overline x$\\
+        \bottomrule
+      \end{tabular}
+    \end{center}
+    \caption{Commons pairings.} \label{faketable:mul}
+
+  \end{figure}
+
+\end{remark}
+
+\begin{remark}\label{multiple-def}
+  Lets analyze the considerations that are held whenever considering a type $t_{n+1}(x_1^{t_1},...,x_n^{t_n})$ that satisfy the condition on variables.  A closed type correspond to an object $\overline t_1\in C$. Then we proceed to consider $t_2(x_1^{t_1})$, then $\overline t_2$ is a morphism $\tau_2:\overline t_2\to \overline t_1$. Then we type $t_{3}(x_1^{t_1}, x_2^{t_2})$, is maps to $\tau_3: \overline{t_3}\to \overline{t_2}$. This also induced a morphism $\tau_3' = \langle \tau_2\tau_3, \tau_3\rangle$.\\
+
+  Similarly for the term, we will end up for any $f:t_3(x_1^{t_1}, x_2^{t_2})$ as:
+  \[
+    \begin{tikzpicture}
+      \node {\begin{tikzcd}
+          \overline t_2 \ar[rr,"\overline f"]\ar[rd,swap, "1_{\overline t_2}"] &  & \overline t_3 \ar[ld, "\tau_3"]\ar[rd, "\tau_2\tau_3"]  \\
+          &   \overline t_2\ar[rr, swap, "\tau_2"] & & \overline t_1\\
+        \end{tikzcd}};
+    \end{tikzpicture}
+  \]
+
+  Thus, a term $f:t_2$ without any more context, will be considered in the maximum generality as an arrow:
+  \[
+    \begin{tikzpicture}
+      \node {\begin{tikzcd}
+          \overline t_2 \ar[rr,"\overline f"]\ar[rd,swap, "\chi"] &  & \overline t_3 \ar[ld, "\tau"]  \\
+          &   \overline t_1 & \\
+        \end{tikzcd}};
+    \end{tikzpicture}
+  \]
+  
 \end{remark}
 
 
@@ -555,13 +617,33 @@ We define an interpretation as done by Seely. We decide to extend this definitio
     \begin{enumerate}
     \item $\overline 1 = \top$ the terminal object in $C$.
     \item $\overline{I(x_1^a,x_2^a)} = \delta_{\overline{a}}: \overline{a} \to \overline{a}\times \overline{a}}$.\footnote{In view of substitution, $I(a,b)$ would be the equalizer.}
-    \item If $a,b(x^a)$ are types interpreted as $\alpha: \overline a \to \overline x$, $\beta: \overline b \to \overline a$ then:
-      $$\overline{\Pi x^a. b(x)} = \Pi_\alpha \beta, \qquad \overline{\Sigma x^a. b(x)} = \Sigma_\alpha \beta$$
+  \item If $a,b(x^a)$ are types interpreted as $\alpha: \overline a \to \overline x$, $\beta: \overline b \to \overline a$ then:
+    $$\overline{\Pi x^a. b(x)} = \Pi_\alpha \beta, \qquad \overline{\Sigma x^a. b(x)} = \Sigma_\alpha \beta$$
+  \end{enumerate}
+\item The following term formation rules holds:
+  \begin{enumerate}
+  \item $\overline * = id_\top: \top \to \top$.
+  \item If $b(x^a) : t(x^a)$ then $\overline{\lambda x^a. b(x)} = \prod_\alpha \overline t$.\\
+
+    Similarly, let $a$ be a type interpreted as $\alpha : \overline a \to \overline x$, where $x$ represent any possible variable upon which $a$ depend. Let also $b(y^a)$ be a type interpreted by $\beta : \overline b \to \overline a$ and $g: a$, $f:\Pi y^a.b(y)$,  interpreted by $\overline g: \chi \to \alpha $ and  $\overline f: \chi \to \Pi_\alpha \beta$, for some $ \chi: \overline z \to \overline x$, we define $\overline f(a): 1_{\overline z} \to \overline g^* \beta$ as follows.\footnote{Without loss of generality we assume that $g,f$ depend on the same variables. Are dummy variables if not}.
+
+ Since $g$ is a term of type $a$ we have that, as in remark \ref{multiple-def}
+      \[
+        \begin{tikzpicture}
+          \node {\begin{tikzcd}
+              \overline z \ar[rr,"\overline g"]\ar[rd,swap, "\chi"] &  & \overline a\ar[ld, "\alpha"] \\
+              &   \overline x &
+            \end{tikzcd}};
+        \end{tikzpicture}
+      \]
+
+      we can check that $\overline g \alpha = \chi$, and so there exists an object $\Sigma_\alpha \overline g = \chi$. By adjointness of $\Sigma_\alpha \dashv \alpha^*\overline g$, we can get a morphism $$\varphi: \overline g \to \alpha^*\chi \in Ob(C/ \overline a).$$
+      Proceed analogously with the adjoint relative to $\overline f: \chi \to \Pi_\alpha \beta$, for a morphism $\psi: \alpha^* \chi \to \beta$. Finish by composition, and repeating adjointness.
+
+    \item With $a,b(x^a)$ as in previous point, let $g: a$, $f:b(g)$,  interpreted by $\overline g: \chi \to \alpha $ and  $\overline f: 1_{\overline z} \to \overline g ^* \beta$, for some $ \chi: \overline z \to \overline x$, supposing again that $g,f$ depend on the same variables. Then $\overline{\langle g, f\rangle}$ is defined by the morphism induced by $\overline f$ seen as  $\overline f = \Sigma_{\overline g} 1_{\overline z}\to \beta$ by adjointness. Finish by applying $\Sigma_\alpha$ and using again that $\overline g \alpha = \chi.$\\
+
+      For $\Sigma x^a.b(x)$, we define  $\overline \pi  = \beta: \sigma_\alpha \beta \to \alpha$, and $\overline {\pi'}$ as the identity.
+    \item $\overline {r(x^a)} = 1_{\overline a}$.
     \end{enumerate}
-  \item The following type formation rules holds:
-    \begin{enumerate}
-    \item $\overline * = id_\top: \top \to \top$.
-    \item 
-    \end{enumerate}
-  \end{itemize}
+\end{itemize}
 \end{definition}
