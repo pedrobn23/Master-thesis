@@ -83,15 +83,20 @@ Similarly to $\pi_i$, we will usually denote just $\varepsilon$.
 
 This last definition has an important meaning, It formalizes within our system the fact that if we have a proof that $A$ implies $B$, in the form of an arrow, it generates a proof that the statement "$A$ implies $B$", as an object, is also true (since it can be derived from truth value $\top$). We finish this section with the definition of assumption and the deduction theorem.\\
 
-As we have seen during the last part of the previous chapter, there is a constant work in the deduction system in changing each truth assumption. So the question is: how can we adapt this idea to a deduction system $D$? This is done by introducing \emph{assumptions}. These assumptions are arrows $x^A: \top \to A$, which does not have to be in $Ar(D)$. This arrows allow us to consider new implications. Given $x^A$ we can consider proofs $\varphi(x^A)$ by composition of arrows in $D$ with $x$. This derive lastly in  a proposition, widely known in the context of propositional logic:
+As we have seen during the last part of the previous chapter, there is a constant work in the deduction system in changing each truth assumption. So the question is: how can we adapt this idea to a deduction system $D$? This is done by introducing \emph{assumptions}.
 
-\begin{definition}[Deduction Theorem]\label{deduction-theorem}
-  In a conjunction calculus $D$, a proof $\varphi(x^A): B \to C$ dependent on an assumption $x^A:\Top \to A$ implies the existence of a proof $\lambda x^A.\varphi (x^A): A\land B \to C$ not dependent on $x^A$.
+\begin{definition}
+These assumptions are arrows $x^A: \top \to A$, which does not have to be in $Ar(D)$\footnote{That is, an assumption can be considered as an extra edge in the graph created by the deduction system.}. This arrows allow us to consider new implications. Given $x^A$ we can consider proofs $\varphi(x^A)$ by composition of arrows in $D$ with $x$.
 \end{definition}
+This derive lastly in  a proposition, widely known in the context of propositional logic:
+
+\begin{theorem}[Deduction Theorem]\label{deduction-theorem}
+  In a conjunction calculus $D$, a proof $\varphi(x^A): B \to C$ dependent on an assumption $x^A: \top \to A$ implies the existence of a proof $\lambda x^A.\varphi (x^A): A\land B \to C$ not dependent on $x^A$.
+\end{theorem}
 \begin{sproof}
   As most proofs in the previous chapter, this proposition is proved by induction on the length on the proof, and studying the list of possible last steps taken. A full proof can be found in \cite[proposition 2.1]{lambek1988introduction}.
 \end{sproof}
-This theorem  conditionally on the existence of a suitable $A$, we have a function from $B$ to $C$. We are implicitly using the idea of the adjoint $f:A\times B \to C \cong f: A \to C^B$, although it is not needed for the formalism.
+ We are implicitly using the idea of the adjoint $f:A\times B \to C \cong f: A \to C^B$, although it is not needed for the formalism.
 
 
 
@@ -99,16 +104,16 @@ This theorem  conditionally on the existence of a suitable $A$, we have a functi
 
 \subsection{Categorical systems as Deduction systems}
 
-We have already note how a category is a particular case of a deduction system. We can consider how are the logical systems, but we only select those who are also categories.
+We have already note how a category is a particular case of a deduction system. We can consider how are the logical systems, in the view of the Curry-Howard bijection, but we only focus on category systems.
 
-\begin{remark}Now that  we see categories as deduction system, we have a notation problems. We will identify $A\land B$ with $A\times B$. While in a deductive system we have define $\langle f_1,f_2\rangle : C \to A\land B$ we have done the same in categories, meaning $$\langle f_1,f_2\rangle : C \land C \to A \land B.$$  This was necessary in deduction system to not put a burden of having a diagonal arrow $C\to C\land C$. This make though some extra verbosity in functions like $\langle h\pi_1, \pi_2\rangle : C\times B \to A\times B$, that would otherwise be the much more legible $\langle h, 1_b\rangle: C\times B \to A \times B$.  The consideration with $[f_1,f_2]$ is dual.
+\begin{remark}Now that  we see categories as deduction system, we have a notation problems. We will identify $A\land B$ with $A\times B$. While in a deductive system we have define $\langle f_1,f_2\rangle : C \to A\land B$ we have done the same in categories, meaning $$\langle f_1,f_2\rangle : C \land C \to A \land B.$$  This was necessary in deduction system to not put a burden of having a diagonal arrow $C\to C\land C$. This make though some extra verbosity in functions like $\langle h\pi_1, \pi_2\rangle : C\times B \to A\times B$, that would otherwise be the much more legible $\langle h, 1_b\rangle: C\times B \to A \times B$. 
 \end{remark}
 
 
 \begin{proposition}\label{prop:CartCategory2}
   A Cartesian category $\mathcal{C}$ is a deduction system that is both conjunction system and a category where:
   \begin{enumerate}
-  \item $f:A\to T\implies f=O_A$.
+  \item $f:A\to T$ and $g:A\to T$ then $f=g$.
   \item Given $\langle f_1,f_2\rangle: C\to A\land B$ then $\pi_i \circ \langle f_1,f_2\rangle = f_i$.
   \item Given $h:C\to A\land B$ we have that $\langle \pi_1 h, \pi_2 h\rangle = h$.
   \end{enumerate}
@@ -150,7 +155,7 @@ Thus, we can start seeing the kind of bijection already shown in the Curry Howar
   \end{itemize}
 
   To prove that any intuitionistic calculus that is also a category is a ccc, we just made the same pairing, $a\times b = a\land b$ and $a\to b = b^a$ to define $F_b^3$ on both objects and arrows, (where $F_b^3(h:a\to a') = \langle h, 1_b\rangle $), define $G_3^b$ on objects, and define $\varepsilon^b(a)$ as $\varepsilon^{a,b}$.
-
+\end{proof}
 
 
 
@@ -182,11 +187,11 @@ Thus, we can start seeing the kind of bijection already shown in the Curry Howar
 
   
   % To do the converse, is enough to made the same pairings and apply the notions of universality of $\varepsilon$ in  and apply \ref{prop:equivdefinition} to check that such adjoints are define via $\arepsilon$.
-\end{proof}
 
-These propositions allow us to easily define graph completions to generate a to generate from these CCCs and positive conjunction calculus.
 
-\begin{proposition} A \emph{closed Cartesian category} is a deduction system that is both a intuitionistic propositional calculus and a category, with the additional equations:
+
+
+\begin{proposition} A \emph{closed bi-Cartesian category} is a deduction system that is both a intuitionistic propositional calculus and a category, with the additional equations:
   \begin{enumerate}
   \item $f:\bot \to A \implies f=\square_A$.
   \item Given $[f_1,f_2] : A\lor B \to C$ then $ [f_1,f_2]\circ \iin_i  = f_i$.
@@ -275,7 +280,7 @@ This construction sports a nice property:
   \]
 \end{proposition}
 \begin{proof}
-  Polynomials in closed Cartesian categories have to be defined inductively, with the following rules:
+  Observe that polynomials in closed Cartesian categories have to be defined inductively, with the following rules:
   \begin{enumerate}
   \item $x$ is a polynomial.
   \item Every arrow $f\in A$ is a polynomial.
@@ -288,10 +293,11 @@ This construction sports a nice property:
 We finish this subsection presenting a refinement of the proposition \ref{deduction-theorem}. This result is also proved by induction on the length of the proof.
 
 \begin{proposition}[functional completeness]
-  For every polynomial $varphi(x^a): 1\to C$ over a closed cartesian category $C[x^a]$ over an indeterminate $x:1\to a$, there is an unique $f$ such that $fx=\varphi(x)$
+  For every polynomial $\varphi(x^a): 1\to C$ over a closed cartesian category $C[x^a]$ with an indeterminate $x:1\to a$, there is an unique arrow $f$ such that $f\circ x=\varphi(x)$
 \end{proposition}
+
 \section{Categorical understanding of simply typed $\lambda$-calculus}
-After introducing this new optic, we will use it to complete the lambeck equivalence. For this we will make a series of preparations. We first introduce the concept of nautral numbers in categories and in lambda typed calculations.\\
+After introducing this new optic, we will use it to complete the lambeck equivalence. For this we will make a series of preparations. We first introduce the concept of natural numbers in categories and in lambda typed calculations.\\
 
 The introduction of the natural numbers in lambda calculus has been delayed, because it is a construction that is inspired by our own construction for categories, and we believe that by explaining them straight away we can grasp the underlying idea of the natural numbers in a more efficient way.\\
 
@@ -341,7 +347,7 @@ and is denoted as $(1,h,g)$. Considering the category $(C_*^J)'$ with objects as
 Every time natural are talked, induction have to appear in some part. The intuition of the categorical concept is that we have a object $N$ that is the set of every natural, and a successor arrow $S$. 
 
 \begin{definition}[Category of closed Cartesian categories]
-  We can define the \emph{category of closed Cartesian categories with natural numbers} $CCart_N$ that has as objects all small ccc, and as objects all functors that preserve the structure of closed Cartesian categories and added natural numbers structure.\\
+  We can define the \emph{category of closed Cartesian categories with natural numbers} $CCart_N$ that has as objects all small ccc with natural number systems, and as arrows all functors that preserve the structure of closed Cartesian categories and added natural numbers structure.\\
 \end{definition}
 % {\color{red} Maybe add the proposition and corollary 9.1 and 9.2 of Lambeck.}
 
@@ -440,7 +446,7 @@ In chapter 3, we have described how there exists different $\lambda$-calculus, t
 
 Up to this moment, we have related that a closed Cartesian category is a positive intuitionistic calculus, that is equivalent to  typed $\lambda$-calculus, with some extra structure.\\
 
-Now we have to consider the original ideas that are consider to be considered the precursor of categorical thinking: the Poincaré functor.l This functor is, in short,  sees how to consider a group within a topology, and see that we can infer group morphism from topologies homeomorphism. This is the original idea behind the functors, and we will now provide an example that is similar in flavor to the Poincaré functor: we will generate a $lambda$-calculus from a CCC.\\ 
+Now we have to consider the original ideas that were the precursor of categorical thinking: the Poincaré functor.l This functor is, in short,  sees how to consider a group within a topology, and see that we can infer group morphism from topologies homeomorphism. This is the original idea behind the functors, and we will now provide an example that is similar in flavor to the Poincaré functor: we will generate a $lambda$-calculus from a CCC.\\ 
 
 
 
@@ -652,13 +658,13 @@ After defining in the two previous sections we define two functors/ the language
 
   \item[\fbox{$ 1_{\mathcal A}\cong \LL \CC $}] We start by studying the language $\LL\CC(L)$, given $L$ a language. Is easy to check that the types in both languages are the same.\\
 
-    Remember that arrows $f:a\to b$ in $\CC(L)$ are closed terms $\lambda x^a.f(x)$ of type $a\to b$. Finally, every term $M$ of type $A$ in $\LL\CC(L)$ has the form $\varphi(x^1,...,x^n): 1 \to A$, where $\varphi(x^{t_1},...,x^{t_n})$ is an arrow in $\CC(L)$ dependent on some indeterminates, thus $M =\lambda z^1.m(x^1,...,x^n)$\footnote{Here we are identifying $\CC(L)[x_1,...,x_n]$ with $\CC(L(x_1,...,x_n))$}.\\
+    Remember that arrows $f:a\to b$ in $\CC(L)$ are closed terms $\lambda x^a.f(x)$ of type $a\to b$. Finally, every term $M$ of type $A$ in $\LL\CC(L)$ has the form $\varphi(x_1,...,x_n): 1 \to A$, where $\varphi(x^{t_1},...,x^{t_n})$ is an arrow in $\CC(L)$ dependent on some indeterminates, thus $M =\lambda z^1.m(x_1,...,x_n)$\footnote{Here we are identifying $\CC(L)[x_1,...,x_n]$ with $\CC(L(x_1,...,x_n))$}, where $z^1$ is bounded variable of type of type 1.\\
 
 
     We define the unit $\eta$ of the adjoint equivalence similarly.
     \begin{itemize}
     \item For every $L\in \LC$ and every type $t\in L$ we have that $\eta(L)(t) = t$.
-    \item For every term $\lamba z^1.\varphi (x_1^{t_1},...,x_n^{t_n})$, were every $x_i^{t_i}$ represents a free variable, to $\lambda z^1. \varphi (x_1^{t_1},...,x_n^{t_n}).$
+    \item For every term $\lambda z^1.\varphi (x_1^{t_1},...,x_n^{t_n})$, were every $x_i^{t_i}$ represents a free variable, to $\lambda z^1. \varphi (x_1^{t_1},...,x_n^{t_n}).$
     \end{itemize}
 
 

@@ -1,4 +1,5 @@
 
+
 \chapter{Lambda Calculus}
 \thispagestyle{empty}
 In this chapter we define the $\lambda$-calculus as a formal language of computation, and on this define the concept of typing, ubiquitous in programming. The main references  for the general approach if this chapter are are \cite{selinger2008lecture} and \cite{hindley2008lambda}. For the historical motivation for the development of the theory  we refer to \cite{cardone2006history}.  \\
@@ -204,9 +205,9 @@ This subsection we present an important result for $\lambda$-calculus: the \emph
   Consider a relation $\to$ and let $\twoheadrightarrow$ be its reflexive transitive closure. We can define three relations:
 
   \begin{enumerate}
-  \item The Church-Rosser Property: $$M\twoheadrightarrow N, M\twoheadrightarrow P \implies \exists Z : N\twoheadrightarrow Z, P\twoheadrightarrow P.$$
-  \item The Quasidiamond Property: $$M\to N, M\to P \implies \exists Z : N\twoheadrightarrow Z, P\twoheadrightarrow P.$$
-  \item The Diamond Property : $$M\to N, M\to P \implies \exists Z : N\to Z,P\to P.$$
+  \item The Church-Rosser Property: $$M\twoheadrightarrow N, M\twoheadrightarrow P \implies \exists Z : N\twoheadrightarrow Z, P\twoheadrightarrow Z.$$
+  \item The Quasidiamond Property: $$M\to N, M\to P \implies \exists Z : N\twoheadrightarrow Z, P\twoheadrightarrow Z.$$
+  \item The Diamond Property : $$M\to N, M\to P \implies \exists Z : N\to Z,P\to Z$$
   \end{enumerate}
 \end{definition}
 
@@ -683,7 +684,7 @@ Thorough this section we replicate notations and process done when defining type
 
 
 
-Having the syntax done, is time to provide meaning. We want $\top$ to be the truth value. A formula is true if $\top \to A$\footnote{check this}. Conversely, a formula is \emph{not-true} or \emph{false} (sometimes denoted as $\neg A$) if $ A \to \bot$. In addition, we want all the formulas from which we can derive certain to be true. For this we will define, analogously to the typing-contex from the previous chapter, what a \emph{truth-assumption} is and  what the rules of deduction are.
+Having the syntax done, is time to provide meaning. We want $\top$ to be the truth value. A formula is true if $\top \to A$. Conversely, a formula is \emph{not-true} or \emph{false} (sometimes denoted as $\neg A$) if $ A \to \bot$. In addition, we want all the formulas from which we can derive certain to be true. For this we will define, analogously to the typing-contex from the previous chapter, what a \emph{truth-assumption} is and  what the rules of deduction are.
 
 \begin{definition}
   A truth-assumption is a set of variables $\Gamma = \{x_1,...,x_n\}$ that we assume to be true. An \emph{judgement} $\Gamma \vdash B$ states that from truth assumption $\Gamma$, the formula $B$ can be deduced to be true. 
@@ -698,7 +699,7 @@ Sometimes we can write a truth assumption $\Gamma, A$, that will denote that add
     In addition, $\top$ is always true:
     $$  (\top)\qquad  {\displaystyle \over \Gamma \vdash \top}.$$
   \item From a true formula $A\to B$ and a true formula $A$, $B$ can be derived:
-    $$(\to_1)\qquad  {\displaystyle \Gamma \vdash A\to B\qquad \Gamma \vdash A      \over \Gamma \vdash B}.$$
+    $$(\to_1)\qquad  {\displaystyle \Gamma \vdash A \to B\qquad \Gamma \vdash A      \over \Gamma \vdash B}.$$
     Conversely, if assuming $A$ deduces $B$, then $A\to B$ is true.
     $$(\to_2)\qquad  {\displaystyle \Gamma, A \vdash B      \over \Gamma \vdash (A\to B)}.$$
     
@@ -706,8 +707,11 @@ Sometimes we can write a truth assumption $\Gamma, A$, that will denote that add
     $$(\land_1) \qquad {\displaystyle \Gamma\vdash A_1\land A_2 \over \Gamma \vdash A, \qquad \Gamma \vdash B },$$
     and conversely:
     $$(\land_2) \qquad {\displaystyle \Gamma\vdash A\qquad \Gamma\vdash B \over \Gamma \vdash  A \land B}.$$
-  \item Every type is part of a union type including it:
-    $$  (\lor_1^i)\qquad  {\displaystyle\Gamma \vdashA_i \over \Gamma \vdash \in_i A_1+A_2},\qquad  i=  1,2.$$
+  \item An element being true implies the union being true:
+        $$  (\lor_1^i)\qquad  {\displaystyle\Gamma \vdash A_i \over \Gamma \vdash A_1+A_2},\qquad  i=  1,2.$$
+
+    Every type is part of a union type including it:
+    $$  (\lor_1^i)\qquad  {\displaystyle\Gamma \over \Gamma A_i  \vdash A_1+A_2},\qquad  i=  1,2.$$
     conversely, A term on a union must always have the same type after application.:
     $$(\lor_2) \qquad {\displaystyle \Gamma\vdash A\lor B\qquad \Gamma, A\vdash C\qquad \Gamma, B\vdash C \over \Gamma \vdash C}.$$
   \item the \emph{ex falsum quodlibet} (i.e. everything is derivable from falsity)  holds:
