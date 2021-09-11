@@ -291,7 +291,7 @@ This result, as noted in \cites{seely1984locally}, can be deduced from results s
 
 
 \begin{theorem}[Proposition 1.31,\cite{freyd1972aspects}]
-  Let $A$ be a CCC and $A'\subset A$ be a full reflexive subcategory with reflector  $R$. Then $R$ preserves products iff for all $b,a\in Ob(A')$, we have that $b^a\in A'$.
+  Let $A$ be a closed Cartesian categories and $A'\subset A$ be a full reflexive subcategory with reflector  $R$. Then $R$ preserves products iff for all $b,a\in Ob(A')$, we have that $b^a\in A'$.
 \end{theorem}
 \begin{corollary}
   Let $C$ be a category. We define the functor $\sigma_b : C/b \to C$ as the forgetful functor for every $b\in Ob(C)$. Then $\sigma_b$ preserves and reflects colimits, equalizers, pullbacks and monomorphisms.
@@ -509,7 +509,7 @@ To proof this proposition we are going to introduce two adjoint functors for eve
   $\CC(M)$ is locally Cartesian closed.
 \end{theorem}
 \begin{proof}
-  We proof that, as $C$ indexed categories, $C\cong P(M)$. Finally, as $P(M)(a)$ is a CCC, so is $\CC(M)/a$ for each $a$.\\
+  We proof that, as $C$ indexed categories, $C\cong P(M)$. Finally, as $P(M)(a)$ is a closed Cartesian category, so is $\CC(M)/a$ for each $a$.\\
 
   Given proposition \ref{lemma:hyperdoc} it is only left to show that $\Phi$ and $\Psi$ commutes with $f^*$. It suffices to show that:
   \[
@@ -671,7 +671,7 @@ Finally, we introduce the concept of canonical interpretation.
   \begin{itemize}
   \item $\tilde 1 = 1$.
   \item A closed type correspond to itself.
-  \item If $a, b(x^a)$ are types, the $b(x)$ is interpreted as $\pi = \sigma x^a.b(x)$
+  \item If $a, b(x^a)$ are types, the $b(x)$ is interpreted as the projection  $\pi$ related to  $\Sigma x^a.b(x)$\footnote{This refers to the intuitive idea of identifying $b(x)$ as the subset of $a$ such that property $b$ is satisfied.}.
   \item $\widetilde{I(x,y)} = \Sigma x^a.\Sigma y^a. I(x,y) \to a\times a$, supposing that $a$ is closed. As they are closed $\Pi x^a.b(x)$ and $\Sigma x^a.b(x)$ are interpreted as themselves.
   \item Each term are interpreted as their associated morphism (remembering that a closed term $a$ is equivalent to a function term $a\to 1$).
   \end{itemize}

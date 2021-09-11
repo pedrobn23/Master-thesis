@@ -1,34 +1,33 @@
 
 
-\chapter{Lambda Calculus}
+\chapter{$\lambda$-Calculus}
 \thispagestyle{empty}
-In this chapter we define the $\lambda$-calculus as a formal language of computation, and on this define the concept of typing, ubiquitous in programming. The main references  for the general approach if this chapter are are \cite{selinger2008lecture} and \cite{hindley2008lambda}. For the historical motivation for the development of the theory  we refer to \cite{cardone2006history}.  \\
+In this chapter we define the $\lambda$-calculus as a formal language of computation, and on this we shall define the concept of typing, ubiquitous in programming. The main references  for the general approach of this chapter are \cite{selinger2008lecture} and \cite{hindley2008lambda}. For the historical motivation for the development of the theory  we refer to \cite{cardone2006history}.  \\
 
+In the 19th century, mathematicians developed the concept of function. In this time it was question whether two functions were the same. The most widespread view is the \emph{extensional} approach. This approach consider two functions to be the same whenever for the same input they have the same outputs. A function $f$ as a pairing of an X domain to an Y codomain. In other words, a function $f$ is seen as a pairing $f\subset X \times Y$.\\
 
-In the 19th century mathematicians developed the concept of function. In this time it was question whether two functions were the same. The most widespread view is the \emph{extensional} approach. This approach consider two functions to be the same whenever for the same input they have the same output. A function $f$ as a pairing of an X domain to an Y codomain. These functions can be considered as sets $f\subset X \times Y$.\\
+For example, let $p$ be a prime big enough, and let $f$ and $g$ be two endomorphisms of  $\mathbb{Z}/p\mathbb{Z}$. One could argue that the endomorphism of  $f(x)\to x^2$ is different to $g(x) \to \log_a a^{x+2}$. Despite having the same output for the same input, they are clearly different in \emph{complexity}, with complexity understood as the cost of computing a function. It even involve the resolution of a discrete logarithm, that is a highly non-trivial task. \\
 
-Despite that, this notion can be considered misleading. For example, let $p$ be a prime big enough, and let $f$ and $g$ be two endomorphisms of  $\mathbb{Z}/p\mathbb{Z}$. One could argue that the endomorphism of  $f(x)\to x^2$ is different to $g(x) \to \log_a a^{x+2}$. Despite having the same output for the same input, they are clearly different in \emph{complexity}, with complexity understood as the cost of computing a function. It even involve the resolution of a discrete logarithm, that is highly non trivial. \\
-
-This view, in which not only is the result of the function important but how is that result obtained, is called the \emph{intensional} approach. This approach, gain traction in early 1930 as Church\cite{church1932set}, Gödel\cite{adams2011early} or Turing\cite{turing1938computable} start formalizing what is to be computable. Nowadays, after the wake of computation, the intensional approach have come to be as relevant as the extenisional approach.
+This view, in which not only is the result of the function important but how is that result obtained, is called the \emph{intensional} approach. In early 1930 mathematicians such as Church\cite{church1932set}, Gödel\cite{adams2011early} or Turing\cite{turing1938computable} started formalizing what is to be computable. Nowadays, after the wake of computation, the intensional approach have come to be as relevant as the extenisional approach.
 
 % (to the point on which correctness is often partially dropped to easy time complexity, for example \cite{hofmeister2002probabilistic}). \\
 
 % In $\lambda$-calculus we consider function as formulas, and thus, we consider an intensional approach. This intensional approach was also backed by the constructivist, to whom we will later on relate with the study of the Curry-Howard isomorphism  .\\
 
 
-\section{Untyped $\lambda$-Calculus }
-We will start defining the most simple version of $\lambda$-calculus: untyped $\lambda$-calculus. Let's define some concepts:
+\section{Untyped $\lambda$-Calculus } \label{lambda-calc-untyped-section}
+We will start defining the most simple version of $\lambda$-calculus: untyped $\lambda$-calculus. Let us define some concepts:
 
 
 \begin{enumerate}
-\item An alphabet $A$ is an arbitrary, maybe finite, non-empty set.
-\item A symbol $a$ in an element of the alphabet.
-\item A word is a finite sequence of symbols.
+\item An alphabet $A$ is an arbitrary, maybe infinite, non-empty set.
+\item A symbol $a$ is an element of the alphabet.
+\item A word is an ordered finite sequence of symbols.
 \item The collection of all possible finite words over an alphabet $A$ is denoted by $A^*$.
 \item A language $L$ over $A$  is a subset of $A^*.$
 \end{enumerate}
 
-There are a lot of languages. For example, Spanish is a language, with a well-known alphabet $L$, with a proper subset of words over $L^*$.In the same fashion, we define $\lambda$-calculus as a formal language, defining its syntax, that is, what words are valid.
+There are a lot of languages. For example, Spanish is a language, with a well-known alphabet $L$, with a proper subset of words over $L^*$. In the same fashion, we define $\lambda$-calculus as a formal language, defining its syntax, that is, what words are valid.
 
 
 \subsubsection{Syntax of untyped $\lambda$-calculus}
@@ -36,14 +35,14 @@ We start with the basic building blocks, which collectively form what is
 called the alphabet:
 
 \begin{itemize}
-\item We use $x, y, z,...$ to denote variables. As more variables are necessary sub-indexes will be used, up to countable infinite variables.
+\item We use $x, y, z,...$ to denote variables. As more variables are necessary sub-indexes will be used, up to countable many variables.
 \item We consider an abstract connector $\lambda$.
 \item Auxiliary, we consider the characters $".", "("$ and $")"$.
 \end{itemize}
 Now, we are ready to formally define the untyped $\lambda$-calculus:
 
 \begin{definition}[Syntax of Untyped $\lambda$-calculus (section 2.1 \cite{selinger2008lecture})]\label{def:untyped-lambda-calc}
-  A $\lambda$-calculus term (sometimes called formula) is defined inductively:
+  A $\lambda$-calculus term (sometimes called a formula) is defined inductively:
   \begin{itemize}
   \item Every variable $x,y,z...$ is a valid formula.
   \item If $A,B$ is a formula, then $AB$ is a valid formula.
@@ -55,25 +54,27 @@ Now, we are ready to formally define the untyped $\lambda$-calculus:
   $\Lambda$ is countable.
 \end{remark}
 
-Dealing with formal languages we make use of similar inductive statements more often than not. we find it useful to introduce the Backus-Naur Form notation \cite{knuth1964backus}, BNF for short.  A BNF specification is a set of derivation rules, written as
+When dealing with formal languages we make use of similar inductive statements more often than not. we find it useful to introduce the Backus-Naur Form notation \cite{knuth1964backus}, BNF for short.  For this purpose, we shall find it useful BNF specification is a set of derivation rules, written as
+
 $$\operatorname{word1}, \operatorname{word2} ... ::= \operatorname{expression1} | \operatorname{expression2} |...,$$
+
 where each $\operatorname{word}$ is a generic valid word from the language, and each  expression consists of a derived valid formulas. Expressions are separated by the vertical bar: $|$. For example, we can revisit definition \ref{def:untyped-lambda-calc} as follow:
 
 \begin{definition}
   The formulas of  $\lambda$-calculus are built via the BNF:
-  $$A,B ::= x\ |\ (AB)\ |\ (\lambda x.A) .$$
+  $$A,B ::= x\ |\ (AB)\ |\ (\lambda x.A) ,$$
   where $x$ denote any variable in $\mathcal{V}$.
 \end{definition}
 \begin{remark}
-  Note that there is no need to specify the alphabet aside from the set $\mathcal{V}$.
+  Note that, in this case, there is no need to specify the alphabet aside from the set $\mathcal{V}$.
 \end{remark}
 
-From this point on we know how the $\lambda$-terms are constructed. This point is better understood with some examples, using natural numbers.  We recommend to trust us in their existence, and use a naive intuition of what a natural is when  reading this examples. The notion of natural numbers is formalized definition \ref{def:untyped-natural} and revisited in section \ref{section:natural-revisited}.\\
+From this point on we know how the $\lambda$-terms are constructed. This point is better understood with some examples, using natural numbers.  We recommend to trust us in their existence, and use a naive intuition of what a natural is when  reading this examples. The notion of natural numbers is formalized in definition \ref{def:untyped-natural} and revisited in section \ref{section:natural-revisited}.\\
 
 \subsection{Reductions in untyped $\lambda$-calculus}
-Let us now explain the idea behind the formalism. Consider the expression $\lambda x.(x+1)$. This expression represent the idea of the function $f(x)=x+1$ that take a variable $x$ and return $x+1$. $\lambda x.M$ is called the \emph{abstraction} of $x$.\\
+Let us now explain the idea behind the formalism. Consider the expression $\lambda x.(x+1)$. This expression represents the idea of the function $f(x)=x+1$ that take a variable $x$ and return $x+1$. The formula $\lambda x.M$ is called the \emph{abstraction} of $M$.\\
 
-From the notion of abstraction naturally arises the second one: \emph{application}. Consider terms $M  =\lambda x. x+1$ and $N = 3$. Then $MN = (\lambda x. x+1)(3)$ represent the application of $M$ to $N$. In untyped $\lambda$-calculus, $N$ can be any term. Thus for example, the term $\lambda f.\lambda g. fg$ just represent the composition of terms.   
+From the notion of abstraction naturally arises the second one: \emph{application}. Consider terms $M  =\lambda x. x+1$ and $N = 3$. Then $MN = (\lambda x. x+1)(3)$ represents the application of $M$ to $N$. In untyped $\lambda$-calculus, $N$ can be any term. Thus for example, the term $\lambda f.\lambda g. fg$ just represent the composition of terms.   
 
 \begin{example} The term $$\lambda g.(\lambda f.(\lambda x. (gf)(x) )) (x+1)(x+2),$$
   can be understood as $(g\circ f) (x)$ where $g(x) = x+1$ and $f(x)=x+2$.
@@ -82,13 +83,13 @@ From the notion of abstraction naturally arises the second one: \emph{applicatio
 In a expression $M = (\lambda x. N)$ we say that the variable $x$ is \emph{bound} in $M$.
 
 
-The idea of $\alpha$-equivalence, $=_{\alpha}$, is that expressions such as $\lambda x.x$ and $\lambda y.y$ are essentially the same. That is, we consider terms up to \emph{rename} of variables. To formalise this, we have to formalize the concept of free and bound variables, and the concept of renamed.
+The idea of $\alpha$-equivalence, $=_{\alpha}$, is that expressions such as $\lambda x.x$ and $\lambda y.y$ are essentially the same. That is, we consider terms up to \emph{renaming} of variables. To formalise this, we have to formalize the concept of free and bound variables, and the concept of renaming.
 
 \begin{definition}
-  We have a \emph{free variable} function $FV:\Lambda \to \mathcal{P}(\mathcal{V})$ defined recursively:
+  We have a \emph{free variable} function $FV:\Lambda \to \mathcal{P}(\mathcal{V})$ defined recursively as:
   \begin{itemize}
   \item $FV(x) = \{x\}$ for every $x\in \mathcal{V}$.
-  \item $FV(MN) = FV(M)\cap FV(N)$ for every $M,N\in \Lambda$.
+  \item $FV(MN) = FV(M)\cup FV(N)$ for every $M,N\in \Lambda$.
   \item $FV(\lambda x.M) = FV(M)\backslash \{x\}$ for every $M\in \Lambda, x\in \mathcal{V}$.
   \end{itemize}
   Given a term $M$, if $x\in FV(M)$ we say that $x$ is a free variable in $M$ or that $M$ has a free variable $x$.
@@ -99,31 +100,34 @@ The idea of $\alpha$-equivalence, $=_{\alpha}$, is that expressions such as $\la
 \end{definition}
 We can now define process of \emph{substitution}, and define a rename as a particular case. This process is the one behind the intuitive idea of evaluation. For example when we consider $(\lambda y. y^2+y)(4) = 4^2+4 = 20$ we are replacing the value of $x$ by the term $4$. 
 \begin{definition}\label{def:substition}
-  The substitution of $N$ for free occurrences of $x$ in $M$, denoted as $M[N/x]$ is defined recurrently in the structure of $\lambda$-terms by:
+  The substitution of $N$ for free occurrences of $x$ in $M$, denoted by $M[N/x]$ is defined recurrently in the structure of $\lambda$-terms by:
   \begin{align*}
     x[N/x]& \equiv N,\\
     y[N/x]& \equiv y, &  \text{if } x\ne y&,\\
     (MP)[N/x]& \equiv (M[N/x])(P[N/x]),\\
     (\lambda x.M)[N/x] & \equiv \lambda x.M,\\
-    (\lambda y.M)[N/x] & \equiv \lambda y.(M[N/x]), & \text{if } x\ne y \text{ and } \not \in FV(N)&,\\
+    (\lambda y.M)[N/x] & \equiv \lambda y.(M[N/x]), & \text{if } x\ne y \text{ and } y \not \in FV(N)&,\\
     (\lambda y.M)[N/x] & \equiv \lambda y'.((M[y'/y])[N/x]), & \text{if } x\ne y \text{ and } y\in FV(N),\\
           & & \text{ with } y' \not \in FV(N) \cup \{x\}&.
   \end{align*}
   When $N = y$ a variable we say that $[N/x] = [y/x]$ is a rename. 
 \end{definition}
+\begin{remark}
+  In equality $  (\lambda x.M)[N/x]  \equiv \lambda x.M,$ we remark that, although being both the variable $x$, no substitution is carried out as $x$ is bounded. This is called, \emph{non-capturing substitution}.
+\end{remark}
 
 \begin{definition}
   We define the $\alpha$-equivalence $=_\alpha$ as the smallest congruence relation on $\Lambda$ such that:
   $$\lambda x. M =_\alpha \lambda y. M[x/y], \qquad \forall y \in \mathcal{V} \backslash FV(M).$$
 \end{definition}
-In other words is the congruence that consider every rename of a bounded variable as equals. This type of property-oriented definition is commonplace in $\lambda$-calculus, as it allows for some synthetic and goal-oriented definition. More often than note we will not give explicit use of this equivalence.\\
+In other words is the congruence that consider every renaming of a bounded variable as equals. This type of property-oriented definition is commonplace in $\lambda$-calculus, as it allows for some synthetic and goal-oriented definition. 
 
 
 
-Using this same tool we are going to define the $\beta$-reduction. This is not going to be an equivalence implication, but rather a relationship. It abstracts the notion of $4$ and $(\lambda x. 2+x)(2)$ being equals. Formally:
+Using this same tool we are going to define the $\beta$-reduction. This is not going to be an equivalence implication, but rather a relationship. It abstracts the notion of  $(\lambda x. 2+x)(2)$  being computed as $4$. Formally:
 
 \begin{definition}[Section 2.5 \cite{selinger2008lecture}]
-  We define the \emph{single-step} $\beta$\emph{-reduction} as the smallest relationship $\to_\beta$ such that:%\footnote{Should i explain the notation ${A \over B}$}
+  We define the \emph{single-steps} $\beta$\emph{-reduction} as the smallest relationship $\to_\beta$ such that:%\footnote{Should i explain the notation ${A \over B}$}
   \begin{align*}
     &(\beta) \qquad\ \ \  \ {\ \over(\lambda x.M)N \to_\beta M[N/x]},\\
     &(\operatorname{cong}_1)\qquad\qquad{ M \to_\beta M' \over MN \to_\beta M'N },\\
@@ -142,14 +146,13 @@ Using this same tool we are going to define the $\beta$-reduction. This is not g
   We define the $\beta$-equivalence $=_\beta$ as the symmetric closure of $\twoheadrightarrow_\beta$.
 \end{definition}
 
-Up to this point the focus of the system was to define an intensional language for computation. $\beta$-reduction encapsulate the concept of computation, where we have evaluation.
+Up to this point the focus of the system was to define an intensional language for computation. $\beta$-reduction encapsulates the concept of computation, where we have evaluation.
 
-\begin{example}
-  \begin{itemize}
-  \item Ending example.
-  \item Never ending example.
-  \end{itemize}
-\end{example}
+% \begin{example}
+%   \begin{itemize}
+%   \item We can see that $(\lambda x. \lambda y. (x+ y))(6)(7)$ is reduced  to $(6+y)(7)$ and then to 13.
+%   \end{itemize}
+% \end{example}
 
 
 Should we want to consider a way of having an extensional approach, for example, to generate normal forms for the terms, we would need more machinery. The $\eta$-equivalence provides us with the tools to consider $\lambda$-calculus in a extensional way. \\
@@ -162,10 +165,10 @@ Should we want to consider a way of having an extensional approach, for example,
     &(\operatorname{cong}_2)\qquad\qquad{ N \to_\eta N' \over MN \to_\eta MN' },\\
     &(\zeta) \qquad\qquad \ \  \ {M\to_\eta M' \over(\lambda x.M) \to_\eta \lambda x.M'}.\\
   \end{align*}
-  Similarly, we define the multiple-step $\eta$-reduction $\twoheadrightarrow_\eta$ as the transitive reflexive closure of $\to_\eta$, and the $\eta$-equivalence as the symmetric closure of $\twoheadrightarrow_\eta$.
+  Similarly, we define the multiple-step $\eta$-reduction $\twoheadrightarrow_\eta$ as the transitive reflexive closure of $\to_\eta$, and the $\eta$-equivalence $=_\eta$ as the symmetric closure of $\twoheadrightarrow_\eta$.
 \end{definition}
 \begin{definition}
-  We define the single-step $\beta\eta$-reduction $\to_{\beta\eta}$ as the union of $\to_\beta$ and $\to_\eta$.  We define the multiple-step $\beta\eta$-reduction $\twoheadrightarrow_{\beta\eta}$ as the transitive reflexive closure of $\to_{\beta\eta}$.
+  We define the single-step $\beta\eta$-reduction $\to_{\beta\eta}$ as the union of $\to_\beta$ and $\to_\eta$.  We define the multiple-step $\beta\eta$-reduction $\twoheadrightarrow_{\beta\eta}$ as the transitive reflexive closure of $\to_{\beta\eta}$ and $=_{\beta\eta}$ ad the symmetric closure of $\twoheadrightarrow_{\beta\eta}$.
 \end{definition}
 
 % \begin{proposition}
@@ -193,7 +196,7 @@ Should we want to consider a way of having an extensional approach, for example,
       \hline
     \end{tabular}
   \end{center}
-  \caption{\label{tab:reductions}Reductions}
+  \caption{\label{tab:reductions}Considered reductions in $\lambda$-calculus.}
 \end{table}
 
 
@@ -218,7 +221,7 @@ This subsection we present an important result for $\lambda$-calculus: the \emph
 
 With this notation, we introduce the Church-Rosser Theorem, proved as done by Martin-Löf.
 
-\begin{theorem}{Church-Rosser}\label{theo:church-rosser}
+\begin{theorem}[Church-Rosser]The reductions in untyped $\lambda$-calculus satisfy the following properties:\label{theo:church-rosser}
   \begin{enumerate}
   \item $\twoheadrightarrow_{\beta\eta}$ satisfy the Church-Rosser property.
   \item $\twoheadrightarrow_{\beta}$ satisfy the Church-Rosser property.
@@ -228,7 +231,7 @@ With this notation, we introduce the Church-Rosser Theorem, proved as done by Ma
 
 
 
-We prove the theorem only for the $ \twoheadrightarrow_{\beta\eta}$ case. We refer to [Theorem 1.32, \cite{hindley2008lambda}] for a full proof for $\twoheadrightarrow_\beta$. he first step in the proof is going to be an alternative definition of $\toheadrightarrow_{\beta\eta}$, as a completion of a new reduction $\triangleright$.
+We prove the theorem only for the $ \twoheadrightarrow_{\beta\eta}$ case. We refer to  \cite[Theorem 1.32]{hindley2008lambda} for a full proof for $\twoheadrightarrow_\beta$. he first step in the proof is going to be an alternative definition of $\toheadrightarrow_{\beta\eta}$ as a completion of the new reduction $\triangleright$.
 \begin{definition}[parallel one-step reduction]
   We define the parallel one-step reduction  $\triangleright$ as the smallest relationship such that,\\
   \begin{align*}
@@ -253,16 +256,16 @@ We prove the theorem only for the $ \twoheadrightarrow_{\beta\eta}$ case. We ref
 \end{lemma}
 \begin{proof}
   \begin{enumerate}
-  \item  We  apply induction on the structure of $\to_{\beta\eta}$. That is, we know that $\to_{\beta\eta}$ have to be constructed following a series of rules. We are going to use induction on the last rule used. Therefore we conclude  every rule use for $\M \to_{\beta\eta} M'$ implies $M \triangleright M'$.
+  \item  We  apply induction on the structure of $\to_{\beta\eta}$. That is, we know that $\to_{\beta\eta}$ have to be constructed following a series of rules. We are going to use induction on the last rule used. Therefore we conclude  every rule use for $\M \to_{\beta\eta} M'$ implies $M \triangleright M'$. At every point, $x$ denote some variable, and $M,N,M',N',P,Q,Q'$ denote some term.
 
     \begin{itemize}
     \item[($\beta$)] In this case, then $M=(\lambda x.Q)M$ and $M' = Q[N/x]$. Then using (4) $M \triangleright M'$.
     \item[($\eta$)] In this case, then $M=(\lambda x.Qx)$ and $M' = Q$. Then using (5) $M \triangleright M'$.
-    \item[($\operatorname{cong}_1$)] In this case, then $M=PQ$ and $M' = PQ'$ for some $Q\to_{\beta\eta} Q'$. Using induction $Q\triangleright Q'$ and using (5) $M \triangleright M'$. 
+    \item[($\operatorname{cong}_1$)] In this case, then $M=PQ$ and $M' = PQ'$ for some $Q\to_{\beta\eta} Q'$. Using induction we get $Q\triangleright Q'$ and using (5) $M \triangleright M'$. 
     \item[($\operatorname{cong}_2$)]  Analogous.
-    \item[($\zeta$)] In this case, then $M=\lambda x.Q$ and $M' = \lambda x.Q'$ for some $Q\to_{\beta\eta} Q'$. Using induction $Q\triangleright Q'$ and using (3) $M \triangleright M'$.  
+    \item[($\zeta$)] In this case, then $M=\lambda x.Q$ and $M' = \lambda x.Q'$ for some $Q\to_{\beta\eta} Q'$. Using induction we get $Q\triangleright Q'$ and using (3) $M \triangleright M'$.  
     \end{itemize}
-    Where, in every point, $x$ denote some variable, and $M,N,M',N',P,Q,Q'$ denote some term.
+
   \item Similarly, every possible in which $M\triangleright M'$ rule derive in  $M \twoheadrightarrow_{\beta\eta} M'$:
     \begin{itemize}
     \item[(1)] By reflexivity of $ \twoheadrightarrow_{\beta\eta}$.
@@ -274,13 +277,13 @@ We prove the theorem only for the $ \twoheadrightarrow_{\beta\eta}$ case. We ref
     \end{itemize}
 
   \end{enumerate}
-  Where, in every point, $x$ denote some variable, and $M,N,M',N',P,Q,Q'$ denote some term.
+
 \end{proof}
 
-\begin{lemma}[Subtitution Lemma]If $M \triangleright M'$ and $U \triangleright U'$ , then $M [U/y] \triangleright M' [U' /y]$.
+\begin{lemma}[Substitution Lemma]If $M \triangleright M'$ and $U \triangleright U'$ , then $M [U/y] \triangleright M' [U' /y]$.\label{lemma:overconstrains}
 \end{lemma}
 \begin{proof}
-  As we define in \ref{def:substition} a capture-avoiding substitution, in the sense that we do not let bound variable to be substituted, we can assume without any loss of generality that $M$. Similarly to previous lemma, we proceed by induction, studying the last rule applied. The induction is proceed on the rules applied to $M\triangleright M'$.
+  We have defined in definition \ref{def:substition} a capture-avoiding substitution, in the sense that we do not let bound variable to be substituted. Similarly to previous lemma, we proceed by induction, studying the last rule applied. The induction is proceed on the rules applied to $M\triangleright M'$.
 
   \begin{itemize}
   \item[(1)] In this case $M=M'=x$. If $x\ne y$ the substitution does not alter $M$ so we have finished. If $x = y$, the term is only $U\triangleright U'$, that we know by hypothesis.
@@ -291,13 +294,13 @@ We prove the theorem only for the $ \twoheadrightarrow_{\beta\eta}$ case. We ref
   \end{itemize}
 \end{proof}
 
-While the proof is rather straight forward, one can see that it does require induction, and thus the length of it. \footnote{Maybe add some explanation here.}
+While the proof is rather straightforward, one can see that it does require induction, and thus the length of it. 
 
 \begin{definition}[Maximal parallel one-step reduction]
   Given a term $M$, the \emph{maximal parallel one-step reduction} $M^*$ is defined inductively:
   \begin{itemize}
   \item $(x)^*  =x$ 
-  \item $(PN)*=P^*N^*$ but for $\beta$-reductions.
+  \item $(PN)^*=P^*N^*$ but for $\beta$-reductions.
   \item $((\lambda x.P)N)^* = Q^*[N/x] $
   \item $(\lambda x.N)^*=\lambda x.N^*$ but for $\eta$-reductions, 
   \item $(\lambda x.Nx)^*=N^*$ 
@@ -310,42 +313,41 @@ While the proof is rather straight forward, one can see that it does require ind
   If $M\triangleright M'$ then $M'\triangleright M^*$.
 \end{lemma}
 \begin{proof}
-  \begin{itemize}
   We proceed by induction on $M$ again:
-\item[(1)] In this case $M=M'=x$. Then $M^*=x$.
-\item[(2)] In this case $M=NP, M'=P'N'$ for some terms $N,N',P,P'$ such that $N\triangleright N'$, $P\triangleright P'$.
   \begin{itemize}
-  \item If $NP$ is not a $\beta$-reduction, then $M^* = P^*N^*$ and we can use the hypothesis induction on $N^*$ and $P^*$ and (2).
-  \item If $NP$ is a $\beta$-reduction, then $N = \lambda x. Q$, thus $M^* = Q^*[N^*/x]$. $P = \lambda x.Q$ and $P \triangleright P'$ could be derived using congruence to $\lambda$-abstraction (2) or extensionality (5). In the first case use induction on $Q$ and (4). On the second case $Q=Rx$, use induction on $R$, and apply substitution lemma.
-  \end{itemize}
 
-  Proceed by induction on these implications and apply (2).
-\item[(3)] In this case $M=\lambda x.N$ and $M=\lambda x.N'$, for some $N\triangleright N'$. If $M$ is not an $\eta$-reduction, then use induction hypothesis and finish with (3). Otherwise we have that $N = Py$, and distinguish two cases on the last rule applied to $N$:
-  \begin{itemize}
-  \item[(2)\to (3)] Then apply induction hypothesis to $P$ and end using (5).
-  \item[(4)\to (3)] We have that $N = P = \lambda y.Q \triangleright N' = Q'[x/y]$. Apply induction hypothesis using that $M ' = \lambda x.N' = \lambda x.Q'[x/y] = \lambda y. Q'$.
+  \item[(1)] In this case $M=M'=x$. Then $M^*=x$.
+  \item[(2)] In this case $M=NP, M'=P'N'$ for some terms $N,N',P,P'$ such that $N\triangleright N'$, $P\triangleright P'$.
+    \begin{itemize}
+    \item If $NP$ is not a $\beta$-reduction, then $M^* = P^*N^*$ and we can use the  induction hypothesis on $N^*$ and $P^*$ and (2).
+    \item If $NP$ is a $\beta$-reduction, then $N = \lambda x. Q$, thus $M^* = Q^*[N^*/x]$. $P = \lambda x.Q$ and $P \triangleright P'$ could be derived using congruence to $\lambda$-abstraction (2) or extensionality (5). In the first case use induction on $Q$ and (4). On the second case $Q=Rx$, use induction on $R$, and apply substitution lemma.
+    \end{itemize}
+
+    Proceed by induction on these implications and apply (2).
+  \item[(3)] In this case $M=\lambda x.N$ and $M=\lambda x.N'$, for some $N\triangleright N'$. If $M$ is not an $\eta$-reduction, then use induction hypothesis and finish with (3). Otherwise we have that $N = Py$, and distinguish two cases on the last rule applied to $N$:
+    \begin{itemize}
+    \item[(2)\to (3)]\footnote{Notation $(2)\to (3)$ means that the last to step in the reduction has been $(2)$ and $(3)$.} Then apply induction hypothesis to $P$ and end using (5).
+    \item[(4)\to (3)] We have that $N = P = \lambda y.Q \triangleright N' = Q'[x/y]$. Apply induction hypothesis using that $M ' = \lambda x.N' = \lambda x.Q'[x/y] = \lambda y. Q'$.
+    \end{itemize}
+  \item[(4)] Then we have $(\lambda x.P)N \triangleright P'[N'/x]$ with $P \triangleright P'$ and $P \triangleright P'$. The result follows by the substitution lemma \ref{lemma:overconstrains}.
+  \item[(5)] Then we have $(\lambda x.Px) \triangleright P'$, for some $P\triangleright P'$ and for some $x \not  \in FV(P)$. Finish using induction on 
   \end{itemize}
-\item[(4)] Then we have $(\lambda x.P)N \triangleright P'[N'/x]$ with $P \triangleright P'$ and $P \triangleright P'$. By substitution lemma.
-\item[(5)] Then we have $(\lambda x.Px) \triangleright P'$, for some $P\triangleright P'$ and for some $x \not  \in FV(P)$. Finish using induction on 
-\end{itemize}
 \end{proof}
 
 
-\begin{proof}[Proof of Theorem \ref{theo:church-rosser}]   If a relation $\to$ satisfy the diamond property, its reflexive, transitive closure $\twoheadrightarrow$ satisfy the Church-Rosser property. As a consequence of lemma \ref{lemma:cr2}, we know that $\triangleright$ satisfy the diamond property.  By lemma \ref{lemma:cr1} we know that the reflexive, transitive closure of $\triangleright$ is $\twoheadrightarrow_{\beta\eta}$.
+\begin{proof}[Proof of Theorem \ref{theo:church-rosser}]   If a relation $\to$ satisfy the diamond property, its reflexive and transitive closure $\twoheadrightarrow$ satisfy the Church-Rosser property. As a consequence of lemma \ref{lemma:cr2}, we know that $\triangleright$ satisfy the diamond property.  By lemma \ref{lemma:cr1} we know that the reflexive and transitive closure of $\triangleright$ is $\twoheadrightarrow_{\beta\eta}$.
 \end{proof}
 
-Now let take a moment to comment on the usefulness of each reduction. We can say that $\beta$ reduction is the soul of computation  while $\eta$ is useful to cleanup the results.  This can be used to define \emph{normal} forms for untyped lambda-terms. More infomation on normalization can be found on \cite[Section 7]{selinger2008lecture} and \cite{baader1999term}. \\
+Now let take a moment to comment on the usefulness of each reduction. We can say that $\beta$ reduction is the soul of computation  while $\eta$ is useful to cleanup the results.  This can be used to define \emph{normal} forms for untyped $\lambda$-terms. More infomation on normalization can be found on \cite[Section 7]{selinger2008lecture} and \cite{baader1999term}. \\
 
 
 \subsection{Fixed points and Programming}
-In this subsection we expose the basic rudiments for programming in untyped $\lambda$-calculus. In particular, we explain how to define, for example, a booleans, an integer type and a recursion operator, thus showing the computational potential of recursively enumerable languages. We start with the booleans.
+This section is an interlude. We will stop analyzing for a while the theoretical properties of lambda calculus. Instead, in this section we will ponder upon how lambda calculus actually captures the notion of programming. In particular, we explain how to define the basic rudiments for programming in untyped $\lambda$-calculus. In particular, we explain how to define, for example, a booleans, an integer type and a recursion operator, thus showing the computational potential of recursively enumerable languages. Let us start with the booleans.
 
-\begin{definition}[Boolean in untyped lambda-calculus] \label{def:untyped-natural} 
-  We define the two values $T$ and $F$, true and false, as:
-  \begin{align*}
-    \operatorname{True} &= \lambda xy.z,\\
-    \operatorname{False} &= \lambda xy.z.
-  \end{align*}
+\begin{definition}[Boolean in untyped $\lambda$-calculus] \label{def:untyped-natural} 
+  We define the two values $T$ and $F$, usually referred to as true and false, as:
+  $$\operatorname{True} = \lambda xy.z,\qquad    \operatorname{False} = \lambda xy.z.$$
+
   We also define the operations:
   \begin{align*}
     \operatorname{Not} &= \lambda a.a\operatorname{False}\operatorname{True},\\
@@ -360,11 +362,16 @@ We can check that this construction left us with the basis of a boolean logic, a
   We define the $\operatorname{If} = \lambda x.x$.  
 \end{definition}
 
-We can see that in this case, $\operatorname{If} \operatorname{True} M N = M$ and $\operatorname{If} \operatorname{False} M N = N$. This construction is very natural and widely used in computer programs. Next, we will define Naturals number. 
+We can see that in this case, $\operatorname{If} \operatorname{True} M N = M$ and $\operatorname{If} \operatorname{False} M N = N$. This construction is very natural and widely used in computer programs.\\
 
-\begin{definition}[Natural numbers in untyped lambda-calculus] \label{def:untyped-natural} 
-  Let $f,x$ be fixed $\lambda$-terms, and write $f^nx = f(f(f(...(f(x))...)))$. Then, for each $n \in \mathbb N$, we define the \emph{nth Church numeral} as $\overline n=\lambda fx.f^nx$.
+Next, we will define Naturals number. 
+
+\begin{definition}[Natural numbers in untyped $\lambda$-calculus] \label{def:untyped-natural} 
+  Let $f,x$ be fixed $\lambda$-terms, and write $f^nx = f(f(f(...(f(x))...)))$. Then, for each $n \in \mathbb N$, we define the \emph{nth Church numeral} as $\overline n=\lambda f x.f^nx$.
 \end{definition}
+\begin{remark}
+  We abuse the notation with $\lambda f x.f^nx$, which mean $\lambda f.\lambda x.f^nx$
+\end{remark}
 
 Finally, we consider the notion of recursive function. This is done with a elegant artefact, based on an idea of fixed points. Let's begin:
 
@@ -374,7 +381,7 @@ Finally, we consider the notion of recursive function. This is done with a elega
   For every term $F$ in untyped $\lambda$-calculus, there is a fixed point.
 \end{theorem}
 \begin{proof}
-  Let $A=\lamdba xy.y(xxy)$ and $\Theta =AA$. Then, for every lambda-term $F$ we have that $N=\theta F = FN$, thus being a fixed point. In fact:
+  Let $A=\lamdba xy.y(xxy)$ and $\Theta =AA$. Then, for every $\lambda$-term $F$ we have that $N=\theta F = FN$, thus being a fixed point. In fact:
   \begin{align*}
     N = \Theta F = AAF = (\lambda xy.y(xxy))AF \twoheadrightarrow_\beta F(AAF) = F(\Theta F) = FN.
   \end{align*}
@@ -399,7 +406,7 @@ This existence of fixed point theorem is really useful, as we can now define \em
 \end{definition}
 Suppose that we want to define the factorial. We want that:
 $$\operatorname{fact} n = \operatorname{If}(\operatorname{iszero} n)(1)(\operatorname{mult}(n)(\operatorname{fact} (\operatorname{pred}(n))),$$
-in orther to do that, look for a fixed point of:
+in order to do that, look for a fixed point of:
 $$\lambda f. \lambda n.\operatorname{If}(\operatorname{iszero}n)(1)(\operatorname{mult}(n)(f (\operatorname{pred}(n))),$$
 and thus $\operatorname{fact}=\Theta \lambda f.\lambda n. \operatorname{If}(\operatorname{iszero}n)(1)(\operatorname{mult}(n)(f (\operatorname{pred}(n)))$. In general:
 
@@ -408,14 +415,13 @@ and thus $\operatorname{fact}=\Theta \lambda f.\lambda n. \operatorname{If}(\ope
   $$F = \Theta \lambda f. \operatorname{If}(gn)(n)(f (\operatorname{pred}(n))$$
 \end{definition}
 
-Another implementation of the fixed point operator is \emph{Curry's paradoxical fixed point operator}:
-
-\begin{definition}
-  We define Curry's paradoxical fixed point operator $\operatorname{Y}$ as:
+\begin{remark}
+Another implementation of the fixed point operator is \emph{Curry's paradoxical fixed point operator}.  We define Curry's paradoxical fixed point operator $\operatorname{Y}$ as:
   $$\operatorname{Y}=\lambda f.(\lambda x.f(x x)) (\lambda x.f(x x)).$$
-\end{definition}
-
 This operator is used for the Curry's paradox \cite{sep-curry-paradox}.\\
+\end{remark}
+
+
 
 % \subsection{Rosser-Kleene and Curry's Paradoxes}
 
@@ -438,7 +444,7 @@ This operator is used for the Curry's paradox \cite{sep-curry-paradox}.\\
 
 
 \section{Typed $\lambda$-Calculus}
-\emph{Typed $\lambda$-calculus} is a refinement of untyped $\lambda$-calculus, on which the concept of typing is introduced. We are going to present three aproximation to simply typing: \emph{minimal, basic and extended simply typed }$\lambda$\emph{-calculus}. 
+\emph{Typed $\lambda$-calculus} is a refinement of the untyped $\lambda$-calculus, on which the concept of typing is introduced. We are going to present three aproximation to simply typing: \emph{minimal simply typed }$\lambda$\emph{-calculus}, \emph{basic simply typed }$\lambda$\emph{-calculus} and \emph{extended simply typed }$\lambda$\emph{-calculus}. 
 
 \subsection{Definition}
 
@@ -451,14 +457,19 @@ We synthesize the definitions of typing presented in \cite{lambek1988introductio
   where $\iota$ denote a basic type. 
 \end{definition}
 \begin{remark}
-  We usually refer to basic simply typed $\lambda$-calculus as simply typed $\lambda$-calculus.
+  We usually refer to the basic simply typed $\lambda$-calculus just as simply typed $\lambda$-calculus.
 \end{remark}
-
+\begin{definition}
+  We say that a term is closed if it has no free variables.
+\end{definition}
+\begin{remark}
+Let us have a word on the intuitive notion of $A\to B$. As it happens in sets, where we have that we can consider the sets of functions between two set, here we can consider the type of function between two types. This types are called \emph{function types}.\\
+\end{remark}
 
 % Lets start laying some bricks useful for the intuition. $\iota$ type is foundational type. We consider also the type $1$. Others author, such as \cite{lambek1988introduction} prefer to include a type for every natural. Nonetheless, we consider that we can repeat the construction realized in untyped lambda-calculus to consider this typing. \\
 
 
-As it happens in sets, where we have that we can consider the set of functions between two set, here we can consider the type of function between two types. This types are called \emph{function types}.\\
+
 
 
 
@@ -468,24 +479,22 @@ As it happens in sets, where we have that we can consider the set of functions b
   $$A,B ::= x\ |\ AB\ |\ \lambda x^t.A \ |\ \langle A,B \rangle\ |\ \pi_1A\ |\ \pi_2A\ |\ *.$$
   where $x$ denote any variables, and $t$ denote any type. 
 \end{definition}
-\begin{definition}
-  We say that a term is closed if it has no free variables.
-\end{definition}
+
 \begin{remark}
-  We avoid the meticulous redefinition of free and bounded variable and use the one that naturally translates from untyped lambda calculus.
+  We avoid the meticulous redefinition of free and bounded variable and use the one that naturally translates from untyped $\lambda$-calculus as explained in Section \ref{lambda-calc-untyped-section}
 \end{remark}
 
 
-The main difference with untyped calculus, is that every bound variable has a type. That is, for the expression $(\lambda x^t.M)N$ to be coherent we require $N$ to be of type $t$. This led us to require some sort of condition to $N$ for being of type $t$.\\
+The main difference with untyped calculus is that every bound variable has a type. That is, for the expression $(\lambda x^t.M)N$ to be coherent we require the term $N$ to be of type $t$. This led us to formulate some sort of condition to $N$ for being of type $t$.\\
 
-Nonetheless raw terms have some other meaningless terms, such as projections of a non-pair $\pi_1(\lambda x^t.x)$. We solve all this problems at once with the \emph {Typing rules}. This rules will restricts the semantics of terms. We start by defining \emph{typing context}.
+Nonetheless raw terms have some other meaningless terms, such as projections of a non-pair $\pi_1(\lambda x^t.x)$. We solve all this problems at once with the \emph {Typing rules}. This rules will restrict the semantics of terms. We start by defining \emph{typing context}.
 
 \begin{definition}
-  We state by $M:t$  that a term $M$ is of type $t$. A typing context is a set of assumption $\Gamma = (x_1:A_1)$, on which we assume each variable $x_i$ to be of type $A_i$.
+  We state by $M:t$  that a term $M$ is of type $t$. A typing context is a set of assumptions $\Gamma = \{x_1:A_1\}$, on which we assume each variable $x_i$ to be of type $A_i$.
 \end{definition}
 
 \begin{remark}
-  From this definition, we can state the typing rules, from which we will be able to provide typing. We use the notation $\Gamma \vdash M:A$ meaning that the typing context $\Gamma$ derives in term $M$ being of type $A$. 
+  From this definition, we can state the typing rules, from which we will be able to provide typing. We use the notation $\Gamma \vdash M:A$ meaning to state that the typing context $\Gamma$ derives that term $M$ is of type $A$. 
 \end{remark}
 
 
@@ -497,9 +506,9 @@ Nonetheless raw terms have some other meaningless terms, such as projections of 
     In addition,  $*$ is of type 1.
     $$  (*)\qquad  {\displaystyle \over \Gamma\vdash *:1}.$$
 
-  \item From a term of type $A\to B$ we can derive a term of type $B$, from a term of type $A$:
+  \item From a term of type $A\to B$ we can derive a term of type $B$ from a term of type $A$:
     $$(app)\qquad  {\displaystyle \Gamma \vdash M:A\to B\qquad \Gamma \vdash N:A      \over \Gamma \vdash MN:B}.$$
-    Conversely, we can deduce th
+    Conversely, 
     $$(abs)\qquad  {\displaystyle \Gamma, x: A\vdash M: B  \over \Gamma \vdash \lambda x^A.m:A\to B}.$$
   \item The projections takes types pairing to each typing:
     $$(\pi_i) \qquad {\displaystyle \Gamma\vdash M: A_1\times A_2 \over \Gamma \vdash \pi_i M: A_i},\qquad i=1,2,$$
@@ -515,29 +524,29 @@ Nonetheless raw terms have some other meaningless terms, such as projections of 
 \end{remark}
 
 \begin{definition}
-  The terms of \emph{basic simply typed $\lambda$-calculus} is a raw typed $\lambda$-term that, together with a typing context of every variable, is subject to be typed.
+  The terms of \emph{basic simply typed $\lambda$-calculus} is a raw typed $\lambda$-term that, together with a typing context of every variable, satisfies to be typed in the sense of definition \ref{def:typing-rules}.
 \end{definition}
 \begin{remark}
-  Typing rules are often called \emph{term-forming operation}. As the only terms that we consider are those suitable to be typed, we can see these typing rules as rules to construct terms inductively.
+  Typing rules are often called \emph{term-forming operation}. As the only terms that we consider here are those suitable to be typed. In this sense,  we can see these typing rules as rules to construct terms inductively.
 \end{remark}
 
-By assigning type we mean assigning types to the free and bound variables. Further on, when talking about terms we will refer to simply type $\lambda$-terms. On these terms, we can define substitution just like we defined it on untyped $\lambda$-calculus.
+By assigning a type we mean assigning types to the free and bound variables. Further on, when talking about terms we will refer to simply type $\lambda$-terms. That is, to fix a context, we can define substitution just like we defined it on typed $\lambda$-calculus.
 
 
 \subsection{Reductions in simply typed $\lambda$-calculus}
 
-To talk Church-Rosser, we have to talk reduction. Reductions are basically the same but for the additional structure added that we need to respect: 
+To talk about Church-Rosser properties, we have to talk about reduction. Reductions in the typed lambda calculus are basically the same but for the additional structure added about we need to respect: 
 
 \begin{definition}[Section 2.5 \cite{selinger2008lecture}]
   We define the \emph{single-step} $\beta$\emph{-reduction} as the smallest relationship $\to_\beta$ such that:
   \begin{itemize}
   \item[]$(\beta)$: $ (\lambda x^t.M)N \to_\beta M[N/x]$.\\
-  \item[]$(\beta_{\times,i})$: $\pi_i\langle M_1,M_2\rangle \to_\beta M_i$.\\
+  \item[]$(\beta_{\times,i})$: $\pi_i\langle M_1,M_2\rangle \to_\beta M_i$ for $i=1,2$.\\
   \item[]$(\operatorname{cong}_1)$: If $ M \to_\beta M'$ then $MN \to_\beta M'N$.\\
   \item[]$(\operatorname{cong}_2)$: If $ N \to_\beta N'$ then $ MN \to_\beta MN'$.\\
   \item[]$(\zeta)$: If $M\to_\beta M'$ then $(\lambda x^t.M) \to_\beta \lambda x^t.M'$.\\
   \end{itemize}
-  We define the \emph{multiple-step} $\beta$\emph{-reduction} $\twoheadrightarrow_\beta$ as the reflexive, transitive closure of $\to_\beta$.
+  We define the \emph{multiple-step} $\beta$\emph{-reduction} $\twoheadrightarrow_\beta$ as the reflexive, transitive closure of $\to_\beta$ and $\beta$-equality $=_\beta$ as the symmetric closure of $\twoheadrightarrow_\beta$.
 \end{definition}
 
 \begin{definition}
@@ -554,19 +563,19 @@ To talk Church-Rosser, we have to talk reduction. Reductions are basically the s
 Similarly, we define the multiple-step $\eta$-reduction $\twoheadrightarrow_\eta$ as the transitive reflexive closure of $\to_\eta$, and the $\eta$-equivalence as the symmetric closure of $\twoheadrightarrow_\eta$.
 \end{definition}
 
-\begin{remark} Note that we basically just add new rules so that $\beta$ and $\eta$ reductions pair with the new syntax provided by the product.
+\begin{remark} Note that we basically just add new rules so that $\beta$ and $\eta$ reductions match with the new syntax provided by the product.
 \end{remark} 
-We can now talk about about Church-Rosser.  Lets check that it does not hold. For example, if $x: A\times 1$ then we can consider $M=\langle \pi_1x, \pi_2x\rangle$. Because of the rule $\eta_1$, we have that $M \to_{\eta}\langle \pi_1 x, *\rangle$, but taking $\eta_\times$ into account we can check that $M \to_{\eta} x$. \\
+We can now talk about about Church-Rosser.  Let us check that it does not hold. For example, if $x: A\times 1$ then we can consider $M=\langle \pi_1x, \pi_2x\rangle$. Because of the rule $\eta_1$, we have that $M \to_{\eta}\langle \pi_1 x, *\rangle$, but taking $\eta_\times$ into account we can check that $M \to_{\eta} x$. \\
 
-Despite this, $\beta$-reduction does maintain the Church-Rosser property, so from a computational point of view there is no problem at all. 
+Although the Church-Rosser property is not satisfied for $\eta$-reduction, it is satisfied for $\beta$-reduction. This has an important significance. Recall that $\beta$-reduction is an abstraction of the idea of computation, while $\eta$-reduction is an abstraction of the idea of equivalence. So, in a simply typed system, we can perform computations all with the same end, because of the Curh-Rosser property of $\beta$-reduction. We cannot do the same with $\eta$-reduction, thus having no universal normal forms.
 
 \subsection{Minimal and Expanded Typing}
 \subsubsection{Minimal Typing}
-The already explained $\lambda$-calculus can be reduce to a slimmer version. In fact, the only type truly necessary are the function types. We present it succinctly.
+The already explained $\lambda$-calculus can be reduced to a slimmer version. In fact, the only type truly necessary are the function types. We present it succinctly.
 
 \begin{definition}
-  The types of minimal simply typed $\lambda$-calculus are built via the BNF:
-  $$A,B ::= \iota |\ A\to B.$$
+  The types of minimal simply typed $\lambda$-calculus are here built via the BNF:
+  $$A,B ::= \iota |\ A\to B,$$
   where $\iota$ denote a basic type. 
 \end{definition}
 
@@ -574,7 +583,7 @@ The already explained $\lambda$-calculus can be reduce to a slimmer version. In 
 
 \begin{definition}
   The raw term of minimal simply typed $\lambda$-calculus are built via the BNF:
-  $$A,B ::= x\ |\ AB\ |\ \lambda x^t.A.$$
+  $$A,B ::= x\ |\ AB\ |\ \lambda x^t.A,$$
   where $x$ denote any variables, and $t$ denote any type. 
 \end{definition}
 
@@ -594,13 +603,13 @@ The already explained $\lambda$-calculus can be reduce to a slimmer version. In 
 \end{definition}
 
 \begin{definition}
-  The terms of minimal simply typed lambda calculus are the raw terms that are subject to being typed under a certain Type context.
+  The terms of minimal simply typed $\lambda$-calculus are the raw terms that are subject to being typed under a certain Type context.
 \end{definition}
 \begin{remark}
   We have simply trimmed the fundamental part of the basic definition.
 \end{remark}
 \subsubsection{Expanded Typing}
-We can add to the definition of typing by considering the sum Type. The idea is to have two types $A$ and $B$ and be able to consider a term $\lambda x^{A+B}. x+1$. That is, we can consider two types to be acceptable by a function. 
+In a different direction than minimal typing, expanded typing seeks to enlarge the definition of typing by considering the sum type. We can add to the definition of typing by considering the sum Type. The idea is to have two types $A$ and $B$ and be able to consider a term $\lambda x^{A+B}. x+1$. That is, we can consider two types to be acceptable by a function. 
 
 \begin{definition}
   The types of expanded simply typed $\lambda$-calculus are built via the BNF:
@@ -627,72 +636,72 @@ For this typing, three new rules are included for type derivation, in addition t
   \begin{itemize}
   \item Every type is part of a union type including it:
     $$  (\iin_i)\qquad  {\displaystyle\Gamma \vdash M:A_i \over \Gamma \vdash \iin_i M:A_1+A_2},\qquad  i=  1,2.$$
-    conversely, A term on a union must always have the same type after application.:
+    Conversely, a term on a union must always have the same type after application.:
     $$(\ccase) \qquad {\displaystyle \Gamma\vdash M: A+B\qquad \Gamma, x:A\vdash N: C\qquad \Gamma, x:B\vdash P: C \over \Gamma \vdash \ccase A ; x^{A}.M\oo x^{B}.P:C}.$$
-  \item The $\square^\cdot$ extract a term of any type form the void type.
+  \item The $\square^\cdot$ extract a term of any type from the void type.
     $$  (\square)\qquad  {\displaystyle\Gamma \vdash M:0 \over \Gamma \vdash \square^A M:A}.$$
   \end{itemize}
 \end{definition}
 
 We have the same consideration as previously, so that only those being subject to typing will be considered terms. Unification of typing considerations also holds.
 \begin{definition}
-  The terms of expanded simply typed lambda calculus are the raw terms that are subject to being typed under a certain Type context.
+  The terms of expanded simply typed $\lambda$-calculus are the raw terms that are subject to being typed under a certain Type context.
 \end{definition}
 \subsubsection{Pure and impure typed $\lambda$-calculus}
 
-We have seen that a typing context can vary which terms are subject to be formed and which does not. This consideration will be important later in our discussion, when we consider the category of $\lambda$-calculus. In this sense, we can assume that, associated with each typing context, a different lambda computation is generated. This distinction inspires the following definition.
+We have seen that a typing context can vary which terms are subject to be formed and which does not. This consideration will be important later in our discussion, when we consider the category of $\lambda$-calculus. In this sense, we can assume that, associated with each typing context, a different $\lambda$-computation is generated. This distinction inspires the following definition.
 
 
 \begin{definition}
-  A basic (resp. minimal, extended) lambda calculus is a triple $(\Xi, \Lambda, \Gamma)$ such that:
+  A basic (resp. minimal, extended) $\lambda$-calculus is a triple $(\Xi, \Lambda, \Gamma)$ such that:
   \begin{itemize}
-  \item $\Xi$ is the collection of types,
-  \item $\Lambda$ is the collection of terms,
+  \item $\Xi$ is the collection of types of the basic lambda-calculus (resp. minimal, extended),
+  \item $\Lambda$ is the collection of terms of the basic lambda-calculus (resp. minimal, extended),
   \item $\Gamma$ is a typing context,
   \end{itemize}
-  where all rules of basic (resp. minimal, extended) lambda calculus are satisfied. When there
-  exists no more types and terms that those derived from the definition, and $\Gamma=\{\}$, it is called a \emph{pure basic (resp. minimal, extended) lambda calculus}.   
+  where all rules of basic the (resp. minimal, extended) $\lambda$-calculus are satisfied. When there
+  exist no more types and terms than those derived from the definition, and $\Gamma=\{\}$, it is called a \emph{pure basic (resp. minimal, extended) $\lambda$-calculus}.   
 \end{definition}
 \begin{remark}
-  Often, in a lambda calculus, is usual to consider terms up to $\alpha\beta\eta$-equivalence. 
+  Often, in a $\lambda$-calculus, is usual to consider terms up to $\alpha\beta\eta$-equivalence. 
 \end{remark}
 
-The way to generate a new lambda calculus, is to create a new type $t$, (often, based on other types), and to create a (possibly abstract) new term $M$ with typing context $\{M:t\}$.
+The way to generate a new $\lambda$-calculus, is to add a new type $t$, (often, based on other types), and to create a (possibly abstract) new term $M$ with typing context $\Gamma = \{M:t\}$.
 \subsection{Unification of typing}
 
 We can consider two standards in typing: \emph{Church Style} and \emph{Curry Style}.
 \begin{itemize}
-\item Church style,  first shown in \cite{church1940formulation}, is an explicit system, as we do only consider expression with well defined types, in the same way that a function is consider with regard to it domain and codomain. In summary, the typing of a function is the first part of the definition of it, so you can define $f:(0,1)\to (0,1)$ and just then define $f(x)=1/x$. This domain is not it only possible domain, but it what we choose it to be. 
+\item Church style,  first shown in \cite{church1940formulation}, is an explicit system, as we do only consider expression with well defined types, in the same way that a function is consider with regard to it domain and codomain. In summary, the typing of a function is the first part of the definition of it, so you can define $f:(0,1)\to (0,1)$ and just then define $f(x)=1/x$. This domain is not it only a possible domain, but it what we choose it to be. 
 \item Curry style on the other hand, gain some of the notions of untyped $\lambda$-calculus and consider expression as function. To continue the real function analogy, it consider that the function $f(x)=x^2$ just exists, and one can check that it is well defined on $\R$. \\
 \end{itemize}
-More information about the typing style can be found on Chapter 10 and 11 of \cite{hindley2008lambda}. \\
+More information about the typing style can be found on Chapters 10 and 11 of \cite{hindley2008lambda}. \\
 
-Despite this apparent differences, both typing styles can be \emph{unified}. An unifier is a pair of substitution that makes two type styles equal as typed templates. Such an unifier is based onta an algorithm based on type inference. This is instrumental to languages  as relevant \texttt{python}, that works with implicit typed variables. How this algorithms for unification is shown in great detail in chapter 9  of \cite{selinger2008lecture}. Due to this unification, we can consider only explicitely typed terms without any remorse.
+Despite this apparent differences, both typing styles can be \emph{unified}. A unifier is a pair of substitutions that makes two type styles equal as typed templates. Such a unifier is based onta an algorithm based on type inference. This is instrumental to languages  as relevant as \texttt{python}, which works with implicit typed variables. How this algorithms for unification is shown in great detail in Chapter 9  of \cite{selinger2008lecture}. Due to this unification, we can consider only explicitely typed terms without any remorse.
 
 \section{Curry-Howard bijection}
 \subsection{Natural deduction}
-In this section we succinctly introduce the notation of propositional intuitionistic logic, in order to work with them further in the chapter. As we will discuss them in more depth the deduction system in next chapter, we spare our readers of yet another comprehensive introduction of the widely known intuitional propositional logic. Should it be required, more information of propositional logic can be found in, for example, \cite{marek2009introduction} and \cite{wadler2015propositions}. Natural deduction originally appears in the works of \cite{gentzen1935untersuchungen}.In this section, we present the more general form. \\
+In this section we succinctly introduce the notation of propositional intuitionistic logic, in order to work with it further this Chapter. As we will discuss them in more depth the deduction system in next chapter, we spare our readers of yet another comprehensive introduction of the widely known intuitional propositional logic. Should it be required, more information of propositional logic can be found in, for example, \cite{marek2009introduction} and \cite{wadler2015propositions}. Natural deduction originally appeared in the works of \cite{gentzen1935untersuchungen}. In this section, we present it in its most general form. \\
 
-Thorough this section we replicate notations and process done when defining typed $\lambda$-calculus. This is done purposely, as our aim is to proof an equivalence between both system. We start by considering the alphabet consisting a set of countable many variables $x,y,z,...$ as done previously in lambda-calculus, $\top$ and $\bot$ 
+Throughout this section we replicate notations and process done when we defined typed $\lambda$-calculus. This is done purposely, as our aim is to prove an equivalence between both system. We start by considering the alphabet consisting a set of countable many variables $x,y,z,...$ as done previously in $\lambda$-calculus, together with two new symbols: $\top$ and $\bot$ 
 
 \begin{definition}
   The formulas of propositional intuitionistic logic are built via the BNF:
   $$A,B ::= x |\ A\to B\ |\ A \land B \ |\ A \lor B \ |\ \top \ |\ \bot .$$
-  where $x$ denote any variable.
+  where $x$ denotes any variable.
 \end{definition}
 
 
 
 
-Having the syntax done, is time to provide meaning. We want $\top$ to be the truth value. A formula is true if $\top \to A$. Conversely, a formula is \emph{not-true} or \emph{false} (sometimes denoted as $\neg A$) if $ A \to \bot$. In addition, we want all the formulas from which we can derive certain to be true. For this we will define, analogously to the typing-contex from the previous chapter, what a \emph{truth-assumption} is and  what the rules of deduction are.
+Having the syntax done, is time to provide meaning. We want $\top$ to be the truth value. A formula is to be true is encoded in the formula $\top \to A$. Conversely, a formula is \emph{not-true} or \emph{false} (sometimes denoted as $\neg A$) is encoded as $ A \to \bot$. In addition, we want all the formulas from which we can derive certain to be true. For this we will define, analogously to the typing-contex from the previous chapter, what a \emph{truth-assumption} is and  what the rules of deduction are.
 
 \begin{definition}
-  A truth-assumption is a set of variables $\Gamma = \{x_1,...,x_n\}$ that we assume to be true. An \emph{judgement} $\Gamma \vdash B$ states that from truth assumption $\Gamma$, the formula $B$ can be deduced to be true. 
+  A truth-assumption is a set of variables $\Gamma = \{x_1,...,x_n\}$ that we assume to be true. An \emph{judgement} $\Gamma \vdash B$ states that from the truth assumption $\Gamma$, the formula $B$ can be deduced to be true. 
 \end{definition}
 
-Sometimes we can write a truth assumption $\Gamma, A$, that will denote that additionally $A$ is assume to be true. As most times, we will only need a formula $A$ to be true or not without any interest on what exact variable configuration made this possible, so by abuse of notation we can consider $\Gamma = \{x_1,A_1\}$ to have both variables and formulas.  
+Sometimes we can write a truth assumption $\Gamma, A_1, ..., A_n$, that will denote that additionally $A$ is assume to be true. As most times, we will only need a formula $A$ to be true or not without any interest on what exact variable configuration made this possible, so by abuse of notation we can consider $\Gamma = \{x_1, ..., x_n, A_1, ..., A_m\}$ to have both variables and formulas.  
 \begin{definition}[Deduction Rules]
-  We define the following deduction rules, for each truth assumption Gamma $\Gamma=\{x_1,...,x_n\}$.
+  We define the following deduction rules, for each truth assumption $\Gamma=\{x_1,...,x_n\}$.
   \begin{itemize}
   \item Every variable assumed to be true is true:
     $$  (ax)\qquad  {\displaystyle \over \Gamma \vdash x_i},\qquad \forall i \in 1,..,n.$$
@@ -708,15 +717,14 @@ Sometimes we can write a truth assumption $\Gamma, A$, that will denote that add
     and conversely:
     $$(\land_2) \qquad {\displaystyle \Gamma\vdash A\qquad \Gamma\vdash B \over \Gamma \vdash  A \land B}.$$
   \item An element being true implies the union being true:
-        $$  (\lor_1^i)\qquad  {\displaystyle\Gamma \vdash A_i \over \Gamma \vdash A_1+A_2},\qquad  i=  1,2.$$
-
+    $$  (\lor_1^i)\qquad  {\displaystyle\Gamma \vdash A_i \over \Gamma \vdash A_1+A_2},\qquad  i=  1,2.$$
     Every type is part of a union type including it:
     $$  (\lor_1^i)\qquad  {\displaystyle\Gamma \over \Gamma A_i  \vdash A_1+A_2},\qquad  i=  1,2.$$
     conversely, A term on a union must always have the same type after application.:
     $$(\lor_2) \qquad {\displaystyle \Gamma\vdash A\lor B\qquad \Gamma, A\vdash C\qquad \Gamma, B\vdash C \over \Gamma \vdash C}.$$
   \item the \emph{ex falsum quodlibet} (i.e. everything is derivable from falsity)  holds:
-    $$  (\bot)\qquad  {\displaystyle\Gamma \vdash \bot \over \Gamma \vdash A}.$$ 
-
+    $$  (\bot)\qquad  {\displaystyle\Gamma \vdash \bot \over \Gamma \vdash A},$$
+    for all term $A$.
   \end{itemize}
 \end{definition}
 
@@ -725,7 +733,7 @@ Sometimes we can write a truth assumption $\Gamma, A$, that will denote that add
 Note that we consider a logic without law of excluded middle. This approach, although somewhat demodé in modern mathematics, was highly popular at the beginning of the twentieth century. It sought to solve the problems of mathematical foundations, in particular the \emph{principle of explosion}. \\
 
 
-To work with this logic, we usually work in the usual \emph{truth derivation}. That is, having a formula $F$, we use the previously introduced rules in other to see whether can they be derivated from the truth assumption. More often than not, we consider the empty assumption, therefore we are working with \emph{tautologies}
+To work with this logic, we usually work in the usual \emph{truth derivation}. That is to deduce a formula we use the previously introduced rules in other to see whether can they be derivated from the truth assumption. More often than not, we consider the empty assumption, therefore we are working with \emph{tautologies}.
 
 \begin{example}
   We can consider the formula $F=((x\to y) \land (y\to z)) \to ((x \to z)$ and $\Gamma$ the empty assumption. Then we can deduce:
@@ -734,7 +742,7 @@ To work with this logic, we usually work in the usual \emph{truth derivation}. T
     \Gamma=\{(x\to y)\land (y\to z)\} & \vdash    (x \to z),\\
     \Gamma=\{(x\to y), (y\to z)\} & \vdash    (x \to z),\\
     \Gamma=\{ (y\to z)\} & \vdash    (y \to z),\\
-    \Gamma=\{\} & \vdash \top.
+    \Gamma=\{\} & \vdash \top,
   \end{align*}
   therefore the formula $F$ is true.
 \end{example}
@@ -743,7 +751,7 @@ To work with this logic, we usually work in the usual \emph{truth derivation}. T
 
 
 
-As a final note, the definitions of intuitionistic logic and $\lambda$-calculus introduced in this work, are made to be matching but are not unique. For example, other source consider that the types of simply typed $\lambda$-calculus (instead of the extended typing) and consider only (as is done in \cite[Section 6.5]{selinger2008lecture}):
+As a final note, the definitions of intuitionistic logic and $\lambda$-calculus introduced in this work are made to be matching but are not unique. For example, other source consider that the types of simply typed $\lambda$-calculus (instead of the extended typing) and consider only (as is done in \cite[Section 6.5]{selinger2008lecture}):
 $$A,B ::= x |\ A\to B\ |\ A \land B \ |\ \top .$$
 
 This is called \emph{positive intuitionistic calculus}. In the next chapter we are going to define the concept of \emph{deduction system} and from it, grow into the different approaches to logic.

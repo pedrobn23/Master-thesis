@@ -263,9 +263,9 @@ Lets provide some examples of functors:\\
     \end{theorem}
 
     \begin{proof}
-      We define the functional $\Delta: \Omega \to \Omega^{**}$   such that $\Delta(t)=\delta_t$ where $\delta_t(f) = f(t)$ is Dirac's operator .  It is enough to take as $\beta \Omega$ the closure of $\Delta(\Omega)$ in the induced weak-topology $\omega^*$ of $\Omega$ (since in the weak topology we have that a bounded closed is compact).  
+      We define the functional $\Delta: \Omega \to \Omega^{**}$   such that $\Delta(t)=\delta_t$ where $\delta_t(f) = f(t)$ is Dirac's operator .  It is enough to take as $\beta \Omega$ the closure of $\Delta(\Omega)$ in the induced weak-topology $\omega^*$ of $\Omega^{**}$ (since in the weak topology we have that a bounded closed is compact).  
       
-      Given a continuous and bounded function $f:\Omega \to\mathbb K$ we can define the function $\overline{f}$ by injection of $\Omega$ and then limit to maintain continuity (which will exist by compactness and boundedness of $f$). Thus the maximum of $\overline{f}$ can be reached by a sequence of points injected from  $\Omega$ obtaining that   
+      Given a continuous and bounded function $f:\Omega \to\mathbb K$ we can define the function $\overline{f}$ by injection of $\Omega$ and then limit to maintain continuity (which will exist by compactness and boundedness of $f$). Thus the maximum of $\overline{f}$ can be reached by a sequence of points injected from  $\Omega^{**}$ obtaining that   
       $${\displaystyle\max\left\{|\ \overline{f}\ (s)\ | : s \in \beta\Omega\right\} = \sup\left\{| f(s) |: s \in \Omega\right\}}.$$
       
       The application $f \mapsto \overline{f}$ is therefore an isometric isomorphism. Thanks to this isometric isomorphism the function spaces and by the Banach-Stone theorem\cite[Theorem 3]{banach1932theorie} we have uniqueness up to isomorphisms. 
@@ -291,7 +291,7 @@ Lets provide some examples of functors:\\
 
   \item Group actions:\label{group-action} Every group action can be seen as a functor from a Group to a Set.\\
     
-    Let $G$ be a group seen as a category with only one element and $X$ be a set seen as a discrete category. Then, an action is a representation of the group of the endomorphism of the set, that is, an action $\alpha$ associate each element of the group with an function $\alpha(g):X\to X$ such that the product of element of the group is maintain via composition. That is for $g\in Ar(G)$ we have that $\alpha(g) \in Ar(X)$  and for all $ g,f\in Ar(G):$
+    Let $G$ be a group seen as a category with only one element and let $X$ be a set seen as a discrete category. Then, an action is a representation of the group of the endomorphism of the set, that is, an action $\alpha$ associate each element of the group with an function $\alpha(g):X\to X$ such that the product of element of the group is maintain via composition. That is for $g\in Ar(G)$ we have that $\alpha(g) \in Ar(X)$  and for all $ g,f\in Ar(G):$
     $$\alpha(g\circ f) = \alpha(g) \circ \alpha(f).$$
 
     Notice that, by the definition of $G$, the composition $g\circ f$ actually correspond to the product in $G$.
@@ -324,7 +324,7 @@ $$T:\hhom_C(a,b) \to \{Tf: Ta \to Tb | f \in C\} \subset \hhom_D(Ta,Tb)$$
   A functor $T:C\to D$ is \emph{full} if it is surjective as a function over homesets, i.e. if the function $T:\hhom_C(a,b) \to  \hhom_D(Ta,Tb)$  is surjective for every $a,b \in C$. A functor is \emph{faithfull} if it is injective over homesets.
 \end{definition}
 
-As we have defined the concept of opposite category, we can consider functors $T:C^{op} \to D$. It is customary to refer to this type of functions a \emph{contravariant} functor from $C$ to $D$ and regular functors $F:C\to D$ as \emph{covariant}.
+We can consider functors $T:C^{op} \to D$. It is customary to refer to this type of functions a \emph{contravariant} functor from $C$ to $D$ and regular functors $F:C\to D$ as \emph{covariant}.
 
 
 
@@ -422,13 +422,13 @@ A functor $F: B^{op}\times C \to D$ is called  a \emph{bifunctor}. Arguably the 
 \[
   \hhom_C(\cdot,\cdot)(a,b) = \hhom_C (a,b) 
 \]
-for the object. For the arrows, for all $f:a\to a', g:b\to b' \in C$ and for all $h\in \hhom_C(a',b)$:
+for the objects. For the arrows, for all $f:a\to a', g:b\to b' \in C$ and for all $h\in \hhom_C(a',b)$:
 \begin{align*}
   \hhom_C(f^{op},g): \hhom_C (a',b)  & \to \hhom_C(a,b'), \\
   \hhom_C(f^{op},g) (h)   &= g \circ h \circ f.
 \end{align*}
 
-From this bifunctor we can define two functors for every $c\in Ob(C),g:d\to d' \in C, h\in \hhom_C(c,d) $:
+From this bifunctor for every  $c\in Ob(C),g:d\to d' \in C, h\in \hhom_C(c,d)$ we can define two functors:
 \begin{itemize}
 \item  The functor $\hhom_C(c, \cdot):C\to Set$ such that for all $d \in Ob(C)$:
   \[
@@ -440,12 +440,12 @@ From this bifunctor we can define two functors for every $c\in Ob(C),g:d\to d' \
     \hhom_C(c,g) (h)   &= g \circ h .
   \end{align*}
 This functor is often called the \emph{post-composition} functor.
-\item  The covariant functor $\hhom_C(\cdot, c):C^{op}\to Set$, defined analogously.This functor is often called the \emph{pre-composition} functor.
+\item  Analogously, we can define the contravariant functor $\hhom_C(\cdot, c):C^{op}\to Set$, defined analogously.This functor is often called the \emph{pre-composition} functor.
 \end{itemize}
 \subsubsection{Functor Categories}
-We continue by defining functor categories, that is, categories where we consider the functors as objects and natural transformation as arrows in some sense. This concept will be instrumental in further consideration in the realm of functional programming (in particular, in the definition of a monad).\\
+We continue by defining functor categories, that is, categories where we consider the functors as objects and natural transformation as arrows in some sense. This concept will be instrumental in further consideration in the domain of functional programming (in particular, in the definition of a monad).\\
 
-Before explaining composition between natural transformation, it is useful to present the following diagram. Let $B,C$ be categories, $F,G:B\to C$ be functors and $\tau:F\to G$ natural transformation $\tau$. It is common to represent this structure with:
+Before explaining composition between natural transformation, it is useful to present the following diagram. Let $B,C$ be categories, $F,G:B\to C$ be functors and $\tau:F\to G$ a natural transformation. It is common to represent this structure with:
 \[
   \begin{tikzcd}[column sep=huge]
     A
@@ -473,11 +473,11 @@ Let us define the composition of two natural transformation. We will start defin
 Due to this representation, this composition of natural transformations is called \emph{vertical composition}, in opposition to the \emph{horizontal composition} (def. \ref{horizontal-composition}).
 
 \begin{definition}\label{vertical-composition}
-  Let $C$ and $B$ be two categories, $R,S,T : C \to B$ be functors, and let $\tau: R \to S$, $\sigma:S\to T$. We define the composition $(\tau \circ \sigma)c = \tau c\circ \sigma c$.
+  Let $C$ and $B$ be two categories, $R,S,T : C \to B$ be functors, and let $\tau: R \to S$, $\sigma:S\to T$. We define the composition $(\tau \cdot \sigma)c = \tau c\cdot \sigma c$.
 \end{definition}
 
 
-To see that $(\tau \circ \sigma)$ is a natural transformation it suffices the following diagram \cite{stack-composition-natural}:
+To see that $(\tau \cdot \sigma)$ is a natural transformation it suffices the following diagram \cite{stack-composition-natural}:
 
 \[
 \begin{tikzcd}[row sep = 1.4cm, column sep = 1.4cm]
@@ -507,7 +507,7 @@ To see that $(\tau \circ \sigma)$ is a natural transformation it suffices the fo
 
 
 \begin{definition}
-  Let $B,C$ be categories. We define the Functor category from $C$ to $B$ as $B^C$ as  the category with all functors $F:C \to B$ as object, natural transformation as arrows, and composition as defined in \ref{vertical-composition}.
+  Let $B,C$ be categories. We define the Functor category from $C$ to $B$ as $B^C$ as  the category with all functors $F:C \to B$ as object, natural transformation as arrows, and composition as defined in definition \ref{vertical-composition}.
 \end{definition}
 
 
@@ -517,9 +517,9 @@ We now present some examples to provide some intuition about when this type of c
   \begin{itemize}
   \item The category of group actions over sets: As we have seen in example \ref{group-action} each group action over a set is a functor. Let $G$ be a group and $S$ be a set, both seen as categories and discrete categories. Then we can consider the category  $S^G$, that has as object every group action of $G$ over $S$ and as arrow the morpishm of actions.\\
     
-  \item  In example \ref{2-category} we define the $2$ category and  can consider therefore the category of functor from $2$ to $C$. This category is called the arrow category, as the can see that there are a functor from $2$ to $C$ as functor for each arrow in $C$ and conversely.\\
+  \item  In example \ref{2-category} we define the $2$ category and  can consider therefore the category of functor from $2$ to $C$. This category is called the arrow category, as we can see that there is a functor from $2$ to $C$ as functor for each arrow in $C$ and conversely.\\
 
-    This example displays a interesting idea: we can consider small collection of object as functions/functors. This idea can as well be seen when we define a pair of real numbers as any function $f:\{0,1\} \to \R$. Should we want, for example, to consider all the squares in a category $C$, we might ass well define the category square $Sqr$ and consider every functor $F:Sqr \to C$.\\
+    This example displays a interesting idea: we can consider small collection of object as functions/functors. This idea can as well be seen when we define a pair of real numbers as any function $f:\{0,1\} \to \R$. Should we want, for example, to consider all the squares in a category $C$, we might as well define the category square $Sqr$ and consider every functor $F:Sqr \to C$.\\
     \begin{figure}[!h]
       \[
         \begin{tikzpicture}
@@ -554,9 +554,9 @@ Note that this is not the only way in which to define the composition of natural
   \end{tikzcd}
 \]
 
-Lets formalize this composition:
+Let us formalize this composition:
 \begin{definition}\label{horizontal-composition}
-  Let $B,C,D$ be categories, $F,G: B \to C, F',G':C\to D$ be functors, and let $\tau: F \to G$, $\sigma:F'\to G'$, we define the horizontal composition $(\tau \circ \sigma): F\circ F' \to G\circ G'$ by: $$(\sigma \circ \tau) c = \sigma F c \circ G' \tau c$$  for all $c\in B$.
+  Let $B,C,D$ be categories, $F,G: B \to C, F',G':C\to D$ be functors, and let $\tau: F \to G$, $\sigma:F'\to G'$. We define the horizontal composition $(\tau \circ \sigma): F\circ F' \to G\circ G'$ by: $$(\sigma \circ \tau) c = \sigma F c \circ G' \tau c$$  for all $c\in B$.
 \end{definition}
 
 In this case we can see that the composition of two natural transformation is indeed a natural transformation due to the commutativity of:
@@ -576,10 +576,10 @@ In this case we can see that the composition of two natural transformation is in
 
 With this definition of composition we can consider another different category: the category of all functors of all (small) categories, that is, the category that has all the functors as object, and has the natural transformation with horizontal composition as arrows.\\
 
-When we have to consider both compositions at the same time we denote the vertical composition with $\tau \cdot \sigma$ and horizontal composition with $\tau \circ \sigma$ , as in  \cite{mac2013categories}. Lastly we have to consider how this composition relate to each other. This is seen in the \emph{interchange law}:\\
+When we have to consider both compositions at the same time we denote the vertical composition with $\tau \cdot \sigma$ and horizontal composition with $\tau \circ \sigma$ , as in  \cite{mac2013categories}. Lastly we have to consider how this composition relate to each other. This is seen in the \emph{interchange law}, also known as  \emph{Godement relation}:\\
 
 \begin{proposition}
-  Let $A,B,C$ be categories, let $F,G,H:A\to B$ and  $F',G',H':B\to C$ be functors and $\tau: F \to G,\sigma:G\to H,\tau': F' \to G'$ and $\sigma' : G'\to H'$ be natural transformations. Then:
+  Let $A,B,C$ be categories, let $F,G,H:A\to B$ and  $F',G',H':B\to C$ be functors and $\tau: F \to G,\sigma:G\to H,\tau': F' \to G'$ and $\sigma' : G'\to H'$ be natural transformations. Then let:
   $$(\sigma' \circ \sigma)\cdot (\tau' \circ \tau) = (\sigma' \cdot \tau')\circ (\sigma\cdot \tau)  $$
 \end{proposition}
 \begin{proof}
@@ -626,7 +626,7 @@ This fact will be taken into account further in the text, as this will mean that
 
 To define the comma category, we shall define the category $(b \downarrow S)$ of objects $S$-under $b$, sketch the dual notion, and generalize this two concepts with the comma category.\\
 
-Given a functor $F:B\to C$ an object $b\in B$ is $F-$under another object $c\in C$ if there exists an arrow $f:c\to b \in C$. This can be represented as
+Given a functor $F:B\to C$ an object $b\in B$ is $F-$under another object $c\in C$ if there exists an arrow $f:c\to Fb \in C$. This can be represented as
 
 $$
 \begin{tikzcd}
@@ -653,7 +653,7 @@ The property that each arrow should satisfy can be represented as:
   \end{tikzpicture}
 \]
 
-\begin{example} Let $U:Grp \to Set$ be the forgetful functor, and let $X\in Ob(Set)$. We can consider $(X\downarrow U)$ where every object is a function of Sets $f: X\to Ug$ for a group $g$.  
+\begin{example} Let $U:Grp \to Set$ be the forgetful functor, and let $X\in Ob(Set)$. We can consider $(X\downarrow U)$ where every object is a function of Sets $f: X\to U G$ for a group $G$.  
 \end{example}
 
 One can easily now deduce the dual concept of the category $(S\uparrow b)$ represented by: \\
@@ -689,7 +689,7 @@ We might want to consider the relations objects of $B$ and $D$, for that we have
 
 
 \begin{definition}
-  Let $B,C,D$ be categories and to $S:B\to C,T: C\to D$. We define the coma category $(S\downarrow T)$ as the category that has as object the triples $(b,d,f)$ with $b\in Ob(B), d\in Ob(D), f:Sb\to Td\in Ar(C)$ and as arrows the pairs $(g,h):(b,d,f)\to (b',d',f')$ with $g:b\to b'\in Ar(B), h:d\to d'\in Ar(D)$ such that $Th \circ f = f' \circ Sg$. 
+  Let $B,C,D$ be categories and to $S:B\to C,T: C\to D$. We define the coma category $(S\downarrow T)$ as the category that has as object the triples $(b,d,f)$ with $b\in Ob(B), d\in Ob(D), f:Sb\to Td\in Ar(C)$ and consider as arrows the pairs $(g,h):(b,d,f)\to (b',d',f')$ with $g:b\to b'\in Ar(B), h:d\to d'\in Ar(D)$ such that $Th \circ f = f' \circ Sg$. 
 \end{definition}
 
 We can represent the previous definition by:
