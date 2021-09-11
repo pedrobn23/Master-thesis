@@ -3,11 +3,11 @@
 \label{chap:5}
 \thispagestyle{empty}
 
-In this we use hyperdoctrines as a tool to better understand closed Cartesian categories and relate them with a new typing theory: Martin-Lof type theory.\\
+In this we use hyperdoctrines as a tool to better understand closed Cartesian categories and relate them with a new typing theory: Martin-Löf type theory.\\
 
-In this chapter we continue our categorical presentation of the tip theory with the introduction of Martin Lof's type theory. This type theory, also known as intuitionistic type theory, is initially proposed as a foundation of mathematics. This is really important because it implies a change of mentality, as we do no longer are so focus formalizing computation systems. \\
+In this chapter we continue our categorical presentation of the tip theory with the introduction of Martin L\"of's type theory. This type theory, also known as intuitionistic type theory, is initially proposed as a foundation of mathematics. This is really important because it implies a change of mentality, as we do no longer are so focus formalizing computation systems. \\
 
-This relationship with first-order logic arises from the hand of dependent typing. That is, in Martin Lof's type theory there is a formal structure for generating types dependent on other types. This is used (without needing to know the formalism) nowadays continuously in programming languages. \\
+This relationship with first-order logic arises from the hand of dependent typing. That is, in Martin Löf's type theory there is a formal structure for generating types dependent on other types. This is used (without needing to know the formalism) nowadays continuously in programming languages. \\
 
 The most interesting part for us will be to study the new structures that arise in the theory of categories to understand this new typing. In particular, we will study local closed Cartesian category structures through hyperdoctrines. \\
 
@@ -25,7 +25,7 @@ In this section we introduce rather succinctly the foundations of the type theor
 
 After having previously introduced the calculations, in this one we will introduce Martin-L\"of type theory, ML for short, in a more systematic way, introducing type formation rules, term formation rules, and the equivalence rules. After that, we will introduce the category structure. The main source for this section is \cite{martinlof1973intuitionistic}, with summaries taken from \cite{seely1984locally} with commentary from .\\
 
-As a founding level of mathematics, we are going to define types and terms as before. The change in enphasis comes from the fact that we will manage the notation of the Curry-Howard from the beginning, as it was done while firstly introduced by Martin-L\"of in \cite{martinlof1973intuitionistic}. In this we will always consider \emph{types as propositions} and \emph{terms as proofs}, and we will made use of this analogy to explain the properties of the theory. Also, as done in lambda-calculus, we should regard also \emph{proofs as objects}, with all the constructions previously done still in place.\\
+As a founding level of mathematics, we are going to define types and terms as before. The change in emphasis comes from the fact that we will manage the notation of the Curry-Howard from the beginning, as it was done while firstly introduced by Martin-L\"of in \cite{martinlof1973intuitionistic}. In this we will always consider \emph{types as propositions} and \emph{terms as proofs}, and we will made use of this analogy to explain the properties of the theory. Also, as done in lambda-calculus, we should regard also \emph{proofs as objects}, with all the constructions previously done still in place.\\
 
 One last particularity of the Martin-L\"of is the fact that we can include details of proofs in the statement of propositions. This will be formalized further on, but explain why we need to delay the introduction of term and type rules until the definition of type-function.
 
@@ -35,13 +35,13 @@ The formal system that Martin-L\"of presents consists of a set of rules $a : A$,
 
 Variables are defined analogously as in the case of simply typed lambda calculus. The statements $x: A$ represents arbitrary object of a given type. As previously, an statement of $x: A$ where $x$ is a variable is called an \emph{assumption}. We will also note the type of variables as super-index, $x^A$. As in simply typed lambda calculus, a term $a$ can depend on variables $x_1,...,x_n$, usually noted by $a(x_1,...,x_n)$.\\
 
-Quite importantly, as types can depend on variables, and each variable should have a type, we need to impose the \emph{condition on variables}. This state that in statement $a(x_1,..,x_n)$ it should happens that no variable $x_j$ should depend on variables $x_i$ for any $i<j$. The results of substituting $x_1:A_1,...,x_n:A_n$ with $a_1:A_1,...,a_n:A_n$ is denoted by $a(a_1,...,a_n)$. Note that in this last expression, $A_n$ can depend on $x_1,...,x_{n-1}$, thus noted $A[x_1,...,x_{n-1}]$. Variables will be prefereably denoted by $x,y,z$ characters. Further on, each time we talk about any generic type or term dependent on variables, we will always suppose the it follows the condition on variables.\\
+Quite importantly, as types can depend on variables, and each variable should have a type, we need to impose the \emph{condition on variables}. This state that in statement $a(x_1,..,x_n)$ it should happens that no variable $x_j$ should depend on variables $x_i$ for any $i<j$. The results of substituting $x_1:A_1,...,x_n:A_n$ with $a_1:A_1,...,a_n:A_n$ is denoted by $a(a_1,...,a_n)$. Note that in this last expression, $A_n$ can depend on $x_1,...,x_{n-1}$, thus noted $A[x_1,...,x_{n-1}]$. Variables will be preferably denoted by $x,y,z$ characters. Further on, each time we talk about any generic type or term dependent on variables, we will always suppose the it follows the condition on variables.\\
 
 Note that type can depend on variables, that is, on terms. They do not depend on other types directly.\\ 
 
 Function constant is a function from terms to terms. Each function constant $f$ has associated an index $n$ with the number of argument, and also $n$ types symbols $$A_1, A_2[x_1^{A_1}],...,A_n[x_1^{A_1},...,x_1^{A_{n-1}}].$$ A function $f$ of index $n$ is called to be an \emph{$n$-ary function constant}. A 0-ary function is called a \emph{constant}.  Function constants are preferably denoted by $f,g,h$ characters. \\
 
-In addition to function constant, we can consider \emph{type valued function constants}. This have the same indicacion as above, and a 0-ary type valued function constant is called a type constant. In the analogy of terms and types, with proof and proposition, that have previously been discussed, type valued functions constants are \emph{properties}. Type valued function constants are preferably denoted by $F,G,H$ characters. By opposition, function constants are called \emph{terms valued function constants}.
+In addition to function constant, we can consider \emph{type valued function constants}. This have the same indication as above, and a 0-ary type valued function constant is called a type constant. In the analogy of terms and types, with proof and proposition, that have previously been discussed, type valued functions constants are \emph{properties}. Type valued function constants are preferably denoted by $F,G,H$ characters. By opposition, function constants are called \emph{terms valued function constants}.
 
 
 \begin{example}\label{example:primeML}
@@ -103,16 +103,16 @@ Finally, as a mayor difference from previously, we can consider the identity typ
 
 
 \begin{remark}
-  As it happens in the previous chapter, we can consider an expansion with the sum type of $A+B$, as is presented in \cite[Section 1.6]{martinlof1973intuitionistic}. In the shake of brevity, we avoid it as it is not as interesting from a categoric viewpoint.
+  As it happens in the previous chapter, we can consider an expansion with the sum type of $A+B$, as is presented in \cite[Section 1.6]{martinlof1973intuitionistic}. In the shake of brevity, we avoid it as it is not as interesting from a categorical viewpoint.
 \end{remark}
 
 \subsection{Equivalences and universes}
 \subsubsection{Equivalences}
 
-The most important difference in this exposition of type theory is that now we will not present the differentiated alpha/beta/eta equivalences, but we will present them all together as a single equivalence concept. This is due to two reasons. The first is that we consider that the objective of explaining the intuition and the multiple forms of equality is already satisfied. The second is that our main interest is in the relation to Category Theorics, where we always consider all equivalences together.
+The most important difference in this exposition of type theory is that now we will not present the differentiated alpha/beta/eta equivalences, but we will present them all together as a single equivalence concept. This is due to two reasons. The first is that we consider that the objective of explaining the intuition and the multiple forms of equality is already satisfied. The second is that our main interest is in the relation to Category Theories, where we always consider all equivalences together.
 
 
-\begin{definition}[Equality rules, 1.1.3 \cite{seely1984locally}]
+\begin{definition}[Equality rules, 1.1.3 \cite{seely1984locally}] \label{def:ml-equality}
   Using the notation from \ref{1.1.2-seely} point by point:
   \begin{enumerate}
   \item If $t:1$, then $t=*$.
@@ -141,7 +141,7 @@ After having presented the Martin-L\"of as presented originally, in this subsect
 
 The point of this notion is simple, that is to more succinctly denote whenever a variable does not depend on a particular pair of variable but only on the moment when they work together. One particular example of this are the properties assign to satisfiable formulas.
 
-With this definition, mantaining the notation, we also introduce the following equalities:
+With this definition, maintaining the notation, we also introduce the following qualities:
 \begin{itemize}
 \item $\tilde t(\langle x,y\rangle) = t(\langle x,y\rangle) $.
 \item If $f(z): C(z)$, $t(x,y):C(\langle x,y\rangle)$ and $f(\langle x,y\rangle) = t(x,y)$ then $f=\tilde t$.
@@ -150,7 +150,7 @@ With this definition, mantaining the notation, we also introduce the following e
 
 
 \subsubsection{Universes}
-Now we will have a word on \emph{universes}.Let us begin this discussion with an illustrative example, as introduced by martin lof. Let us imagine that we want to consider the type of sequences of natural numbers as 
+Now we will have a word on \emph{universes}.Let us begin this discussion with an illustrative example, as introduced by martin Löf. Let us imagine that we want to consider the type of sequences of natural numbers as 
 
 $$\Sigma x^\N. F(x),$$
 
@@ -196,10 +196,13 @@ This allow us to consider arrows (terms) as objects (types) in local contexts, b
   If a category $C$ has finite limits, thus every category $C/a$ with $a\in Ob(C)$  has also finite limits. This needs not to happen with exponent object, being this the main quality of LCCs.
 \end{remark}
 
+\begin{definition}
+  We define the category $LCC$ of all locally Cartesian closed categories along with structure preserving functors.
+\end{definition}
 \subsection{Hyperdoctrines}
 
 
-As a tool for dealing with LCC we are going to introduce hyperdoctrines. This were introduced in by Lawvere as part of his influential work \cite{lawvere1969adjointness}. The notion of a hyperdoctrine is essentially an axiomatization of the collection of slices of a locally cartesian closed category\cite{nlab:hyperdoctrine}.
+As a tool for dealing with LCC we are going to introduce hyperdoctrines. This were introduced in by Lawvere as part of his influential work \cite{lawvere1969adjointness}. The notion of a hyperdoctrine is essentially an axiomatization of the collection of slices of a locally Cartesian closed category\cite{nlab:hyperdoctrine}.
 
 \begin{definition}
   Let $C$ be a category with finite limits. A $C$-indexed category $P$ is a collection that  consists of:
@@ -250,7 +253,7 @@ We can see that $P$ is, in summary, an contravariant functor from $C$ to $Cat$. 
   \end{itemize}
 \end{definition}
 
-Note that if $P_1\cong P_2$ as $C$-indexed categories, and $P_1$ is a hypedoctrine, the $P_2$ is an hyperdoctrine.
+Note that if $P_1\cong P_2$ as $C$-indexed categories, and $P_1$ is a hyperdoctrine, the $P_2$ is an hyperdoctrine.
 
 \begin{remark}
   Similar to the definition of $f^*$ with the pullback, we can define the functor $\Sigma_f: C/b_1 \to C/b_2$ via post-composition. 
@@ -309,12 +312,12 @@ Note that $(C/b_2)/(b_1\to b_2)$ is isomorphic to $C/b_1$. With this identificat
 with this note we have two important things to point out:
 \begin{itemize}
 \item We have that each $f^*$ have a left adjoint $\Sigma_f$. It can be checked that in the context of $C$ having finite limits, that they satisfy the Beck condition. 
-\item To prove that $f^*$ has a right adjoint for each $f$ if, and only if, for each $b\in Ob(C)$ we have that $C/b$ is cartesian closed, it suffices to proof such for $\times_b$.\\
+\item To prove that $f^*$ has a right adjoint for each $f$ if, and only if, for each $b\in Ob(C)$ we have that $C/b$ is Cartesian closed, it suffices to proof such for $\times_b$.\\
 \end{itemize}
 
 On implication directly derives from the following proposition
 \begin{proposition}[Proposition 1.34,\cite{freyd1972aspects}]
-  For $C$ cartesian closed, $\times_b: C\to C/b$ has a right adjoint.
+  For $C$ Cartesian closed, $\times_b: C\to C/b$ has a right adjoint.
 \end{proposition}
 
 The other implication can be check by noting that, if $\times_b$ has a right-adjoint $\#_b$, then we have:
@@ -325,7 +328,7 @@ where in 1. and 2. we use adjointness. Thus, we can define $a^b:= \#_b(\times_b(
 
 \section{The closed Cartesian category of a Martin-L\"of theory}
 \label{InternalLCC}
-In this section we are going to explain how to create a local cartesian category. To do that, we define the function $\CC$ that take a ML theory and return a category, and them proceed to proof that such a category is an LCC.
+In this section we are going to explain how to create a local Cartesian category. To do that, we define the function $\CC$ that take a ML theory and return a category, and them proceed to proof that such a category is an LCC.
 
 \begin{definition}
   Let $M$ be a ML theory. We define the category $\CC(M)$ as the category that has:
@@ -399,7 +402,7 @@ Further on, we will consider $M$ an arbitrary ML theory.
 \end{remark}
 
 \begin{proposition}\label{prop:CM2}
-  $\CC(M)$ is cartesian closed.
+  $\CC(M)$ is Cartesian closed.
 \end{proposition}
 \begin{proof}
   Given an object $b$, we can define of the adjoint $F_3^b\dashv G_3^b$ (see definition \ref{def:CCC}) by the bijection$\varphi: \hom(a\times b, c) \to \hom(a, c^b)$ such that
@@ -408,9 +411,9 @@ Further on, we will consider $M$ an arbitrary ML theory.
   $$\varphi^{-1}(t:a\times c^b) = \lambda x^{a\times b}. s(\pi'(z))(\pi(z)) : a\times b\to c.$$
 \end{proof}
 \begin{remark}
-  Note that the evaluation is the clasical $\epsilon  = \lambda x^{(c^b\times b)}.\pi(x)(\pi'(x))$.
+  Note that the evaluation is the classical $\epsilon  = \lambda x^{(c^b\times b)}.\pi(x)(\pi'(x))$.
 \end{remark}
-Now, we have a nice structure for $C=\CC(M)$ as a closed cartesian category. Further on, we are to proof that it is, in fact, locally cartesian closed.  The strategy will be the following:  we are going to define a $C$-indexed hyperdoctrine $P(M)$, and proof that $C$ and $P(M)$ are equals as $C$-indexed categories.
+Now, we have a nice structure for $C=\CC(M)$ as a closed Cartesian category. Further on, we are to proof that it is, in fact, locally Cartesian closed.  The strategy will be the following:  we are going to define a $C$-indexed hyperdoctrine $P(M)$, and proof that $C$ and $P(M)$ are equals as $C$-indexed categories.
 
 \begin{definition} $P(M)$ is the $C$-indexed category such that:
   \begin{itemize}
@@ -427,7 +430,7 @@ Now, we have a nice structure for $C=\CC(M)$ as a closed cartesian category. Fur
   In the context of $P(M)(a)$ variable $x$ will be used as the ever available variable $x^a$, and thus we would use primarily $y$ as standard variable symbol.
 \end{remark}
 \begin{proposition}
-  $P(M)(a)$ is cartesian closed.
+  $P(M)(a)$ is Cartesian closed.
 \end{proposition}
 \begin{proof}
   Repeat proofs for proposition \ref{prop:CM1} and proposition \ref{prop:CM2} step by step considering in each term an extra parameter.
@@ -503,7 +506,7 @@ To proof this proposition we are going to introduce two adjoint functors for eve
 
 \end{proof}
 \begin{theorem}
-  $\CC(M)$ is locally cartesian closed.
+  $\CC(M)$ is locally Cartesian closed.
 \end{theorem}
 \begin{proof}
   We proof that, as $C$ indexed categories, $C\cong P(M)$. Finally, as $P(M)(a)$ is a CCC, so is $\CC(M)/a$ for each $a$.\\
@@ -517,7 +520,7 @@ To proof this proposition we are going to introduce two adjoint functors for eve
         \end{tikzcd}};
     \end{tikzpicture}
   \]
-  where we use the notation $f_P^*$ and $f_C^*$ to diferentiate functor induced in different indexes categories.   Let $t:c\to a \in Ob(C/a)$. We can see that
+  where we use the notation $f_P^*$ and $f_C^*$ to differentiate functor induced in different indexes categories.   Let $t:c\to a \in Ob(C/a)$. We can see that
   $$\Psi\circ f^*\circ \Phi(t) = \pi: \Sigma x^a. \Sigma y^b.I(f(x),t(y)) \to b,$$
   being this the definition of pullback of $t$ along $f$, thus equal to $f_C^*$.
 \end{proof}
@@ -560,7 +563,7 @@ We define an interpretation as done by Seely. We decide to extend this definitio
 \end{remark}
 
 \begin{remark}
-  Note that, in mapping a type, we have a codomain fixed, but not so the domain of the arrow and the arrow itself to which the type is mapped. This notation is resolved by sending a term in a latin letter, to the greek equivalent letter as arrow, and an overline latin letter as codomain. For example:
+  Note that, in mapping a type, we have a codomain fixed, but not so the domain of the arrow and the arrow itself to which the type is mapped. This notation is resolved by sending a term in a Latin letter, to the Greek equivalent letter as arrow, and an overline Latin letter as codomain. For example:
   
   \begin{figure}[!h]
     \begin{center}
@@ -609,7 +612,7 @@ We define an interpretation as done by Seely. We decide to extend this definitio
 \end{remark}
 
 
-\begin{definition}[Interpretation of a Martin-L\"of theory - second part]
+\begin{definition}[Interpretation of a Martin-L\"of theory - second part]\label{def:terminando}
   The following equalities must be true:
   \begin{itemize}
   \item The substitution of a variable in a type is defined as $\overline{a(t)} = \overline t^* \overline a$, where $a$ is type dependent on a variable $x^b$ and $t : b$ is a term.
@@ -642,8 +645,114 @@ We define an interpretation as done by Seely. We decide to extend this definitio
 
     \item With $a,b(x^a)$ as in previous point, let $g: a$, $f:b(g)$,  interpreted by $\overline g: \chi \to \alpha $ and  $\overline f: 1_{\overline z} \to \overline g ^* \beta$, for some $ \chi: \overline z \to \overline x$, supposing again that $g,f$ depend on the same variables. Then $\overline{\langle g, f\rangle}$ is defined by the morphism induced by $\overline f$ seen as  $\overline f = \Sigma_{\overline g} 1_{\overline z}\to \beta$ by adjointness. Finish by applying $\Sigma_\alpha$ and using again that $\overline g \alpha = \chi.$\\
 
-      For $\Sigma x^a.b(x)$, we define  $\overline \pi  = \beta: \sigma_\alpha \beta \to \alpha$, and $\overline {\pi'}$ as the identity.
-    \item $\overline {r(x^a)} = 1_{\overline a}$.
+      For $\Sigma x^a.b(x)$, we define  $\overline \pi  = \beta: \Sigma_\alpha \beta \to \alpha$, and $\overline {\pi'}$ as the identity.
+    \item $\overline {r(x^a)} = 1_{\overline a}$. Hence, for a type $a$ interpreted as $\alpha: \overline a \to \overline x$, and a term $g : a$ interpreted as $\overline g : \chi \to \alpha$ with $\chi : \overline z \to \overline x$. Then $\overline {I(g,g)} = (Eq(g,g)\to \overline z)$ and $\overline {r(g)} = 1_{\overline z}$. Lastly, we want to define $C[x^a, y^1, z^{I(x,y)}]$, we want to define a \emph{substitution morphism} $b(f)\time I(f,g) \to b(g)$, with standard $a,b,g,f$.This is done like follow. If for some $\chi: \overline z \to \overline x$, we have that $g,f : a$ interpreted as $\overline g,\overline f:\chi \to \alpha$ the substitution morphism is defined by $\overline g^*\beta \times \overline {\langle g,f \rangle} ^* \overline I.$
     \end{enumerate}
 \end{itemize}
 \end{definition}
+
+Let's review the progress. In this section we have defined the concept of interpretation. In this one, we have a way of looking at a ML theory within a category. After that, we have seen how to define the operations proper to a ML theory within a category. So finally it remains for us to check that the equivalences hold.
+
+\begin{proposition}[Soundness]
+All equality rules in definition \ref{def:ml-equality} are valid under interpretation.
+\end{proposition}
+
+
+This is what is known as soundness of interpretation. This result, is enunciated in \cite[proposition 4.5]{seely1984locally} but is is proven in detail. Proof can be found in the equivalent form of the interpretation of LPCE in hyperdoctrines in \cite{seely1983hyperdoctrines}.
+
+\begin{remark}\label{rem:induced-functor} From soundness derives an interesting property. Any interpretation $\overline{\cdot}: M \to C$ induces a LCC-preserving functor $F:\CC (M) \to C$, as under $\overline M$ one sends closed type of $M$ (object of $\CC (M)$) to object of $C$, and similarly with terms. The soundness of an interpretation provides the preservation of LCC structure. 
+\end{remark}
+
+
+Finally, we introduce the concept of canonical interpretation.
+
+\begin{definition}[Canonical interpretation]
+  Let $M$ be a Martin-L\"of theory, we can define the canonical interpretation $\tilde \cdot: M\to \CC(M)$ as the interpretation such that closed:
+  \begin{itemize}
+  \item $\tilde 1 = 1$.
+  \item A closed type correspond to itself.
+  \item If $a, b(x^a)$ are types, the $b(x)$ is interpreted as $\pi = \sigma x^a.b(x)$
+  \item $\widetilde{I(x,y)} = \Sigma x^a.\Sigma y^a. I(x,y) \to a\times a$, supposing that $a$ is closed. As they are closed $\Pi x^a.b(x)$ and $\Sigma x^a.b(x)$ are interpreted as themselves.
+  \item Each term are interpreted as their associated morphism (remembering that a closed term $a$ is equivalent to a function term $a\to 1$).
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}
+  Given any interpretation $\overline \cdot$, there is an unique functor $F:\CC (M) \to C$ such that the following diagram commute:
+        \[
+        \begin{tikzpicture}
+          \node {\begin{tikzcd}
+              M \ar[rr,"\tilde \cdot "]\ar[rd,swap, "\overline \cdot "] &  & \CC (M) \ar[ld, "F"] \\
+              &   C &
+            \end{tikzcd}};
+        \end{tikzpicture}
+      \]
+\end{proposition}
+\begin{proof}
+Define functor $F$ as it is induced as in remark \ref{rem:induced-functor}. Commutativity of the diagram follows form the definition of $\tilde \cdot$.
+\end{proof}
+
+\begin{definition}
+For any ML theory $M$ and any LCC category $C$, we define $\Int(M,C)$ as the set\footnote{We can consider bigger universes if necessary.} of interpretations $M\to C$.
+\end{definition}
+
+\begin{definition}
+  For ML theories $M,M'$,  an interpretation $M\to M'$ is an interpretation $M\to \CC (M)$. Thus we define ML as the category of ML theory along with interpretation.
+\end{definition}
+
+\begin{proposition}\label{que-cansaito-que-estoy}
+  \begin{enumerate}
+  \item For any ML theory $M$, and any $LCC$ category $C$,
+    $$  \Int (M,C) \cong \hom_{LCC} (\CC(M), C)$$
+  \item For ML theories $M,M'$ we have that:
+    $$ \hom_{ML}(M,M') \cong \hom_{LCC}(\CC(M),\CC(m'))$$
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}
+  \item From the definition of interpretations $M\to M'$.
+  \item     $$ \hom_{ML}(M,M') \cong \Int(M, \CC(M'))\cong \hom_{LCC}(\CC(M),\CC(m'))$$
+  \end{enumerate}
+\end{proof}
+\begin{remark}[remark 4.8.1 \cite{seely1984locally}]
+  $\Int$ is in fact functorial in both variables, and equality in proposition \ref{que-cansaito-que-estoy} are natural in each variables.
+\end{remark}
+
+Finally, we note that we can repeat the same ideas carried away for interpretations  to introduce the concept of \emph{the theory of a locally Cartesian category}. The idea is to consider the ML theory whose interpretation is the identity. As the ideas are similar to those previously explained, we will avoid most of the step. A more extended explanation, (not much extended) can be found in \cite[Section 5]{seely1984locally}.
+
+\begin{definition}
+  Let $C$ be a LCC. Then we define the ML theory $\MM (C)$, as the Martin-L\"of theory such that:
+  \begin{itemize}
+  \item As closed types it has the objects of $C$, a type with a free variable $x^a$ is an object $C/a$, a successive constructions as in \ref{multiple-def}
+  \item Term-valued functions are the terms of $C$.
+  \item Has type and terms formation rules as in definition \ref{def:terminando}
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}
+$\MM (C) $ is an ML theory.
+\end{proposition}
+
+\begin{definition}\label{def:ml-equivalent}
+    
+  Two ML theories $m,M'$ are equivalent if their functor $\Int(M,\cdot)$, $\Int(M',\cdot)$ are naturally isomorphic. 
+\end{definition}
+
+Finally, we present the derived equivalences:
+
+
+\begin{theorem}[Theorem 6.1 \cite{seely1984locally}]\label{ml:6.1}
+If $C$ is an LCC, then $C\cong \CC(\MM(C))$. 
+\end{theorem}
+\begin{proof}
+  By definition, the closed type and terms of $\MM(C)$ (object and arrows of $\CC(\MM(C))$)  are the closed types and terms of $C$.
+\end{proof}
+
+\begin{theorem}[Theorem 6.2 \cite{seely1984locally}]\label{ml:6.2}
+If $M$ is a Martin-L\"of theory, then $M\cong \MM(\CC(M))$. 
+\end{theorem}
+\begin{proof}
+  By theorem \ref{ml:6.1} and definition \ref{def:ml-equivalent}.
+\end{proof}
+
+Thus, both categories are equivalent.
