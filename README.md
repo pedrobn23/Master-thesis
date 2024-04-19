@@ -1,33 +1,9 @@
 # Master-thesis
-Repository for my master thesis - Work in progress. I usually forget to put in here the updates so don't trust me.
-
-## Current State
-
-Here I will be updating when each section state:
-
-- Chapter 1: 
-  - Ready.
-  
-- Chapter 2: 
-  - Ready  - still to be checked over.
-
-- Chapter 3:
-  - Ready - still to be checked over.
-  
-- Chapter 4:
-  - Ready - still to be checked over.
-
-- Chapter 5:
-  - WIP
-  
-- Appendix:
-  - WIP
-
-I have also a todo.md file that is also rarely updated. Right now it has some work that I am purposely delaying until August.
+Repository for my master thesis about category theory with application to foundamentation of computation.
 
 ## Acknowledges
 Thanks a lot to Ángel González Prieto for supervising this work. 
 
 ## If you want to help
 - Just reading and telling me whether everything is understandable and well written is more than enough. :)
-- Funny example, specially category theory examples, are **always** well received.
+- Funny examples, specially category theory examples, are **always** well received.
